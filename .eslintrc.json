@@ -1,3 +1,28 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb",
+    "airbnb/hooks",
+    "airbnb-typescript",
+    "plugin:@typescript-eslint/recommended-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked"
+  ],
+  "settings": {
+    "next": {
+      "rootDir": "packages/my-app/"
+    }
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "react/react-in-jsx-scope": 0,
+    "semi": ["error", "never"],
+    "@typescript-eslint/semi": ["error", "never"],
+    "plugin:react/jsx-runtime": 0
+    // "eslint quotes": "single"
+  },
+  "ignorePatterns": ["next.config.js", "postcss.config.js"]
 }
