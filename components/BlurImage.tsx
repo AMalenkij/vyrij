@@ -1,0 +1,33 @@
+'use client'
+
+import { twMerge } from 'tailwind-merge'
+import Image from 'next/image'
+import { useState } from 'react'
+
+import { Photo } from '@/types'
+
+export default function BlurImage({ image }: { image: Photo }) {
+  const [isLoading, setLoading] = useState(true)
+
+  return (
+    <a href={image.href} className="group">
+      <div className="aspect-square xl:aspect-7/8 relative overflow-hidden rounded-lg bg-gray-200">
+        <Image
+          alt="choir photos"
+          src={image.href}
+          fill
+          objectFit="cover"
+          className={twMerge(
+            'duration-700 ease-in-out group-hover:opacity-75',
+            isLoading
+              ? 'scale-110 blur-2xl grayscale'
+              : 'scale-100 blur-0 grayscale-0',
+          )}
+          onLoadingComplete={() => setLoading(false)}
+        />
+      </div>
+      <h3 className="mt-4 text-sm text-gray-700">{image.author}</h3>
+      <p className="mt-1 text-lg font-medium text-gray-900">{image.date}</p>
+    </a>
+  )
+}

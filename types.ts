@@ -13,6 +13,25 @@ export interface ConcertCardProps {
   place: string;
 }
 
+export interface ChorusChronicles {
+  event_id: string;
+  created_at: string;
+  title: string;
+  description: string;
+  date: string;
+}
+
+export interface Photo {
+  photo_id: string;
+  created_at: string;
+  href: string;
+}
+export interface EventPhotos {
+  id: string;
+  event: string;
+  photo: string;
+}
+
 export interface Concerts {
   id: string;
   title: string;
@@ -22,6 +41,7 @@ export interface Concerts {
   link: string;
   is_published: boolean;
   link_to_img: string;
+  place: string;
 }
 
 export interface Product {
