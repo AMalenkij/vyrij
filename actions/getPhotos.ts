@@ -1,16 +1,17 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 
-import { Photo } from '@/types'
+import { Photos } from '@/types'
 
-const getPhoto = async (): Promise<Photo []> => {
+const getPhotos = async (limit: number | null = null): Promise<Photos []> => {
   const supabase = createServerComponentClient({
     cookies,
   })
 
   const { data, error } = await supabase
-    .from('photo')
+    .from('photos')
     .select('*')
+    .limit(limit)
   if (error) {
     console.log(error.message)
   }
@@ -18,4 +19,4 @@ const getPhoto = async (): Promise<Photo []> => {
   return (data as any) || []
 }
 
-export default getPhoto
+export default getPhotos

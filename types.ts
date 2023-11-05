@@ -21,7 +21,7 @@ export interface ChorusChronicles {
   date: string;
 }
 
-export interface Photo {
+export interface Photos {
   photo_id: string;
   created_at: string;
   href: string;
