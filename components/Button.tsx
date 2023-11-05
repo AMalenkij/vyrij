@@ -8,9 +8,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   children,
   disabled,
   type = 'button',
+  ...props
 }, ref) => (
   <button
-    // eslint-disable-next-line react/button-has-type
     type={type}
     className={twMerge(
       `
@@ -33,6 +33,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     )}
     disabled={disabled}
     ref={ref}
+    {...props}
   >
     {children}
   </button>
