@@ -4,9 +4,10 @@ import { twMerge } from 'tailwind-merge'
 import Image from 'next/image'
 import { useState } from 'react'
 
-import { Photo } from '@/types'
+import { supabaseStorageURL } from '@/constants/settings'
+import { Photos } from '@/types'
 
-export default function BlurImage({ image }: { image: Photo }) {
+export default function BlurImage({ image }: { image: Photos }) {
   const [isLoading, setLoading] = useState(true)
 
   return (
@@ -14,11 +15,10 @@ export default function BlurImage({ image }: { image: Photo }) {
       <div className="aspect-square xl:aspect-7/8 relative overflow-hidden rounded-lg bg-gray-200">
         <Image
           alt="choir photos"
-          src={image.href}
+          src={`${supabaseStorageURL}${image.href}`}
           fill
-          objectFit="cover"
           className={twMerge(
-            'duration-700 ease-in-out group-hover:opacity-75',
+            'duration-700 ease-in-out group-hover:opacity-75 object-cover',
             isLoading
               ? 'scale-110 blur-2xl grayscale'
               : 'scale-100 blur-0 grayscale-0',
@@ -26,8 +26,8 @@ export default function BlurImage({ image }: { image: Photo }) {
           onLoadingComplete={() => setLoading(false)}
         />
       </div>
-      <h3 className="mt-4 text-sm text-gray-700">{image.author}</h3>
-      <p className="mt-1 text-lg font-medium text-gray-900">{image.date}</p>
+      {/* <h3 className="mt-4 text-sm text-gray-700">{`${supabaseStorageURL}${image.href}`}</h3> */}
+      {/* <p className="mt-1 text-lg font-medium text-gray-900">{image.date}</p> */}
     </a>
   )
 }
