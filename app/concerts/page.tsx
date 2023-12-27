@@ -13,7 +13,7 @@ export default async function Concerts() {
           title={concert.title}
           location={concert.location}
           link={concert.link}
-          place={concert.map_link}
+          place={concert.place}
         />
       ))}
     </div>

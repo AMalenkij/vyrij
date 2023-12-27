@@ -2,8 +2,8 @@ import { twMerge } from 'tailwind-merge'
 import Image from 'next/image'
 
 import Button from '@/components/Button'
-import getPhotos from '@/actions/getPhotos'
-import { HERO_TEXT, QUOTE_TEXT, supabaseStorageURL } from '@/constants/settings'
+import floating8 from '@/public/images/floating_8.jpg'
+import { HERO_TEXT, QUOTE_TEXT } from '@/constants/settings'
 
 interface HeroHeadersProps {
   className?: string
@@ -11,9 +11,7 @@ interface HeroHeadersProps {
 const time = 'Mar 10, 2020'
 const fish = 'Boost your conversion rate'
 
-export default async function HeroHeaders({ className } : HeroHeadersProps) {
-  const photos = await getPhotos(1)
-
+export default function HeroHeaders({ className } : HeroHeadersProps) {
   return (
     <div className={twMerge(
       `
@@ -24,15 +22,13 @@ export default async function HeroHeaders({ className } : HeroHeadersProps) {
       className,
     )}
     >
-      {photos.map((photo) => (
-        <Image
-          key={photo.photo_id}
-          src={`${supabaseStorageURL}${photo.href}`}
-          width={600}
-          height={600}
-          alt="Hero img"
-        />
-      ))}
+
+      <Image
+        src={floating8}
+        width={600}
+        height={600}
+        alt="Hero img"
+      />
 
       <article className="flex flex-col justify-end p-4">
         <time>{time}</time>

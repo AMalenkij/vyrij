@@ -9,6 +9,41 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      chorus_chronicles: {
+        Row: {
+          created_at: string
+          date: string | null
+          description: string
+          event_id: number
+          title: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          date?: string | null
+          description: string
+          event_id?: number
+          title: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          date?: string | null
+          description?: string
+          event_id?: number
+          title?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'chorus_chronicles_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
+        ]
+      }
       concerts: {
         Row: {
           id: number
@@ -17,6 +52,7 @@ export interface Database {
           link_to_img: string | null
           location: string | null
           map_link: string | null
+          place: string | null
           time: string | null
           title: string | null
         }
@@ -27,6 +63,7 @@ export interface Database {
           link_to_img?: string | null
           location?: string | null
           map_link?: string | null
+          place?: string | null
           time?: string | null
           title?: string | null
         }
@@ -37,6 +74,7 @@ export interface Database {
           link_to_img?: string | null
           location?: string | null
           map_link?: string | null
+          place?: string | null
           time?: string | null
           title?: string | null
         }
@@ -59,8 +97,71 @@ export interface Database {
           {
             foreignKeyName: 'customers_id_fkey'
             columns: ['id']
+            isOneToOne: true
             referencedRelation: 'users'
             referencedColumns: ['id']
+          },
+        ]
+      }
+      photos: {
+        Row: {
+          created_at: string
+          href: string | null
+          photo_id: number
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          href?: string | null
+          photo_id?: number
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          href?: string | null
+          photo_id?: number
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'photos_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      photos_event: {
+        Row: {
+          event_id: number
+          photo_id: number
+          photo_number: Database['public']['Enums']['photo_number']
+        }
+        Insert: {
+          event_id: number
+          photo_id: number
+          photo_number: Database['public']['Enums']['photo_number']
+        }
+        Update: {
+          event_id?: number
+          photo_id?: number
+          photo_number?: Database['public']['Enums']['photo_number']
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'photos_event_event_id_fkey'
+            columns: ['event_id']
+            isOneToOne: false
+            referencedRelation: 'chorus_chronicles'
+            referencedColumns: ['event_id']
+          },
+          {
+            foreignKeyName: 'photos_event_photo_id_fkey'
+            columns: ['photo_id']
+            isOneToOne: false
+            referencedRelation: 'photos'
+            referencedColumns: ['photo_id']
           },
         ]
       }
@@ -108,6 +209,7 @@ export interface Database {
           {
             foreignKeyName: 'prices_product_id_fkey'
             columns: ['product_id']
+            isOneToOne: false
             referencedRelation: 'products'
             referencedColumns: ['id']
           },
@@ -139,6 +241,44 @@ export interface Database {
           name?: string | null
         }
         Relationships: []
+      }
+      songs: {
+        Row: {
+          author: string | null
+          created_at: string
+          id: number
+          image_path: string | null
+          song_path: string | null
+          title: string | null
+          user_id: string | null
+        }
+        Insert: {
+          author?: string | null
+          created_at?: string
+          id?: number
+          image_path?: string | null
+          song_path?: string | null
+          title?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          author?: string | null
+          created_at?: string
+          id?: number
+          image_path?: string | null
+          song_path?: string | null
+          title?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'songs_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
+        ]
       }
       subscriptions: {
         Row: {
@@ -196,12 +336,14 @@ export interface Database {
           {
             foreignKeyName: 'subscriptions_price_id_fkey'
             columns: ['price_id']
+            isOneToOne: false
             referencedRelation: 'prices'
             referencedColumns: ['id']
           },
           {
             foreignKeyName: 'subscriptions_user_id_fkey'
             columns: ['user_id']
+            isOneToOne: false
             referencedRelation: 'users'
             referencedColumns: ['id']
           },
@@ -233,6 +375,7 @@ export interface Database {
           {
             foreignKeyName: 'users_id_fkey'
             columns: ['id']
+            isOneToOne: true
             referencedRelation: 'users'
             referencedColumns: ['id']
           },
@@ -246,6 +389,7 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
+      photo_number: '1' | '2' | '3' | '4' | '5' | '6'
       pricing_plan_interval: 'day' | 'week' | 'month' | 'year'
       pricing_type: 'one_time' | 'recurring'
       subscription_status:

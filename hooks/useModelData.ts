@@ -5,18 +5,17 @@ interface ModelDataItem {
 }
 
 export default function useModelData<T extends ModelDataItem>(
-  getModelData: (page: number) => Promise<T[]>,
+  getModelData: () => Promise<T[]>,
   pageSize: number,
 ) {
   const [dataSupabase, setDataSupabase] = useState<T[]>([])
-  const [page, setPage] = useState(1)
   const [hasMoreData, setHasMoreData] = useState(true)
   const [modelData, setModelData] = useState<T[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const newData = await getModelData(page)
+        const newData = await getModelData()
         if (newData.length < pageSize) {
           setHasMoreData(false)
         }
@@ -30,18 +29,16 @@ export default function useModelData<T extends ModelDataItem>(
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchData()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page])
-
-  const loadMore = () => {
-    setPage((prevPage) => prevPage + 1)
-  }
+  }, [])
 
   useEffect(() => {
-    const newData = dataSupabase.filter((newItem) => !modelData.some((oldItem) => oldItem.event_id === newItem.event_id))
+    const newData = dataSupabase
+      .filter((newItem) => !modelData
+        .some((oldItem) => oldItem.event_id === newItem.event_id))
     if (newData.length > 0) {
       setModelData((prevChronicles) => [...prevChronicles, ...newData])
     }
   }, [modelData, dataSupabase])
 
-  return { modelData, loadMore, hasMoreData }
+  return { modelData, hasMoreData }
 }

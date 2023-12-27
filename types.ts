@@ -13,19 +13,35 @@ export interface ConcertCardProps {
   place: string;
 }
 
+export interface MajorEvent {
+  ChorusChronicles: []
+}
+
 export interface ChorusChronicles {
-  event_id: string;
-  created_at: string;
+  index: number;
+  photos: Photos[];
+  photos_event: PhotosEvent[];
+  event_id: string
+  created_at: string
   title: string;
   description: string;
   date: string;
+  limit?: number | undefined
+  startFromIndex?: number | undefined
+}
+
+export interface PhotosEvent {
+  event_id: string
+  photo_id: number
+  photo_number: '1' | '2' | '3' | '4' | '5' | '6'
 }
 
 export interface Photos {
-  photo_id: string;
+  photo_id: string
   created_at: string;
   href: string;
 }
+
 export interface EventPhotos {
   id: string;
   event: string;
