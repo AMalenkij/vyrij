@@ -2,6 +2,7 @@ import { twMerge } from 'tailwind-merge'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import Link from 'next/link'
 
 interface CardProps {
   year: string;
@@ -21,7 +22,7 @@ export default function Card({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={twMerge('relative overflow-hidden transform-gpu transition-transform ', className)}>
+      <Link href={`/event/${year}`} className={twMerge('relative overflow-hidden transform-gpu transition-transform ', className)}>
         <motion.div
           className="group"
           animate={isHovered ? {
@@ -57,7 +58,7 @@ export default function Card({
             <div className="text-xl text-blue-700">{description}</div>
           </motion.div>
         ) : null}
-      </div>
+      </Link>
     </div>
   )
 }

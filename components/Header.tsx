@@ -38,9 +38,9 @@ export default function Header({ className } : HeaderProps) {
       href: '/timeline',
     },
     {
-      label: 'Choral History',
-      active: pathName === '/choralhistory',
-      href: '/choralhistory',
+      label: 'Event',
+      active: pathName === '/event',
+      href: '/event',
     },
     {
       label: 'Concerts',
