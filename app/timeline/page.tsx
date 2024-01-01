@@ -11,41 +11,13 @@ import { motion } from 'framer-motion'
 import useMousePosition from '@/utils/useMousePosition'
 import Card from '@/components/Card'
 import VerticalTimelineLine from '@/components/VerticalTimelineLine'
-
-const timelineData = [
-  {
-    year: '2019',
-    description: 'Описание событий в 2019 году',
-    imageSrc: '/img/foto1.jpg',
-  },
-  {
-    year: '2020',
-    description: 'Описание событий в 2020 году',
-    imageSrc: '/img/foto2.jpg',
-  },
-  {
-    year: '2021',
-    description: 'Описание событий в 2021 году',
-    imageSrc: '/img/foto3.jpg',
-  },
-  {
-    year: '2022',
-    description: 'Описание событий в 2022 году',
-    imageSrc: '/img/foto4.jpg',
-  },
-  {
-    year: '2023',
-    description: 'Описание событий в 2023 году',
-    imageSrc: '/img/foto5.jpg',
-  },
-  {
-    year: '2024',
-    description: 'Описание событий в 2023 году',
-    imageSrc: '/img/foto6.jpg',
-  },
-]
+import useModelData from '@/hooks/useModelData'
+import getMajorEvent from '@/actions/getMajorEvent'
+import { supabaseStorageURL } from '@/constants/settings'
 
 export function TimeLine() {
+  const { ...data } = useModelData(getMajorEvent, 1)
+  // console.log(data.modelData)
   const [x, setX] = useState(0)
   const mousePosition = useMousePosition()
   const requestRef = useRef<number | null>(null)
@@ -86,18 +58,17 @@ export function TimeLine() {
       }
     }
   }, [handleAnimation])
-
   return (
     <motion.main animate={{ x }} className="flex gap-12">
-      {timelineData.map((data) => (
+      {data.modelData.map((element) => (
         <div className="flex-col justify-center items-center">
           <Card
-            key={data.year}
-            year={data.year}
-            description={data.description}
-            imageSrc={data.imageSrc}
+            key={element.minor_event.date}
+            year={element.minor_event.date.slice(0,4)}
+            description={element.minor_event.title}
+            imageSrc={`${supabaseStorageURL}${element.minor_event.photos[0].href}`}
           />
-          <VerticalTimelineLine year={data.year} />
+          <VerticalTimelineLine year={element.minor_event.date.slice(0,4)} />
         </div>
       ))}
     </motion.main>
