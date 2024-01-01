@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 interface ModelDataItem {
+  [x: string]: any;
   event_id: string;
 }
 

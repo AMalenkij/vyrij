@@ -18,6 +18,7 @@ export interface MajorEvent {
 }
 
 export interface ChorusChronicles {
+  event: string;
   index: number;
   photos: Photos[];
   photos_event: PhotosEvent[];
