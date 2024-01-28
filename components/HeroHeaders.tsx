@@ -11,7 +11,7 @@ interface HeroHeadersProps {
 const time = 'Mar 10, 2020'
 const fish = 'Boost your conversion rate'
 
-export default function HeroHeaders({ className } : HeroHeadersProps) {
+export default function HeroHeaders({ imgSrc, className } : HeroHeadersProps) {
   return (
     <div className={twMerge(
       `
@@ -22,14 +22,12 @@ export default function HeroHeaders({ className } : HeroHeadersProps) {
       className,
     )}
     >
-
       <Image
-        src={floating8}
+        src={imgSrc}
         width={600}
         height={600}
         alt="Hero img"
       />
-
       <article className="flex flex-col justify-end p-4">
         <time>{time}</time>
         <h2>{fish}</h2>
