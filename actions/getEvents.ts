@@ -41,7 +41,7 @@ export default async function getEvents():Promise<(MajorEvent | MinorEvent)[]> {
     let commonIdCounter = 0
     const updatedJoinMassive: (MajorEvent | MinorEvent)[] = []
     majorEvent?.forEach((element) => {
-      updatedJoinMassive.push({ minor_events: [{ ...element.minor_event, event: 'Major', id: commonIdCounter += 1 }] })
+      updatedJoinMassive.push({ major_events: { ...element.minor_event, event: 'Major', id: commonIdCounter += 1 } })
       const years = minorEvent.find((secondElement) => secondElement.date.slice(0, 4) === element.minor_event.date.slice(0, 4))
       if (years) {
         updatedJoinMassive.push({ ...years, event: 'Minor', id: commonIdCounter += 1 })
