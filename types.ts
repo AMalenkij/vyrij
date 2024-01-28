@@ -1,5 +1,14 @@
 import Stripe from 'stripe'
 
+export interface PhotosMainProps {
+  photo_main_id: number;
+  positon_left: number;
+  positon_top: number;
+  type: 'plane1' | 'plane2' | 'plane3';
+  width: number;
+  photos: { href: string };
+}
+
 export interface ConcertCardProps {
   timestamptz: {
     date: string;
@@ -14,10 +23,10 @@ export interface ConcertCardProps {
 }
 
 export interface MajorEvent {
-  ChorusChronicles: []
+  MinorEvent: []
 }
 
-export interface ChorusChronicles {
+export interface MinorEvent {
   event: string;
   index: number;
   photos: Photos[];
@@ -29,6 +38,7 @@ export interface ChorusChronicles {
   date: string;
   limit?: number | undefined
   startFromIndex?: number | undefined
+  id: number
 }
 
 export interface PhotosEvent {
