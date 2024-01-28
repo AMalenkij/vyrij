@@ -63,9 +63,6 @@ export default function ChorusChronicles({ params }: Props) {
     }
   }, [data.modelData, modelData])
 
-  // console.log(joinMassive.date)
-  // const findYear = joinMassive?.find(elm => (elm.date.slice(0,4) === '2020' && elm.event == 'Major'))
-  // console.log(findYear?.index);
     useEffect(() => {
     if (joinMassive) {
       const findYear = joinMassive?.find(elm => (elm.date.slice(0,4) === params.id && elm.event == 'Major'))
