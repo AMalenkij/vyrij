@@ -1,18 +1,43 @@
 import Link from 'next/link'
 import { twMerge } from 'tailwind-merge'
+import { motion } from 'framer-motion'
+
+import { blur } from '@/constants/anim'
 
 interface HeaderItemProps {
-  label:string
-  active?:boolean
-  href:string
+  index: number;
+  label: string;
+  active?: boolean;
+  href: string;
+  selectedRoute: { isActive: boolean; index: number };
+  setSelectedRoute: (value: { isActive: boolean; index: number }) => void;
 }
-export default function HeaderItem({ label, active, href } : HeaderItemProps) {
+
+export default function HeaderItem({
+  index,
+  label,
+  active,
+  href,
+  selectedRoute,
+  setSelectedRoute,
+}: HeaderItemProps) {
   return (
     <Link
       href={href}
-      className={twMerge('text-neutral-400 cursor-pointer hover:text-yellow-300 transition', active && 'text-white')}
     >
-      <p>{label}</p>
+      <motion.p
+        onMouseOver={() => { setSelectedRoute({ isActive: true, index }) }}
+        onMouseLeave={() => { setSelectedRoute({ isActive: false, index }) }}
+        variants={blur}
+        animate={selectedRoute.isActive && selectedRoute.index !== index ? 'open' : 'closed'}
+        className={twMerge(
+          'text-black no-underline uppercase overflow-hidden text-2xl md:text-5xl font-light pt-10 pr-8',
+          active && 'text-red-600',
+        )}
+      >
+        {label}
+      </motion.p>
     </Link>
+
   )
 }
