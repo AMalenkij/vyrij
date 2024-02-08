@@ -8,9 +8,7 @@ export default function Home() {
   return (
     <main>
       <FloatingImageGallery data={dataPhotoMain}>
-        <div className="flex items-center justify-center h-screen">
           <HeroHeaders imgSrc={imgHero} />
-        </div>
       </FloatingImageGallery>
     </main>
   )
