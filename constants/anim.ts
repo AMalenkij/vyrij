@@ -1,5 +1,16 @@
 const transition = { duration: 1, ease: [0.76, 0, 0.24, 1] }
 
+export const scale = {
+  open: {
+    scale: 1,
+    transition: { duration: 0.35 },
+  },
+  closed: {
+    scale: 1.5,
+    transition: { duration: 0.35 },
+  },
+}
+
 export const opacity = {
   initial: {
     opacity: 0,
