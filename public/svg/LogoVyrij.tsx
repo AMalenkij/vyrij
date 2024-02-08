@@ -1,9 +1,9 @@
 export default function SVGLogoVyrij() {
   return (
     <svg
-      width="152"
+      // width="152"
       xmlns="http://www.w3.org/2000/svg"
-      height="136"
+      height="60"
       viewBox="0 0 152 136"
       fill="black"
     >
