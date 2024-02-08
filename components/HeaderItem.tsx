@@ -11,6 +11,8 @@ interface HeaderItemProps {
   href: string;
   selectedRoute: { isActive: boolean; index: number };
   setSelectedRoute: (value: { isActive: boolean; index: number }) => void;
+  setClosedMenu: (value: boolean) => void;
+  setIsActive: (value: boolean) => void;
 }
 
 export default function HeaderItem({
@@ -20,6 +22,8 @@ export default function HeaderItem({
   href,
   selectedRoute,
   setSelectedRoute,
+  setIsActive,
+  setClosedMenu,
 }: HeaderItemProps) {
   return (
     <Link
@@ -28,6 +32,10 @@ export default function HeaderItem({
       <motion.p
         onMouseOver={() => { setSelectedRoute({ isActive: true, index }) }}
         onMouseLeave={() => { setSelectedRoute({ isActive: false, index }) }}
+        onClick={() => {
+          setIsActive(false)
+          setClosedMenu(true)
+        }}
         variants={blur}
         animate={selectedRoute.isActive && selectedRoute.index !== index ? 'open' : 'closed'}
         className={twMerge(
