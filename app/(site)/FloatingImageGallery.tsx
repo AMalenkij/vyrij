@@ -3,10 +3,13 @@
 'use client'
 
 import Image from 'next/image'
-import { useRef, MouseEvent, useEffect } from 'react'
+import {
+  useRef, MouseEvent, useEffect, useState,
+} from 'react'
 import { motion, useAnimation } from 'framer-motion'
 
 export default function FloatingImageGallery({ data, children }) {
+  const [startAnimation, setStartAnimation] = useState(false)
   const planes = [
     { type: 'plane1', ref: useRef(null), control: useAnimation() },
     { type: 'plane2', ref: useRef(null), control: useAnimation() },
@@ -42,6 +45,14 @@ export default function FloatingImageGallery({ data, children }) {
     animate()
   }, [])
 
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setStartAnimation(true)
+    }, 2000)
+
+    return () => clearTimeout(timeoutId)
+  }, [])
+
   return (
     <div onMouseMove={manageMouseMove} className="relative w-screen h-screen">
       {planes.map(({ type, ref, control }) => (
@@ -52,17 +63,23 @@ export default function FloatingImageGallery({ data, children }) {
           animate={control}
           className="absolute w-full h-full"
         >
-          {data
-            .filter((image) => image.type === type)
-            .map((image) => (
-              <Image
+          {startAnimation && data
+            ?.filter((image) => image.type === type)
+            .map((image, index) => (
+              <motion.div
                 key={image.id}
-                src={image.src}
-                alt={alt}
-                width={image.width}
-                height={image.width}
-                style={image.style}
-              />
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: index * 1.5, duration: 5, ease: [0, 0.31, 0.2, 1.01] }}
+              >
+                <Image
+                  src={image.src}
+                  alt={alt}
+                  width={image.width}
+                  height={image.width}
+                  style={image.style}
+                />
+              </motion.div>
             ))}
         </motion.div>
       ))}
