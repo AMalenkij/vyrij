@@ -12,8 +12,8 @@ export default function Logo({ children, className } : LogoProps) {
       `
      flex
      items-center
-     gap-3
-     text-5xl
+     gap-2
+     text-2xl
         `,
       className,
     )}
