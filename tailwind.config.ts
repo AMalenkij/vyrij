@@ -11,6 +11,9 @@ const config: Config = {
       aspectRatio: {
         '7/8': '7 / 8',
       },
+      fontFamily: {
+        comforter: ['var(--font-comforter)'],
+      },
     },
   },
   plugins: [],
