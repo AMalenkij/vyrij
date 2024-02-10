@@ -1,5 +1,8 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+
 import { ChorusChronicles as ChorusChroniclesProps } from '@/types'
+import { scale } from '@/constants/anim'
 import RenderPhotos from './RenderPhotos'
 
 interface ChorusEventCardProps {
@@ -13,14 +16,28 @@ const MajorCard = forwardRef<HTMLDivElement, ChorusEventCardProps>(
       title,
       photos,
     } = event
+
+    const refFM = useRef<HTMLDivElement>(null)
+
+    const { scrollYProgress } = useScroll({
+      target: refFM,
+      offset: ['0', '1'],
+    })
+    const scaleProgress = useTransform(scrollYProgress, [0, 1], [1, 1.25])
     return (
-      <div ref={ref} className="flex flex-col gap-12 bg-yellow-600">
-        <h2>{date}</h2>
-        <h1>{title}</h1>
-        <div className="mt-10">
-        {RenderPhotos({ photos, limit: 1, className: 'w-full' })}
+      <motion.div
+        className="relative h-[200vh]"
+        ref={refFM}
+        style={{
+          scale: scaleProgress,
+        }}
+      >
+        <div ref={ref} className="sticky top-0 w-full h-screen overflow-hidden">
+          {RenderPhotos({ photos, limit: 1, className: 'w-full h-screen relative' })}
+          <div className="absolute inset-0 flex justify-center items-center text-white text-2xl font-bold pb-56 md:mb-5">{`${date.substring(0, 4)}р`}</div>
+          <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-9xl font-comforter">{title}</div>
         </div>
-      </div>
+      </motion.div>
     )
   },
 )

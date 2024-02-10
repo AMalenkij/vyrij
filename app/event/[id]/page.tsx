@@ -63,9 +63,9 @@ export default function ChorusChronicles({ params }: Props) {
     }
   }, [data.modelData, modelData])
 
-    useEffect(() => {
+  useEffect(() => {
     if (joinMassive) {
-      const findYear = joinMassive?.find(elm => (elm.date.slice(0,4) === params.id && elm.event == 'Major'))
+      const findYear = joinMassive?.find((elm) => (elm.date.slice(0, 4) === params.id && elm.event == 'Major'))
       const startIndex = findYear?.index
       const endIndex = startIndex + 3
       setRenderedData(joinMassive.slice(startIndex, endIndex))
@@ -76,7 +76,7 @@ export default function ChorusChronicles({ params }: Props) {
     if (renderedData.length > 0
       && isTimerActive
       && (renderedData[renderedData.length - 1].index < joinMassive[joinMassive.length - 1].index)) {
-      console.log('nextLoadData')
+      // console.log('nextLoadData')
       const lastElement = renderedData[renderedData.length - 1]
       const nextStartIndex = lastElement.index + 1
       const nextEndIndex = lastElement.index + 2
@@ -87,7 +87,7 @@ export default function ChorusChronicles({ params }: Props) {
 
   const prevLoadData = useCallback(() => {
     if (renderedData.length > 0 && renderedData[0].index > 0) {
-      console.log('prevLoadData')
+      // console.log('prevLoadData')
       const lastObject = renderedData[0]
       const nextStartIndex = lastObject.index
       const nextEndIndex = nextStartIndex - 2
@@ -130,8 +130,8 @@ export default function ChorusChronicles({ params }: Props) {
 
   return (
     <div>
-      <div className="h-14 bg-red-600" />
-      <main className="container mx-auto">
+      <div className="-mt-16 z-10" />
+      <section className="">
         {renderedData.map((item, index) => {
           if (index === 0 && item.event === 'Minor') {
             return <MinorCard ref={firstRef} key={item.index} event={item} />
@@ -153,9 +153,7 @@ export default function ChorusChronicles({ params }: Props) {
           }
           return null
         })}
-      </main>
-      <div className="h-14 bg-red-600" />
+      </section>
     </div>
-
   )
 }

@@ -117,8 +117,8 @@ function Nav({ setIsActive, setClosedMenu }) {
   ], [pathName])
 
   return (
-    <motion.div variants={height} initial="initial" animate="enter" exit="exit" className="overflow-hidden">
-      <div className="flex gap-8 mb-20 md:mb-0">
+    <motion.div variants={height} initial="initial" animate="enter" exit="exit" className="overflow-hidden bg-white">
+      <div className="flex gap-8 mb-20 md:mb-0 ">
         <div className=" flex-col justify-between md:flex-row">
           <div className="flex flex-wrap mt-40">
             {routes.map((route, index) => (
@@ -147,14 +147,14 @@ export default function NavigationMenu() {
   const [closedMenu, setClosedMenu] = useState(false)
 
   return (
-    <div className="w-full box-border p-6 ">
+    <div className="w-full box-border p-6 mb-10">
       <div className="relative flex justify-between text-uppercase text-sm font-semibold px-10">
         <Link href="/">
-          <motion.div variants={scale} animate={!isActive ? 'open' : 'closed'}>
+          <motion.div className='' variants={scale} animate={!isActive ? 'open' : 'closed'}>
             <Logo>Chor |</Logo>
           </motion.div>
         </Link>
-        <button type="button" onClick={() => { setIsActive(!isActive), setClosedMenu(false) }} className="flex items-center justify-center gap-8 cursor-pointer">
+        <button type="button" onClick={() => { setIsActive(!isActive), setClosedMenu(false) }} className="flex items-center justify-center gap-8 cursor-pointer ">
           <div className={`burger ${isActive ? 'burgerActive' : ''}`} />
           <div className="relative flex items-center ">
             <motion.p className="absolute opacity-0" variants={opacity} animate={!isActive ? 'open' : 'closed'}>Menu</motion.p>
