@@ -1,12 +1,15 @@
 import Stripe from 'stripe'
 
-export interface PhotosMainProps {
-  photo_main_id: number;
-  positon_left: number;
-  positon_top: number;
-  type: 'plane1' | 'plane2' | 'plane3';
+export interface HomepageImages {
+  id: number;
   width: number;
-  photos: { href: string };
+  type: 'plane1' | 'plane2' | 'plane3';
+  src: string | null
+  style: {
+    position: 'absolute';
+    left: string;
+    top: string;
+  };
 }
 
 export interface ConcertCardProps {

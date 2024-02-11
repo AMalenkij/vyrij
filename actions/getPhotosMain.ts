@@ -1,39 +1,27 @@
+/* eslint-disable no-console */
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 
 import { supabaseStorageURL } from '@/constants/settings'
-import { PhotosMainProps } from '@/types'
+import { Database } from '@/types_db'
+import { HomepageImages } from '@/types'
 
-export interface ReturnImageTypes {
-  id: number;
-  width: number;
-  type: 'plane1' | 'plane2' | 'plane3';
-  src: string;
-  style: {
-    position: 'absolute';
-    left: string;
-    top: string;
-  };
-}
-
-export default async function getPhotosMain(): Promise<ReturnImageTypes[]> {
-  const supabase = createServerComponentClient({
-    cookies,
-  })
+export default async function getPhotosMain(): Promise<HomepageImages[]> {
+  const supabase = createServerComponentClient<Database>({ cookies })
 
   const { data, error } = await supabase
-    .from<PhotosMainProps[]>('photos_main')
+    .from('photos_main')
     .select('photo_main_id, type, positon_top, positon_left, width, photos(href)')
     .order('photo_main_id', { ascending: true }) // Added sorting order
   if (error) {
     console.log(error.message)
     return []
   }
-  const updatedJoinMassive: ReturnImageTypes[] = data.map((element) => ({
+  const updatedJoinMassive: HomepageImages[] = data.map((element) => ({
     id: element.photo_main_id,
     width: element.width,
     type: element.type,
-    src: `${supabaseStorageURL}${element.photos.href}`,
+    src: element.photos ? `${supabaseStorageURL}${element.photos.href}` : null,
     style: {
       position: 'absolute',
       left: `${element.positon_left}%`,
