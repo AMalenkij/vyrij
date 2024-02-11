@@ -8,7 +8,14 @@ import {
 } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 
-export default function FloatingImageGallery({ data, children }) {
+import { HomepageImages } from '@/types'
+
+interface FloatingImageGalleryProps {
+  children: JSX.Element;
+  photoMain: HomepageImages[]
+}
+
+export default function FloatingImageGallery({ children, photoMain }: FloatingImageGalleryProps) {
   const [startAnimation, setStartAnimation] = useState(false)
   const planes = [
     { type: 'plane1', ref: useRef(null), control: useAnimation() },
@@ -24,9 +31,23 @@ export default function FloatingImageGallery({ data, children }) {
 
   const animate = () => {
     planes.forEach(({ type, control }) => {
+      let xMultiplier; let
+        yMultiplier
+
+      if (type === 'plane1') {
+        xMultiplier = 1
+        yMultiplier = 1
+      } else if (type === 'plane2') {
+        xMultiplier = 0.5
+        yMultiplier = 0.5
+      } else {
+        xMultiplier = 0.25
+        yMultiplier = 0.25
+      }
+
       control.start({
-        x: xForce * (type === 'plane1' ? 1 : (type === 'plane2' ? 0.5 : 0.25)),
-        y: yForce * (type === 'plane1' ? 1 : (type === 'plane2' ? 0.5 : 0.25)),
+        x: xForce * xMultiplier,
+        y: yForce * yMultiplier,
       })
     })
   }
@@ -63,7 +84,7 @@ export default function FloatingImageGallery({ data, children }) {
           animate={control}
           className="absolute w-full h-full"
         >
-          {startAnimation && data
+          {startAnimation && photoMain
             ?.filter((image) => image.type === type)
             .map((image, index) => (
               <motion.div
@@ -73,7 +94,7 @@ export default function FloatingImageGallery({ data, children }) {
                 transition={{ delay: index * 1.5, duration: 5, ease: [0, 0.31, 0.2, 1.01] }}
               >
                 <Image
-                  src={image.src}
+                  src={image.src ? image.src : ''}
                   alt={alt}
                   width={image.width}
                   height={image.width}
