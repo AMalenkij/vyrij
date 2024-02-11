@@ -1,51 +1,18 @@
 import Link from 'next/link'
 import { twMerge } from 'tailwind-merge'
-import { motion } from 'framer-motion'
-
-import { blur } from '@/constants/anim'
 
 interface HeaderItemProps {
-  index: number;
-  label: string;
-  active?: boolean;
-  href: string;
-  selectedRoute: { isActive: boolean; index: number };
-  setSelectedRoute: (value: { isActive: boolean; index: number }) => void;
-  setClosedMenu: (value: boolean) => void;
-  setIsActive: (value: boolean) => void;
+  label:string
+  active?:boolean
+  href:string
 }
-
-export default function HeaderItem({
-  index,
-  label,
-  active,
-  href,
-  selectedRoute,
-  setSelectedRoute,
-  setIsActive,
-  setClosedMenu,
-}: HeaderItemProps) {
+export default function HeaderItem({ label, active, href } : HeaderItemProps) {
   return (
     <Link
       href={href}
+      className={twMerge('text-black cursor-pointer hover:text-zinc-500 transition', active && 'text-red-700')}
     >
-      <motion.p
-        onMouseOver={() => { setSelectedRoute({ isActive: true, index }) }}
-        onMouseLeave={() => { setSelectedRoute({ isActive: false, index }) }}
-        onClick={() => {
-          setIsActive(false)
-          setClosedMenu(true)
-        }}
-        variants={blur}
-        animate={selectedRoute.isActive && selectedRoute.index !== index ? 'open' : 'closed'}
-        className={twMerge(
-          'text-black no-underline uppercase overflow-hidden text-2xl md:text-5xl font-light pt-10 pr-8',
-          active && 'text-red-600',
-        )}
-      >
-        {label}
-      </motion.p>
+      <p>{label}</p>
     </Link>
-
   )
 }

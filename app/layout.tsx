@@ -3,8 +3,8 @@ import { Comforter } from 'next/font/google'
 
 import type { Metadata } from 'next'
 import './globals.css'
-// import Header from '@/components/Header'
-import NavigationMenu from '@/components/NavigationMenu'
+import Header from '@/components/Header'
+// import NavigationMenu from '@/components/NavigationMenu'
 import SupabaseProvider from '@/providers/SupabaseProvider'
 import UserProvider from '@/providers/UserProvider'
 import ModalProvider from '@/providers/ModalProvider'
@@ -30,8 +30,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ToasterProvider />
           <UserProvider>
             <ModalProvider />
-            {/* <Header /> */}
-            <NavigationMenu />
+            <Header />
+            {/* <NavigationMenu /> */}
             {children}
           </UserProvider>
         </SupabaseProvider>
