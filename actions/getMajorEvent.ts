@@ -1,27 +1,25 @@
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+/* eslint-disable no-console */
 
-import { MajorEvent } from '@/types'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
 
-const supabase = createClientComponentClient()
+import { Database } from '@/types_db'
 
-export default async function getMajorEvent(): Promise<MajorEvent[]> {
+export default async function getMajorEvent() {
+  const supabase = createServerComponentClient<Database>({ cookies })
+
   try {
     const { data, error } = await supabase
       .from('major_event')
-      .select(`
-      minor_event(title, date, photos(href))
-      `)
+      .select('minor_event(title, date, photos(href))')
       .order('minor_event(date)', { ascending: true }) // Order by date in ascending order (oldest first)
 
     if (error) {
-      // eslint-disable-next-line no-console
-      console.error('Error fetching data:', (error as unknown as Error).message)
+      console.error('Error fetching MajorEvent:', (error as unknown as Error).message)
       return []
     }
-    // console.log(data)
-    return data as unknown as MajorEvent[]
+    return data || []
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('Unexpected error:', (error as Error).message)
     return []
   }
