@@ -27,7 +27,7 @@ export default function Header({ className } : HeaderProps) {
     {
       label: 'Event',
       active: pathName === '/event',
-      href: '/event/2019',
+      href: '/event/',
     },
     {
       label: 'Concerts',
