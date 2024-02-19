@@ -1,15 +1,22 @@
 import { MinorEvent } from '@/types'
+import getMonthNameUkr from '@/utils/getMonthNameUkr'
 import RenderPhotos from './RenderPhotos'
 
 export default function MinorCard({ minorEvent }:{ minorEvent:MinorEvent }) {
-  const { date, description, photos } = minorEvent
+  const {
+    month, day, description, photos,
+  } = minorEvent
 
   const photoEventCounts = minorEvent.photos_event?.length || 0
 
   return (
-    <div className="container mx-auto my-72 flex flex-col gap-12">
+    <div className="container mx-auto my-12 flex flex-col gap-12">
       <div>
-        <h2 className="mt-10 text-2xl ">{date}</h2>
+        <h2 className="mt-10 text-2xl ">
+          {day}
+          {' '}
+          {getMonthNameUkr(month)}
+        </h2>
         <h2 className="mt-10 text-lg">{description}</h2>
       </div>
 
