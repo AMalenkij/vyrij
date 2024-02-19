@@ -8,15 +8,17 @@ export default function mergeEvents(
 ): GroupedEvent[] {
   const groupedEvents: Record<string, MinorEventGroup[]> = {}
   minorEvent.forEach((event) => {
-    const year = event.date.slice(0, 4)
-    const monthDay = event.date.slice(5)
-    const formattedDate = `${monthDay}`
+    const year = parseInt(event.date.slice(0, 4), 10)
+    const month = parseInt(event.date.slice(5, 7), 10)
+    const day = parseInt(event.date.slice(8), 10)
+
     if (!groupedEvents[year]) {
       groupedEvents[year] = []
     }
     groupedEvents[year].push({
       description: event.description,
-      date: formattedDate,
+      month,
+      day,
       photos: event.photos,
       photos_event: event.photos_event,
     })
@@ -25,10 +27,10 @@ export default function mergeEvents(
   const mergedEvents: GroupedEvent[] = majorEvent.map((element) => {
     const year = element.minor_event.date.slice(0, 4)
     return {
-      date: element.minor_event.date,
+      year: parseInt(year, 10),
       title: element.minor_event.title,
       photos: element.minor_event.photos,
-      minorEvents: groupedEvents[year] || [],
+      minorEvents: groupedEvents[year],
     }
   })
 
