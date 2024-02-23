@@ -41,10 +41,13 @@ export interface ConcertCardProps {
   place: string;
 }
 
-export interface ModifiedMajorEvents {
+export interface CustomMajorEvents {
   year: number;
   title: string;
-  photos:Photos[];
+  photos: Photos[];
+}
+
+export interface ModifiedMajorEvents extends CustomMajorEvents {
   minorEvents: ModifiedMinorEvents[];
 }
 
