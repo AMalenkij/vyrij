@@ -1,12 +1,15 @@
 import {
-  MajorEvent, MinorEvent, GroupedEvent, MinorEventGroup,
+  MajorEvents,
+  MinorEvents,
+  ModifiedMajorEvents,
+  ModifiedMinorEvents,
 } from '@/types'
 
 export default function mergeEvents(
-  majorEvent: MajorEvent[],
-  minorEvent: MinorEvent[],
-): GroupedEvent[] {
-  const groupedEvents: Record<string, MinorEventGroup[]> = {}
+  majorEvent: MajorEvents[],
+  minorEvent: MinorEvents[],
+): ModifiedMajorEvents[] {
+  const groupedEvents: Record<number, ModifiedMinorEvents[]> = {}
   minorEvent.forEach((event) => {
     const year = parseInt(event.date.slice(0, 4), 10)
     const month = parseInt(event.date.slice(5, 7), 10)
@@ -24,15 +27,14 @@ export default function mergeEvents(
     })
   })
 
-  const mergedEvents: GroupedEvent[] = majorEvent.map((element) => {
-    const year = element.minor_event.date.slice(0, 4)
+  const mergedEvents = majorEvent.map((element) => {
+    const year = parseInt(element.minor_event.date.slice(0, 4), 10)
     return {
-      year: parseInt(year, 10),
+      year,
       title: element.minor_event.title,
       photos: element.minor_event.photos,
       minorEvents: groupedEvents[year],
     }
   })
-
-  return mergedEvents || []
+  return mergedEvents
 }
