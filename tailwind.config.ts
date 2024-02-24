@@ -14,6 +14,15 @@ const config: Config = {
       fontFamily: {
         comforter: ['var(--font-comforter)'],
       },
+      container: {
+        padding: {
+          DEFAULT: '2rem',
+          sm: '4rem',
+          lg: '8rem',
+          xl: '10rem',
+          '2xl': '12rem',
+        },
+      },
     },
   },
   plugins: [],
