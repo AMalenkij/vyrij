@@ -1,4 +1,4 @@
-import { useStore } from '@/state/photoMain'
+import { useStore } from '@/state/allData'
 import HeroHeaders from '@/components/HeroHeaders'
 import { HomepageImages } from '@/types'
 import FloatingImageGallery from './FloatingImageGallery'

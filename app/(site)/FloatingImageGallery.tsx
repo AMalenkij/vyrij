@@ -4,7 +4,10 @@
 
 import Image from 'next/image'
 import {
-  useRef, MouseEvent, useEffect, useState,
+  useRef,
+  MouseEvent,
+  useEffect,
+  useState,
 } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 
