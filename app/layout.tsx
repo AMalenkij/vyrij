@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${comforter.variable}`}>
+      <body className={`${comforter.variable} overflow-x-hidden `}>
         <SupabaseProvider>
           <ToasterProvider />
           <UserProvider>
