@@ -1,17 +1,12 @@
 'use client'
 
-import { twMerge } from 'tailwind-merge'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 import { HERO_TEXT, QUOTE_TEXT, AUTOR } from '@/constants/settings'
+import imgHero from '@/public/img/Hero.jpg'
 
-interface HeroHeadersProps {
-  className?: string
-  imgSrc: string
-}
-
-export default function HeroHeaders({ imgSrc, className } : HeroHeadersProps) {
+export default function HeroHeaders() {
   return (
     <div className="
     relative
@@ -23,15 +18,12 @@ export default function HeroHeaders({ imgSrc, className } : HeroHeadersProps) {
     p-30
     md:p-52"
     >
-      <div className={twMerge(
-        `
+      <div className="
       md:flex
       mx-auto
       justify-center
       w-7/12
-      `,
-        className,
-      )}
+      "
       >
         <motion.div
           initial={{ opacity: 0, scale: 0.7, y: 100 }}
@@ -42,7 +34,7 @@ export default function HeroHeaders({ imgSrc, className } : HeroHeadersProps) {
           }}
         >
           <Image
-            src={imgSrc}
+            src={imgHero}
             width={688} // 688 origin
             height={459} // 459 origin
             alt="Hero img"

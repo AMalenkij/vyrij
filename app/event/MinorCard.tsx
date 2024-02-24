@@ -1,65 +1,67 @@
-import React, { forwardRef } from 'react'
-
-import { ChorusChronicles as ChorusChroniclesProps } from '@/types'
+/* eslint-disable @typescript-eslint/naming-convention */
+import { ModifiedMinorEvents } from '@/types'
+import getMonthNameUkr from '@/utils/getMonthNameUkr'
 import RenderPhotos from './RenderPhotos'
 
-interface ChorusEventCardProps {
-  event: ChorusChroniclesProps;
-}
+export default function MinorCard({ minorEvents }:{ minorEvents:ModifiedMinorEvents }) {
+  const {
+    month,
+    day,
+    description,
+    photos,
+    photos_event,
+  } = minorEvents
 
-const MinorCard = forwardRef<HTMLDivElement, ChorusEventCardProps>(
-  ({ event }: ChorusEventCardProps, ref) => {
-    const {
-      date,
-      title,
-      description,
-      photos,
-    } = event
+  const photoEventCounts = photos_event?.length || 0
 
-    const photoEventCounts = event.photos_event?.length || 0
-
-    return (
-      <div ref={ref} className="flex flex-col gap-12">
-        <div>
-          <h2>{date}</h2>
-          <h1>{title}</h1>
-          <h2>{description}</h2>
-        </div>
-
-        {photoEventCounts === 1 && (
-          <div className="mt-10">
-            {RenderPhotos({ photos, className: 'w-full' })}
-          </div>
-        )}
-        {photoEventCounts === 2 && (
-          <div className="mt-10 flex">
-            {RenderPhotos({ photos, limit: 1, className: '-ml-20' })}
-            {RenderPhotos({ photos, startFromIndex: 1 })}
-          </div>
-        )}
-        {photoEventCounts === 3 && (
-          <div className="mt-10 flex">
-            <div className="flex-col">
-              {RenderPhotos({ photos, limit: 1, className: '-ml-20' })}
-              {RenderPhotos({ photos, startFromIndex: 1, limit: 1 })}
-            </div>
-            {RenderPhotos({ photos, startFromIndex: 2 })}
-          </div>
-        )}
-        {photoEventCounts === 4 && (
-          <div className="mt-10 flex">
-            <div className="flex-col">
-              {RenderPhotos({ photos, limit: 1, className: '-ml-20' })}
-              {RenderPhotos({ photos, startFromIndex: 1, limit: 1 })}
-            </div>
-            <div className="flex-col">
-              {RenderPhotos({ photos, startFromIndex: 2, limit: 2 })}
-            </div>
-          </div>
-        )}
+  return (
+    <div className="container mx-auto flex flex-col">
+      <div>
+        <h2 className="mt-24 text-2xl ">
+          {day}
+          {' '}
+          {getMonthNameUkr(month)}
+        </h2>
+        <h2 className="py-6 text-lg">{description}</h2>
       </div>
-    )
-  },
-)
 
-export default MinorCard
+      {photoEventCounts === 1 && (
+      <div className="w-full">
+        {RenderPhotos({ photos, className: '' })}
+      </div>
+      )}
+      {photoEventCounts === 2 && (
+      <div className="flex gap-6">
+        {RenderPhotos({ photos, limit: 1, className: 'w-1/2' })}
+        {RenderPhotos({ photos, startFromIndex: 1, className: 'w-1/2' })}
+      </div>
+      )}
+      {photoEventCounts === 3 && (
+      <div className="flex gap-x-6">
+        <div className="flex-col">
+          {RenderPhotos({ photos, limit: 1, className: '-ml-20 pb-10 h-1/2' })}
+          {RenderPhotos({
+            photos, startFromIndex: 1, limit: 1, className: 'h-1/2',
+          })}
+        </div>
+        {RenderPhotos({ photos, startFromIndex: 2, className: '' })}
+      </div>
+      )}
+      {photoEventCounts === 4 && (
+      <div className="mt-10 flex gap-6">
+        <div className="flex-col">
+          {RenderPhotos({ photos, limit: 1, className: '-ml-20' })}
+          {RenderPhotos({
+            photos, startFromIndex: 1, limit: 1, className: 'pt-10',
+          })}
+        </div>
+        <div className="flex-col">
+          {RenderPhotos({
+            photos, startFromIndex: 2, limit: 2, className: 'pb-10',
+          })}
+        </div>
+      </div>
+      )}
+    </div>
+  )
+}

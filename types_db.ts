@@ -71,15 +71,15 @@ export interface Database {
       major_event: {
         Row: {
           event_id: number
-          test: string | null
+          test: string
         }
         Insert: {
           event_id?: number
-          test?: string | null
+          test: string
         }
         Update: {
           event_id?: number
-          test?: string | null
+          test?: string
         }
         Relationships: [
           {
@@ -94,7 +94,7 @@ export interface Database {
       minor_event: {
         Row: {
           created_at: string
-          date: string | null
+          date: string
           description: string
           event_id: number
           title: string
@@ -102,7 +102,7 @@ export interface Database {
         }
         Insert: {
           created_at?: string
-          date?: string | null
+          date: string
           description: string
           event_id?: number
           title: string
@@ -110,7 +110,7 @@ export interface Database {
         }
         Update: {
           created_at?: string
-          date?: string | null
+          date?: string
           description?: string
           event_id?: number
           title?: string
@@ -129,19 +129,19 @@ export interface Database {
       photos: {
         Row: {
           created_at: string
-          href: string | null
+          href: string
           photo_id: number
           user_id: string | null
         }
         Insert: {
           created_at?: string
-          href?: string | null
+          href: string
           photo_id?: number
           user_id?: string | null
         }
         Update: {
           created_at?: string
-          href?: string | null
+          href?: string
           photo_id?: number
           user_id?: string | null
         }

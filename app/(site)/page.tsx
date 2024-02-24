@@ -1,14 +1,14 @@
-import { useStore } from '@/state/photoMain'
+import { useStore } from '@/state/allData'
 import HeroHeaders from '@/components/HeroHeaders'
+import { HomepageImages } from '@/types'
 import FloatingImageGallery from './FloatingImageGallery'
-import imgHero from '@/public/img/Hero.jpg'
 
 export default function Home() {
-  const dataPhotoMain = useStore.getState().photoMain
+  const { photoMain } = useStore.getState() as { photoMain: HomepageImages[] }
   return (
     <main>
-      <FloatingImageGallery data={dataPhotoMain}>
-          <HeroHeaders imgSrc={imgHero} />
+      <FloatingImageGallery photoMain={photoMain}>
+        <HeroHeaders />
       </FloatingImageGallery>
     </main>
   )

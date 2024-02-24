@@ -1,14 +1,33 @@
 import Stripe from 'stripe'
 
-export interface PhotosMainProps {
-  photo_main_id: number;
-  positon_left: number;
-  positon_top: number;
-  type: 'plane1' | 'plane2' | 'plane3';
+export interface HomepageImages {
+  id: number;
   width: number;
-  photos: { href: string };
+  type: 'plane1' | 'plane2' | 'plane3';
+  src: string | null
+  style: {
+    position: 'absolute';
+    left: string;
+    top: string;
+  };
 }
 
+export interface PhotoMainData {
+  photo_main_id: number;
+  type: 'plane1' | 'plane2' | 'plane3';
+  positon_top: number;
+  positon_left: number;
+  width: number;
+  photos: { href: string } | null;
+}
+
+export interface MinorEventGroup {
+  description: string;
+  month: number;
+  day: number;
+  photos: { href: string }[];
+  photos_event: { photo_number: string }[];
+}
 export interface ConcertCardProps {
   timestamptz: {
     date: string;
@@ -22,41 +41,42 @@ export interface ConcertCardProps {
   place: string;
 }
 
-export interface MajorEvent {
-  MinorEvent: []
+export interface CustomMajorEvents {
+  year: number;
+  title: string;
+  photos: Photos[];
 }
 
-export interface MinorEvent {
-  event: string;
-  index: number;
+export interface ModifiedMajorEvents extends CustomMajorEvents {
+  minorEvents: ModifiedMinorEvents[];
+}
+
+export interface ModifiedMinorEvents {
+  description: string;
+  month: number;
+  day: number;
   photos: Photos[];
   photos_event: PhotosEvent[];
-  event_id: string
-  created_at: string
-  title: string;
-  description: string;
-  date: string;
-  limit?: number | undefined
-  startFromIndex?: number | undefined
-  id: number
 }
 
-export interface PhotosEvent {
-  event_id: string
-  photo_id: number
-  photo_number: '1' | '2' | '3' | '4' | '5' | '6'
+export interface MajorEvents {
+  minor_event: MinorEvents;
+}
+
+export interface MinorEvents {
+  title: string;
+  date: string;
+  description: string;
+  photos_event: PhotosEvent[];
+  photos: Photos[];
 }
 
 export interface Photos {
-  photo_id: string
-  created_at: string;
   href: string;
 }
 
-export interface EventPhotos {
-  id: string;
-  event: string;
-  photo: string;
+export interface PhotosEvent {
+  photo_number: '1' | '2' | '3' | '4' | '5' | '6'
 }
 
 export interface Concerts {
