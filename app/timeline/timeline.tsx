@@ -12,9 +12,9 @@ import useMousePosition from '@/utils/useMousePosition'
 import Card from '@/components/Card'
 import VerticalTimelineLine from '@/components/VerticalTimelineLine'
 import { supabaseStorageURL } from '@/constants/settings'
-import { MinorEventTL } from '@/types'
+import { CustomMajorEvents } from '@/types'
 
-export function TimeLine({ majorEvent }: { majorEvent: MinorEventTL[] }) {
+export function TimeLine({ majorEvent }: { majorEvent: CustomMajorEvents[] }) {
   const [x, setX] = useState(0)
   const mousePosition = useMousePosition()
   const requestRef = useRef<number | null>(null)
@@ -60,12 +60,12 @@ export function TimeLine({ majorEvent }: { majorEvent: MinorEventTL[] }) {
       {majorEvent.map((element) => (
         <div className="flex-col justify-center items-center">
           <Card
-            key={element.minor_event.date}
-            year={element.minor_event.date.slice(0, 4)}
-            description={element.minor_event.title}
-            imageSrc={`${supabaseStorageURL}${element.minor_event.photos[0].href}`}
+            key={element.year}
+            year={element.year}
+            description={element.title}
+            imageSrc={`${supabaseStorageURL}${element.photos[0].href}`}
           />
-          <VerticalTimelineLine year={element.minor_event.date.slice(0, 4)} />
+          <VerticalTimelineLine year={element.year} />
         </div>
       ))}
     </motion.main>
