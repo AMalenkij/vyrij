@@ -1,23 +1,28 @@
-import { MinorEvent } from '@/types'
+/* eslint-disable @typescript-eslint/naming-convention */
+import { ModifiedMinorEvents } from '@/types'
 import getMonthNameUkr from '@/utils/getMonthNameUkr'
 import RenderPhotos from './RenderPhotos'
 
-export default function MinorCard({ minorEvent }:{ minorEvent:MinorEvent }) {
+export default function MinorCard({ minorEvents }:{ minorEvents:ModifiedMinorEvents }) {
   const {
-    month, day, description, photos,
-  } = minorEvent
+    month,
+    day,
+    description,
+    photos,
+    photos_event,
+  } = minorEvents
 
-  const photoEventCounts = minorEvent.photos_event?.length || 0
+  const photoEventCounts = photos_event?.length || 0
 
   return (
-    <div className="container mx-auto my-12 flex flex-col gap-12">
+    <div className="container mx-auto flex flex-col">
       <div>
-        <h2 className="mt-10 text-2xl ">
+        <h2 className="mt-24 text-2xl ">
           {day}
           {' '}
           {getMonthNameUkr(month)}
         </h2>
-        <h2 className="mt-10 text-lg">{description}</h2>
+        <h2 className="py-6 text-lg">{description}</h2>
       </div>
 
       {photoEventCounts === 1 && (
@@ -26,30 +31,34 @@ export default function MinorCard({ minorEvent }:{ minorEvent:MinorEvent }) {
       </div>
       )}
       {photoEventCounts === 2 && (
-      <div className="flex">
-        {RenderPhotos({ photos, limit: 1, className: '-ml-20' })}
-        {RenderPhotos({ photos, startFromIndex: 1 })}
+      <div className="flex gap-6">
+        {RenderPhotos({ photos, limit: 1, className: 'w-1/2' })}
+        {RenderPhotos({ photos, startFromIndex: 1, className: 'w-1/2' })}
       </div>
       )}
       {photoEventCounts === 3 && (
-      <div className="flex">
-        <div className="flex-col w-3/4">
-          {RenderPhotos({ photos, limit: 1, className: '-ml-20 mb-10 w-full' })}
+      <div className="flex gap-x-6">
+        <div className="flex-col">
+          {RenderPhotos({ photos, limit: 1, className: '-ml-20 pb-10 h-1/2' })}
           {RenderPhotos({
-            photos, startFromIndex: 1, limit: 1, className: 'w-full',
+            photos, startFromIndex: 1, limit: 1, className: 'h-1/2',
           })}
         </div>
-        {RenderPhotos({ photos, startFromIndex: 2, className: 'w-1/2 w-full' })}
+        {RenderPhotos({ photos, startFromIndex: 2, className: '' })}
       </div>
       )}
       {photoEventCounts === 4 && (
-      <div className="mt-10 flex">
+      <div className="mt-10 flex gap-6">
         <div className="flex-col">
           {RenderPhotos({ photos, limit: 1, className: '-ml-20' })}
-          {RenderPhotos({ photos, startFromIndex: 1, limit: 1 })}
+          {RenderPhotos({
+            photos, startFromIndex: 1, limit: 1, className: 'pt-10',
+          })}
         </div>
         <div className="flex-col">
-          {RenderPhotos({ photos, startFromIndex: 2, limit: 2 })}
+          {RenderPhotos({
+            photos, startFromIndex: 2, limit: 2, className: 'pb-10',
+          })}
         </div>
       </div>
       )}
