@@ -133,3 +133,32 @@
     }
   }
   
+  .scroll-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    will-change: transform;
+ }
+  .scroll-container .ghost {
+    width: 100vw;
+ }
+  .thumbnails-container {
+    position: relative;
+    height: 80vh;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    padding: 0px 160px;
+ }
+  .thumbnails-container .thumbnails {
+    position: relative;
+    display: flex;
+ }
+  .thumbnails-container .thumbnails > *:not(:last-child) {
+    margin-right: 45px;
+ }
+  .thumbnails-container .thumbnails .thumbnail {
+    height: 40vh;
+    width: 700px;
+ }
+  
