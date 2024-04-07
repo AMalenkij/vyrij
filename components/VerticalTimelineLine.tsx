@@ -1,5 +1,5 @@
 interface VerticalTimelineLineProps {
-  year: string;
+  year: number;
 }
 
 export default function VerticalTimelineLine({ year }: VerticalTimelineLineProps) {
