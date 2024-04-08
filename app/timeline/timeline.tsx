@@ -61,17 +61,17 @@ export default function TimeLine({ majorEvent }: { majorEvent: CustomMajorEvents
   return (
     <>
       <div className="scroll-container">
-        <div className="absolute inset-0 bottom-auto text-center pointer-events-none mt-28">
-          <h2 className="text-12 md:text-14 mt-100 md:my-65">Choose a year</h2>
+        <div className="absolute inset-0 bottom-auto text-center pointer-events-none mt-12 md:mt-28">
+          <h2 className="text-12 md:text-14 md:mt-100 mt-12 my-10 md:my-65">Choose a year</h2>
         </div>
         <motion.div
           ref={scrollRef}
           style={{ x: spring }}
-          className="thumbnails-container"
+          className="thumbnails-container ml-4 pr-10 md:pr-24 mt-44 md:mt-72 md:ml-16"
         >
           <div className="thumbnails">
             {majorEvent.map((element) => (
-              <div className="flex-col justify-center items-center mt-96 thumbnail" key={element.year}>
+              <div className="flex-col justify-center items-center  thumbnail" key={element.year}>
                 <Card
                   year={element.year}
                   description={element.title}

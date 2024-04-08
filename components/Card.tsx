@@ -28,14 +28,14 @@ export default function Card({
         <motion.div
           className="group"
           animate={isHovered ? {
-            scale: 2, height: 310, width: 270, transition: { duration: 1 },
+            scale: 1.3, height: 450, width: 410, transition: { duration: 1 },
           } : {}}
-          initial={{ height: 300, width: 260 }}
+          initial={{ height: 440, width: 400 }}
         >
           <Image
             src={imageSrc}
             alt={String(year)}
-            sizes="40vh"
+            sizes="50vh"
             fill
             style={{
               objectFit: 'none',
