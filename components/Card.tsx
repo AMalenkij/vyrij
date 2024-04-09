@@ -1,3 +1,5 @@
+'use client'
+
 import { twMerge } from 'tailwind-merge'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
@@ -5,7 +7,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 
 interface CardProps {
-  year: string;
+  year: number;
   description: string;
   imageSrc: string;
   className?: string;
@@ -18,7 +20,7 @@ export default function Card({
 
   return (
     <div
-      className="flex flex-col items-center justify-center bg-blue-50"
+      className="flex flex-col items-center justify-center hoverCard"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -26,14 +28,14 @@ export default function Card({
         <motion.div
           className="group"
           animate={isHovered ? {
-            scale: 2, height: 310, width: 270, transition: { duration: 1 },
+            scale: 1.3, height: 450, width: 410, transition: { duration: 1 },
           } : {}}
-          initial={{ height: 300, width: 260 }}
+          initial={{ height: 440, width: 400 }}
         >
           <Image
             src={imageSrc}
-            alt={year}
-            sizes="15vh"
+            alt={String(year)}
+            sizes="50vh"
             fill
             style={{
               objectFit: 'none',
@@ -54,8 +56,8 @@ export default function Card({
         text-center
         "
           >
-            <div className="text-4xl text-blue-700">{year}</div>
-            <div className="text-xl text-blue-700">{description}</div>
+            <div className="text-4xl text-white">{year}</div>
+            <div className="text-xl text-white">{description}</div>
           </motion.div>
         ) : null}
       </Link>

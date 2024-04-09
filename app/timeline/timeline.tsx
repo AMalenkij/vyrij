@@ -1,75 +1,89 @@
 'use client'
 
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  useCallback,
-} from 'react'
-import { motion } from 'framer-motion'
-
-import useMousePosition from '@/utils/useMousePosition'
 import Card from '@/components/Card'
 import VerticalTimelineLine from '@/components/VerticalTimelineLine'
 import { supabaseStorageURL } from '@/constants/settings'
-import { MinorEventTL } from '@/types'
+import { CustomMajorEvents } from '@/types'
 
-export function TimeLine({ majorEvent }: { majorEvent: MinorEventTL[] }) {
-  const [x, setX] = useState(0)
-  const mousePosition = useMousePosition()
-  const requestRef = useRef<number | null>(null)
+import React, {
+  useRef,
+  useState,
+  useLayoutEffect,
+  useCallback,
+} from 'react'
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+} from 'framer-motion'
 
-  const handleAnimation = useCallback(() => {
-    const screenWidth = window.innerWidth
-    const leftZone = screenWidth / 3
-    const rightZone = (2 * screenWidth) / 3
-
-    let scrollDirection = 0
-    let cursorPositionCoefficient = 0.5
-
-    const minLimit = -500
-    const maxLimit = 500
-
-    if (mousePosition.x < leftZone) {
-      scrollDirection = 1
-      cursorPositionCoefficient = 1 - mousePosition.x / leftZone
-    } else if (mousePosition.x > rightZone) {
-      scrollDirection = -1
-      cursorPositionCoefficient = (mousePosition.x - rightZone) / (screenWidth - rightZone)
-    }
-
-    const newScrollLeft = x + scrollDirection * cursorPositionCoefficient * 5
-
-    const clampedScrollLeft = Math.min(maxLimit, Math.max(minLimit, newScrollLeft))
-
-    setX(clampedScrollLeft)
-    requestRef.current = requestAnimationFrame(handleAnimation)
-  }, [mousePosition.x, x])
-
-  useEffect(() => {
-    requestRef.current = requestAnimationFrame(handleAnimation)
-
-    return () => {
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current)
-      }
-    }
-  }, [handleAnimation])
-  return (
-    <motion.main animate={{ x }} className="flex gap-12">
-      {majorEvent.map((element) => (
-        <div className="flex-col justify-center items-center">
-          <Card
-            key={element.minor_event.date}
-            year={element.minor_event.date.slice(0, 4)}
-            description={element.minor_event.title}
-            imageSrc={`${supabaseStorageURL}${element.minor_event.photos[0].href}`}
-          />
-          <VerticalTimelineLine year={element.minor_event.date.slice(0, 4)} />
-        </div>
-      ))}
-    </motion.main>
-  )
+interface ResizeObserverEntry {
+  contentRect: DOMRectReadOnly;
+  target: Element;
 }
 
-export default React.memo(TimeLine)
+export default function TimeLine({ majorEvent }: { majorEvent: CustomMajorEvents[] }) {
+  const scrollRef = useRef<HTMLDivElement | null>(null)
+  const ghostRef = useRef<HTMLDivElement | null>(null)
+  const [scrollRange, setScrollRange] = useState<number>(0)
+  const [viewportW, setViewportW] = useState<number>(0)
+
+  useLayoutEffect(() => {
+    if (scrollRef.current) {
+      setScrollRange(scrollRef.current.scrollWidth)
+    }
+  }, [scrollRef])
+
+  const onResize = useCallback((entries: ResizeObserverEntry[]) => {
+    entries.forEach((entry) => {
+      setViewportW(entry.contentRect.width)
+    })
+  }, [])
+
+  useLayoutEffect(() => {
+    const resizeObserver = new ResizeObserver(onResize)
+    if (ghostRef.current) {
+      resizeObserver.observe(ghostRef.current)
+    }
+    return () => resizeObserver.disconnect()
+  }, [onResize])
+
+  const { scrollYProgress } = useScroll()
+  const transform = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, -scrollRange + viewportW],
+  )
+  const physics = { damping: 15, mass: 0.27, stiffness: 55 }
+  const spring = useSpring(transform, physics)
+
+  return (
+    <>
+      <div className="scroll-container">
+        <div className="absolute inset-0 bottom-auto text-center pointer-events-none mt-12 md:mt-28">
+          <h2 className="text-12 md:text-14 md:mt-100 mt-12 my-10 md:my-65">Choose a year</h2>
+        </div>
+        <motion.div
+          ref={scrollRef}
+          style={{ x: spring }}
+          className="thumbnails-container ml-4 pr-10 md:pr-24 mt-44 md:mt-72 md:ml-16"
+        >
+          <div className="thumbnails">
+            {majorEvent.map((element) => (
+              <div className="flex-col justify-center items-center  thumbnail" key={element.year}>
+                <Card
+                  year={element.year}
+                  description={element.title}
+                  imageSrc={`${supabaseStorageURL}${element.photos[0].href}`}
+                />
+                <VerticalTimelineLine year={element.year} />
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+      <div ref={ghostRef} style={{ height: scrollRange }} className="ghost" />
+    </>
+  )
+}
