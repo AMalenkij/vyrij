@@ -2,8 +2,15 @@ import getConcerts from '@/actions/getConcerts'
 import ConcertCard from '@/components/ConcertCard'
 import splitTimestamp from '@/utils/splitTimestamp'
 
+import { Concerts as ConcertsT } from '@/types/supabase'
+
 export default async function Concerts() {
-  const concertsData = await getConcerts()
+  const concertsData: ConcertsT[] | null = await getConcerts()
+
+  if (!concertsData) {
+    return <div>No concerts data available</div>
+  }
+
   return (
     <div className="container mx-auto h-screen justify-center mt-10 flex-col relative">
       {concertsData.map((concert) => (
