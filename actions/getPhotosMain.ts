@@ -17,5 +17,5 @@ export default async function getPhotosMain() {
     return []
   }
 
-  return data || []
+  return data
 }

@@ -18,7 +18,7 @@ export default async function getMajorEvent() {
       console.error('Error fetching MajorEvent:', (error as unknown as Error).message)
       return []
     }
-    return data || []
+    return data
   } catch (error) {
     console.error('Unexpected error:', (error as Error).message)
     return []
