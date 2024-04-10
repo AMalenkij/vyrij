@@ -1,9 +1,9 @@
 import {
-  MajorEvents,
-  MinorEvents,
   ModifiedMajorEvents,
   ModifiedMinorEvents,
 } from '@/types'
+
+import { MajorEvents, MinorEvents } from '@/types/supabase'
 
 export default function mergeEvents(
   majorEvent: MajorEvents[],
@@ -28,11 +28,11 @@ export default function mergeEvents(
   })
 
   const mergedEvents = majorEvent.map((element) => {
-    const year = parseInt(element.minor_event.date.slice(0, 4), 10)
+    const year = element.minor_event ? parseInt(element.minor_event.date.slice(0, 4), 10) : 0
     return {
       year,
-      title: element.minor_event.title,
-      photos: element.minor_event.photos,
+      title: element.minor_event ? element.minor_event.title : '',
+      photos: element.minor_event ? element.minor_event.photos : [],
       minorEvents: groupedEvents[year],
     }
   })
