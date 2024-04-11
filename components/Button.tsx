@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import { forwardRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
@@ -7,8 +8,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   className,
   children,
   disabled,
-  type = 'button',
-  ...props
+  type,
 }, ref) => (
   <button
     type={type}
@@ -33,7 +33,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     )}
     disabled={disabled}
     ref={ref}
-    {...props}
+
   >
     {children}
   </button>
