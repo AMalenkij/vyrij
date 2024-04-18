@@ -1,12 +1,9 @@
 /* eslint-disable no-console */
 
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-
-import { Database } from '@/types_db'
+import createClient from '@/utils/supabase/client'
 
 export default async function getMajorEvent() {
-  const supabase = createServerComponentClient<Database>({ cookies })
+  const supabase = createClient()
 
   try {
     const { data, error } = await supabase
