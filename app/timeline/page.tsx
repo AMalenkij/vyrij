@@ -1,8 +1,11 @@
-import { useStore } from '@/state/allData'
-import { CustomMajorEvents } from '@/types'
+import { type CustomMajorEvents } from '@/types'
+import getMajorEvent from '@/actions/getMajorEvent'
+import processingMajorEvent from '@/utils/processingMajorEvent'
+
 import Timeline from './timeline'
 
-export default function TimeLine() {
-  const { majorEvent } = useStore.getState() as { majorEvent: CustomMajorEvents[] }
+export default async function TimeLine() {
+  const data = await getMajorEvent()
+  const majorEvent: CustomMajorEvents[] = data ? processingMajorEvent(data) : []
   return majorEvent ? <Timeline majorEvent={majorEvent} /> : null
 }

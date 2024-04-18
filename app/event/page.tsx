@@ -1,11 +1,18 @@
-import { useStore } from '@/state/allData'
-import { ModifiedMajorEvents } from '@/types'
+import { type ModifiedMajorEvents } from '@/types'
 
-import MinorCard from './MinorCard'
+import mergeEvents from '@/utils/mergeEvents'
+import getMinorEvent from '@/actions/getMinorEvent'
+import getMajorEvent from '@/actions/getMajorEvent'
 import MajorCard from './MajorCard'
+import MinorCard from './MinorCard'
 
-export default function Event() {
-  const { allEvent } = useStore.getState() as { allEvent: ModifiedMajorEvents[] }
+export default async function Event() {
+  const dataMinorEvent = await getMinorEvent()
+  const dataMajorEvent = await getMajorEvent()
+
+  const allEvent: ModifiedMajorEvents[] = (dataMinorEvent && dataMajorEvent)
+    ? mergeEvents(dataMajorEvent, dataMinorEvent)
+    : []
   return (
     <div>
       {allEvent?.map((item) => (
