@@ -13,7 +13,8 @@ export default function Logo({ children, className } : LogoProps) {
      flex
      items-center
      gap-2
-     text-2xl
+     text-3xl
+     rochester-regular
         `,
       className,
     )}

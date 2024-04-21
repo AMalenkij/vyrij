@@ -43,8 +43,7 @@ export default function HeroHeaders() {
         <div className="
       md:w-1/3
       md:flex-none
-      text-gray
-      "
+      text-gray"
         >
           <article className="
         md:-ml-96
@@ -66,7 +65,6 @@ export default function HeroHeaders() {
             >
               {QUOTE_TEXT}
             </motion.p>
-
             <motion.p
               className="text-2xl"
               initial={{ opacity: 0, y: 40 }}
@@ -87,8 +85,7 @@ export default function HeroHeaders() {
         text-center
         md:text-left
         md:mr-auto
-        mb-10
-        "
+        mb-10"
           >
             <motion.p
               className="ml-6 -mt-10"
@@ -106,6 +103,5 @@ export default function HeroHeaders() {
         </div>
       </div>
     </div>
-
   )
 }
