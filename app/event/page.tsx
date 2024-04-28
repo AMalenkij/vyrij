@@ -14,7 +14,7 @@ export default async function Event() {
     ? mergeEvents(dataMajorEvent, dataMinorEvent)
     : []
   return (
-    <div>
+    <div className="-mt-40">
       {allEvent?.map((item) => (
         <section key={item.year} className="2xl:mb-44 xl:mb-40 lg:mb-32 md:mb-28 mb-24">
           <MajorCard majorEvents={item} />
