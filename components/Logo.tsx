@@ -1,4 +1,5 @@
 import { twMerge } from 'tailwind-merge'
+import Link from 'next/link'
 
 import SVGLogoVyrij from '@/public/svg/LogoVyrij'
 
@@ -8,19 +9,21 @@ interface LogoProps {
 }
 export default function Logo({ children, className } : LogoProps) {
   return (
-    <div className={twMerge(
-      `
+    <Link
+      className={twMerge(
+        `
      flex
      items-center
      gap-2
      text-3xl
      rochester-regular
         `,
-      className,
-    )}
+        className,
+      )}
+      href="/"
     >
       { children }
       <SVGLogoVyrij />
-    </div>
+    </Link>
   )
 }
