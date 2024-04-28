@@ -1,5 +1,4 @@
-// import { Inter } from 'next/font/google'
-import { Comforter } from 'next/font/google'
+import { Poiret_One, Comforter } from 'next/font/google'
 
 import type { Metadata } from 'next'
 import './globals.css'
@@ -11,9 +10,14 @@ import ToasterProvider from '@/providers/ToasterProvider'
 
 // const font = Inter({ subsets: ['latin'] })
 const comforter = Comforter({
-  subsets: ['latin'],
+  subsets: ['latin', 'cyrillic'],
   weight: '400',
   variable: '--font-comforter',
+})
+const poiretOne = Poiret_One({
+  subsets: ['latin', 'cyrillic'],
+  weight: '400',
+  variable: '--font-poiret-one',
 })
 
 export const metadata: Metadata = {
@@ -24,7 +28,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${comforter.variable} overflow-x-hidden `}>
+      <body className={`${poiretOne.variable} ${comforter.variable} overflow-x-hidden `}>
         <SupabaseProvider>
           <ToasterProvider />
           <UserProvider>

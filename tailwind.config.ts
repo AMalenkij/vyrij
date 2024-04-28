@@ -13,6 +13,7 @@ const config: Config = {
       },
       fontFamily: {
         comforter: ['var(--font-comforter)'],
+        poiretOne: ['var(--font-poiret-one)'],
       },
       container: {
         padding: {
