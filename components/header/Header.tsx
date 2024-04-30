@@ -19,7 +19,6 @@ export default function Header({ className } : HeaderProps) {
       `
       grid 
       grid-cols-3 
-      p-8 
       relative 
       z-[100]
     `,

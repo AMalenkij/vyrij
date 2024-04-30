@@ -17,6 +17,8 @@ export default function Logo({ children, className } : LogoProps) {
      gap-2
      text-3xl
      rochester-regular
+     mt-8
+     ml-8
         `,
         className,
       )}
