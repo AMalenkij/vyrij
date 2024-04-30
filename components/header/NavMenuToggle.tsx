@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable react-hooks/exhaustive-deps */
 
 'use client'
@@ -24,13 +25,17 @@ export default function NavMenuToggle() {
   }
 
   useEffect(() => {
-    if (isOpen) {
-      path1Controls.start(path1Variants.open)
-      path2Controls.start(path2Variants.open)
-    } else {
-      path1Controls.start(path1Variants.closed)
-      path2Controls.start(path2Variants.closed)
+    const animatePaths = async () => {
+      if (isOpen) {
+        await path1Controls.start(path1Variants.open)
+        await path2Controls.start(path2Variants.open)
+      } else {
+        await path1Controls.start(path1Variants.closed)
+        await path2Controls.start(path2Variants.closed)
+      }
     }
+
+    animatePaths()
   }, [isOpen])
 
   return (
@@ -45,12 +50,12 @@ export default function NavMenuToggle() {
         viewBox="0 0 24 24"
       >
         <motion.path
-          {...path1Variants.closed}
+          d={path1Variants.closed.d}
           animate={path1Controls}
           transition={{ duration: 0.2 }}
         />
         <motion.path
-          {...path2Variants.closed}
+          d={path2Variants.closed.d}
           animate={path2Controls}
           transition={{ duration: 0.2 }}
         />
