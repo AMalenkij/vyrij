@@ -77,8 +77,8 @@ export default function TimeLine({ majorEvent }: { majorEvent: CustomMajorEvents
         "
         >
           <h2 className="
-          text-12
-          md:text-14
+          text-2xl
+          md:text-3xl
           md:mt-100
           my-10
           md:my-65
@@ -99,9 +99,9 @@ export default function TimeLine({ majorEvent }: { majorEvent: CustomMajorEvents
           ml-4
           pr-10
           md:pr-24
-          mt-40
+          mt-36
           md:mt-72
-          md:ml-16"
+          md:ml-10"
         >
           <div className="
           relative

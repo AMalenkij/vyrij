@@ -35,7 +35,7 @@ export default function Card({
           <Image
             src={imageSrc}
             alt={String(year)}
-            sizes="50vh"
+            sizes="40vh"
             fill
             style={{
               objectFit: 'none',
