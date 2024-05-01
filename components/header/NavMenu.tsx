@@ -38,7 +38,15 @@ export default function NavMenu() {
 
   return (
     <motion.nav
-      className="fixed h-screen w-screen bg-[#eee9e4] flex flex-col justify-end"
+      className="
+      fixed
+      h-screen
+      w-screen
+      bg-[#eee9e4]
+      flex
+      flex-col
+      justify-end
+      pb-10"
       initial={{ y: '-100%' }}
       animate={{
         y: 0,
