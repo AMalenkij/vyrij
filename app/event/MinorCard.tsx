@@ -50,7 +50,7 @@ export default function MinorCard({ minorEvents }:{ minorEvents:ModifiedMinorEve
       {photoEventCounts === 4 && (
       <div className="mt-10 flex gap-6">
         <div className="flex-col">
-          {RenderPhotos({ photos, limit: 1, className: '-ml-20' })}
+          {RenderPhotos({ photos, limit: 1, className: 'xl:-ml-20 -ml-4' })}
           {RenderPhotos({
             photos, startFromIndex: 1, limit: 1, className: 'pt-10',
           })}

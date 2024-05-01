@@ -59,7 +59,7 @@ export default function MajorCard({ majorEvents }:{ majorEvents:CustomMajorEvent
         font-bold
         2xl:pb-56
         xl:pb-40
-        pb-32
+        pb-48
         md:mb-5"
         >
           {year}
@@ -80,6 +80,7 @@ export default function MajorCard({ majorEvents }:{ majorEvents:CustomMajorEvent
           text-6xl
           font-comforter
           whitespace-normal
+          px-16
           "
           style={{
             scale: scaleProgressText,
