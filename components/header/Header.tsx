@@ -7,6 +7,7 @@ import Logo from '@/components/Logo'
 import NavMenuToggle from '@/components/header/NavMenuToggle'
 import NavMenu from '@/components/header/NavMenu'
 import useMenuOpen from '@/hooks/useMenuOpen'
+import SVGLogoVyrij from '@/public/svg/LogoVyrij'
 
 interface HeaderProps {
   className?: string
@@ -26,7 +27,10 @@ export default function Header({ className } : HeaderProps) {
     )}
     >
       <AnimatePresence>{isOpen && <NavMenu />}</AnimatePresence>
-      <Logo>Chor |</Logo>
+      <Logo>
+        Chor |
+        <SVGLogoVyrij />
+      </Logo>
       <NavMenuToggle />
     </header>
   )

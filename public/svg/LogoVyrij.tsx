@@ -3,7 +3,7 @@ export default function SVGLogoVyrij() {
     <svg
       // width="152"
       xmlns="http://www.w3.org/2000/svg"
-      height="60"
+      // height="60"
       viewBox="0 0 152 136"
       // fill="black"
     >

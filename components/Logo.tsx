@@ -1,8 +1,6 @@
 import { twMerge } from 'tailwind-merge'
 import Link from 'next/link'
 
-import SVGLogoVyrij from '@/public/svg/LogoVyrij'
-
 interface LogoProps {
   children: React.ReactNode
   className?: string
@@ -15,17 +13,26 @@ export default function Logo({ children, className } : LogoProps) {
      flex
      items-center
      gap-2
-     text-3xl
+     text-xl
+     xl:text-3xl
      rochester-regular
      mt-8
      ml-8
+     h-10
+     shrink-0
+     w-28
+     lg:w-40
+     whitespace-nowrap
+     text-white
+     fill-white
+     lg:text-black
+     lg:fill-black
         `,
         className,
       )}
       href="/"
     >
       { children }
-      <SVGLogoVyrij />
     </Link>
   )
 }
