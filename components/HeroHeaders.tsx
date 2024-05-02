@@ -16,6 +16,7 @@ export default function HeroHeaders() {
     text-center
     gap-y-8
     font-poiretOne
+    mt-40
     "
     >
       <motion.p

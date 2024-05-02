@@ -50,14 +50,13 @@ export default function Card({
             transition={{ duration: 1.2 }}
             className="
         absolute
-        flex-col
-        justify-end
-        p-4
-        text-center
+        pl-4
+        pt-12
+        text-start
         "
           >
-            <div className="text-4xl text-white">{year}</div>
-            <div className="text-xl text-white">{description}</div>
+            <p className="text-4xl text-start text-white">{year}</p>
+            <p className="text-xl text-white">{description}</p>
           </motion.div>
         ) : null}
       </Link>
