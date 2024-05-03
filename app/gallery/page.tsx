@@ -9,8 +9,7 @@ export default async function Gallery() {
           text-2xl
           md:text-3xl
           md:mt-100
-          my-10
-          md:my-65
+          my-4
           text-center
           "
       >
@@ -19,9 +18,9 @@ export default async function Gallery() {
       <div className="
       mx-auto
       max-w-2xl
-      py-16
+      py-12
       px-4
-      sm:py-24
+      sm:py-14
       sm:px-6
       lg:max-w-7xl
       lg:px-8 grid

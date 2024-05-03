@@ -17,6 +17,7 @@ export default function Card({
   year, description, imageSrc, className,
 }: CardProps) {
   const [isHovered, setIsHovered] = useState(false)
+  const [isLoading, setLoading] = useState(true)
 
   return (
     <div
@@ -40,6 +41,13 @@ export default function Card({
             style={{
               objectFit: 'none',
             }}
+            className={twMerge(
+              'duration-700 ease-in-out group-hover:opacity-90 object-cover ',
+              isLoading
+                ? 'scale-110 blur-2xl grayscale'
+                : 'scale-100 blur-0 grayscale-0',
+            )}
+            onLoadingComplete={() => setLoading(false)}
           />
 
         </motion.div>
