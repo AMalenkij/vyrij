@@ -86,7 +86,7 @@ export default function FloatingImageGallery({ children, photoMain }: FloatingIm
           ref={ref}
           initial={initial}
           animate={control}
-          className="absolute w-full h-full"
+          className="absolute w-full h-[75vh]"
         >
           {startAnimation && photoMain
             ?.filter((image) => image.type === type)
