@@ -11,7 +11,7 @@
 - Form Handling: Integrates react-hook-form for efficient form management.
 - Payment Integration: Utilizes Stripe for secure payment processing.
 
-###Dependencies
+### Dependencies
 - Next.js: React framework for building server-side rendered applications.
 - React: JavaScript library for building user interfaces.
 - Tailwind CSS: Utility-first CSS framework for rapid UI development.
