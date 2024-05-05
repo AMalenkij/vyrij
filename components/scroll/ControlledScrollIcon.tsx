@@ -10,8 +10,15 @@ export default function ControlledScrollIcon() {
   const { scrollYProgress } = useScroll()
   const router = useRouter()
   useEffect(() => {
-    scroll((progress) => { if (progress === 1) router.push('/timeline') })
+    const unsubscribe = scroll((progress) => {
+      if (progress === 1) router.push('/timeline')
+    })
+
+    return () => {
+      unsubscribe()
+    }
   }, [router])
+
   return (
     <div className="mouse top-3/4 fixed left-1/2 w-12">
       <div className="frame w-full absolute z-[1]">
