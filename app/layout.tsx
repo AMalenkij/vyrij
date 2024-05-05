@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${poiretOne.variable} ${comforter.variable} overflow-x-hidden `}>
+      <body className={`${poiretOne.variable} ${comforter.variable} overflow-x-hidden font-poiretOne tracking-wider`}>
         <Header />
         {children}
       </body>

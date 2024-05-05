@@ -1,5 +1,4 @@
 .animate-text {
-	 letter-spacing: 12px;
 	 animation: nudgeText 5.5s ease-out infinite;
 	 transform: translateX(-50%) translateY(0);
 }

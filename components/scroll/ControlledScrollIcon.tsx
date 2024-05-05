@@ -58,7 +58,7 @@ export default function ControlledScrollIcon() {
         </svg>
       </div>
       <div className="ball absolute w-2 h-2 bg-black m-auto inset-0 rounded-full" />
-      <p className="animate-text text-sm text-black absolute left-1/2 top-28 ml-[6px]">Scroll</p>
+      <p className="animate-text text-sm text-black absolute left-1/2 top-28 ml-[6px] tracking-[12px]">Scroll</p>
 
     </div>
 
