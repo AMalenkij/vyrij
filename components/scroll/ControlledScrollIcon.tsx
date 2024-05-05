@@ -2,13 +2,16 @@
 
 import { motion, useScroll, scroll } from 'framer-motion'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 import './controlledScrollIcon.css'
 
 export default function ControlledScrollIcon() {
   const { scrollYProgress } = useScroll()
   const router = useRouter()
-  scroll((progress) => { if (progress === 1) router.push('/timeline') })
+  useEffect(() => {
+    scroll((progress) => { if (progress === 1) router.push('/timeline') })
+  }, [router])
   return (
     <div className="mouse top-3/4 fixed left-1/2 w-12">
       <div className="frame w-full absolute z-[1]">
