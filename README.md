@@ -21,4 +21,5 @@
 - Stripe: Payment processing platform for online businesses.
 
 
-DeploymentThe website is deployed using Vercel and can be accessed here https://vyrij.vercel.app
+### Deployment
+The website is deployed using Vercel and can be accessed here https://vyrij.vercel.app
