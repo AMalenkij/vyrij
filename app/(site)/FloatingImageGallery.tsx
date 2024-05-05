@@ -79,14 +79,14 @@ export default function FloatingImageGallery({ children, photoMain }: FloatingIm
   }, [])
 
   return (
-    <div onMouseMove={manageMouseMove} className="relative w-screen h-full hidden lg:block">
+    <div onMouseMove={manageMouseMove} className="relative h-[200vh] w-screen hidden lg:block">
       {planes.map(({ type, ref, control }) => (
         <motion.div
           key={type}
           ref={ref}
           initial={initial}
           animate={control}
-          className="absolute w-full h-[75vh]"
+          className="fixed w-full h-[75vh]"
         >
           {startAnimation && photoMain
             ?.filter((image) => image.type === type)

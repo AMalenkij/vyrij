@@ -2,6 +2,7 @@ import HeroHeaders from '@/components/HeroHeaders'
 import { type HomepageImages } from '@/types'
 import getPhotosMain from '@/actions/getPhotosMain'
 import mapDataToHomepageImages from '@/utils/mapDataToHomepageImages'
+import ControlledScrollIcon from '@/components/scroll/ControlledScrollIcon'
 import FloatingImageGallery from './FloatingImageGallery'
 import Mobile from './Mobile'
 
@@ -11,8 +12,18 @@ export default async function Home() {
   return (
     <>
       {photoMain
-        ? <FloatingImageGallery photoMain={photoMain}><HeroHeaders /></FloatingImageGallery>
-        : <HeroHeaders />}
+        ? (
+          <FloatingImageGallery photoMain={photoMain}>
+            <HeroHeaders>
+              <ControlledScrollIcon />
+            </HeroHeaders>
+          </FloatingImageGallery>
+        )
+        : (
+          <HeroHeaders>
+            <ControlledScrollIcon />
+          </HeroHeaders>
+        )}
       <Mobile />
     </>
   )

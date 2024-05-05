@@ -4,9 +4,11 @@ import { motion } from 'framer-motion'
 
 import { QUOTE_TEXT, QUOTE_TEXT_NEXT, AUTOR } from '@/constants/settings'
 
-export default function HeroHeaders() {
+export default function HeroHeaders({ children }: { children: React.ReactNode }) {
   return (
     <div className="
+    fixed
+    inset-0
     flex
     flex-col
     items-center
@@ -16,7 +18,7 @@ export default function HeroHeaders() {
     text-center
     gap-y-8
     font-poiretOne
-    mt-40
+    pt-40
     "
     >
       <motion.p
@@ -52,6 +54,7 @@ export default function HeroHeaders() {
       >
         {AUTOR}
       </motion.p>
+      {children}
     </div>
   )
 }
