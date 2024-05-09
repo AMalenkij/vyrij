@@ -5,6 +5,7 @@ import getMinorEvent from '@/actions/getMinorEvent'
 import getMajorEvent from '@/actions/getMajorEvent'
 import MajorCard from './MajorCard'
 import MinorCard from './MinorCard'
+import AnimatedContainer from './AnimatedContainer'
 
 export default async function Event() {
   const dataMinorEvent = await getMinorEvent()
@@ -19,7 +20,9 @@ export default async function Event() {
         <section key={item.year} className="2xl:mb-44 xl:mb-40 lg:mb-32 md:mb-28 mb-24">
           <MajorCard majorEvents={item} />
           {item?.minorEvents?.map((elm) => (
-            <MinorCard minorEvents={elm} />
+            <AnimatedContainer>
+              <MinorCard minorEvents={elm} />
+            </AnimatedContainer>
           ))}
         </section>
       ))}
