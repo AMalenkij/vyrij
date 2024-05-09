@@ -5,7 +5,7 @@ import getMinorEvent from '@/actions/getMinorEvent'
 import getMajorEvent from '@/actions/getMajorEvent'
 import MajorCard from './MajorCard'
 import MinorCard from './MinorCard'
-import AnimatedContainer from './AnimatedContainer'
+import AnimatedContainer from './WithViewportAnimation'
 
 export default async function Event() {
   const dataMinorEvent = await getMinorEvent()

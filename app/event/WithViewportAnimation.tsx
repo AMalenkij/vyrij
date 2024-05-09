@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 
-export default function AnimatedContainer({ children }:{ children:JSX.Element }) {
+export default function WithViewportAnimation({ children }:{ children:JSX.Element }) {
   return (
     <motion.div
       initial={{ opacity: 0.2, y: 30 }}
