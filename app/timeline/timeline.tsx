@@ -1,10 +1,5 @@
 'use client'
 
-import Card from '@/components/Card'
-import VerticalTimelineLine from '@/components/VerticalTimelineLine'
-import { supabaseStorageURL } from '@/constants/settings'
-import { CustomMajorEvents } from '@/types'
-
 import React, {
   useRef,
   useState,
@@ -18,12 +13,18 @@ import {
   useSpring,
 } from 'framer-motion'
 
+import { supabaseStorageURL } from '@/constants/settings'
+import { CustomMajorEvents } from '@/types'
+import VerticalTimelineLine from './VerticalTimelineLine'
+import Card from './Card'
+
 interface ResizeObserverEntry {
   contentRect: DOMRectReadOnly;
   target: Element;
 }
 
-export default function TimeLine({ majorEvent }: { majorEvent: CustomMajorEvents[] }) {
+export default function TimeLine({ majorEvent, children }:
+{ majorEvent: CustomMajorEvents[], children: React.ReactNode }) {
   const scrollRef = useRef<HTMLDivElement | null>(null)
   const ghostRef = useRef<HTMLDivElement | null>(null)
   const [scrollRange, setScrollRange] = useState<number>(0)
@@ -66,27 +67,7 @@ export default function TimeLine({ majorEvent }: { majorEvent: CustomMajorEvents
       will-change-transform
       "
       >
-        <div className="
-        absolute
-        inset-0
-        bottom-auto
-        text-center
-        pointer-events-none
-        mt-12
-        md:mt-28
-        "
-        >
-          <h2 className="
-          text-2xl
-          md:text-3xl
-          md:mt-100
-          my-10
-          md:my-65
-          "
-          >
-            Choose a year
-          </h2>
-        </div>
+        {children}
         <motion.div
           ref={scrollRef}
           style={{ x: spring }}
