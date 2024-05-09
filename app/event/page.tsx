@@ -6,6 +6,7 @@ import getMajorEvent from '@/actions/getMajorEvent'
 import MajorCard from './MajorCard'
 import MinorCard from './MinorCard'
 import AnimatedContainer from './WithViewportAnimation'
+import RenderPhotos from './RenderPhotos'
 
 export default async function Event() {
   const dataMinorEvent = await getMinorEvent()
@@ -18,7 +19,9 @@ export default async function Event() {
     <div className="-mt-40">
       {allEvent?.map((item) => (
         <section key={item.year} className="2xl:mb-44 xl:mb-40 lg:mb-32 md:mb-28 mb-24">
-          <MajorCard majorEvents={item} />
+          <MajorCard majorEvents={item}>
+            {RenderPhotos({ photos: item.photos, limit: 1, className: 'min-w-full max-w-full h-screen relative' })}
+          </MajorCard>
           {item?.minorEvents?.map((elm) => (
             <AnimatedContainer>
               <MinorCard minorEvents={elm} />

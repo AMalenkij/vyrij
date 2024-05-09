@@ -1,13 +1,13 @@
 'use client'
 
-import React, { useRef } from 'react'
+import React, { ReactNode, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 import { CustomMajorEvents } from '@/types'
-import RenderPhotos from './RenderPhotos'
 
-export default function MajorCard({ majorEvents }:{ majorEvents:CustomMajorEvents }) {
-  const { year, title, photos } = majorEvents
+export default function MajorCard({ majorEvents, children }:
+{ majorEvents:CustomMajorEvents, children:ReactNode }) {
+  const { year, title } = majorEvents
 
   const refFM = useRef<HTMLDivElement>(null)
 
@@ -43,9 +43,7 @@ export default function MajorCard({ majorEvents }:{ majorEvents:CustomMajorEvent
       overflow-hidden
       "
       >
-        <div>
-          {RenderPhotos({ photos, limit: 1, className: 'min-w-full  max-w-full h-screen relative' })}
-        </div>
+        {children}
         <div className="
         absolute
         inset-0
@@ -54,8 +52,8 @@ export default function MajorCard({ majorEvents }:{ majorEvents:CustomMajorEvent
         items-center
         text-white
         2xl:text-2xl
-        lg:text-xl
-        text-lg
+        lg:text-base
+        text-sm
         font-bold
         2xl:pb-56
         xl:pb-40
