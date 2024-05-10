@@ -13,18 +13,12 @@ import {
   useSpring,
 } from 'framer-motion'
 
-import { supabaseStorageURL } from '@/constants/settings'
-import { CustomMajorEvents } from '@/types'
-import VerticalTimelineLine from './VerticalTimelineLine'
-import Card from './Card'
-
 interface ResizeObserverEntry {
   contentRect: DOMRectReadOnly;
   target: Element;
 }
 
-export default function TimeLine({ majorEvent, children }:
-{ majorEvent: CustomMajorEvents[], children: React.ReactNode }) {
+export default function WithTimeLineAnimation({ children }: { children: React.ReactNode }) {
   const scrollRef = useRef<HTMLDivElement | null>(null)
   const ghostRef = useRef<HTMLDivElement | null>(null)
   const [scrollRange, setScrollRange] = useState<number>(0)
@@ -67,7 +61,25 @@ export default function TimeLine({ majorEvent, children }:
       will-change-transform
       "
       >
-        {children}
+        <div className="
+        absolute
+        inset-0
+        bottom-auto
+        text-center
+        pointer-events-none
+        mt-12
+        md:mt-28"
+        >
+          <h2 className="
+          text-2xl
+          md:text-3xl
+          md:mt-100
+          my-10
+          md:my-65"
+          >
+            Choose a year
+          </h2>
+        </div>
         <motion.div
           ref={scrollRef}
           style={{ x: spring }}
@@ -84,29 +96,8 @@ export default function TimeLine({ majorEvent, children }:
           md:mt-72
           md:ml-10"
         >
-          <div className="
-          relative
-          flex
-          "
-          >
-            {majorEvent.map((element) => (
-              <div
-                className="
-              flex-col
-              justify-center
-              items-center
-              mr-32
-              "
-                key={element.year}
-              >
-                <Card
-                  year={element.year}
-                  description={element.title}
-                  imageSrc={`${supabaseStorageURL}${element.photos[0].href}`}
-                />
-                <VerticalTimelineLine year={element.year} />
-              </div>
-            ))}
+          <div className="relative flex">
+            {children}
           </div>
         </motion.div>
       </div>
