@@ -2,7 +2,7 @@ import { type CustomMajorEvents } from '@/types'
 import getMajorEvent from '@/actions/getMajorEvent'
 import processingMajorEvent from '@/utils/processingMajorEvent'
 import { supabaseStorageURL } from '@/constants/settings'
-import Timeline from './withTimeLineAnimation'
+import WithTimeLineAnimation from './withTimeLineAnimation'
 import VerticalTimelineLine from './VerticalTimelineLine'
 import Card from './Card'
 
@@ -10,7 +10,7 @@ export default async function TimeLine() {
   const data = await getMajorEvent()
   const majorEvent: CustomMajorEvents[] = data ? processingMajorEvent(data) : []
   return majorEvent ? (
-    <Timeline>
+    <WithTimeLineAnimation>
       {majorEvent.map((element) => (
         <div
           className="
@@ -29,6 +29,6 @@ export default async function TimeLine() {
           <VerticalTimelineLine year={element.year} />
         </div>
       ))}
-    </Timeline>
+    </WithTimeLineAnimation>
   ) : null
 }
