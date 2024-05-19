@@ -3,6 +3,7 @@ import { type HomepageImages } from '@/types'
 import getPhotosMain from '@/actions/getPhotosMain'
 import mapDataToHomepageImages from '@/utils/mapDataToHomepageImages'
 import ControlledScrollIcon from '@/components/scroll/ControlledScrollIcon'
+import useHandleScroll from '@/hooks/useHandleScroll'
 import FloatingImageGallery from './FloatingImageGallery'
 import Mobile from './Mobile'
 
@@ -15,7 +16,7 @@ export default async function Home() {
         ? (
           <FloatingImageGallery photoMain={photoMain}>
             <HeroHeaders>
-              <ControlledScrollIcon />
+              <ControlledScrollIcon scrollCallback={useHandleScroll} className="top-3/4" />
             </HeroHeaders>
           </FloatingImageGallery>
         )

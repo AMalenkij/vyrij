@@ -13,6 +13,8 @@ import {
   useSpring,
 } from 'framer-motion'
 
+import ControlledScrollIcon from '@/components/scroll/ControlledScrollIcon'
+
 interface ResizeObserverEntry {
   contentRect: DOMRectReadOnly;
   target: Element;
@@ -62,13 +64,11 @@ export default function WithTimeLineAnimation({ children }: { children: React.Re
       "
       >
         <div className="
-        absolute
-        inset-0
-        bottom-auto
         text-center
         pointer-events-none
         mt-12
-        md:mt-28"
+        md:mt-24
+        "
         >
           <h2 className="
           text-2xl
@@ -79,6 +79,7 @@ export default function WithTimeLineAnimation({ children }: { children: React.Re
           >
             Choose a year
           </h2>
+          <ControlledScrollIcon />
         </div>
         <motion.div
           ref={scrollRef}

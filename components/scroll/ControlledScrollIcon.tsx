@@ -1,26 +1,18 @@
 'use client'
 
-import { motion, useScroll, scroll } from 'framer-motion'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { twMerge } from 'tailwind-merge'
+import { motion, useScroll } from 'framer-motion'
 
-import './controlledScrollIcon.css'
-
-export default function ControlledScrollIcon() {
+export default function ControlledScrollIcon({ scrollCallback, className }
+: { scrollCallback?: () => void, className?: string }) {
+  // eslint-disable-next-line no-console
+  console.log(className)
   const { scrollYProgress } = useScroll()
-  const router = useRouter()
-  useEffect(() => {
-    const unsubscribe = scroll((progress) => {
-      if (progress === 1) router.push('/timeline')
-    })
-
-    return () => {
-      unsubscribe()
-    }
-  }, [router])
-
+  if (typeof scrollCallback === 'function') {
+    scrollCallback()
+  }
   return (
-    <div className="mouse top-3/4 fixed left-1/2 w-12">
+    <div className={twMerge('mouse w-10', className)}>
       <div className="frame w-full absolute z-[1]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -59,8 +51,6 @@ export default function ControlledScrollIcon() {
       </div>
       <div className="ball absolute w-2 h-2 bg-black m-auto inset-0 rounded-full" />
       <p className="animate-text text-sm text-black absolute left-1/2 top-28 ml-[6px] tracking-[12px]">Scroll</p>
-
     </div>
-
   )
 }

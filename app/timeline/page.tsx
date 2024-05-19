@@ -17,8 +17,7 @@ export default async function TimeLine() {
               flex-col
               justify-center
               items-center
-              mr-32
-              "
+              mr-32"
           key={element.year}
         >
           <Card
