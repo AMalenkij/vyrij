@@ -5,8 +5,6 @@ import { motion, useScroll } from 'framer-motion'
 
 export default function ControlledScrollIcon({ scrollCallback, className }
 : { scrollCallback?: () => void, className?: string }) {
-  // eslint-disable-next-line no-console
-  console.log(className)
   const { scrollYProgress } = useScroll()
   if (typeof scrollCallback === 'function') {
     scrollCallback()
@@ -50,7 +48,7 @@ export default function ControlledScrollIcon({ scrollCallback, className }
         </svg>
       </div>
       <div className="ball absolute w-2 h-2 bg-black m-auto inset-0 rounded-full" />
-      <p className="animate-text text-sm text-black absolute left-1/2 top-28 ml-[6px] tracking-[12px]">Scroll</p>
+      <p className="animate-text text-sm text-black absolute left-1/2 sm:top-28 top-20 ml-[6px] tracking-[12px]">Scroll</p>
     </div>
   )
 }

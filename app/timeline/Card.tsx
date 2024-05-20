@@ -29,9 +29,9 @@ export default function Card({
         <motion.div
           className="group"
           animate={isHovered ? {
-            scale: 1.3, height: 450, width: 410, transition: { duration: 1 },
+            scale: 1.3, height: 430, width: 390, transition: { duration: 1 },
           } : {}}
-          initial={{ height: 440, width: 400 }}
+          initial={{ height: 400, width: 360 }}
         >
           <Image
             src={imageSrc}

@@ -66,15 +66,15 @@ export default function WithTimeLineAnimation({ children }: { children: React.Re
         <div className="
         text-center
         pointer-events-none
-        mt-12
-        md:mt-24
+        mt-6
+        md:mt-12
         "
         >
           <h2 className="
           text-2xl
           md:text-3xl
           md:mt-100
-          my-10
+          my-6
           md:my-65"
           >
             Choose a year
