@@ -12,7 +12,7 @@ export default async function Concerts() {
   }
 
   return (
-    <div className="container mx-auto h-screen justify-center mt-10 flex-col relative">
+    <div className="container mx-auto h-screen justify-center mt-24 flex-col relative">
       {concertsData.map((concert) => (
         <ConcertCard
           key={concert.id}

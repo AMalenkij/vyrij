@@ -4,7 +4,7 @@ import BlurImage from '@/components/BlurImage'
 export default async function Gallery() {
   const photos = await getPhotos(12)
   return (
-    <>
+    <div className='mt-24'>
       <h2 className="
           text-2xl
           md:text-3xl
@@ -36,6 +36,6 @@ export default async function Gallery() {
           <BlurImage key={photo.photo_id} image={photo} />
         ))}
       </div>
-    </>
+    </div>
   )
 }

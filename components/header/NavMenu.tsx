@@ -48,7 +48,8 @@ export default function NavMenu() {
       flex
       flex-col
       justify-end
-      pb-10"
+      pb-10
+      "
       initial={{ y: '-100%' }}
       animate={{
         y: 0,

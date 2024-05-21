@@ -7,7 +7,7 @@ interface MenuOpenStore {
 }
 
 const useMenuOpen = create<MenuOpenStore>((set) => ({
-  isOpen: false,
+  isOpen: true,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }))

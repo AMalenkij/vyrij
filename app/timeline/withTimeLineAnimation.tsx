@@ -61,6 +61,7 @@ export default function WithTimeLineAnimation({ children }: { children: React.Re
       fixed
       inset-x-0
       will-change-transform
+      top-20
       "
       >
         <div className="

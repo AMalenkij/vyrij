@@ -40,7 +40,7 @@ export default function NavMenuToggle() {
 
   return (
     <button
-      className="justify-self-center flex flex-col gap-2 cursor-pointer stroke-black stroke-2 z-50 fixed mt-14"
+      className="fixed left-1/2  -translate-x-1/2 top-12 cursor-pointer stroke-white stroke-2 z-50 mix-blend-difference"
       onClick={isOpen ? onClose : onOpen}
       type="button"
     >
