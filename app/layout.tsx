@@ -30,7 +30,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${poiretOne.variable} ${comforter.variable} overflow-x-hidden font-poiretOne tracking-wider bg-white`}>
         <NavMenuToggle />
         <MenuAnimationControl isOpen>
-          <Logo>
+          <Logo className="
+          fixed
+          top-10
+          left-8
+          flex
+          items-center
+          gap-2
+          text-xl
+          xl:text-3xl
+          rochester-regular
+          h-10
+          shrink-0
+          w-28
+          lg:w-44
+          whitespace-nowrap
+        text-white
+          mix-blend-difference
+          z-50
+          "
+          >
             Chor |
             <SVGLogoVyrij />
           </Logo>

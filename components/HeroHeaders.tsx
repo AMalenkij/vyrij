@@ -1,60 +1,48 @@
-'use client'
+import Image from 'next/image'
 
-import { motion } from 'framer-motion'
+import { HERO_TEXT, HERO_TEXT_END } from '@/constants/settings'
+import Logo from '@/components/Logo'
+import SVGLogoVyrij from '@/public/svg/LogoVyrij'
+import WithMotion from '@/components/withMotion'
+import imgHero from '@/public/img/Hero.jpg'
 
-import { QUOTE_TEXT, QUOTE_TEXT_NEXT, AUTOR } from '@/constants/settings'
-
-export default function HeroHeaders({ children }: { children: React.ReactNode }) {
+export default function HeroHeaders() {
   return (
-    <div className="
-    fixed
-    inset-0
-    flex
-    flex-col
-    items-center
-    justify-center
-    p-30
-    md:p-52
-    text-center
-    gap-y-8
-    font-poiretOne
-    pt-40
-    "
-    >
-      <motion.p
-        className="text-8xl inner-shadow"
-        initial={{ opacity: 0, y: 70 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 2,
-          ease: [0, 0.71, 0.2, 1.01],
-        }}
-      >
-        {QUOTE_TEXT}
-      </motion.p>
-      <motion.p
-        className="text-8xl underline decoration-sky-500/30"
-        initial={{ opacity: 0, y: 70 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 2,
-          ease: [0, 0.71, 0.2, 1.01],
-        }}
-      >
-        {QUOTE_TEXT_NEXT}
-      </motion.p>
-      <motion.p
-        className="text-2xl"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 2.5,
-          ease: [0, 0.71, 0.2, 1.01],
-        }}
-      >
-        {AUTOR}
-      </motion.p>
-      {children}
+    <div className="flex flex-col min-h-screen justify-center items-center">
+      <div className="flex justify-center w-screen gap-4">
+        <Image
+          src={imgHero}
+          height={500}
+          alt="Hero img"
+          className="object-cover"
+          quality={100}
+        />
+        <div>
+          <Logo className="
+        relative
+        -left-10
+        top-10
+        flex
+      text-white
+        mix-blend-difference
+        items-center
+        w-56
+        h-10
+        text-3xl
+        whitespace-nowrap
+        mb-36
+        "
+          >
+            <div className="absolute -left-16 top-16 text-5xl">Chor</div>
+            <SVGLogoVyrij />
+          </Logo>
+          <WithMotion className="text-lg mix-blend-difference text-white text-start w-96">
+            {HERO_TEXT}
+            <br />
+            {HERO_TEXT_END}
+          </WithMotion>
+        </div>
+      </div>
     </div>
   )
 }

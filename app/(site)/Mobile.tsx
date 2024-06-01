@@ -7,7 +7,7 @@ import Compass from '@/public/svg/Compass'
 
 export default function Mobile() {
   return (
-    <div className="visible lg:invisible">
+    <div className="block lg:hidden">
       <Image
         src={imgHero}
         height={900}

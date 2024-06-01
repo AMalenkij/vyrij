@@ -1,9 +1,10 @@
+import Link from 'next/link'
+
 import HeroHeaders from '@/components/HeroHeaders'
 import { type HomepageImages } from '@/types'
 import getPhotosMain from '@/actions/getPhotosMain'
 import mapDataToHomepageImages from '@/utils/mapDataToHomepageImages'
-import ControlledScrollIcon from '@/components/scroll/ControlledScrollIcon'
-import useHandleScroll from '@/hooks/useHandleScroll'
+import Compass from '@/public/svg/Compass'
 import FloatingImageGallery from './FloatingImageGallery'
 import Mobile from './Mobile'
 
@@ -15,15 +16,17 @@ export default async function Home() {
       {photoMain
         ? (
           <FloatingImageGallery photoMain={photoMain}>
-            <HeroHeaders>
-              <ControlledScrollIcon scrollCallback={useHandleScroll} className="top-3/4" />
-            </HeroHeaders>
+            <>
+              <HeroHeaders />
+              <Link href="timeline" className="flex items-center justify-center -mt-40 text-3xl gap-3">
+                Explore
+                <Compass />
+              </Link>
+            </>
           </FloatingImageGallery>
         )
         : (
-          <HeroHeaders>
-            <ControlledScrollIcon />
-          </HeroHeaders>
+          <HeroHeaders />
         )}
       <Mobile />
     </>
