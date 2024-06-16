@@ -47,7 +47,7 @@ export default function combineEventData(
         const eventVideos = videoUrls
           .filter((video) => video.event_id === event.event_id)
           .map((video) => ({
-            href: `${supabaseStorageURL}${video.href}`,
+            href: video.href,
             display_order: parseInt(video.display_order, 10),
             type: 'video' as const, // Explicitly setting type
           }))
