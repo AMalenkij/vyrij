@@ -3,14 +3,9 @@
 import React, { ReactNode, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
-import { CustomMajorEvents } from '@/types'
-
-export default function MajorCard({ majorEvents, children }:
-{ majorEvents:CustomMajorEvents, children:ReactNode }) {
-  const { year, title } = majorEvents
-
+export default function MajorCard({ year, title, children }:
+{ year:number, title: string, children:ReactNode }) {
   const refFM = useRef<HTMLDivElement>(null)
-
   const { scrollYProgress } = useScroll({
     target: refFM,
     offset: ['0', '1 0.9'],

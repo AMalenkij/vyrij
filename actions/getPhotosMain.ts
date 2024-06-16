@@ -12,6 +12,5 @@ export default async function getPhotosMain() {
     console.error('Error fetching Photos Main:', (error as unknown as Error).message)
     return []
   }
-
   return data
 }

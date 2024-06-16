@@ -1,10 +1,11 @@
 import Link from 'next/link'
 
-import HeroHeaders from '@/components/HeroHeaders'
 import { type HomepageImages } from '@/types'
+
+import HeroHeaders from '@/components/HeroHeaders'
 import getPhotosMain from '@/actions/getPhotosMain'
-import mapDataToHomepageImages from '@/utils/mapDataToHomepageImages'
 import Compass from '@/public/svg/Compass'
+import mapDataToHomepageImages from '@/utils/mapDataToHomepageImages'
 import FloatingImageGallery from './FloatingImageGallery'
 import Mobile from './Mobile'
 

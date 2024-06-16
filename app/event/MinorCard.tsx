@@ -1,18 +1,55 @@
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/naming-convention */
-import { ModifiedMinorEvents } from '@/types'
+
+import { type EventWithMedia, EventMedia } from '@/types/modifiedDataFromSupabase'
+
 import getMonthNameUkr from '@/utils/getMonthNameUkr'
-import RenderPhotos from './RenderPhotos'
+import YouTubeVideo from './YouTubeVideo'
+import RenderPhoto from './RenderPhoto'
 
-export default function MinorCard({ minorEvents }:{ minorEvents:ModifiedMinorEvents }) {
+export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventWithMedia }) {
   const {
-    month,
-    day,
-    description,
-    photos,
-    photos_event,
-  } = minorEvents
+    month, day, description, media = [],
+  } = eventsWithMedia
+  const renderMedia = (mediaItems: EventMedia[], className?: string) => mediaItems.map((item) => {
+    if (item.type === 'photo') return <RenderPhoto key={item.display_order} photoUrl={item.href} className={className} />
+    if (item.type === 'video') return <YouTubeVideo key={item.display_order} url={item.href} className={className} />
+    return null
+  })
 
-  const photoEventCounts = photos_event?.length || 0
+  const renderPhotosByCount = (count: number) => {
+    switch (count) {
+      case 1:
+        return <div className="w-full">{renderMedia([media[0]])}</div>
+      case 2:
+        return <div className="flex gap-6">{renderMedia(media.slice(0, 2), 'w-1/2')}</div>
+      case 3:
+        return (
+          <div className="flex gap-x-6">
+            <div className="flex-col">
+              {renderMedia([media[0]], '-ml-20 pb-10 h-1/2')}
+              {renderMedia([media[1]], 'h-1/2')}
+            </div>
+            {renderMedia([media[2]])}
+          </div>
+        )
+      case 4:
+        return (
+          <div className="mt-10 flex gap-6">
+            <div className="flex-col">
+              {renderMedia([media[0]], 'xl:-ml-20 -ml-4')}
+              {renderMedia([media[1]], 'pt-10')}
+            </div>
+            <div className="flex-col">
+              {renderMedia([media[2]], 'pb-10')}
+              {renderMedia([media[3]], 'pb-10')}
+            </div>
+          </div>
+        )
+      default:
+        return null
+    }
+  }
 
   return (
     <div className="container mx-auto flex flex-col">
@@ -24,44 +61,7 @@ export default function MinorCard({ minorEvents }:{ minorEvents:ModifiedMinorEve
         </h2>
         <h2 className="py-6 text-lg">{description}</h2>
       </div>
-
-      {photoEventCounts === 1 && (
-      <div className="w-full">
-        {RenderPhotos({ photos, className: '' })}
-      </div>
-      )}
-      {photoEventCounts === 2 && (
-      <div className="flex gap-6">
-        {RenderPhotos({ photos, limit: 1, className: 'w-1/2' })}
-        {RenderPhotos({ photos, startFromIndex: 1, className: 'w-1/2' })}
-      </div>
-      )}
-      {photoEventCounts === 3 && (
-      <div className="flex gap-x-6">
-        <div className="flex-col">
-          {RenderPhotos({ photos, limit: 1, className: '-ml-20 pb-10 h-1/2' })}
-          {RenderPhotos({
-            photos, startFromIndex: 1, limit: 1, className: 'h-1/2',
-          })}
-        </div>
-        {RenderPhotos({ photos, startFromIndex: 2, className: '' })}
-      </div>
-      )}
-      {photoEventCounts === 4 && (
-      <div className="mt-10 flex gap-6">
-        <div className="flex-col">
-          {RenderPhotos({ photos, limit: 1, className: 'xl:-ml-20 -ml-4' })}
-          {RenderPhotos({
-            photos, startFromIndex: 1, limit: 1, className: 'pt-10',
-          })}
-        </div>
-        <div className="flex-col">
-          {RenderPhotos({
-            photos, startFromIndex: 2, limit: 2, className: 'pb-10',
-          })}
-        </div>
-      </div>
-      )}
+      {renderPhotosByCount(media.length)}
     </div>
   )
 }

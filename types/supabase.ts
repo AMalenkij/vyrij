@@ -4,12 +4,9 @@ export interface PhotoMainData {
   positon_top: number;
   positon_left: number;
   width: number;
-  photos: Photos[];
+  photos: Media[];
 }
 
-export interface Photos {
-  href: string;
-}
 export interface Concerts {
   id: number;
   is_published: boolean;
@@ -22,23 +19,18 @@ export interface Concerts {
   title: string;
 }
 
-export interface MajorEvents {
-  minor_event: {
-    title: string;
-    date: string;
-    photos: {
-      href: string;
-    }[];
-  } | null;
+export interface Media {
+  event_id: number
+  href: string
+  display_order: string
 }
-
-export interface MinorEvents {
-  description: string;
-  date: string;
-  photos: {
-    href: string;
-  }[];
-  photos_event: {
-    photo_number: '1' | '2' | '3' | '4' | '5' | '6';
-  }[];
+export interface MajorEvents {
+  event_id: number
+  date: string
+  title: string
+}
+export interface Events {
+  date: string
+  description: string
+  event_id: number
 }

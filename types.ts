@@ -56,7 +56,7 @@ export interface ModifiedMinorEvents {
   month: number;
   day: number;
   photos: Photos[];
-  photos_event: PhotosEvent[];
+  event_media: EventMedia[];
 }
 
 export interface MajorEvents {
@@ -67,7 +67,7 @@ export interface MinorEvents {
   title: string;
   date: string;
   description: string;
-  photos_event: PhotosEvent[];
+  event_media: EventMedia[];
   photos: Photos[];
 }
 
@@ -75,8 +75,11 @@ export interface Photos {
   href: string;
 }
 
-export interface PhotosEvent {
-  photo_number: '1' | '2' | '3' | '4' | '5' | '6'
+export interface VideoUrl {
+  href: string;
+}
+export interface EventMedia {
+  display_order: '1' | '2' | '3' | '4' | '5' | '6'
 }
 
 export interface Concerts {

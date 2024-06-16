@@ -1,17 +1,35 @@
-import { type CustomMajorEvents } from '@/types'
-import getMajorEvent from '@/actions/getMajorEvent'
-import processingMajorEvent from '@/utils/processingMajorEvent'
-import { supabaseStorageURL } from '@/constants/settings'
+import { type MajorEvents, Media, Events } from '@/types/supabase'
+import getData from '@/actions/getData'
+import { getMajorEvents } from '@/utils/combineEventData'
 import WithTimeLineAnimation from './withTimeLineAnimation'
 import VerticalTimelineLine from './VerticalTimelineLine'
 import Card from './Card'
 
 export default async function TimeLine() {
-  const data = await getMajorEvent()
-  const majorEvent: CustomMajorEvents[] = data ? processingMajorEvent(data) : []
-  return majorEvent ? (
+  const [majorEvents, events, photos] = await Promise.all([
+    getData(
+      'events',
+      ['event_id', 'date', 'title'],
+      [{
+        column: 'event_type',
+        value: 'major',
+        operator: 'eq',
+      }],
+      { column: 'date', ascending: true },
+    ),
+    getData('events', ['event_id', 'date', 'description']),
+    getData('photos', ['event_id', 'href', 'display_order']),
+  ])
+  if (!majorEvents.length || !events.length || !photos.length) return []
+
+  const data = getMajorEvents(
+    majorEvents as unknown as MajorEvents[],
+    events as unknown as Events[],
+    photos as unknown as Media[],
+  )
+  return data ? (
     <WithTimeLineAnimation>
-      {majorEvent.map((element) => (
+      {data.map((element) => (
         <div
           className="
               flex-col
@@ -23,7 +41,7 @@ export default async function TimeLine() {
           <Card
             year={element.year}
             description={element.title}
-            imageSrc={`${supabaseStorageURL}${element.photos[0].href}`}
+            imageSrc={element.photos}
           />
           <VerticalTimelineLine year={element.year} />
         </div>
