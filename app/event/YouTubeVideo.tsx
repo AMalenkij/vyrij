@@ -1,10 +1,6 @@
 import { twMerge } from 'tailwind-merge'
 
 export default function YouTubeVideo({ url, className }: { url: string, className?: string }) {
-  function urlChar(urlSting:string) {
-    return urlSting.startsWith('h')
-  }
-  if (!urlChar(url)) return <div className={twMerge('object-cover', className)}>{url}</div>
   return (
     <div className={twMerge('object-cover', className)}>
       <iframe
