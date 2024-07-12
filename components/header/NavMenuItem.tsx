@@ -44,7 +44,7 @@ export default function NavMenuItem({
         type="button"
       >
         <motion.div
-          className=" bg-[#eee9e4]"
+          className=" bg-primary-foreground"
           variants={itemCoverMotion}
         />
         <motion.span
@@ -65,7 +65,7 @@ export default function NavMenuItem({
         </motion.div>
       </Link>
       <motion.div
-        className={twMerge('absolute bottom-0 h-[2px] bg-black w-full origin-left', active && 'bg-red-700')}
+        className={twMerge('absolute bottom-0 h-[2px] bg-border w-full origin-left', active && 'bg-red-700')}
         variants={dividerMotion}
       />
     </motion.li>

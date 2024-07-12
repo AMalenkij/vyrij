@@ -7,13 +7,9 @@ import { Concerts as ConcertsT } from '@/types/supabase'
 export default async function Concerts() {
   const concertsData: ConcertsT[] | null = await getConcerts()
 
-  if (!concertsData) {
-    return <div>No concerts data available</div>
-  }
-
   return (
     <div className="container mx-auto h-screen justify-center mt-24 flex-col relative">
-      {concertsData.map((concert) => (
+      {concertsData?.map((concert) => (
         <ConcertCard
           key={concert.id}
           timestamptz={splitTimestamp(concert.time)}

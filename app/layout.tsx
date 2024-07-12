@@ -7,6 +7,8 @@ import NavMenu from '@/components/header/NavMenu'
 import NavMenuToggle from '@/components/header/NavMenuToggle'
 import Logo from '@/components/Logo'
 import SVGLogoVyrij from '@/public/svg/LogoVyrij'
+import ThemeProvider from '@/providers/ThemeProvider'
+import ModeToggle from '@/components/ModeToggle'
 
 const comforter = Comforter({
   subsets: ['latin', 'cyrillic'],
@@ -27,13 +29,28 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${poiretOne.variable} ${comforter.variable} overflow-x-hidden font-poiretOne tracking-wider bg-white`}>
-        <NavMenuToggle />
-        <MenuAnimationControl isOpen>
-          <Logo className="
-          fixed
-          top-10
-          left-8
+      <body className={`${poiretOne.variable} ${comforter.variable} overflow-x-hidden font-poiretOne tracking-wider`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <MenuAnimationControl isOpen>
+            <nav className="
+            fixed
+            top-0
+            left-0
+            right-0
+            flex
+            justify-between
+            items-center
+            p-4
+            lg:p-10
+            z-50
+            mix-blend-difference"
+            >
+              <Logo className="
           flex
           items-center
           gap-2
@@ -44,20 +61,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           shrink-0
           w-28
           lg:w-44
+          text-white
           whitespace-nowrap
-        text-white
-          mix-blend-difference
-          z-50
           "
-          >
-            Chor |
-            <SVGLogoVyrij />
-          </Logo>
-          {children}
-        </MenuAnimationControl>
-        <MenuAnimationControl isOpen={false}>
-          <NavMenu />
-        </MenuAnimationControl>
+              >
+                Chor |
+                <SVGLogoVyrij />
+              </Logo>
+              <NavMenuToggle />
+              <ModeToggle className="" />
+            </nav>
+            {children}
+          </MenuAnimationControl>
+          <MenuAnimationControl isOpen={false}>
+            <NavMenu />
+          </MenuAnimationControl>
+        </ThemeProvider>
       </body>
     </html>
   )

@@ -44,7 +44,7 @@ export default function NavMenu() {
       fixed
       h-screen
       w-screen
-      bg-[#eee9e4]
+      bg-popover
       flex
       flex-col
       justify-end

@@ -14,9 +14,9 @@ export default function ConcertCard({
       <div className="flex  mx-auto mb-7">
         <div className="lg:grid-cols-3 items-start  lg:gap-x-10 grid gap-y-1 lg:mr-0 lg:pl-10 mr-3 text-center">
           <div className="text-5xl basis-1/4">{date}</div>
-          <div className="gap-y-1 grid">
-            <div className="basis-1/4 text-xl">{month}</div>
-            <div className="basis-1/4">{year}</div>
+          <div className="gap-y-1 grid-cols-2">
+            <div className="text-xl">{month}</div>
+            <div className="">{year}</div>
           </div>
           <div className="basis-1/4 pt-1 lg:-ml-6">{time}</div>
         </div>

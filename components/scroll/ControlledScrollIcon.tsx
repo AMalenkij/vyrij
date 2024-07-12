@@ -18,11 +18,11 @@ export default function ControlledScrollIcon({ scrollCallback, className }
         >
           <path
             d="M27.4,3.6L27.4,3.6C14.2,3.6,3.5,14.3,3.5,27.5v36c0,13.2,10.7,23.9,23.9,23.9h0c13.2,0,23.9-10.7,23.9-23.9v-36C51.4,14.3,40.7,3.6,27.4,3.6z"
-            className="fill-none stroke-black stroke-[3] opacity-50"
+            className="fill-none stroke-primary stroke-[3] opacity-50"
           />
         </svg>
       </div>
-      <div className="mouse-left stroke-current text-black fill-none stroke-[3] w-1/2 absolute z-[2]">
+      <div className="mouse-left stroke-current fill-none stroke-[3] w-1/2 absolute z-[2]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 27.4 91"
@@ -34,7 +34,7 @@ export default function ControlledScrollIcon({ scrollCallback, className }
           />
         </svg>
       </div>
-      <div className="mouse-right stroke-current text-black fill-none stroke-[3] w-1/2 absolute z-[2] right-0">
+      <div className="mouse-right stroke-current fill-none stroke-[3] w-1/2 absolute z-[2] right-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 27.4 91"
@@ -47,8 +47,8 @@ export default function ControlledScrollIcon({ scrollCallback, className }
           />
         </svg>
       </div>
-      <div className="ball absolute w-2 h-2 bg-black m-auto inset-0 rounded-full" />
-      <p className="animate-text text-sm text-black absolute left-1/2 sm:top-28 top-20 ml-[6px] tracking-[12px]">Scroll</p>
+      <div className="ball absolute w-2 h-2 bg-primary m-auto inset-0 rounded-full" />
+      <p className="animate-text text-sm  absolute left-1/2 sm:top-28 top-20 ml-[6px] tracking-[6px]">Scroll</p>
     </div>
   )
 }
