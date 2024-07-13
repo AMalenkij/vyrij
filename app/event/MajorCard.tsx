@@ -47,6 +47,7 @@ export default function MajorCard({ year, title, children }:
         items-center
         2xl:text-2xl
         lg:text-base
+        text-white
         text-sm
         font-bold
         2xl:pb-56
