@@ -3,6 +3,8 @@
 import { twMerge } from 'tailwind-merge'
 import { motion, useScroll } from 'framer-motion'
 
+import { SCROLL } from '@/constants/settings'
+
 export default function ControlledScrollIcon({ scrollCallback, className }
 : { scrollCallback?: () => void, className?: string }) {
   const { scrollYProgress } = useScroll()
@@ -48,7 +50,7 @@ export default function ControlledScrollIcon({ scrollCallback, className }
         </svg>
       </div>
       <div className="ball absolute w-2 h-2 bg-primary m-auto inset-0 rounded-full" />
-      <p className="animate-text text-sm  absolute left-1/2 sm:top-28 top-20 ml-[6px] tracking-[6px]">Scroll</p>
+      <p className="animate-text text-sm  absolute left-1/2 sm:top-28 top-20 ml-[6px] tracking-[6px]">{SCROLL}</p>
     </div>
   )
 }

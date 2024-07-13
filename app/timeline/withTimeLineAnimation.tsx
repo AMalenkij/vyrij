@@ -14,6 +14,7 @@ import {
 } from 'framer-motion'
 
 import ControlledScrollIcon from '@/components/scroll/ControlledScrollIcon'
+import { CHOOSE_A_YEAR } from '@/constants/settings'
 
 interface ResizeObserverEntry {
   contentRect: DOMRectReadOnly;
@@ -78,7 +79,7 @@ export default function WithTimeLineAnimation({ children }: { children: React.Re
           my-6
           md:my-65"
           >
-            Choose a year
+            {CHOOSE_A_YEAR}
           </h2>
           <ControlledScrollIcon />
         </div>

@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge'
 import Image from 'next/image'
 import { useState } from 'react'
 
-import { supabaseStorageURL } from '@/constants/settings'
+import { SUPABASE_STORAGE_URL } from '@/constants/settings'
 import { Photos } from '@/types'
 
 export default function BlurImage({ image }: { image: Photos }) {
@@ -15,7 +15,7 @@ export default function BlurImage({ image }: { image: Photos }) {
       <div className="aspect-square xl:aspect-7/8 relative overflow-hidden rounded-lg bg-gray-200">
         <Image
           alt="choir photos"
-          src={`${supabaseStorageURL}${image.href}`}
+          src={`${SUPABASE_STORAGE_URL}${image.href}`}
           fill
           className={twMerge(
             'duration-700 ease-in-out group-hover:opacity-75 object-cover',

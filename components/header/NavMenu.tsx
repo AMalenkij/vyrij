@@ -5,39 +5,12 @@ import { useMemo } from 'react'
 import { usePathname } from 'next/navigation'
 
 import { easings } from '@/utils/animations'
+import { ROUTES } from '@/constants/settings'
 import NavMenuItem from './NavMenuItem'
 
 export default function NavMenu() {
   const pathName = usePathname()
-
-  const routes = useMemo(() => [
-    {
-      label: 'Home',
-      active: pathName === '/',
-      href: '/',
-    },
-    {
-      label: 'Time Line',
-      active: pathName === '/timeline',
-      href: '/timeline',
-    },
-    {
-      label: 'Event',
-      active: pathName === '/event',
-      href: '/event/',
-    },
-    {
-      label: 'Concerts',
-      active: pathName === '/concerts',
-      href: '/concerts',
-    },
-    {
-      label: 'Gallery',
-      active: pathName === '/gallery',
-      href: '/gallery',
-    },
-  ], [pathName])
-
+  const routes = useMemo(() => ROUTES(pathName), [pathName])
   return (
     <motion.nav
       className="

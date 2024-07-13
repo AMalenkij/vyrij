@@ -9,6 +9,7 @@ import Logo from '@/components/Logo'
 import SVGLogoVyrij from '@/public/svg/LogoVyrij'
 import ThemeProvider from '@/providers/ThemeProvider'
 import ModeToggle from '@/components/ModeToggle'
+import { CHOR } from '@/constants/settings'
 
 const comforter = Comforter({
   subsets: ['latin', 'cyrillic'],
@@ -65,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           whitespace-nowrap
           "
               >
-                Chor |
+                {`${CHOR} | `}
                 <SVGLogoVyrij />
               </Logo>
               <NavMenuToggle />

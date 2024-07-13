@@ -1,5 +1,6 @@
 import getPhotos from '@/actions/getPhotos'
 import BlurImage from '@/components/BlurImage'
+import { GALLERY } from '@/constants/settings'
 
 export default async function Gallery() {
   const photos = await getPhotos(12)
@@ -13,7 +14,7 @@ export default async function Gallery() {
           text-center
           "
       >
-        Gallery
+        {GALLERY}
       </h2>
       <div className="
       mx-auto

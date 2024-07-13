@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { HERO_TEXT, HERO_TEXT_END } from '@/constants/settings'
+import { HERO_TEXT, HERO_TEXT_END, CHOR } from '@/constants/settings'
 import Logo from '@/components/Logo'
 import SVGLogoVyrij from '@/public/svg/LogoVyrij'
 import WithMotion from '@/components/withMotion'
@@ -33,7 +33,7 @@ export default function HeroHeaders() {
         mb-36
         "
           >
-            <div className="absolute -left-16 top-16 text-5xl">Chor</div>
+            <div className="absolute -left-16 top-16 text-5xl">{CHOR}</div>
             <SVGLogoVyrij />
           </Logo>
           <WithMotion className="text-lg mix-blend-difference text-white text-start w-96">

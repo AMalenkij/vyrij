@@ -2,7 +2,7 @@
 
 import { type MajorEvents, Events, Media } from '@/types/supabase'
 import { CombinedEventData } from '@/types/modifiedDataFromSupabase'
-import { supabaseStorageURL } from '@/constants/settings'
+import { SUPABASE_STORAGE_URL } from '@/constants/settings'
 
 export function getMajorEvents(majorEvents: MajorEvents[], events: Events[], photos: Media[]) {
   return majorEvents.map((mEvent) => {
@@ -10,7 +10,7 @@ export function getMajorEvents(majorEvents: MajorEvents[], events: Events[], pho
     const filteredPhotos = photos
       .filter((photo) => photo.event_id === mEvent.event_id)
       .filter((photo) => photo.display_order === '1')
-      .map((photo) => `${supabaseStorageURL}${photo.href}`)
+      .map((photo) => `${SUPABASE_STORAGE_URL}${photo.href}`)
 
     return {
       year,
@@ -39,7 +39,7 @@ export default function combineEventData(
         const eventPhotos = photos
           .filter((photo) => photo.event_id === event.event_id)
           .map((photo) => ({
-            href: `${supabaseStorageURL}${photo.href}`,
+            href: `${SUPABASE_STORAGE_URL}${photo.href}`,
             display_order: parseInt(photo.display_order, 10),
             type: 'photo' as const, // Explicitly setting type
           }))
