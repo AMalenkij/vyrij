@@ -20,7 +20,7 @@ export default async function Home() {
           <FloatingImageGallery photoMain={photoMain}>
             <>
               <HeroHeaders />
-              <Link href="timeline" className="flex items-center justify-center -mt-40 text-3xl gap-3">
+              <Link href="timeline" className="flex items-center justify-center -mt-40 text-3xl gap-3" prefetch>
                 {EXPLORE}
                 <Compass />
               </Link>
