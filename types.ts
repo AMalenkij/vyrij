@@ -37,7 +37,6 @@ export interface ConcertCardProps {
   };
   title: string;
   location: string;
-  link: string;
   place: string;
 }
 

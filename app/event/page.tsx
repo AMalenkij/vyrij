@@ -31,12 +31,12 @@ export default async function Event() {
 
   // Combine data
   const dataEvents: CombinedEventData[] = combineEventData(
-    majorEvents as unknown as MajorEvents[],
-    events as unknown as Events[],
-    photos as unknown as Media[],
-    videoUrls as unknown as Media[],
+    majorEvents as MajorEvents[],
+    events as Events[],
+    photos as Media[],
+    videoUrls as Media[],
   )
-  // console.log(dataEvents)
+
   return (
     <div className="-mt-40">
       {dataEvents?.map((item) => (
@@ -46,7 +46,7 @@ export default async function Event() {
               key={item.photos ? item.photos : ''}
               width={1000}
               height={1000}
-              loading="lazy" // Lazy loading
+              loading="lazy"
               alt="chor"
               src={item.photos ? item.photos : ''}
               className="object-cover min-w-full max-w-full h-screen relative"

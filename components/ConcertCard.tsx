@@ -6,12 +6,11 @@ export default function ConcertCard({
   },
   title,
   location,
-  link,
   place,
 }: ConcertCardProps) {
   return (
-    <a href={link} className="group">
-      <div className="flex  mx-auto mb-7">
+    <>
+      <div className="flex mx-auto mb-7">
         <div className="lg:grid-cols-3 items-start  lg:gap-x-10 grid gap-y-1 lg:mr-0 lg:pl-10 mr-3 text-center">
           <div className="text-5xl basis-1/4">{date}</div>
           <div className="gap-y-1 grid-cols-2">
@@ -28,7 +27,7 @@ export default function ConcertCard({
           </div>
         </div>
       </div>
-      <div className="group-hover:visible invisible h-1 w-24 border-gradient mx-auto mt-2 mb-4 rounded-xl bg-red-600" />
-    </a>
+      <div className="group-hover:visible invisible h-1 w-24 border-gradient mx-auto mt-2 mb-4 rounded-xl bg-accent" />
+    </>
   )
 }

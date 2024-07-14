@@ -9,11 +9,7 @@ export interface PhotoMainData {
 
 export interface Concerts {
   id: number;
-  is_published: boolean;
-  link: string;
-  link_to_img: string;
   location: string;
-  map_link: string;
   place: string;
   time: string;
   title: string;

@@ -15,6 +15,10 @@ export const DARK = 'Темна'
 export const SYSTEM = 'Системна'
 
 export const GALLERY = 'Галерея'
+export const CONCERTS = 'Концерти'
+
+export const FUTURES = 'Майбутні'
+export const PAST = 'Минулі'
 
 export const ROUTES = (pathName: string) => [
   {

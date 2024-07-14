@@ -1,25 +1,44 @@
+/* eslint-disable default-case */
 /* eslint-disable no-console */
 
 import createClient from '@/utils/supabase/client'
 
-export default async function getData(
-  tableName: 'events' | 'photos' | 'video_urls',
-  select: ('event_id' | 'date' | 'title' | 'description' | 'href' | 'display_order' | '*')[] = ['*'],
-  filters: { column: string, operator: string, value: string } [] = [],
-  order: { column: string, ascending: boolean } | null = null,
-) {
+interface Filter {
+  column: string;
+  operator: string;
+  value: string;
+}
+
+interface Order {
+  column: string;
+  ascending: boolean;
+}
+
+export default async function getData<T>(
+  tableName: 'events' | 'photos' | 'video_urls' | 'concerts',
+  select: ('id' | 'event_id' | 'date' | 'time' | 'location' | 'title' | 'place' | 'description' | 'href' | 'display_order' | '*')[] = ['*'],
+  filters: Filter[] = [],
+  order: Order | null = null,
+): Promise<T[]> {
   const supabase = createClient()
 
-  // Convert array to comma-separated string for the select method
   const selectFields = select.join(', ')
   let query = supabase.from(tableName).select(selectFields)
 
-  // Apply filters
-  filters.forEach(({ column, value }) => {
-    query = query.eq(column, value)
+  filters.forEach(({ column, operator, value }) => {
+    switch (operator) {
+      case 'eq':
+        query = query.eq(column, value)
+        break
+      case 'gte':
+        query = query.gte(column, value)
+        break
+      case 'lte':
+        query = query.lte(column, value)
+        break
+    }
   })
 
-  // Apply order
   if (order) {
     query = query.order(order.column, { ascending: order.ascending })
   }
@@ -29,5 +48,5 @@ export default async function getData(
     console.error(`Error fetching ${tableName}:`, error.message)
     return []
   }
-  return data
+  return data as T[]
 }
