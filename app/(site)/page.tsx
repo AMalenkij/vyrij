@@ -1,18 +1,15 @@
+/* eslint-disable object-curly-newline */
 import Link from 'next/link'
 
-import { type HomepageImages } from '@/types'
-
 import HeroHeaders from '@/components/HeroHeaders'
-import getPhotosMain from '@/actions/getPhotosMain'
 import Compass from '@/public/svg/Compass'
 import mapDataToHomepageImages from '@/utils/mapDataToHomepageImages'
-import { EXPLORE } from '@/constants/settings'
+import { EXPLORE, PHOTO_MAIN_DATA } from '@/constants/settings'
 import FloatingImageGallery from './FloatingImageGallery'
 import Mobile from './Mobile'
 
-export default async function Home() {
-  const data = await getPhotosMain()
-  const photoMain: HomepageImages[] = data ? mapDataToHomepageImages(data) : []
+export default function Home() {
+  const photoMain = mapDataToHomepageImages(PHOTO_MAIN_DATA)
   return (
     <>
       {photoMain

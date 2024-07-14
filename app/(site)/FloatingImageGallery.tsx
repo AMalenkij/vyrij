@@ -12,11 +12,11 @@ import {
 } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 
-import { HomepageImages } from '@/types'
+import { type HomepageImage } from '@/types'
 
 interface FloatingImageGalleryProps {
   children: JSX.Element;
-  photoMain: HomepageImages[]
+  photoMain: HomepageImage[]
 }
 
 export default function FloatingImageGallery({ children, photoMain }: FloatingImageGalleryProps) {

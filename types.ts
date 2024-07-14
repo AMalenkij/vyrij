@@ -1,10 +1,10 @@
 import Stripe from 'stripe'
 
-export interface HomepageImages {
+export interface HomepageImage {
   id: number;
   width: number;
   type: 'plane1' | 'plane2' | 'plane3';
-  src: string | null
+  src: string;
   style: {
     position: 'absolute';
     left: string;
@@ -13,12 +13,12 @@ export interface HomepageImages {
 }
 
 export interface PhotoMainData {
-  photo_main_id: number;
+  id: number;
   type: 'plane1' | 'plane2' | 'plane3';
   positon_top: number;
   positon_left: number;
   width: number;
-  photos: { href: string } | null;
+  photos: string;
 }
 
 export interface MinorEventGroup {

@@ -1,12 +1,12 @@
 import { SUPABASE_STORAGE_URL } from '@/constants/settings'
-import { HomepageImages, PhotoMainData } from '@/types'
+import { HomepageImage, PhotoMainData } from '@/types'
 
-export default function mapDataToHomepageImages(data: PhotoMainData[]): HomepageImages[] {
+export default function mapDataToHomepageImages(data: PhotoMainData[]): HomepageImage[] {
   return data.map((element) => ({
-    id: element.photo_main_id,
+    id: element.id,
     width: element.width,
     type: element.type,
-    src: element.photos ? `${SUPABASE_STORAGE_URL}${element.photos.href}` : null,
+    src: `${SUPABASE_STORAGE_URL}${element.photos}`,
     style: {
       position: 'absolute',
       left: `${element.positon_left}%`,
