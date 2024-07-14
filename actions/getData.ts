@@ -16,7 +16,7 @@ interface Order {
 
 export default async function getData<T>(
   tableName: 'events' | 'photos' | 'video_urls' | 'concerts',
-  select: ('id' | 'event_id' | 'date' | 'time' | 'location' | 'title' | 'place' | 'description' | 'href' | 'display_order' | '*')[] = ['*'],
+  select: ('id' | 'event_id' | 'date' | 'time' | 'location' | 'title' | 'place' | 'description' | 'href' | 'display_order' | 'photo_id' | '*')[] = ['*'],
   filters: Filter[] = [],
   order: Order | null = null,
 ): Promise<T[]> {

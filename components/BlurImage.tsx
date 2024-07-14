@@ -11,7 +11,7 @@ export default function BlurImage({ image }: { image: Photos }) {
   const [isLoading, setLoading] = useState(true)
 
   return (
-    <a href={image.href} className="group">
+    <a href={`${SUPABASE_STORAGE_URL}${image.href}`} className="group">
       <div className="aspect-square xl:aspect-7/8 relative overflow-hidden rounded-lg bg-gray-200">
         <Image
           alt="choir photos"

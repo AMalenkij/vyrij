@@ -1,9 +1,14 @@
-import getPhotos from '@/actions/getPhotos'
+import getData from '@/actions/getData'
 import BlurImage from '@/components/BlurImage'
 import { GALLERY } from '@/constants/settings'
 
+interface PhotosType {
+  photo_id: number
+  href: string
+}
+
 export default async function Gallery() {
-  const photos = await getPhotos(12)
+  const photos:PhotosType[] = await getData('photos', ['photo_id', 'href'])
   return (
     <div className="mt-24">
       <h2 className="
