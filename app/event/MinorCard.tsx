@@ -20,7 +20,7 @@ export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventW
   const renderPhotosByCount = (count: number) => {
     switch (count) {
       case 1:
-        return <div className="w-full">{renderMedia([media[0]])}</div>
+        return <div className="lg:w-full w-1/2">{renderMedia([media[0]])}</div>
       case 2:
         return <div className="flex gap-6">{renderMedia(media.slice(0, 2), 'w-1/2')}</div>
       case 3:
@@ -30,7 +30,7 @@ export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventW
               {renderMedia([media[0]], '-ml-20 pb-10 h-1/2')}
               {renderMedia([media[1]], 'h-1/2')}
             </div>
-            {renderMedia([media[2]])}
+            {renderMedia([media[2]], 'lg:w-full w-1/2')}
           </div>
         )
       case 4:
