@@ -59,7 +59,7 @@ export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventW
           {' '}
           {getMonthNameUkr(month)}
         </h2>
-        <h2 className="py-6 text-lg">{description}</h2>
+        <p className="py-6 text-lg whitespace-pre-line">{description}</p>
       </div>
       {renderPhotosByCount(media.length)}
     </div>
