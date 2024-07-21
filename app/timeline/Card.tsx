@@ -1,10 +1,10 @@
 'use client'
 
 import { twMerge } from 'tailwind-merge'
-import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useCallback } from 'react'
 import Link from 'next/link'
+import ImageWithEffects from './ImageWithEffects'
 
 interface CardProps {
   year: number;
@@ -17,57 +17,52 @@ export default function Card({
   year, description, imageSrc, className,
 }: CardProps) {
   const [isHovered, setIsHovered] = useState(false)
-  const [isLoading, setLoading] = useState(true)
+  const handleMouseEnter = useCallback(() => setIsHovered(true), [])
+  const handleMouseLeave = useCallback(() => setIsHovered(false), [])
 
   return (
-    <div
-      className="flex flex-col items-center justify-center hoverCard"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <Link href={`/event/#${year}`} className={twMerge('relative overflow-hidden transform-gpu transition-transform ', className)} prefetch>
-        <motion.div
-          className="group"
-          animate={isHovered ? {
-            scale: 1.3, height: 430, width: 390, transition: { duration: 1 },
-          } : {}}
-          initial={{ height: 400, width: 360 }}
-        >
-          <Image
-            src={imageSrc}
-            alt={String(year)}
-            sizes="40vh"
-            fill
-            style={{
-              objectFit: 'none',
-            }}
-            className={twMerge(
-              'duration-700 ease-in-out group-hover:opacity-90 object-cover ',
-              isLoading
-                ? 'scale-110 blur-2xl grayscale'
-                : 'scale-100 blur-0 grayscale-0',
-            )}
-            onLoadingComplete={() => setLoading(false)}
-          />
-
-        </motion.div>
-        {isHovered ? (
+    <div className={twMerge('', className)}>
+      <div
+        className="flex flex-col items-center justify-center hoverCard"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <Link href={`/event/#${year}`} className="relative overflow-hidden transform-gpu transition-transform" prefetch>
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, y: -130, scale: 0.9 }}
-            transition={{ duration: 1.2 }}
-            className="
-        absolute
-        pl-4
-        pt-12
-        text-start
-        "
+            className="group"
+            animate={isHovered ? {
+              scale: 1.3,
+              height: 430,
+              width: 390,
+              filter: 'grayscale(100%)',
+              transition: { duration: 1 },
+            } : {
+              scale: 1,
+              height: 400,
+              width: 360,
+              filter: 'grayscale(0%)',
+              transition: { duration: 1 },
+            }}
+            initial={{ height: 400, width: 360 }}
           >
-            <p className="text-4xl text-start text-white">{year}</p>
-            <p className="text-xl text-white">{description}</p>
+            <ImageWithEffects src={imageSrc} alt={String(year)} sizes="(max-width: 640px) 35vh, 40vh" />
           </motion.div>
-        ) : null}
-      </Link>
+          <AnimatePresence>
+            {isHovered && (
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: -220, scale: 0.9 }}
+                exit={{ opacity: 0, y: 50 }}
+                transition={{ duration: 0.5 }}
+                className="absolute pl-4 pt-20 text-start text-white"
+              >
+                <p className="text-5xl">{year}</p>
+                <p className="text-3xl">{description}</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </Link>
+      </div>
     </div>
   )
 }

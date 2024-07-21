@@ -13,19 +13,17 @@ import {
   useSpring,
 } from 'framer-motion'
 
-import ControlledScrollIcon from '@/components/scroll/ControlledScrollIcon'
-import { CHOOSE_A_YEAR } from '@/constants/settings'
-
 interface ResizeObserverEntry {
   contentRect: DOMRectReadOnly;
   target: Element;
 }
 
-export default function WithTimeLineAnimation({ children }: { children: React.ReactNode }) {
-  const scrollRef = useRef<HTMLDivElement | null>(null)
-  const ghostRef = useRef<HTMLDivElement | null>(null)
-  const [scrollRange, setScrollRange] = useState<number>(0)
-  const [viewportW, setViewportW] = useState<number>(0)
+export default function WithTimeLineAnimation({ title, timelineContent }:
+{ title: React.ReactNode, timelineContent:React.ReactNode }) {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const ghostRef = useRef<HTMLDivElement>(null)
+  const [scrollRange, setScrollRange] = useState(0)
+  const [viewportW, setViewportW] = useState(0)
 
   useLayoutEffect(() => {
     if (scrollRef.current) {
@@ -53,9 +51,8 @@ export default function WithTimeLineAnimation({ children }: { children: React.Re
     [0, 1],
     [0, -scrollRange + viewportW],
   )
-  const physics = { damping: 15, mass: 0.27, stiffness: 55 }
+  const physics = { damping: 15, mass: 0.5, stiffness: 55 }
   const spring = useSpring(transform, physics)
-
   return (
     <>
       <div className="
@@ -65,43 +62,19 @@ export default function WithTimeLineAnimation({ children }: { children: React.Re
       top-20
       "
       >
-        <div className="
-        text-center
-        pointer-events-none
-        mt-6
-        md:mt-12
-        "
-        >
-          <h2 className="
-          text-2xl
-          md:text-3xl
-          md:mt-100
-          my-6
-          md:my-65"
-          >
-            {CHOOSE_A_YEAR}
-          </h2>
-          <ControlledScrollIcon />
-        </div>
+        {title}
         <motion.div
           ref={scrollRef}
           style={{ x: spring }}
           className="
-          relative
-          h-30vh
-          w-max-content
           flex
-          items-center
-          ml-4
-          pr-10
-          md:pr-24
+          ml-10
           mt-36
+          sm:mt-48
           md:mt-72
-          md:ml-10"
+          "
         >
-          <div className="relative flex">
-            {children}
-          </div>
+          <div className="relative flex">{timelineContent}</div>
         </motion.div>
       </div>
       <div ref={ghostRef} style={{ height: scrollRange }} />

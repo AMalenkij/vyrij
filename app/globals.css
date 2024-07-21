@@ -200,3 +200,24 @@
        opacity: 1;
  }
 }
+
+@media (max-width: 640px) {
+      .mouse {
+        transform: translateX(-50%) scale(0.8);
+      }
+      
+      .animate-text {
+        font-size: 0.875rem;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      @keyframes nudgeMouse {
+        0%, 100% {
+          transform: translateY(0) translateX(-50%) scale(0.8);
+        }
+        50% {
+          transform: translateY(7px) translateX(-50%) scale(0.8);
+        }
+      }
+    }
