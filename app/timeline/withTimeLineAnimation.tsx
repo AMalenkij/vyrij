@@ -56,7 +56,7 @@ export default function WithTimeLineAnimation({ title, timelineContent }:
   return (
     <>
       <div className="
-      sticky
+      fixed
       inset-x-0
       will-change-transform
       top-20
