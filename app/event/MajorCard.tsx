@@ -12,34 +12,28 @@ export default function MajorCard({ year, title, children }:
   })
 
   const scaleProgressImg = useTransform(scrollYProgress, [0, 1], [1, 1.25])
-  const scaleProgressText = useTransform(scrollYProgress, [0, 1], [1, 1.1])
-
   return (
-    <motion.div
-      className="
-      relative
-      2xl:mb-80
-      xl:mb-72
-      lg:mb-64
-      mb-60
-      "
-      ref={refFM}
-      style={{
-        scale: scaleProgressImg,
-        height: '200vh',
-      }}
+    <div
+      className="relative h-screen"
+      style={{ height: '200vh' }}
       id={year.toString()}
+      ref={refFM}
     >
-      <div className="
-      sticky
-      top-0
-      w-full
-      h-screen
-      overflow-hidden
-      "
-      >
-        {children}
-        <div className="
+      <div className="absolute inset-0">
+        <div className="absolute inset-0">
+          <div className="sticky top-0 w-full h-screen overflow-hidden">
+            <motion.div
+              className="relative overflow-hidden w-full h-full"
+              style={{
+                scale: scaleProgressImg,
+              }}
+            >
+              {children}
+            </motion.div>
+          </div>
+        </div>
+        <div className="sticky top-0 h-screen flex flex-col justify-center items-center mx-30 md:mx-50">
+          <div className="
         absolute
         inset-0
         flex
@@ -54,12 +48,12 @@ export default function MajorCard({ year, title, children }:
         xl:pb-40
         pb-48
         md:mb-5"
-        >
-          {year}
-          p
-        </div>
-        <motion.div
-          className="
+          >
+            {year}
+            p
+          </div>
+          <motion.div
+            className="
           absolute
           inset-0
           flex
@@ -75,13 +69,12 @@ export default function MajorCard({ year, title, children }:
           whitespace-normal
           px-16
           "
-          style={{
-            scale: scaleProgressText,
-          }}
-        >
-          {title}
-        </motion.div>
+          >
+            {title}
+          </motion.div>
+        </div>
+
       </div>
-    </motion.div>
+    </div>
   )
 }

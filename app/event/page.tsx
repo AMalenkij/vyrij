@@ -38,18 +38,17 @@ export default async function Event() {
   )
 
   return (
-    <div className="-mt-40">
+    <div className="">
       {dataEvents?.map((item) => (
-        <section key={item.year} className="2xl:mb-44 xl:mb-40 lg:mb-32 md:mb-28 mb-24">
+        <section key={item.year} className="">
           <MajorCard year={item.year} title={item.title}>
             <Image
-              key={item.photos ? item.photos : ''}
-              width={1000}
-              height={1000}
-              loading="lazy"
+              key={item.photos}
+              priority={false}
               alt="chor"
+              fill
               src={item.photos ? item.photos : ''}
-              className="object-cover min-w-full max-w-full h-screen relative"
+              className="w-full h-full absolute inset-0 object-cover"
             />
           </MajorCard>
           {item?.eventsWithMedia?.map((elm) => (

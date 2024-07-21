@@ -39,7 +39,7 @@ export default function NavMenuToggle() {
 
   return (
     <button
-      className="fixed left-1/2 -translate-x-1/2 top-12 cursor-pointer stroke-white stroke-2 z-[100] mix-blend-difference"
+      className="fixed left-1/2 -translate-x-1/2 top-12 cursor-pointer stroke-2 z-[100] stroke-white  mix-blend-difference"
       onClick={isOpen ? onClose : onOpen}
       type="button"
     >

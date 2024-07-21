@@ -13,7 +13,8 @@ export default function Mobile() {
       <Image
         src={imgHero}
         alt="Hero img"
-        className="object-cover -z-10 -mt-20 h-[400px] xs:h-[900px]"
+        className="object-cover -z-10 xs:-mt-0 -mt-32"
+        placeholder="blur"
         quality={100}
       />
       <p className="text-3xl xs:text-5xl pb-3 text-end pt-5 px-3">{QUOTE_TEXT}</p>

@@ -52,7 +52,7 @@ export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventW
   }
 
   return (
-    <div className="container mx-auto flex flex-col">
+    <div className="container mx-auto flex flex-col mb-28">
       <div>
         <h2 className="mt-24 text-2xl ">
           {day}

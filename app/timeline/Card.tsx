@@ -4,6 +4,7 @@ import { twMerge } from 'tailwind-merge'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useCallback } from 'react'
 import Link from 'next/link'
+
 import ImageWithEffects from './ImageWithEffects'
 
 interface CardProps {
