@@ -1,5 +1,6 @@
 import getData from '@/actions/getData'
 import BlurImage from '@/components/BlurImage'
+import Title from '@/components/Title'
 import { GALLERY } from '@/constants/settings'
 
 interface PhotosType {
@@ -11,16 +12,9 @@ export default async function Gallery() {
   const photos:PhotosType[] = await getData('photos', ['photo_id', 'href'])
   return (
     <div className="mt-24">
-      <h2 className="
-          text-2xl
-          md:text-3xl
-          md:mt-100
-          my-4
-          text-center
-          "
-      >
+      <Title>
         {GALLERY}
-      </h2>
+      </Title>
       <div className="
       mx-auto
       max-w-2xl
