@@ -40,7 +40,7 @@ export default async function Event() {
   return (
     <div className="">
       {dataEvents?.map((item) => (
-        <section key={item.year} className="">
+        <section key={item.year} className="mb-20">
           <MajorCard year={item.year} title={item.title}>
             <Image
               key={item.photos}

@@ -52,9 +52,9 @@ export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventW
   }
 
   return (
-    <div className="container mx-auto flex flex-col mb-28">
+    <div className="container mx-auto flex flex-col">
       <div>
-        <h2 className="mt-24 text-2xl ">
+        <h2 className="mt-20 text-2xl ">
           {day}
           {' '}
           {getMonthNameUkr(month)}
