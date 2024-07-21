@@ -13,7 +13,7 @@ export default function Mobile() {
       <Image
         src={imgHero}
         alt="Hero img"
-        className="object-cover -z-10 xs:-mt-0 -mt-32"
+        className="object-cover -z-10 xs:-mt-24 sm:mt-0 -mt-32"
         placeholder="blur"
         quality={100}
       />
