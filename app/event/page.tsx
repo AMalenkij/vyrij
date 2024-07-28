@@ -10,6 +10,7 @@ import { combineEventData, getMajorEventYears } from '@/utils/combineEventData'
 import getData from '@/actions/getData'
 import Chain from '@/public/svg/Chain'
 import { TIMELINE_ROUTE } from '@/constants/settings'
+import LenisProvider from '@/providers/LenisProvider'
 import MajorCard from './MajorCard'
 import MinorCard from './MinorCard'
 import AnimatedContainer from './WithViewportAnimation'
@@ -44,7 +45,7 @@ export default async function Event() {
 
   return (
     <>
-      <div className="">
+      <LenisProvider>
         {dataEvents?.map((item) => (
           <section key={item.year} className="mb-20">
             <Suspense>
@@ -66,7 +67,8 @@ export default async function Event() {
             ))}
           </section>
         ))}
-      </div>
+      </LenisProvider>
+
       <Suspense>
         <nav className="fixed 2xl:left-20 hidden 2xl:flex top-1/3 flex-col mix-blend-difference text-white">
           <Link href={TIMELINE_ROUTE} className="transition-color duration-500 hover:text-red-600 py-6">

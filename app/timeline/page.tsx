@@ -4,6 +4,7 @@ import { getMajorEvents } from '@/utils/combineEventData'
 import ControlledScrollIcon from '@/components/scroll/ControlledScrollIcon'
 import { CHOOSE_A_YEAR } from '@/constants/settings'
 import Title from '@/components/Title'
+import LenisProvider from '@/providers/LenisProvider'
 import WithTimeLineAnimation from './withTimeLineAnimation'
 import VerticalTimelineLine from './VerticalTimelineLine'
 import Card from './Card'
@@ -32,14 +33,15 @@ export default async function TimeLine() {
     photos as Media[],
   )
   return (
-    <WithTimeLineAnimation
-      title={(
-        <>
-          <Title>{CHOOSE_A_YEAR}</Title>
-          <ControlledScrollIcon />
-        </>
+    <LenisProvider>
+      <WithTimeLineAnimation
+        title={(
+          <>
+            <Title>{CHOOSE_A_YEAR}</Title>
+            <ControlledScrollIcon />
+          </>
     )}
-      timelineContent={
+        timelineContent={
       data.map((element) => (
         <div
           key={element.year}
@@ -61,6 +63,7 @@ export default async function TimeLine() {
         </div>
       ))
     }
-    />
+      />
+    </LenisProvider>
   )
 }
