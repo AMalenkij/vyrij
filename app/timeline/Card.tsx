@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useCallback } from 'react'
 import Link from 'next/link'
 
+import { EVENTS_HASH_ENDPOINT } from '@/constants/settings'
+
 import ImageWithEffects from './ImageWithEffects'
 
 interface CardProps {
@@ -28,7 +30,7 @@ export default function Card({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <Link href={`/event/#${year}`} className="relative overflow-hidden transform-gpu transition-transform" prefetch>
+        <Link href={EVENTS_HASH_ENDPOINT + year} className="relative overflow-hidden transform-gpu transition-transform" prefetch>
           <motion.div
             className="group"
             animate={isHovered ? {

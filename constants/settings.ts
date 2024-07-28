@@ -22,32 +22,42 @@ export const CONCERTS = 'Концерти'
 
 export const FUTURES = 'Майбутні'
 export const PAST = 'Минулі'
+export const EVENTS_HASH_ENDPOINT = '/event#'
+export const EVENTS_YEAR_QUERY_ENDPOINT = '/event?year='
+
+export const HOME_ROUTE = '/'
+export const TIMELINE_ROUTE = '/timeline'
+export const EVENT_ROUTE = '/event'
+export const CONCERTS_ROUTE = '/concerts'
+export const GALLERY_ROUTE = '/gallery'
+
+export const YEAR = 'year'
 
 export const ROUTES = (pathName: string) => [
   {
     label: 'Головна',
-    active: pathName === '/',
-    href: '/',
+    active: pathName === HOME_ROUTE,
+    href: HOME_ROUTE,
   },
   {
     label: 'Хронологія',
-    active: pathName === '/timeline',
-    href: '/timeline',
+    active: pathName === TIMELINE_ROUTE,
+    href: TIMELINE_ROUTE,
   },
   {
     label: 'Події',
-    active: pathName === '/event',
-    href: '/event/',
+    active: pathName === EVENT_ROUTE,
+    href: EVENT_ROUTE,
   },
   {
-    label: 'Концерти',
-    active: pathName === '/concerts',
-    href: '/concerts',
+    label: CONCERTS,
+    active: pathName === CONCERTS_ROUTE,
+    href: CONCERTS_ROUTE,
   },
   {
-    label: 'Галерея',
-    active: pathName === '/gallery',
-    href: '/gallery',
+    label: GALLERY,
+    active: pathName === GALLERY_ROUTE,
+    href: GALLERY_ROUTE,
   },
 ] as const
 

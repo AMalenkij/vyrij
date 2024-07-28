@@ -4,6 +4,13 @@ import { type MajorEvents, Events, Media } from '@/types/supabase'
 import { CombinedEventData } from '@/types/modifiedDataFromSupabase'
 import { SUPABASE_STORAGE_URL } from '@/constants/settings'
 
+export function getMajorEventYears(majorEvents: MajorEvents[]): number[] {
+  return majorEvents.map((mEvent) => {
+    const year = parseInt(mEvent.date.slice(0, 4), 10)
+    return year
+  })
+}
+
 export function getMajorEvents(majorEvents: MajorEvents[], events: Events[], photos: Media[]) {
   return majorEvents.map((mEvent) => {
     const year = parseInt(mEvent.date.slice(0, 4), 10)
@@ -20,7 +27,7 @@ export function getMajorEvents(majorEvents: MajorEvents[], events: Events[], pho
   })
 }
 
-export default function combineEventData(
+export function combineEventData(
   majorEvents: MajorEvents[],
   events: Events[],
   photos: Media[],
