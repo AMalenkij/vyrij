@@ -84,10 +84,15 @@ const config = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
+        appear: {
+          from: { opacity: '0.2', filter: 'blur(5px)' },
+          to: { opacity: '1', filter: 'blur(0px)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        appear: 'appear 500ms ease-in-out',
       },
     },
   },
