@@ -10,7 +10,7 @@ export default function RenderPhoto({ photoUrl, className }: { photoUrl: string,
       loading="lazy" // Lazy loading
       alt="chor"
       src={photoUrl}
-      className={twMerge('object-cover', className)}
+      className={twMerge('object-cover  max-h-[70vh] w-full', className)}
     />
   )
 }

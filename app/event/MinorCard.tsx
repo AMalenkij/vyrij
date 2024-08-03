@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import { type EventWithMedia, EventMedia } from '@/types/modifiedDataFromSupabase'
+import type { EventWithMedia, EventMedia } from '@/types/modifiedDataFromSupabase'
 
 import getMonthNameUkr from '@/utils/getMonthNameUkr'
 import YouTubeVideo from './YouTubeVideo'
@@ -20,7 +20,7 @@ export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventW
   const renderPhotosByCount = (count: number) => {
     switch (count) {
       case 1:
-        return <div className="w-full">{renderMedia([media[0]])}</div>
+        return <div className="w-full h-1/2">{renderMedia([media[0]])}</div>
       case 2:
         return <div className="flex gap-6">{renderMedia(media.slice(0, 2), 'w-1/2')}</div>
       case 3:
@@ -52,14 +52,14 @@ export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventW
   }
 
   return (
-    <div className="container mx-auto flex flex-col">
+    <div className="container mx-auto flex flex-col w-full">
       <div>
-        <h2 className="mt-20 text-2xl ">
+        <h2 className="mt-20 text-2xl lg:text-3xl ">
           {day}
           {' '}
           {getMonthNameUkr(month)}
         </h2>
-        <p className="py-6 text-lg whitespace-pre-line">{description}</p>
+        <p className="py-6 text-lg lg:text-xl whitespace-pre-line">{description}</p>
       </div>
       {renderPhotosByCount(media.length)}
     </div>

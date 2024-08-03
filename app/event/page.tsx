@@ -56,7 +56,7 @@ export default async function Event() {
                   priority={false}
                   alt="chor"
                   fill
-                  src={item.photos ? item.photos : ''}
+                  src={item.photos}
                   className="w-full h-full absolute inset-0 object-cover"
                 />
               </MajorCard>
@@ -78,7 +78,6 @@ export default async function Event() {
           <Scrollbar MajorEventYears={MajorEventYears} />
         </nav>
       </Suspense>
-
       <Footer />
     </>
   )
