@@ -29,7 +29,7 @@ export default function NavMenuItem({
 
   return (
     <motion.li
-      className={`cursor-pointer py-8 relative w-full ${
+      className={`cursor-pointer py-6 relative w-full ${
         isLoading ? 'pointer-events-none' : 'pointer-events-auto'
       }`}
       initial="initial"
@@ -59,13 +59,13 @@ export default function NavMenuItem({
           {title}
         </h1>
         <motion.div variants={arrowMotion}>
-          <div className="h-6 w-6">
+          <div className="h-6 w-6 text-accent-foreground">
             <Arrow />
           </div>
         </motion.div>
       </Link>
       <motion.div
-        className={twMerge('absolute bottom-0 h-[2px] bg-border w-full origin-left', active && 'bg-red-700')}
+        className={twMerge('absolute bottom-0 h-[2px] bg-border w-full origin-left', active && 'bg-red-500')}
         variants={dividerMotion}
       />
     </motion.li>
