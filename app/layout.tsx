@@ -63,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           shrink-0
           w-28
           lg:w-44
-          text-white
+          text-static_white
           whitespace-nowrap
           "
               >

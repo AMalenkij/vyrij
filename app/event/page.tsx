@@ -71,8 +71,8 @@ export default async function Event() {
       </LenisProvider>
 
       <Suspense>
-        <nav className="fixed 2xl:left-20 hidden 2xl:flex top-1/3 flex-col mix-blend-difference text-white">
-          <Link href={TIMELINE_ROUTE} className="transition-color duration-500 hover:text-red-600 py-6">
+        <nav className="fixed 2xl:left-20 hidden 2xl:flex top-1/3 flex-col mix-blend-difference text-static_white">
+          <Link href={TIMELINE_ROUTE} className="transition-color duration-500 hover:text-accent py-6">
             <Chain />
           </Link>
           <Scrollbar MajorEventYears={MajorEventYears} />

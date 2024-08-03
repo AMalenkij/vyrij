@@ -57,7 +57,7 @@ export default function Card({
                 animate={{ opacity: 1, y: -220, scale: 0.9 }}
                 exit={{ opacity: 0, y: 50 }}
                 transition={{ duration: 0.5 }}
-                className="absolute pl-4 pt-20 text-start text-white"
+                className="absolute pl-4 pt-20 text-start text-static_white"
               >
                 <p className="text-5xl">{year}</p>
                 <p className="text-3xl">{description}</p>

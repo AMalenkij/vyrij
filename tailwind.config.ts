@@ -35,6 +35,7 @@ const config = {
         poiretOne: ['var(--font-poiret-one)'],
       },
       colors: {
+        static_white: 'hsl(var(--static-white))',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

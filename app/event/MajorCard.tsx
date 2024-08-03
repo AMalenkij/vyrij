@@ -59,10 +59,10 @@ export default function MajorCard({ year, title, children }: MajorCardProps) {
           </motion.div>
         </div>
         <div className="sticky top-0 h-screen flex flex-col justify-center items-center mx-30 md:mx-50">
-          <div className="absolute inset-0 flex justify-center items-center text-white font-bold 2xl:text-2xl lg:text-base text-sm 2xl:pb-56 xl:pb-40 pb-48 md:mb-5">
+          <div className="absolute inset-0 flex justify-center items-center text-static_white font-bold 2xl:text-2xl lg:text-base text-sm 2xl:pb-56 xl:pb-40 pb-48 md:mb-5">
             {year}
           </div>
-          <motion.div className="absolute inset-0 flex flex-col justify-center items-center text-white font-comforter whitespace-normal px-16 2xl:text-9xl xl:text-8xl lg:text-7xl text-6xl">
+          <motion.div className="absolute inset-0 flex flex-col justify-center items-center text-static_white font-comforter whitespace-normal px-16 2xl:text-9xl xl:text-8xl lg:text-7xl text-6xl">
             {title}
           </motion.div>
         </div>

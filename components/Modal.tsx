@@ -76,7 +76,7 @@ export default function Modal({
               type="button"
               className="
             text-neutral-400
-            hover:text-white
+            hover:text-primary
             absolute
             top-[10px]
             right-[10px]
