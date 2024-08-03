@@ -1,6 +1,8 @@
 import { twMerge } from 'tailwind-merge'
 import Link from 'next/link'
 
+import { HOME_ROUTE } from '@/constants/settings'
+
 interface LogoProps {
   children: React.ReactNode
   className?: string
@@ -13,7 +15,7 @@ export default function Logo({ children, className } : LogoProps) {
         `,
         className,
       )}
-      href="/"
+      href={HOME_ROUTE}
     >
       { children }
     </Link>

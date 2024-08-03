@@ -12,7 +12,7 @@ export default function BlurImage({ image }: { image: Photos }) {
 
   return (
     <a href={`${SUPABASE_STORAGE_URL}${image.href}`} className="group">
-      <div className="aspect-square xl:aspect-7/8 relative overflow-hidden rounded-lg bg-gray-200">
+      <div className="aspect-square xl:aspect-7/8 relative overflow-hidden rounded-lg bg-accent">
         <Image
           alt="choir photos"
           src={`${SUPABASE_STORAGE_URL}${image.href}`}
@@ -26,8 +26,6 @@ export default function BlurImage({ image }: { image: Photos }) {
           onLoad={() => setLoading(false)}
         />
       </div>
-      {/* <h3 className="mt-4 text-sm text-gray-700">{`${supabaseStorageURL}${image.href}`}</h3> */}
-      {/* <p className="mt-1 text-lg font-medium text-gray-900">{image.date}</p> */}
     </a>
   )
 }

@@ -9,7 +9,7 @@ function SocialLink({ href, label, children }: { href: string; label: string; ch
     <Link
       href={href}
       aria-label={label}
-      className="text-2xl hover:text-red-500 transition-colors duration-300"
+      className="text-2xl hover:underline transition-colors duration-300"
     >
       {children}
     </Link>
@@ -22,7 +22,7 @@ export default function Footer() {
   return (
     <footer className="mt-20">
       <div className="text-center text-4xl p-2 mb-8">{HERO_TEXT_END}</div>
-      <div className="w-full h-1 container bg-red-500" />
+      <div className="w-full h-1 container bg-border" />
       <div className="container mx-auto px-4">
         <div className="flex justify-between space-x-10 py-10 ">
           <SocialLink href={SOCIAL_MEDIA.FACEBOOK.URL} label={SOCIAL_MEDIA.FACEBOOK.LABEL}>

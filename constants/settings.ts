@@ -25,7 +25,7 @@ export const PAST = 'Минулі'
 export const EVENTS_HASH_ENDPOINT = '/event#'
 export const EVENTS_YEAR_QUERY_ENDPOINT = '/event?year='
 
-export const HOME_ROUTE = '/'
+export const HOME_ROUTE = '/home'
 export const TIMELINE_ROUTE = '/timeline'
 export const EVENT_ROUTE = '/event'
 export const CONCERTS_ROUTE = '/concerts'
