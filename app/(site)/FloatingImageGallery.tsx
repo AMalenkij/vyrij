@@ -98,7 +98,7 @@ export default function FloatingImageGallery({ children, photoMain }: FloatingIm
                 transition={{ delay: index * 1.5, duration: 5, ease: [0, 0.31, 0.2, 1.01] }}
               >
                 <Image
-                  src={image.src ? image.src : ''}
+                  src={image.src}
                   alt={alt}
                   width={image.width}
                   height={image.width}

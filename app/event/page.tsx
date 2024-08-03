@@ -11,6 +11,7 @@ import getData from '@/actions/getData'
 import Chain from '@/public/svg/Chain'
 import { TIMELINE_ROUTE } from '@/constants/settings'
 import LenisProvider from '@/providers/LenisProvider'
+import Footer from '@/components/Footer'
 import MajorCard from './MajorCard'
 import MinorCard from './MinorCard'
 import AnimatedContainer from './WithViewportAnimation'
@@ -77,6 +78,8 @@ export default async function Event() {
           <Scrollbar MajorEventYears={MajorEventYears} />
         </nav>
       </Suspense>
+
+      <Footer />
     </>
   )
 }

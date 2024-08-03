@@ -37,13 +37,13 @@ export default function Card({
               scale: 1.3,
               height: 430,
               width: 390,
-              filter: 'grayscale(100%)',
+              filter: 'grayscale(0%)',
               transition: { duration: 1 },
             } : {
               scale: 1,
               height: 400,
               width: 360,
-              filter: 'grayscale(0%)',
+              filter: 'grayscale(100%)',
               transition: { duration: 1 },
             }}
             initial={{ height: 400, width: 360 }}
