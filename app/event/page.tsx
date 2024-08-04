@@ -61,8 +61,8 @@ export default async function Event() {
               </MajorCard>
             </Suspense>
             {item?.eventsWithMedia?.map((elm) => (
-              <AnimatedContainer key={elm.day + elm.month}>
-                <MinorCard eventsWithMedia={elm} />
+              <AnimatedContainer>
+                <MinorCard eventsWithMedia={elm} key={elm.day + elm.month} />
               </AnimatedContainer>
             ))}
           </section>

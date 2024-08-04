@@ -1,49 +1,50 @@
-/* eslint-disable max-len */
-/* eslint-disable @typescript-eslint/naming-convention */
-
 import type { EventWithMedia, EventMedia } from '@/types/modifiedDataFromSupabase'
-
 import getMonthNameUkr from '@/utils/getMonthNameUkr'
 import YouTubeVideo from './YouTubeVideo'
 import RenderPhoto from './RenderPhoto'
+
+function MediaItem({ item, className } : { item:EventMedia, className?: string }) {
+  if (item.type === 'photo') return <RenderPhoto photoUrl={item.href} className={className} />
+  if (item.type === 'video') return <YouTubeVideo url={item.href} className={className} />
+  return null
+}
 
 export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventWithMedia }) {
   const {
     month, day, description, media = [],
   } = eventsWithMedia
-  const renderMedia = (mediaItems: EventMedia[], className?: string) => mediaItems.map((item) => {
-    if (item.type === 'photo') return <RenderPhoto key={item.display_order} photoUrl={item.href} className={className} />
-    if (item.type === 'video') return <YouTubeVideo key={item.display_order} url={item.href} className={className} />
-    return null
-  })
 
-  const renderPhotosByCount = (count: number) => {
+  const renderPhotosByCount = (mediaItems: EventMedia[]) => {
+    const count = mediaItems.length
+
     switch (count) {
       case 1:
-        return <div>{renderMedia([media[0]])}</div>
+        return <MediaItem item={mediaItems[0]} />
       case 2:
-        return <div className="flex gap-6">{renderMedia(media.slice(0, 2))}</div>
+        return (
+          <div className="grid grid-cols-2 gap-4">
+            {mediaItems.map((item) => (
+              <MediaItem key={item.display_order} item={item} />
+            ))}
+          </div>
+        )
       case 3:
         return (
-          <div className="flex gap-x-6">
-            <div className="flex-col">
-              {renderMedia([media[0]], '-ml-16 pb-10 h-1/2')}
-              {renderMedia([media[1]], 'h-1/2')}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="-ml-16 md:col-span-2">
+              <MediaItem item={mediaItems[0]} />
             </div>
-            {renderMedia([media[2]], 'lg:w-full w-1/2')}
+            <MediaItem item={mediaItems[1]} />
+            <MediaItem item={mediaItems[2]} />
           </div>
         )
       case 4:
         return (
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex-col">
-              {renderMedia([media[0]], 'xl:-ml-16 -ml-4')}
-              {renderMedia([media[1]], 'pt-10')}
-            </div>
-            <div className="flex-col">
-              {renderMedia([media[2]], 'pb-10')}
-              {renderMedia([media[3]], 'pb-10')}
-            </div>
+          <div className="grid grid-cols-2 gap-4 h-[calc(70vh-250px)] lg:h-[calc(100vh-200px)]">
+            <MediaItem item={mediaItems[0]} className="md:-ml-6 ml-2" />
+            <MediaItem item={mediaItems[1]} />
+            <MediaItem item={mediaItems[2]} />
+            <MediaItem item={mediaItems[3]} />
           </div>
         )
       default:
@@ -52,16 +53,16 @@ export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventW
   }
 
   return (
-    <div className="container mx-auto flex flex-col">
-      <div>
-        <h2 className="mt-20 text-2xl lg:text-3xl ">
+    <article className="container mx-auto py-8">
+      <header>
+        <h2 className="text-2xl lg:text-3xl font-semibold mb-4">
           {day}
           {' '}
           {getMonthNameUkr(month)}
         </h2>
-        <p className="py-6 text-lg lg:text-xl whitespace-pre-line">{description}</p>
-      </div>
-      {renderPhotosByCount(media.length)}
-    </div>
+      </header>
+      <p className="text-lg lg:text-xl whitespace-pre-line pb-8">{description}</p>
+      {renderPhotosByCount(media)}
+    </article>
   )
 }
