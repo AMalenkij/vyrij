@@ -6,7 +6,6 @@ import { useState, useCallback } from 'react'
 import Link from 'next/link'
 
 import { EVENTS_HASH_ENDPOINT } from '@/constants/settings'
-
 import ImageWithEffects from './ImageWithEffects'
 
 interface CardProps {

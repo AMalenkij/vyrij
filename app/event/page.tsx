@@ -56,7 +56,7 @@ export default async function Event() {
                   alt="chor"
                   fill
                   src={item.photos}
-                  className="w-full h-full absolute inset-0 object-cover"
+                  className="w-full h-full absolute inset-0 object-cover brightness-75 contrast-125"
                 />
               </MajorCard>
             </Suspense>
