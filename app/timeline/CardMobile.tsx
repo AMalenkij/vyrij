@@ -24,7 +24,7 @@ export default function CardMobile({
               src={imageSrc}
               alt={String(year)}
               fill
-              style={{ objectFit: 'cover' }}
+              className="object-cover"
             />
           </div>
           <CardFooter className="flex flex-col items-start p-4">

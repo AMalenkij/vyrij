@@ -52,7 +52,7 @@ export default async function Concerts() {
           <AccordionContent>
             {concertsDataFuture?.map((concert) => (
               <ConcertCard
-                key={concert.id}
+                key={`Future-${concert.id}`}
                 timestamptz={splitTimestamp(concert.time)}
                 title={concert.title}
                 location={concert.location}
@@ -68,7 +68,7 @@ export default async function Concerts() {
           <AccordionContent>
             {concertsDataPast?.map((concert) => (
               <ConcertCard
-                key={concert.id}
+                key={`Past-${concert.id}`}
                 timestamptz={splitTimestamp(concert.time)}
                 title={concert.title}
                 location={concert.location}

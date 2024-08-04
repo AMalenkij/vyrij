@@ -48,11 +48,10 @@ export default async function Event() {
     <>
       <LenisProvider>
         {dataEvents?.map((item) => (
-          <section key={item.year} className="mb-20">
+          <section key={`major-${item.year}`} className="mb-20">
             <Suspense>
               <MajorCard year={item.year} title={item.title}>
                 <Image
-                  key={item.photos}
                   priority={false}
                   alt="chor"
                   fill

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
-import { YEAR_SYMBOL, EVENT_ROUTE, YEAR } from '@/constants/settings'
+import { YEAR_SYMBOL, EVENTS_HASH_ENDPOINT, YEAR } from '@/constants/settings'
 
 export default function Scrollbar({ MajorEventYears }: { MajorEventYears: number[] }) {
   const searchParams = useSearchParams()
@@ -14,9 +14,9 @@ export default function Scrollbar({ MajorEventYears }: { MajorEventYears: number
       {MajorEventYears.map((year) => {
         const isCurrentYear = year.toString() === currentSelectedYear
         return (
-          <div key={year} className="my-4">
+          <div key={`Scrollbar-${year}`} className="my-4">
             <Link
-              href={`${EVENT_ROUTE}#${year}`}
+              href={`${EVENTS_HASH_ENDPOINT}${year}`}
               className={`
                 transition-colors duration-500
                 ${isCurrentYear ? 'text-red-500 pointer-events-none' : 'hover:text-white'}

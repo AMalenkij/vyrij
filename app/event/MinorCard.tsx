@@ -27,7 +27,7 @@ export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventW
         return (
           <div className="flex gap-x-6">
             <div className="flex-col">
-              {renderMedia([media[0]], '-ml-20 pb-10 h-1/2')}
+              {renderMedia([media[0]], '-ml-16 pb-10 h-1/2')}
               {renderMedia([media[1]], 'h-1/2')}
             </div>
             {renderMedia([media[2]], 'lg:w-full w-1/2')}
@@ -35,9 +35,9 @@ export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventW
         )
       case 4:
         return (
-          <div className="mt-10 flex gap-6">
+          <div className="grid grid-cols-2 gap-4">
             <div className="flex-col">
-              {renderMedia([media[0]], 'xl:-ml-20 -ml-4')}
+              {renderMedia([media[0]], 'xl:-ml-16 -ml-4')}
               {renderMedia([media[1]], 'pt-10')}
             </div>
             <div className="flex-col">
