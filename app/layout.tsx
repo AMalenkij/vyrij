@@ -1,4 +1,4 @@
-import { Poiret_One, Comforter } from 'next/font/google'
+import { Poiret_One, Great_Vibes } from 'next/font/google'
 
 import type { Metadata } from 'next'
 import './globals.css'
@@ -11,8 +11,8 @@ import ThemeProvider from '@/providers/ThemeProvider'
 import ModeToggle from '@/components/ModeToggle'
 import { CHOR } from '@/constants/settings'
 
-const comforter = Comforter({
-  subsets: ['latin', 'cyrillic'],
+const comforter = Great_Vibes({
+  subsets: ['latin'],
   weight: '400',
   variable: '--font-comforter',
 })

@@ -10,11 +10,11 @@ export default function Scrollbar({ MajorEventYears }: { MajorEventYears: number
   const currentSelectedYear = searchParams.get(YEAR)
 
   return (
-    <div>
+    <>
       {MajorEventYears.map((year) => {
         const isCurrentYear = year.toString() === currentSelectedYear
         return (
-          <div key={`Scrollbar-${year}`} className="my-4">
+          <div key={`scrollbar-${year}`} className="my-4">
             <Link
               href={`${EVENTS_HASH_ENDPOINT}${year}`}
               className={`
@@ -28,6 +28,6 @@ export default function Scrollbar({ MajorEventYears }: { MajorEventYears: number
           </div>
         )
       })}
-    </div>
+    </>
   )
 }
