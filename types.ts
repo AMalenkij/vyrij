@@ -6,7 +6,6 @@ export interface HomepageImage {
   type: 'plane1' | 'plane2' | 'plane3';
   src: string;
   style: {
-    position: 'absolute';
     left: string;
     top: string;
   };

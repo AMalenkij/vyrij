@@ -12,7 +12,7 @@ import {
 } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 
-import { type HomepageImage } from '@/types'
+import type { HomepageImage } from '@/types'
 
 interface FloatingImageGalleryProps {
   children: JSX.Element;
@@ -30,8 +30,7 @@ export default function FloatingImageGallery({ children, photoMain }: FloatingIm
   const initial = { x: 0, y: 0 }
   let xForce = 0
   let yForce = 0
-  const easing = 0.025 // Adjust the easing value for smoother animation
-  const alt = 'image'
+  const easing = 0.009 // Adjust the easing value for smoother animation
 
   const animate = () => {
     planes.forEach(({ type, control }) => {
@@ -96,13 +95,15 @@ export default function FloatingImageGallery({ children, photoMain }: FloatingIm
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: index * 1.5, duration: 5, ease: [0, 0.31, 0.2, 1.01] }}
+                className={`w-[${image.width}px] h-[${image.width}px]`}
               >
                 <Image
                   src={image.src}
-                  alt={alt}
+                  alt={`Image ${image.id}`}
                   width={image.width}
                   height={image.width}
                   style={image.style}
+                  className="absolute"
                 />
               </motion.div>
             ))}

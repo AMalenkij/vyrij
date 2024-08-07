@@ -8,7 +8,6 @@ export default function mapDataToHomepageImages(data: PhotoMainData[]): Homepage
     type: element.type,
     src: `${SUPABASE_STORAGE_URL}${element.photos}`,
     style: {
-      position: 'absolute',
       left: `${element.positon_left}%`,
       top: `${element.positon_top}%`,
     },

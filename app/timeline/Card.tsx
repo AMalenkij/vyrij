@@ -31,7 +31,7 @@ export default function Card({
       >
         <Link href={EVENTS_HASH_ENDPOINT + year} className="relative overflow-hidden transform-gpu transition-transform" prefetch>
           <motion.div
-            className="group"
+            className="group relative"
             animate={isHovered ? {
               scale: 1.3,
               height: 430,
