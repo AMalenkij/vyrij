@@ -11,15 +11,15 @@ import ThemeProvider from '@/providers/ThemeProvider'
 import ModeToggle from '@/components/ModeToggle'
 import { CHOR } from '@/constants/settings'
 
-const comforter = Great_Vibes({
+const secondaryFont = Great_Vibes({
   subsets: ['latin'],
   weight: '400',
-  variable: '--font-comforter',
+  variable: '--font-secondaryFont',
 })
-const poiretOne = Poiret_One({
+const mainFont = Poiret_One({
   subsets: ['latin', 'cyrillic'],
   weight: '400',
-  variable: '--font-poiret-one',
+  variable: '--font-mainFont',
 })
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${poiretOne.variable} ${comforter.variable} font-poiretOne tracking-wider`}>
+      <body className={`${mainFont.variable} ${secondaryFont.variable} font-mainFont tracking-wider`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

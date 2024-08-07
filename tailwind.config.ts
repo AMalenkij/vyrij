@@ -31,8 +31,8 @@ const config = {
         '7/8': '7 / 8',
       },
       fontFamily: {
-        comforter: ['var(--font-comforter)'],
-        poiretOne: ['var(--font-poiret-one)'],
+        secondaryFont: ['var(--font-secondaryFont)'],
+        mainFont: ['var(--font-mainFont)'],
       },
       colors: {
         static_white: 'hsl(var(--static-white))',
