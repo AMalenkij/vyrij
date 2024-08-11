@@ -43,25 +43,21 @@ export default async function Event() {
     videoUrls as Media[],
   )
   const MajorEventYears = getMajorEventYears(majorEvents as MajorEvents[])
-
   return (
     <>
       <LenisProvider>
         {dataEvents?.map((item) => (
-          <section key={`major-${item.year}`} className="mb-20">
-            <Suspense>
-              <MajorCard year={item.year} title={item.title}>
-                <Image
-                  priority={false}
-                  alt="chor"
-                  fill
-                  src={item.photos}
-                  className="w-full h-full absolute inset-0 object-cover brightness-75 contrast-125"
-                />
-              </MajorCard>
-            </Suspense>
+          <section key={`major-${item.year}`}>
+            <MajorCard year={item.year} title={item.title}>
+              <Image
+                alt={`photo ${item.title}`}
+                fill
+                src={item.photos}
+                className="object-cover brightness-75 contrast-125"
+              />
+            </MajorCard>
             {item?.eventsWithMedia?.map((elm) => (
-              <AnimatedContainer key={elm.day + elm.month}>
+              <AnimatedContainer key={`minor-${item.year}${elm.month}${elm.day}`}>
                 <MinorCard eventsWithMedia={elm} />
               </AnimatedContainer>
             ))}
