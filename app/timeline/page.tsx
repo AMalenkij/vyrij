@@ -1,4 +1,4 @@
-import { type MajorEvents, Media, Events } from '@/types/supabase'
+import type { MajorEvents, Media, Events } from '@/types/supabase'
 import getData from '@/actions/getData'
 import { getMajorEvents } from '@/utils/combineEventData'
 import ControlledScrollIcon from '@/components/scroll/ControlledScrollIcon'
@@ -8,7 +8,7 @@ import LenisProvider from '@/providers/LenisProvider'
 import WithTimeLineAnimation from './withTimeLineAnimation'
 import VerticalTimelineLine from './VerticalTimelineLine'
 import Card from './Card'
-import CardMobile from './CardMobile'
+import CarouselCardMobile from './CarouselCardMobile'
 
 export default async function TimeLine() {
   const [majorEvents, events, photos] = await Promise.all([
@@ -33,37 +33,39 @@ export default async function TimeLine() {
     photos as Media[],
   )
   return (
-    <LenisProvider>
-      <WithTimeLineAnimation
-        title={(
-          <>
-            <Title>{CHOOSE_A_YEAR}</Title>
-            <ControlledScrollIcon />
-          </>
+    <>
+      <div className="block lg:hidden">
+        <Title>{CHOOSE_A_YEAR}</Title>
+        <CarouselCardMobile data={data} />
+      </div>
+
+      <div className="hidden lg:block">
+        <LenisProvider>
+          <WithTimeLineAnimation
+            title={(
+              <>
+                <Title>{CHOOSE_A_YEAR}</Title>
+                <ControlledScrollIcon />
+              </>
     )}
-        timelineContent={
+            timelineContent={
       data.map((element) => (
         <div
           key={element.year}
           className="flex-col justify-center items-center mr-32"
         >
-          <CardMobile
-            year={element.year}
-            description={element.title}
-            imageSrc={element.photos}
-            className="block lg:hidden"
-          />
           <Card
             year={element.year}
             description={element.title}
             imageSrc={element.photos}
-            className="hidden lg:block"
           />
           <VerticalTimelineLine year={element.year} />
         </div>
       ))
     }
-      />
-    </LenisProvider>
+          />
+        </LenisProvider>
+      </div>
+    </>
   )
 }
