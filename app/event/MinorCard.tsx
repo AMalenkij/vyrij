@@ -11,7 +11,7 @@ function MediaItem({ item, className } : { item:EventMedia, className?: string }
 
 export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventWithMedia }) {
   const {
-    month, day, description, media = [],
+    month, day, description, media,
   } = eventsWithMedia
 
   const renderPhotosByCount = (mediaItems: EventMedia[]) => {
@@ -23,9 +23,8 @@ export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventW
       case 2:
         return (
           <div className="grid grid-cols-2 gap-4">
-            {mediaItems.map((item) => (
-              <MediaItem key={item.display_order} item={item} />
-            ))}
+            <MediaItem item={mediaItems[0]} />
+            <MediaItem item={mediaItems[1]} />
           </div>
         )
       case 3:
@@ -53,7 +52,7 @@ export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventW
   }
 
   return (
-    <article className="container mx-auto py-8">
+    <article className="container mx-auto my-16">
       <header>
         <h2 className="text-2xl lg:text-3xl font-semibold mb-4">
           {day}
@@ -61,7 +60,7 @@ export default function MinorCard({ eventsWithMedia }: { eventsWithMedia: EventW
           {getMonthNameUkr(month)}
         </h2>
       </header>
-      <p className="text-lg lg:text-xl whitespace-pre-line pb-8">{description}</p>
+      <p className="text-lg lg:text-xl whitespace-pre-line">{description}</p>
       {renderPhotosByCount(media)}
     </article>
   )

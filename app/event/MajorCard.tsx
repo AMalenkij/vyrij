@@ -7,6 +7,7 @@ import {
   motion, useScroll, useTransform, useInView,
 } from 'framer-motion'
 import { useRouter, useSearchParams } from 'next/navigation'
+
 import { EVENTS_YEAR_QUERY_ENDPOINT, YEAR } from '@/constants/settings'
 
 interface MajorCardProps {
@@ -58,10 +59,10 @@ export default function MajorCard({ year, title, children }: MajorCardProps) {
         <div
           className="absolute inset-0 flex flex-col justify-center items-center"
         >
-          <div className="text-static_white font-bold 2xl:text-2xl lg:text-base text-sm mb-12">
+          <div className="text-static_white font-bold 2xl:text-3xl lg:text-xl text-base mb-12">
             {year}
           </div>
-          <div className="text-static_white font-secondaryFont whitespace-normal lg:px-28 px-10 2xl:text-10xl xl:text-9xl lg:text-8xl text-7xl text-center">
+          <div className="text-static_white font-secondaryFont lg:px-28 px-10 2xl:text-10xl xl:text-9xl lg:text-8xl text-7xl text-center">
             {title}
           </div>
         </div>
