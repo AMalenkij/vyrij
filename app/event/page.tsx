@@ -47,21 +47,23 @@ export default async function Event() {
     <>
       <LenisProvider>
         {dataEvents?.map((item) => (
-          <section key={`major-${item.year}`}>
-            <MajorCard year={item.year} title={item.title}>
-              <Image
-                alt={`photo ${item.title}`}
-                fill
-                src={item.photos}
-                className="object-cover brightness-75 contrast-125"
-              />
-            </MajorCard>
-            {item?.eventsWithMedia?.map((elm) => (
-              <AnimatedContainer key={`minor-${item.year}${elm.month}${elm.day}`}>
-                <MinorCard eventsWithMedia={elm} />
-              </AnimatedContainer>
-            ))}
-          </section>
+          <Suspense>
+            <section key={`major-${item.year}`}>
+              <MajorCard year={item.year} title={item.title}>
+                <Image
+                  alt={`photo ${item.title}`}
+                  fill
+                  src={item.photos}
+                  className="object-cover brightness-75 contrast-125"
+                />
+              </MajorCard>
+              {item?.eventsWithMedia?.map((elm) => (
+                <AnimatedContainer key={`minor-${item.year}${elm.month}${elm.day}`}>
+                  <MinorCard eventsWithMedia={elm} />
+                </AnimatedContainer>
+              ))}
+            </section>
+          </Suspense>
         ))}
       </LenisProvider>
 
