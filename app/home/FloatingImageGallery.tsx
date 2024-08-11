@@ -30,27 +30,22 @@ export default function FloatingImageGallery({ children, photoMain }: FloatingIm
   const initial = { x: 0, y: 0 }
   let xForce = 0
   let yForce = 0
-  const easing = 0.009 // Adjust the easing value for smoother animation
+  const easing = 0.1 // Reduced easing for smoother motion
 
   const animate = () => {
     planes.forEach(({ type, control }) => {
-      let xMultiplier; let
-        yMultiplier
-
+      let multiplier
       if (type === 'plane1') {
-        xMultiplier = 1
-        yMultiplier = 1
+        multiplier = 1
       } else if (type === 'plane2') {
-        xMultiplier = 0.5
-        yMultiplier = 0.5
+        multiplier = 0.5
       } else {
-        xMultiplier = 0.25
-        yMultiplier = 0.25
+        multiplier = 0.25
       }
-
       control.start({
-        x: xForce * xMultiplier,
-        y: yForce * yMultiplier,
+        x: xForce * multiplier,
+        y: yForce * multiplier,
+        transition: { type: 'spring', stiffness: 50, damping: 30 },
       })
     })
   }
@@ -60,25 +55,17 @@ export default function FloatingImageGallery({ children, photoMain }: FloatingIm
     xForce += movementX * easing
     yForce += movementY * easing
 
-    // Request an animation frame to smooth out the animation
     requestAnimationFrame(animate)
   }
 
   useEffect(() => {
-    // Initialize animation on mount
     animate()
-  }, [])
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setStartAnimation(true)
-    }, 2000)
-
+    const timeoutId = setTimeout(() => setStartAnimation(true), 2000)
     return () => clearTimeout(timeoutId)
   }, [])
 
   return (
-    <div onMouseMove={manageMouseMove} className="hidden lg:block relative h-screen w-screen">
+    <div onMouseMove={manageMouseMove} className="hidden lg:block relative h-screen w-screen overflow-hidden">
       {planes.map(({ type, ref, control }) => (
         <motion.div
           key={type}
@@ -94,16 +81,38 @@ export default function FloatingImageGallery({ children, photoMain }: FloatingIm
                 key={image.id}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: index * 1.5, duration: 5, ease: [0, 0.31, 0.2, 1.01] }}
-                className={`w-[${image.width}px] h-[${image.width}px]`}
+                transition={{
+                  delay: index * 1,
+                  duration: 1.5,
+                  ease: [0, 0.71, 0.2, 1.01],
+                  scale: {
+                    type: 'spring',
+                    damping: 5,
+                    stiffness: 100,
+                    restDelta: 0.01,
+                  },
+                }}
+                style={{
+                  position: 'absolute',
+                  left: `${image.style.left}`,
+                  top: `${image.style.top}`,
+                  width: `${image.width}px`,
+                  height: 'auto', // Allow height to adjust automatically
+                }}
               >
                 <Image
                   src={image.src}
                   alt={`Image ${image.id}`}
                   width={image.width}
-                  height={image.width}
-                  style={image.style}
-                  className="absolute"
+                  height={0}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    maxHeight: '100%',
+                    objectFit: 'contain',
+                  }}
+                  className="shadow-lg"
                 />
               </motion.div>
             ))}

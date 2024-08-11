@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import imgHero from '@/public/img/heroMobile.jpg'
 import {
-  QUOTE_TEXT_NEXT, QUOTE_TEXT, AUTOR, EXPLORE,
+  QUOTE_TEXT_NEXT, QUOTE_TEXT, AUTOR, EXPLORE, TIMELINE_ROUTE,
 } from '@/constants/settings'
 import Compass from '@/public/svg/Compass'
 
@@ -20,7 +20,12 @@ export default function Mobile() {
       <p className="text-3xl xs:text-5xl pb-3 text-end pt-5 px-3">{QUOTE_TEXT}</p>
       <p className="text-3xl xs:text-5xl pb-3 underline decoration-border text-end px-3">{QUOTE_TEXT_NEXT}</p>
       <p className="text-xl text-end px-3">{AUTOR}</p>
-      <Link className="text-lg xs:text-xl text-center pb-12 absolute bottom-0 inset-x-0 flex items-center justify-center gap-2" href="/timeline" type="button" prefetch>
+      <Link
+        href={TIMELINE_ROUTE}
+        type="button"
+        prefetch
+        className="text-xl xs:text-2xl text-center pb-12 absolute bottom-0 inset-x-0 flex items-center justify-center gap-2 font-secondaryFont"
+      >
         {EXPLORE}
         <Compass />
       </Link>
