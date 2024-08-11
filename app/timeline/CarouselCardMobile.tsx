@@ -30,7 +30,7 @@ export default function CarouselCardMobile({
       <CarouselContent className="w-[350px]">
         {data.map((item) => (
           <CarouselItem key={`carousel ${item.year}`}>
-            <Card className="w-72 xs:w-[318px]">
+            <Card className="w-72 xs:w-[318px] p-2">
               <CardContent className="p-0">
                 <Link href={EVENTS_HASH_ENDPOINT + item.year} prefetch>
                   <div className="relative h-40 xs:h-64">
@@ -42,7 +42,7 @@ export default function CarouselCardMobile({
                     />
                   </div>
                   <CardFooter>
-                    <p className="text-2xl text-start mb-4 mt-10">{item.title}</p>
+                    <p className="text-2xl text-start mt-4">{item.title}</p>
                   </CardFooter>
                 </Link>
               </CardContent>
@@ -52,7 +52,6 @@ export default function CarouselCardMobile({
               <CarouselNext />
             </div>
             <VerticalTimelineLine year={item.year} />
-
           </CarouselItem>
         ))}
       </CarouselContent>
