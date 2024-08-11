@@ -11,16 +11,14 @@ interface PhotosType {
 export default async function Gallery() {
   const photos:PhotosType[] = await getData('photos', ['photo_id', 'href'])
   return (
-    <div className="mt-24">
+    <>
       <Title>
         {GALLERY}
       </Title>
       <div className="
       mx-auto
       max-w-2xl
-      py-12
       px-4
-      sm:py-14
       sm:px-6
       lg:max-w-7xl
       lg:px-8 grid
@@ -36,6 +34,6 @@ export default async function Gallery() {
           <BlurImage key={photo.photo_id} image={photo} />
         ))}
       </div>
-    </div>
+    </>
   )
 }
