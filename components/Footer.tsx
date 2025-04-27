@@ -1,8 +1,6 @@
 /* eslint-disable max-len */
 import Link from 'next/link'
-import {
-  HERO_TEXT_END, SOCIAL_MEDIA, DESIGNER_NAME, RIGHTS_RESERVED, DESIGN_TEXT, DESIGNER_URL,
-} from '@/constants/settings'
+import { SOCIAL_MEDIA, DESIGNER_URL } from '@/constants/settings'
 
 function SocialLink({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
   return (
@@ -16,12 +14,22 @@ function SocialLink({ href, label, children }: { href: string; label: string; ch
   )
 }
 
-export default function Footer() {
+export default function Footer({
+  heroSubtitle,
+  designerName,
+  copyrightNotice,
+  designCreditText,
+} : {
+  heroSubtitle:string,
+  designerName:string,
+  copyrightNotice:string,
+  designCreditText:string
+}) {
   const currentYear = new Date().getFullYear()
 
   return (
     <footer className="mt-20">
-      <div className="text-center text-4xl p-2 mb-8">{HERO_TEXT_END}</div>
+      <div className="text-center text-4xl p-2 mb-8">{heroSubtitle}</div>
       <div className="w-full h-1 container bg-border" />
       <div className="container mx-auto px-4">
         <div className="flex justify-between space-x-10 py-10 ">
@@ -43,12 +51,12 @@ export default function Footer() {
             {' '}
             Vyrij.
             {' '}
-            {RIGHTS_RESERVED}
+            {copyrightNotice}
           </div>
           <div className="mt-2 sm:mt-0">
-            {DESIGN_TEXT}
+            {designCreditText}
             {' '}
-            <Link href={DESIGNER_URL} className="hover:underline">{DESIGNER_NAME}</Link>
+            <Link href={DESIGNER_URL} className="hover:underline">{designerName}</Link>
           </div>
         </div>
       </div>

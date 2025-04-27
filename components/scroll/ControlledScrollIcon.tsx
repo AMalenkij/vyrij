@@ -1,18 +1,13 @@
 'use client'
 
-import { twMerge } from 'tailwind-merge'
 import { motion, useScroll } from 'framer-motion'
 
-import { SCROLL } from '@/constants/settings'
-
-export default function ControlledScrollIcon({ scrollCallback, className }
-: { scrollCallback?: () => void, className?: string }) {
+export default function ControlledScrollIcon({ title }
+: { title:string
+}) {
   const { scrollYProgress } = useScroll()
-  if (typeof scrollCallback === 'function') {
-    scrollCallback()
-  }
   return (
-    <div className={twMerge('mouse w-10 mt-4', className)}>
+    <div className="mouse w-10 mt-4">
       <div className="frame w-full absolute z-[1]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +45,7 @@ export default function ControlledScrollIcon({ scrollCallback, className }
         </svg>
       </div>
       <div className="ball absolute w-2 h-2 bg-primary m-auto inset-0 rounded-full" />
-      <p className="animate-text text-sm  absolute left-1/2 sm:top-28 top-20 ml-[6px] lg:tracking-[6px] tracking-[4px]">{SCROLL}</p>
+      <p className="animate-text text-sm  absolute left-1/2 sm:top-28 top-20 ml-[6px] lg:tracking-[6px] tracking-[4px]">{title}</p>
     </div>
   )
 }

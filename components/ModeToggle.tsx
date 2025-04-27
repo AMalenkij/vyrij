@@ -1,9 +1,7 @@
 'use client'
 
-import * as React from 'react'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import { twMerge } from 'tailwind-merge'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -12,20 +10,22 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { LIGHT, DARK, SYSTEM } from '@/constants/settings'
 
-export default function ModeToggle({ className }: { className?: string | null }) {
+export default function ModeToggle({
+  lightLabel,
+  darkLabel,
+  systemLabel,
+}: {
+  lightLabel: string;
+  darkLabel: string;
+  systemLabel: string;
+}) {
   const { setTheme } = useTheme()
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          className={twMerge(
-            `
-        `,
-            className,
-          )}
           variant="outline"
           size="icon"
         >
@@ -36,13 +36,13 @@ export default function ModeToggle({ className }: { className?: string | null })
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme('light')}>
-          {LIGHT}
+          {lightLabel}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('dark')}>
-          {DARK}
+          {darkLabel}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('system')}>
-          {SYSTEM}
+          {systemLabel}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -29,7 +29,7 @@ export default function CarouselCardMobile({
     <Carousel className="w-full mx-auto  max-w-xs">
       <CarouselContent className="w-[350px]">
         {data.map((item) => (
-          <CarouselItem key={`carousel ${item.year}`}>
+          <CarouselItem key={`carousel-${item.year}`}>
             <Card className="w-72 xs:w-[318px] p-2">
               <CardContent className="p-0">
                 <Link href={EVENTS_HASH_ENDPOINT + item.year} prefetch>

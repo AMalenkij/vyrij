@@ -1,0 +1,38 @@
+{
+     "GalleryPage" :{
+          "title": "Gallery"
+     },
+     "ConcertsPage" :{
+          "title": "Concerts",
+          "futures": "Futures",
+         "past":  "Past"
+     },
+     "TimelinePage" : {
+          "title" :"Choose a year",
+          "scrollTitle" : "scroll"
+     },
+     "HomePage" :{
+          "explore": "Explore",
+          "heroDescription" : "April 2022. Katowice. Final preparations before the performance: in a minute, the choir will be performing on the stage of the Polish National Radio Symphony Orchestra Concert Hall.",
+          "heroSubtitle" : "This is our story.",
+          "choirName" : "Chor",
+          "quoteStart" : "A person supposedly cannot fly...",
+          "quoteEnd" : "But they have wings!",
+          "author":  "L. Kostenko"
+     },
+     "EventPage" : {
+          "heroSubtitle" : "This is our story.",
+          "designerName" : "Anton Malenkyi",
+          "copyrightNotice" : "All rights reserved.",
+          "designCreditText" : "Design by:"
+     },
+     "Header" : {
+          "Chor" : "chor",
+          "ModeToggle":{
+               "lightLabel": "Light",
+               "darkLabel": "Dark",
+               "systemLabel": "System"
+          } 
+
+     }
+}

@@ -1,8 +1,9 @@
+import { getTranslations } from 'next-intl/server'
+
 import type { MajorEvents, Media, Events } from '@/types/supabase'
 import getData from '@/actions/getData'
 import { getMajorEvents } from '@/utils/combineEventData'
 import ControlledScrollIcon from '@/components/scroll/ControlledScrollIcon'
-import { CHOOSE_A_YEAR } from '@/constants/settings'
 import Title from '@/components/Title'
 import LenisProvider from '@/providers/LenisProvider'
 import WithTimeLineAnimation from './withTimeLineAnimation'
@@ -11,6 +12,8 @@ import Card from './Card'
 import CarouselCardMobile from './CarouselCardMobile'
 
 export default async function TimeLine() {
+  const t = await getTranslations('TimelinePage')
+
   const [majorEvents, events, photos] = await Promise.all([
     getData(
       'events',
@@ -35,7 +38,7 @@ export default async function TimeLine() {
   return (
     <>
       <div className="block lg:hidden">
-        <Title>{CHOOSE_A_YEAR}</Title>
+        <Title>{t('title')}</Title>
         <CarouselCardMobile data={data} />
       </div>
 
@@ -44,8 +47,8 @@ export default async function TimeLine() {
           <WithTimeLineAnimation
             title={(
               <>
-                <Title>{CHOOSE_A_YEAR}</Title>
-                <ControlledScrollIcon />
+                <Title>{t('title')}</Title>
+                <ControlledScrollIcon title={t('scrollTitle')} />
               </>
     )}
             timelineContent={

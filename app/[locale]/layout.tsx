@@ -1,6 +1,9 @@
 import { Poiret_One, Great_Vibes } from 'next/font/google'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages, getTranslations } from 'next-intl/server'
 
 import type { Metadata } from 'next'
+
 import './globals.css'
 import MenuAnimationControl from '@/components/header/MenuAnimationControl'
 import NavMenu from '@/components/header/NavMenu'
@@ -9,7 +12,6 @@ import Logo from '@/components/Logo'
 import SVGLogoVyrij from '@/public/svg/LogoVyrij'
 import ThemeProvider from '@/providers/ThemeProvider'
 import ModeToggle from '@/components/ModeToggle'
-import { CHOR } from '@/constants/settings'
 
 const secondaryFont = Great_Vibes({
   subsets: ['latin'],
@@ -27,9 +29,18 @@ export const metadata: Metadata = {
   description: 'choir Vyrij',
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function LocaleLayout({
+  children,
+  params: { locale },
+}: {
+  children: React.ReactNode;
+  params: { locale: string };
+}) {
+  const messages = await getMessages()
+  const t = await getTranslations('Header')
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={`${mainFont.variable} ${secondaryFont.variable} font-mainFont tracking-wider`}>
         <ThemeProvider
           attribute="class"
@@ -37,8 +48,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
-          <MenuAnimationControl isOpen>
-            <nav className="
+          <NextIntlClientProvider messages={messages}>
+            <MenuAnimationControl isOpen>
+              <nav className="
             fixed
             top-0
             left-0
@@ -51,8 +63,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             lg:p-10
             z-50
             mix-blend-difference"
-            >
-              <Logo className="
+              >
+                <Logo className="
           flex
           items-center
           gap-2
@@ -66,18 +78,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           text-static_white
           whitespace-nowrap
           "
-              >
-                {`${CHOR} | `}
-                <SVGLogoVyrij />
-              </Logo>
-              <NavMenuToggle />
-              <ModeToggle className="" />
-            </nav>
-            {children}
-          </MenuAnimationControl>
-          <MenuAnimationControl isOpen={false}>
-            <NavMenu />
-          </MenuAnimationControl>
+                >
+                  {`${t('Chor')} | `}
+                  <SVGLogoVyrij />
+                </Logo>
+                <NavMenuToggle />
+                <ModeToggle
+                  lightLabel={t('ModeToggle.lightLabel')}
+                  darkLabel={t('ModeToggle.darkLabel')}
+                  systemLabel={t('ModeToggle.systemLabel')}
+                />
+              </nav>
+              {children}
+            </MenuAnimationControl>
+            <MenuAnimationControl isOpen={false}>
+              <NavMenu />
+            </MenuAnimationControl>
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>

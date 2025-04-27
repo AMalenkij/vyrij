@@ -1,6 +1,9 @@
+import { getTranslations } from 'next-intl/server'
+
+import type { Concerts as ConcertsType } from '@/types/supabase'
+
 import ConcertCard from '@/components/ConcertCard'
 import splitTimestamp from '@/utils/splitTimestamp'
-import { CONCERTS, PAST, FUTURES } from '@/constants/settings'
 import getData from '@/actions/getData'
 import {
   Accordion,
@@ -9,9 +12,10 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import Title from '@/components/Title'
-import { type Concerts as ConcertsType } from '@/types/supabase'
 
 export default async function Concerts() {
+  const t = await getTranslations('ConcertsPage')
+
   const today = new Date().toISOString().split('T')[0] // Get today's date in 'YYYY-MM-DD' format
   const concertsDataFuture:ConcertsType[] = await getData(
     'concerts',
@@ -37,7 +41,7 @@ export default async function Concerts() {
   return (
     <div className="container mx-auto">
       <Title>
-        {CONCERTS}
+        {t('title')}
       </Title>
       <Accordion
         type="single"
@@ -47,7 +51,7 @@ export default async function Concerts() {
       >
         <AccordionItem value="Futures">
           <AccordionTrigger>
-            <h3 className="text-xl md:text-2xl">{FUTURES}</h3>
+            <h3 className="text-xl md:text-2xl">{t('futures')}</h3>
           </AccordionTrigger>
           <AccordionContent>
             {concertsDataFuture?.map((concert) => (
@@ -63,7 +67,7 @@ export default async function Concerts() {
         </AccordionItem>
         <AccordionItem value="Past">
           <AccordionTrigger>
-            <h3 className="text-xl md:text-2xl">{PAST}</h3>
+            <h3 className="text-xl md:text-2xl">{t('past')}</h3>
           </AccordionTrigger>
           <AccordionContent>
             {concertsDataPast?.map((concert) => (

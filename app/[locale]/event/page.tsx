@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import { getTranslations } from 'next-intl/server'
 
 import type { MajorEvents, Events, Media } from '@/types/supabase'
 import type { CombinedEventData } from '@/types/modifiedDataFromSupabase'
@@ -18,6 +19,7 @@ import AnimatedContainer from './WithViewportAnimation'
 import Scrollbar from './Scrollbar'
 
 export default async function Event() {
+  const t = await getTranslations('EventPage')
   const [majorEvents, events, photos, videoUrls] = await Promise.all([
     getData(
       'events',
@@ -51,7 +53,7 @@ export default async function Event() {
             <section key={`major-${item.year}`}>
               <MajorCard year={item.year} title={item.title}>
                 <Image
-                  alt={`photo ${item.title}`}
+                  alt={`photo-${item.title}`}
                   fill
                   src={item.photos}
                   className="object-cover brightness-75 contrast-125"
@@ -74,8 +76,13 @@ export default async function Event() {
           </Link>
           <Scrollbar MajorEventYears={MajorEventYears} />
         </nav>
+        <Footer
+          heroSubtitle={t('heroSubtitle')}
+          designerName={t('designerName')}
+          copyrightNotice={t('copyrightNotice')}
+          designCreditText={t('designCreditText')}
+        />
       </Suspense>
-      <Footer />
     </>
   )
 }
