@@ -1,0 +1,58 @@
+{
+  "vcs": {
+    "enabled": false,
+    "clientKind": "git",
+    "useIgnoreFile": false
+  },
+  "files": {
+    "ignoreUnknown": false
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "tab"
+  },
+
+  "linter": {
+    "enabled": true,
+    "domains": {
+      "next": "recommended"
+    },
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUnusedVariables": "error",
+        "useExhaustiveDependencies": "error"
+      },
+      "complexity": {
+        "noForEach": "off"
+      },
+      "a11y": {
+        "noSvgWithoutTitle": "warn"
+      },
+      "suspicious": {
+        "noConsole": "warn"
+      },
+      "style": {
+        "noNonNullAssertion": "error"
+      },
+      "performance": {
+        "noDelete": "error"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "error",
+          "fix": "safe",
+          "options": {}
+        }
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "enabled": true,
+      "lineWidth": 130,
+      "semicolons": "asNeeded"
+    }
+  }
+}
