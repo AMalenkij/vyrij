@@ -7,7 +7,7 @@ import React, { ReactNode, useCallback, useEffect, useRef } from "react";
 import { EVENTS_YEAR_QUERY_ENDPOINT, YEAR } from "@/constants/app-content";
 
 type MajorCardProps = {
-  year: number;
+  year: string;
   title: string;
   children: ReactNode;
 };
