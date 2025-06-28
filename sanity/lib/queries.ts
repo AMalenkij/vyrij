@@ -43,7 +43,7 @@ export const majorEventsQuery = defineQuery(`
   *[_type == "events" && references(*[_type == "tag" && name == "major"]._id)] | order(date asc) {
     _id,
     title,
-     date,
+    date,
      "media": media[]->{
        imageFile
      }
