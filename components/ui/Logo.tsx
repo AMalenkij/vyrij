@@ -6,10 +6,10 @@ export default function Logo() {
   return (
     <Link
       href={HOME_ROUTE}
-      className="flex items-center"
+      className="flex items-center gap-2"
       // className="rochester-regular flex h-10 w-28 shrink-0 items-center gap-2 whitespace-nowrap text-static_white text-xl lg:w-44 xl:text-3xl"
     >
-      <span className="text-5xl">Chor |</span>
+      <span className="text-5xl">Chor </span>
       <LogoIcon />
     </Link>
   );
