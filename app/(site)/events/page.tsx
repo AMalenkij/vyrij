@@ -1,45 +1,5 @@
-import Image from "next/image";
-import { sanityFetch } from "@/sanity/lib/live";
-import { majorEventsQuery } from "@/sanity/lib/queries";
-import { minorEventsQuery } from "@/sanity/lib/queries";
-import MajorCard from "@/components/MajorCard";
-import MinorCard from "@/components/MinorCard";
-import AnimatedContainer from "@/components/WithViewportAnimation";
-import { groupEventsByYear } from "@/utils/groupEventsByYear";
+import EventsTimeline from "@/components/EventsTimeline";
 
-export default async function Event() {
-  const { data: majorEvents } = await sanityFetch({
-    query: majorEventsQuery,
-  });
-  const { data: minorEvents } = await sanityFetch({
-    query: minorEventsQuery,
-  });
-  const eventData = groupEventsByYear(majorEvents, minorEvents);
-
-  return (
-    <div className="mt-24">
-      {eventData?.map((event) => {
-        return (
-          <section key={event.id}>
-            <MajorCard year={event.date} title={event.title}>
-              {event.photoUrl && (
-                <Image
-                  alt={`photo ${event.title}`}
-                  fill
-                  src={event.photoUrl}
-                  className="h-full w-full object-cover brightness-75 contrast-125"
-                />
-              )}
-            </MajorCard>
-            {/* Рендерим каждое минорное событие отдельно */}
-            {event.minorEvents?.map((minorEvent) => (
-              <AnimatedContainer key={minorEvent.id}>
-                <MinorCard eventsWithMedia={minorEvent} />
-              </AnimatedContainer>
-            ))}
-          </section>
-        );
-      })}
-    </div>
-  );
+export default async function Events() {
+  return <EventsTimeline />;
 }
