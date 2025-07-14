@@ -4,13 +4,11 @@ import { HOME_ROUTE } from "@/constants/routes";
 
 export default function Logo() {
   return (
-    <Link
-      href={HOME_ROUTE}
-      className="flex items-center gap-2"
-      // className="rochester-regular flex h-10 w-28 shrink-0 items-center gap-2 whitespace-nowrap text-static_white text-xl lg:w-44 xl:text-3xl"
-    >
-      <span className="text-5xl">Chor </span>
-      <LogoIcon />
+    <Link href={HOME_ROUTE} className="flex items-center gap-2">
+      <span className="text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+        Chor
+      </span>
+      <LogoIcon className="h-9 w-10 md:h-11 md:w-12 lg:h-12 lg:w-14 xl:h-18 xl:w-20" />
     </Link>
   );
 }
