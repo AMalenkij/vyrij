@@ -19,10 +19,6 @@ const ROUTES = [
     href: HOME_ROUTE,
   },
   {
-    label: "Хронологія",
-    href: TIMELINE_ROUTE,
-  },
-  {
     label: "Події",
     href: EVENT_ROUTE,
   },
@@ -66,7 +62,12 @@ export default function Navigation() {
         }
 
         return (
-          <Button key={route.href} asChild variant="link" className="uppercase">
+          <Button
+            key={route.href}
+            asChild
+            variant="link"
+            className="text-white uppercase"
+          >
             <Link href={route.href}>{route.label}</Link>
           </Button>
         );
