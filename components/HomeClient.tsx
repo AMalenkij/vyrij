@@ -22,7 +22,7 @@ export default function HomeClient({
     <>
       <div className="container relative mx-auto mt-96 h-[155vh]">
         {children}
-        <p className="sticky top-0 left-0 h-44 w-96 pt-40 text-start font-extralight text-xl uppercase tracking-widest">
+        <p className="sticky top-0 left-0 h-44 w-96 pt-96 pb-196 text-start font-extralight text-xl uppercase tracking-widest lg:pt-40">
           {TEXT_CONSTANTS.ABOUT_TEXT}
         </p>
         {/* Изображения галереи */}

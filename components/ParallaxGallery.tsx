@@ -78,18 +78,12 @@ export default function ParallaxGallery() {
           style={{ opacity: textOpacity }}
           className="absolute inset-0 z-10 flex items-center justify-center"
         >
-          <div className="">
-            <div
-              className="relative h-full w-full"
-              // style={{ scale: scaleProgressImg }}
-            ></div>
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <div className="mb-12 font-bold text-base text-static_white lg:text-xl 2xl:text-3xl">
-                2019
-              </div>
-              <div className="px-10 text-center font-secondaryFont text-7xl text-static_white lg:px-28 lg:text-8xl xl:text-9xl 2xl:text-10xl">
-                Основание хора
-              </div>
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="mb-12 font-bold text-base text-static_white lg:text-xl 2xl:text-3xl">
+              2019
+            </div>
+            <div className="px-10 text-center font-secondaryFont text-7xl text-static_white lg:px-28 lg:text-8xl xl:text-9xl 2xl:text-10xl">
+              Основание хора
             </div>
           </div>
         </motion.div>
