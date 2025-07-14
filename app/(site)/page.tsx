@@ -11,8 +11,12 @@ import Header from "@/components/Header";
 import ParallaxGallery from "@/components/ParallaxGallery";
 import HomeClient from "@/components/HomeClient";
 import EventsTimeline from "@/components/EventsTimeline";
+import Hero from "@/components/Hero";
+import Image from "next/image";
+import { TEXT_CONSTANTS } from "@/constants/app-content";
 
 // Конфигурация галереи изображений
+//to do: Вынести в константы
 const galleryImages = [
   {
     src: heroImg1,
@@ -67,16 +71,21 @@ const galleryImages = [
 export default function Home() {
   return (
     <>
-      <HomeClient
-        heroImg={heroImg}
-        galleryImages={galleryImages}
-        // textConstants={TEXT_CONSTANTS}
-      >
-        <Header />
-      </HomeClient>
-
+      <div className="container relative mx-auto h-full">
+        <Hero>
+          <Image
+            src={heroImg}
+            alt={TEXT_CONSTANTS.ALT_TEXTS.HERO_IMAGE}
+            width={188}
+            height={250}
+            className="absolute top-20 right-10"
+          />
+        </Hero>
+        <HomeClient galleryImages={galleryImages}>
+          <Header />
+        </HomeClient>
+      </div>
       <ParallaxGallery />
-      {/* Возможно встроить в сам EVENT */}
       <Header />
       <EventsTimeline excludeYears="2019" />
     </>
