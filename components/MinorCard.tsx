@@ -1,5 +1,6 @@
 import RenderPhoto from "@/components/RenderPhoto";
 import { PortableText } from "@portabletext/react";
+import { type PortableTextBlock } from "@portabletext/types";
 
 function MediaItem({
   photoUrl,
@@ -17,7 +18,7 @@ export default function MinorCard({
 }: {
   eventsWithMedia: {
     id: string;
-    description: string;
+    description: PortableTextBlock[];
     date: string;
     photoUrls: (string | null)[];
   };
