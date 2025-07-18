@@ -26,7 +26,6 @@ export default async function Concerts() {
     <>
       <div className="container">
         <PageHeader>{"Concerts"}</PageHeader>
-
         <Accordion
           type="single"
           className="w-full"
@@ -42,14 +41,14 @@ export default async function Concerts() {
             </AccordionTrigger>
             <AccordionContent>
               {futureData.data && futureData.data.length > 0 ? (
-                futureData.data.map((concert) => (
+                futureData.data?.map((concert) => (
                   <ConcertCard
                     key={`Future-${concert._id}`}
                     date={concert.date}
                     title={concert?.title}
-                    city={concert.location?.city}
-                    place={concert.location?.place}
-                    address={concert.location?.address}
+                    city={concert.location?.city || null}
+                    place={concert.location?.place || null}
+                    address={concert.location?.address || null}
                   />
                 ))
               ) : (
@@ -70,9 +69,9 @@ export default async function Concerts() {
                   key={`Past-${concert._id}`}
                   date={concert.date}
                   title={concert?.title}
-                  city={concert.location?.city}
-                  place={concert.location?.place}
-                  address={concert.location?.address}
+                  city={concert.location?.city || null}
+                  place={concert.location?.place || null}
+                  address={concert.location?.address || null}
                 />
               ))}
             </AccordionContent>
