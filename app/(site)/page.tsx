@@ -7,7 +7,6 @@ import heroImg8 from "@/public/img/hero8.jpg";
 import heroImg9 from "@/public/img/hero9.jpg";
 import heroImg10 from "@/public/img/hero10.jpg";
 import heroImg11 from "@/public/img/hero11.jpg";
-import Header from "@/components/Header";
 import ParallaxGallery from "@/components/ParallaxGallery";
 import HomeClient from "@/components/HomeClient";
 import EventsTimeline from "@/components/EventsTimeline";
@@ -81,12 +80,9 @@ export default function Home() {
             className="absolute top-20 right-10"
           />
         </Hero>
-        <HomeClient galleryImages={galleryImages}>
-          <Header />
-        </HomeClient>
+        <HomeClient galleryImages={galleryImages} />
       </div>
       <ParallaxGallery />
-      <Header />
       <EventsTimeline excludeYears="2019" />
     </>
   );
