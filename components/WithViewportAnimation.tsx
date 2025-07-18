@@ -1,11 +1,11 @@
 "use client";
-
 import { motion } from "framer-motion";
+import { ReactNode } from "react";
 
 export default function WithViewportAnimation({
   children,
 }: {
-  children: JSX.Element;
+  children: ReactNode;
 }) {
   return (
     <motion.div
