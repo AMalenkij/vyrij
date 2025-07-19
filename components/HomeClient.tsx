@@ -5,7 +5,7 @@ import Image from "next/image";
 import { TEXT_CONSTANTS } from "@/constants/app-content";
 
 type HomeClientProps = {
-  children: React.ReactNode;
+  // children: React.ReactNode;
   galleryImages: Array<{
     src: any;
     width: number;
@@ -16,12 +16,11 @@ type HomeClientProps = {
 
 export default function HomeClient({
   galleryImages,
-  children,
+  // children,
 }: HomeClientProps) {
   return (
     <>
       <div className="container relative mx-auto mt-96 h-[155vh]">
-        {children}
         <p className="sticky top-0 left-0 h-44 w-96 pt-96 pb-196 text-start font-extralight text-xl uppercase tracking-widest lg:pt-40">
           {TEXT_CONSTANTS.ABOUT_TEXT}
         </p>
