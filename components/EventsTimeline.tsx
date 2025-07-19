@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Image from "next/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { majorEventsQuery } from "@/sanity/lib/queries";
@@ -27,16 +28,18 @@ export default async function EventsTimeline({
         return (
           <section key={event.id}>
             {event.date !== excludeYears && (
-              <MajorCard year={event.date} title={event.title}>
-                {event.photoUrl && (
-                  <Image
-                    alt={`photo ${event.title}`}
-                    fill
-                    src={event.photoUrl}
-                    className="h-full w-full object-cover brightness-75 contrast-125"
-                  />
-                )}
-              </MajorCard>
+              <Suspense fallback={<div>Загрузка...</div>}>
+                <MajorCard year={event.date} title={event.title}>
+                  {event.photoUrl && (
+                    <Image
+                      alt={`photo ${event.title}`}
+                      fill
+                      src={event.photoUrl}
+                      className="h-full w-full object-cover brightness-75 contrast-125"
+                    />
+                  )}
+                </MajorCard>
+              </Suspense>
             )}
             {/* Рендерим каждое минорное событие отдельно */}
             {event.minorEvents?.map((minorEvent) => (
