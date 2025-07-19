@@ -74,7 +74,7 @@ export function GalleryModal({
       onOpenChange={(open) => !open && router.push("/gallery")}
     >
       <DialogTitle className="sr-only">Photo</DialogTitle>
-      <DialogContent className="border-0 bg-black/30 p-2 [&_button_svg]:h-10 [&_button_svg]:w-10 w-[1200px] ">
+      <DialogContent className="w-[1200px] border-0 bg-black/30 p-2 [&_button_svg]:h-10 [&_button_svg]:w-10 ">
         {/* Основная карусель */}
         <Carousel setApi={setMainApi} opts={{ startIndex: initialIndex }}>
           <CarouselContent className="">
@@ -83,7 +83,7 @@ export function GalleryModal({
                 <div className="relative flex aspect-[3/2] items-center justify-center">
                   <Image
                     fill
-                    src={image.imageUrl}
+                    src={image?.imageUrl || ""}
                     alt="Gallery image"
                     className="object-contain"
                     sizes="(max-width: 768px) 100vw, 80vw"
@@ -149,7 +149,7 @@ export function GalleryModal({
           }}
         >
           <CarouselContent className="absolute">
-            {images.map((image, index) => (
+            {images?.map((image, index) => (
               <CarouselItem key={image._id} className="basis-1/6">
                 <button
                   type="button" // Добавлен явный тип
@@ -163,7 +163,7 @@ export function GalleryModal({
                   <Image
                     width="140"
                     height="80"
-                    src={image.imageUrl}
+                    src={image.imageUrl || ""}
                     alt={`Thumbnail ${index + 1}`}
                     className="object-cover"
                   />
