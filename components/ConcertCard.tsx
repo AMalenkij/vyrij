@@ -1,7 +1,7 @@
 import splitTimestamp from "@/utils/splitTimestamp";
 
 type ConcertType = {
-  date: string;
+  date: string | null;
   title: string | null;
   city: string | null;
   place: string | null;
@@ -15,6 +15,7 @@ export default function ConcertCard({
   place,
   address,
 }: ConcertType) {
+  if (!date) return null;
   const { date: day, month, year, time } = splitTimestamp(date);
 
   return (
