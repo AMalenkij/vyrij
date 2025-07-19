@@ -24,7 +24,7 @@ export default async function Concerts() {
 
   return (
     <>
-      <div className="container">
+      <div className="container mx-auto">
         <PageHeader>{"Concerts"}</PageHeader>
         <Accordion
           type="single"
