@@ -2,22 +2,9 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { TEXT_CONSTANTS } from "@/constants/app-content";
+import { TEXT_CONSTANTS, GALLERY_IMAGES } from "@/constants/app-content";
 
-type HomeClientProps = {
-  // children: React.ReactNode;
-  galleryImages: Array<{
-    src: any;
-    width: number;
-    height: number;
-    className: string;
-  }>;
-};
-
-export default function HomeClient({
-  galleryImages,
-  // children,
-}: HomeClientProps) {
+export default function HomeClient() {
   return (
     <>
       <div className="container relative mx-auto mt-96 h-[155vh]">
@@ -25,7 +12,7 @@ export default function HomeClient({
           {TEXT_CONSTANTS.ABOUT_TEXT}
         </p>
         {/* Изображения галереи */}
-        {galleryImages.map((image, index) => (
+        {GALLERY_IMAGES.map((image, index) => (
           //to do: motion надо будет выснести в отдельный компонент
           <motion.div
             key={index}
