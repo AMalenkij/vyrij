@@ -1,15 +1,14 @@
 "use client";
 import { useScroll, useTransform, motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-// import InteractiveList from "./InteractiveList";
+import { useRef } from "react";
 import Image from "next/image";
 
-import gallery1 from "@/public/img/gallary1.jpg";
-import gallery2 from "@/public/img/gallary2.jpg";
-import gallery3 from "@/public/img/gallary3.jpg";
-import gallery4 from "@/public/img/gallary4.jpg";
-import gallery5 from "@/public/img/gallary5.jpg";
-import gallery7 from "@/public/img/gallary7.jpg";
+import gallery1 from "@/public/img/gallary1.webp";
+import gallery2 from "@/public/img/gallary2.webp";
+import gallery3 from "@/public/img/gallary3.webp";
+import gallery4 from "@/public/img/gallary4.webp";
+import gallery5 from "@/public/img/gallary5.webp";
+import gallery7 from "@/public/img/gallary7.webp";
 import galleryHero from "@/public/img/gallaryHero.webp";
 
 export default function ParallaxGallery() {
@@ -29,7 +28,7 @@ export default function ParallaxGallery() {
   // Изменяем логику появления текста - он появляется только в самом конце
   const textOpacity = useTransform(scrollYProgress, [0.9, 1], [0, 1]);
 
-  const pictures = [
+  let pictures = [
     {
       src: galleryHero,
       scale: scale4,
