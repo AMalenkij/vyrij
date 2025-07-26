@@ -1,5 +1,5 @@
 import ConcertCard from "@/components/ConcertCard";
-import PageHeader from "@/components/PageHeader";
+import SubHeader from "@/components/SubHeader";
 import {
   Accordion,
   AccordionContent,
@@ -14,6 +14,14 @@ import {
   pastEventsQuery,
 } from "@/sanity/lib/queries";
 
+const texts = {
+  title: "Concerts",
+  sectionName: "Наши концерты",
+  futures: "Futures",
+  past: "Past",
+  noConcerts: "noConcerts",
+};
+
 export default async function Concerts() {
   const [futureData, pastData, futureCount, pastCount] = await Promise.all([
     sanityFetch({ query: futureEventsQuery }),
@@ -21,11 +29,16 @@ export default async function Concerts() {
     sanityFetch({ query: futureEventsCountQuery }),
     sanityFetch({ query: pastEventsCountQuery }),
   ]);
+  let allCount = futureCount.data + pastCount.data;
 
   return (
     <>
       <div className="container mx-auto">
-        <PageHeader>{"Concerts"}</PageHeader>
+        <SubHeader
+          title={texts.title}
+          counter={allCount}
+          sectionName={texts.sectionName}
+        />
         <Accordion
           type="single"
           className="w-full"
@@ -35,8 +48,8 @@ export default async function Concerts() {
           <AccordionItem value="Futures">
             <AccordionTrigger>
               <div className="flex gap-x-1">
-                <h3 className="text-xl md:text-2xl ">{"Futures"}</h3>
-                <h2 className="font-light text-sm md:text-sm">{`[${futureCount.data}]`}</h2>
+                <p className="font-light text-sm md:text-sm">{`[${futureCount.data}]`}</p>
+                <h3 className="text-xl md:text-2xl ">{texts.futures}</h3>
               </div>
             </AccordionTrigger>
             <AccordionContent>
@@ -52,15 +65,15 @@ export default async function Concerts() {
                   />
                 ))
               ) : (
-                <p className="ml-3 text-lg">{"noConcerts"}</p>
+                <p className="ml-3 text-lg">{texts.noConcerts}</p>
               )}
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="Past">
             <AccordionTrigger>
               <div className="flex gap-x-1">
-                <h3 className="text-xl md:text-2xl ">{"Past"}</h3>
-                <h2 className="font-light text-sm md:text-sm">{`[${pastCount.data}]`}</h2>
+                <p className="font-light text-sm md:text-sm">{`[${pastCount.data}]`}</p>
+                <h3 className="text-xl md:text-2xl ">{texts.past}</h3>
               </div>
             </AccordionTrigger>
             <AccordionContent>
