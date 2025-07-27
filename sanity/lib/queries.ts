@@ -13,7 +13,7 @@ export const futureEventsQuery =
   }`);
 
 export const pastEventsQuery =
-  defineQuery(`*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()] {
+  defineQuery(`*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()] | order(date desc) {
     _id,
     title,
     date,
