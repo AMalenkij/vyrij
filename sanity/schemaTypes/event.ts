@@ -34,6 +34,7 @@ export const events = defineType({
       options: {
         dateFormat: "YYYY-MM-DD",
       },
+      validation: (Rule) => Rule.required(), // Валидатор
     },
     defineField({
       name: "time",
@@ -42,10 +43,9 @@ export const events = defineType({
       description: "Введите время в формате HH:mm, например, 14:30",
       placeholder: "HH:mm",
       validation: (Rule) =>
-        Rule.regex(/^([01]\d|2[0-3]):[0-5]\d$/, {
-          message:
-            "Пожалуйста, введите действительное время в формате HH:mm (00:00 до 23:59)",
-        }),
+        Rule.regex(/^([01]\d|2[0-3]):[0-5]\d$/).error(
+          "Пожалуйста, введите действительное время в формате HH:mm (00:00 до 23:59)",
+        ),
     }),
     defineField({
       name: "location",
@@ -69,4 +69,21 @@ export const events = defineType({
       validation: (Rule) => Rule.required(), // Валидатор
     }),
   ],
+  // Конфигурация превью для Studio
+  preview: {
+    select: {
+      title: "title",
+      tag0: "tags.0.name",
+      tag1: "tags.1.name",
+      tag2: "tags.2.name",
+    },
+    prepare({ title, tag0, tag1, tag2 }) {
+      const tags = [tag0, tag1, tag2].filter(Boolean);
+      return {
+        title: title,
+        subtitle:
+          tags.length > 0 ? tags.join(", ") + (tag2 ? "" : "...") : "Нет тегов",
+      };
+    },
+  },
 });

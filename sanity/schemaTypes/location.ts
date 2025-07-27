@@ -1,8 +1,8 @@
 import { defineType, defineField } from "sanity";
 
 export const location = defineType({
-  name: "location", // имя схемы (лучше не использовать "events", если это именно Location)
-  title: "Location", // заголовок схемы в Sanity Studio
+  name: "location",
+  title: "Location",
   type: "document",
   fields: [
     defineField({
@@ -15,13 +15,6 @@ export const location = defineType({
     defineField({
       name: "address",
       title: "Адрес",
-      type: "string",
-      validation: (Rule) => Rule.required(),
-    }),
-
-    defineField({
-      name: "city",
-      title: "Город",
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
