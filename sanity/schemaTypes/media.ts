@@ -12,14 +12,6 @@ export const media = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "mediaFile",
-      title: "Photo",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
       name: "type",
       title: "Media Type",
       type: "string",
