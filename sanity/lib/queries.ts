@@ -58,7 +58,10 @@ export const minorEventsQuery = defineQuery(`
     description,
     "media": media[]->{
       _id,
-      imageFile
+      imageFile,
+      videoUrl,
+      videoFile,
+      externalUrl
     }
   }
 `);
