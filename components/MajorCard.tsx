@@ -52,7 +52,7 @@ export default function MajorCard({ year, title, children }: MajorCardProps) {
           <div className="mb-12 font-bold text-base text-static_white lg:text-xl 2xl:text-3xl">
             {year}
           </div>
-          <div className="px-10 text-center font-secondaryFont text-7xl text-static_white lg:px-28 lg:text-8xl xl:text-9xl 2xl:text-10xl">
+          <div className="px-10 text-center font-accent text-7xl text-static_white lg:px-28 lg:text-8xl xl:text-9xl 2xl:text-10xl">
             {title}
           </div>
         </div>
