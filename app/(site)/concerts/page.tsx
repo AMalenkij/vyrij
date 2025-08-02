@@ -33,7 +33,7 @@ export default async function Concerts() {
 
   return (
     <>
-      <div className="container mx-auto">
+      <div className="container mx-auto min-h-screen">
         <SubHeader
           title={texts.title}
           counter={allCount}
@@ -48,18 +48,22 @@ export default async function Concerts() {
           <AccordionItem value="Futures">
             <AccordionTrigger>
               <div className="flex gap-x-1">
-                <p className="font-light text-sm md:text-sm">{`[${futureCount.data}]`}</p>
+                <p className="font-light text-sm md:text-sm">
+                  {"{ "}
+                  {futureCount.data}
+                  {" }"}
+                </p>
                 <h3 className="text-xl md:text-2xl ">{texts.futures}</h3>
               </div>
             </AccordionTrigger>
             <AccordionContent>
               {futureData.data && futureData.data.length > 0 ? (
-                futureData.data?.map((concert) => (
+                futureData.data?.map((concert, index) => (
                   <ConcertCard
                     key={`Future-${concert._id}`}
+                    index={index}
                     date={concert.date}
                     title={concert?.title}
-                    city={concert.location?.city || null}
                     place={concert.location?.place || null}
                     address={concert.location?.address || null}
                   />
@@ -72,17 +76,21 @@ export default async function Concerts() {
           <AccordionItem value="Past">
             <AccordionTrigger>
               <div className="flex gap-x-1">
-                <p className="font-light text-sm md:text-sm">{`[${pastCount.data}]`}</p>
+                <p className="font-light text-sm md:text-sm">
+                  {"{ "}
+                  {pastCount.data}
+                  {" }"}
+                </p>
                 <h3 className="text-xl md:text-2xl ">{texts.past}</h3>
               </div>
             </AccordionTrigger>
             <AccordionContent>
-              {pastData.data?.map((concert) => (
+              {pastData.data?.map((concert, index) => (
                 <ConcertCard
                   key={`Past-${concert._id}`}
+                  index={index}
                   date={concert.date}
                   title={concert?.title}
-                  city={concert.location?.city || null}
                   place={concert.location?.place || null}
                   address={concert.location?.address || null}
                 />
