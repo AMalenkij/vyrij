@@ -13,15 +13,15 @@ import {
 import Image from "next/image";
 // import { ClientCldImage } from "./clientCldImage";
 import { useRouter } from "next/navigation";
-import { ExternalLink, ImageDown } from "lucide-react";
-import { Button } from "./ui/button";
+// import { ExternalLink, ImageDown } from "lucide-react";
+// import { Button } from "./ui/button";
 // import downloadPhoto from "@/utils/downloadPhoto";
 
 export function GalleryModal({
   images,
   photoId,
 }: {
-  images: Array<{ _id: string; imageUrl: string }>;
+  images: Array<{ _id: string; imageUrl: string | null }>;
   photoId?: string;
 }) {
   const router = useRouter();
@@ -81,13 +81,19 @@ export function GalleryModal({
             {images.map((image) => (
               <CarouselItem key={image._id} className="">
                 <div className="relative flex aspect-[3/2] items-center justify-center">
-                  <Image
-                    fill
-                    src={image?.imageUrl || ""}
-                    alt="Gallery image"
-                    className="object-contain"
-                    sizes="(max-width: 768px) 100vw, 80vw"
-                  />
+                  {image.imageUrl ? (
+                    <Image
+                      fill
+                      src={image.imageUrl}
+                      alt="Gallery image"
+                      className="object-contain"
+                      sizes="(max-width: 768px) 100vw, 80vw"
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-zinc-800 text-sm text-white">
+                      Нет изображения
+                    </div>
+                  )}
                 </div>
                 {/* Main image */}
                 {/* <div className="w-full overflow-hidden">
@@ -160,13 +166,19 @@ export function GalleryModal({
                       : "opacity-70 hover:opacity-100"
                   }`}
                 >
-                  <Image
-                    width="140"
-                    height="80"
-                    src={image.imageUrl || ""}
-                    alt={`Thumbnail ${index + 1}`}
-                    className="object-cover"
-                  />
+                  {image.imageUrl ? (
+                    <Image
+                      width={140}
+                      height={80}
+                      src={image.imageUrl}
+                      alt={`Thumbnail ${index + 1}`}
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-[80px] w-[140px] items-center justify-center bg-zinc-700 text-white text-xs">
+                      Нет изображения
+                    </div>
+                  )}
                 </button>
               </CarouselItem>
             ))}
