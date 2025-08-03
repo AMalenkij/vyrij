@@ -8,7 +8,6 @@ type ConcertType = {
   location: {
     place: string;
     address: string;
-    url?: string;
   } | null;
 };
 

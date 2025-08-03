@@ -18,15 +18,5 @@ export const location = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
-
-    defineField({
-      name: "url",
-      title: "Ссылка",
-      type: "url",
-      validation: (Rule) =>
-        Rule.uri({
-          scheme: ["http", "https"],
-        }),
-    }),
   ],
 });
