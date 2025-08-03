@@ -5,10 +5,10 @@ export const futureEventsQuery =
     _id,
     title,
     date,
+    time,
     "location": location->{
       place,
       address,
-      city
     }
   }`);
 
@@ -17,10 +17,10 @@ export const pastEventsQuery =
     _id,
     title,
     date,
+    time,
     "location": location->{
       place,
       address,
-      city
     }
   }`);
 
@@ -33,11 +33,15 @@ export const pastEventsCountQuery = defineQuery(
 );
 
 export const galleryPhotosQuery = defineQuery(`
-  *[_type == "media" && references(*[_type == "tag" && name == "gallery"]._id)] {
+  *[_type == "media" && type == "photo" && defined(imageFile.asset)] {
     _id,
-    "imageUrl": mediaFile.asset->url
+    title,
+    "imageUrl": imageFile.asset->url
   }
 `);
+export const galleryPhotosCountQuery = defineQuery(
+  `count(*[_type == "media" && type == "photo" && defined(imageFile.asset)])`,
+);
 
 export const majorEventsQuery = defineQuery(`
   *[_type == "events" && references(*[_type == "tag" && name == "major"]._id)] | order(date asc) {
