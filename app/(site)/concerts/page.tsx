@@ -30,7 +30,6 @@ export default async function Concerts() {
     sanityFetch({ query: pastEventsCountQuery }),
   ]);
   let allCount = futureCount.data + pastCount.data;
-
   return (
     <>
       <div className="container mx-auto min-h-screen">
@@ -63,9 +62,9 @@ export default async function Concerts() {
                     key={`Future-${concert._id}`}
                     index={index}
                     date={concert.date}
+                    time={concert.time || null}
                     title={concert?.title}
-                    place={concert.location?.place || null}
-                    address={concert.location?.address || null}
+                    location={concert.location || null}
                   />
                 ))
               ) : (
@@ -90,9 +89,9 @@ export default async function Concerts() {
                   key={`Past-${concert._id}`}
                   index={index}
                   date={concert.date}
+                  time={concert.time || null}
                   title={concert?.title}
-                  place={concert.location?.place || null}
-                  address={concert.location?.address || null}
+                  location={concert.location || null}
                 />
               ))}
             </AccordionContent>
