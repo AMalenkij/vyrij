@@ -1,28 +1,34 @@
-import splitTimestamp from "@/utils/splitTimestamp";
 import { cn } from "@/lib/utils";
 
 type ConcertType = {
   index: number;
-  date: string | null;
-  title: string | null;
-  place: string | null;
-  address: string | null;
+  date: string;
+  time: string | null;
+  title: string;
+  location: {
+    place: string;
+    address: string;
+    url?: string;
+  } | null;
 };
+
 const CARD_TEXT = {
-  DEFAULT_TITLE: "Без названия",
-  NO_PLACE: "Место не указано",
-  NO_ADDRESS: "Адрес не указан",
+  NO_LOCATION: "Место еще не определено",
+  NO_TIME: "Время уточняется",
 } as const;
 
 export default function ConcertCard({
   date,
   title,
-  place,
-  address,
+  time,
+  location,
   index = 0,
 }: ConcertType) {
-  if (!date) return null;
-  const { date: day, month, year, time } = splitTimestamp(date);
+  const dateObj = new Date(date);
+  const day = dateObj.getDate().toString().padStart(2, "0");
+  const month = dateObj.toLocaleDateString("en", { month: "short" });
+  const year = dateObj.getFullYear().toString();
+
   const isEvenIndex = index % 2 === 0;
 
   return (
@@ -39,21 +45,33 @@ export default function ConcertCard({
             <div className="text-xl">{month}</div>
             <div className="">{year}</div>
           </div>
-          <div className="pt-1 font-light text-xl lg:w-24 lg:text-4xl">
-            {time}
+          <div
+            className={cn(
+              "pt-1 font-light text-xl lg:w-24 lg:text-4xl",
+              !time && "text-sm opacity-75 lg:text-base",
+            )}
+          >
+            {time || CARD_TEXT.NO_TIME}
           </div>
         </div>
         <div className="grid items-center lf:gap-x-20 gap-y-1 lg:flex lg:basis-full">
           <h2 className="text-2xl lg:basis-4/5 lg:px-10 lg:text-center lg:font-semibold lg:text-2xl">
-            {title || CARD_TEXT.DEFAULT_TITLE}
+            {title}
           </h2>
           <div className="basis-4/5">
-            <div className="font-bold">{place || CARD_TEXT.NO_PLACE}</div>
-            <div>{address || CARD_TEXT.NO_ADDRESS}</div>
+            {location ? (
+              <>
+                <div className="font-bold">{location.place}</div>
+                <div>{location.address}</div>
+              </>
+            ) : (
+              <div className="text-sm italic opacity-75">
+                {CARD_TEXT.NO_LOCATION}
+              </div>
+            )}
           </div>
         </div>
       </div>
-      <div className="invisible mx-auto mt-2 mb-4 h-1 w-24 rounded-xl border-gradient bg-accent group-hover:visible" />
     </>
   );
 }
