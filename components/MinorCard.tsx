@@ -1,79 +1,91 @@
-import RenderPhoto from "@/components/RenderPhoto";
 import { PortableText } from "@portabletext/react";
 import { type PortableTextBlock } from "@portabletext/types";
+import RenderPhoto from "@/components/RenderPhoto";
+import { urlFor } from "@/sanity/lib/sanityImage";
+import YouTubeVideo from "./YouTubeVideo";
 
-function MediaItem({
-  photoUrl,
+// Define the media item type
+type MediaItem = {
+  videoUrl?: string | null;
+  imageFile?: string | null;
+};
+
+function MediaComponent({
+  videoUrl,
+  imageFile,
   className,
 }: {
-  photoUrl: string;
+  videoUrl?: string | null;
+  imageFile?: string | null;
   className?: string;
 }) {
-  if (!photoUrl) return null;
-  return <RenderPhoto photoUrl={photoUrl} className={className} />;
+  const imageUrl = imageFile ? urlFor(imageFile).url() : null;
+
+  if (videoUrl) {
+    return <YouTubeVideo url={videoUrl} className={className} />;
+  }
+
+  if (imageUrl) {
+    return <RenderPhoto photoUrl={imageUrl} className={className} />;
+  }
+
+  return null;
 }
 
 export default function MinorCard({
-  eventsWithMedia,
+  description,
+  date,
+  media = [], // Add media prop with default empty array
+  countMedia,
 }: {
-  eventsWithMedia: {
-    id: string;
-    description: PortableTextBlock[];
-    date: string;
-    photoUrls: (string | null)[];
-  };
+  description: unknown;
+  date: string;
+  media: MediaItem[];
+  countMedia: number;
 }) {
-  const { date, description, photoUrls } = eventsWithMedia;
+  const renderMediaByCount = () => {
+    if (countMedia === 0) return null;
 
-  // Фильтруем null значения из photoUrls
-  const validPhotoUrls = photoUrls.filter((url) => url !== null);
+    const getItem = (index: number, className?: string) => (
+      <MediaComponent
+        key={index}
+        videoUrl={media[index]?.videoUrl}
+        imageFile={media[index]?.imageFile}
+        className={className}
+      />
+    );
 
-  const renderPhotosByCount = (photoUrls: string[]) => {
-    const count = photoUrls.length;
-
-    if (count === 0) return null;
-
-    switch (count) {
+    switch (countMedia) {
       case 1:
-        return <MediaItem photoUrl={photoUrls[0]} />;
+        return getItem(0);
       case 2:
         return (
           <div className="grid grid-cols-2 gap-4">
-            <MediaItem photoUrl={photoUrls[0]} />
-            <MediaItem photoUrl={photoUrls[1]} />
+            {getItem(0)}
+            {getItem(1)}
           </div>
         );
       case 3:
         return (
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div className="-ml-16 md:col-span-2">
-              <MediaItem photoUrl={photoUrls[0]} />
-            </div>
-            <MediaItem photoUrl={photoUrls[1]} />
-            <MediaItem photoUrl={photoUrls[2]} />
+            <div className="-ml-16 md:col-span-2">{getItem(0)}</div>
+            {getItem(1)}
+            {getItem(2)}
           </div>
         );
       case 4:
-        return (
-          <div className="grid h-[calc(70vh-250px)] grid-cols-2 gap-4 lg:h-[calc(100vh-200px)]">
-            <MediaItem photoUrl={photoUrls[0]} className="md:-ml-6 ml-2" />
-            <MediaItem photoUrl={photoUrls[1]} />
-            <MediaItem photoUrl={photoUrls[2]} />
-            <MediaItem photoUrl={photoUrls[3]} />
-          </div>
-        );
       default:
-        // Если больше 4 фото, показываем только первые 4
         return (
           <div className="grid h-[calc(70vh-250px)] grid-cols-2 gap-4 lg:h-[calc(100vh-200px)]">
-            <MediaItem photoUrl={photoUrls[0]} className="md:-ml-6 ml-2" />
-            <MediaItem photoUrl={photoUrls[1]} />
-            <MediaItem photoUrl={photoUrls[2]} />
-            <MediaItem photoUrl={photoUrls[3]} />
+            {getItem(0, "md:-ml-6 ml-2")}
+            {getItem(1)}
+            {getItem(2)}
+            {getItem(3)}
           </div>
         );
     }
   };
+
   return (
     <article className="container mx-auto my-16">
       <header>
@@ -85,13 +97,13 @@ export default function MinorCard({
         </h2>
       </header>
       <div className="whitespace-pre-line text-lg lg:text-xl">
-        <PortableText
-          value={description}
-
-          // components={/* optional object of custom components to use */}
-        />
+        {description ? (
+          <PortableText value={description as PortableTextBlock[]} />
+        ) : (
+          <p>Текст еще не переведен или не добавлен</p>
+        )}
       </div>
-      {renderPhotosByCount(validPhotoUrls)}
+      {renderMediaByCount()}
     </article>
   );
 }
