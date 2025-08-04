@@ -55,17 +55,14 @@ export const majorEventsQuery = defineQuery(`
 `);
 
 export const minorEventsQuery = defineQuery(`
-  *[_type == "events" && references(*[_type == "tag" && name == "minor"]._id)] | order(date asc) {
+  *[_type == "events" && references(*[_type == "tag" && name == "minor" || name == "major"]._id)] | order(date asc) {
     _id,
     title,
     date,
     description,
     "media": media[]->{
-      _id,
       imageFile,
       videoUrl,
-      videoFile,
-      externalUrl
     }
   }
 `);
