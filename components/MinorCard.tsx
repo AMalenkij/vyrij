@@ -3,6 +3,7 @@ import { type PortableTextBlock } from "@portabletext/types";
 import RenderPhoto from "@/components/RenderPhoto";
 import { urlFor } from "@/sanity/lib/sanityImage";
 import YouTubeVideo from "./YouTubeVideo";
+import { TypographyComponents } from "@/components/TypographyComponents";
 import { type SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 // Define the media item type
@@ -100,7 +101,10 @@ export default function MinorCard({
       </header>
       <div className="whitespace-pre-line text-lg lg:text-xl">
         {description ? (
-          <PortableText value={description as PortableTextBlock[]} />
+          <PortableText
+            value={description as PortableTextBlock[]}
+            components={TypographyComponents}
+          />
         ) : (
           <p>Текст еще не переведен или не добавлен</p>
         )}
