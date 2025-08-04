@@ -2,6 +2,25 @@ import "@/app/globals.css";
 import noiseTransparent from "@/public/img/noiseTransparent.png";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import type { Metadata } from "next";
+import { Marmelad, Great_Vibes } from "next/font/google";
+
+const primaryFont = Marmelad({
+  subsets: ["latin", "cyrillic"],
+  weight: "400",
+  variable: "--font-primary",
+});
+
+const accentFont = Great_Vibes({
+  subsets: ["latin", "cyrillic"],
+  weight: "400",
+  variable: "--font-accent",
+});
+
+export const metadata: Metadata = {
+  title: "Vyrij",
+  description: "choir Vyrij",
+};
 
 export default function SiteLayout({
   children,
@@ -9,9 +28,11 @@ export default function SiteLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-stone-950 text-stone-200">
+    <div
+      className={`${primaryFont.variable} ${accentFont.variable} bg-stone-950 font-primary text-stone-200`}
+    >
       <div
-        className="-top-1/2 -left-1/2 pointer-events-none fixed z-[100] h-[200%] w-[200%] animate-noise opacity-90"
+        className="pointer-events-none fixed inset-0 z-[100] animate-noise opacity-90"
         style={{
           background: `transparent url(${noiseTransparent.src}) repeat 0 0`,
           backgroundSize: "300px 300px",
@@ -19,8 +40,7 @@ export default function SiteLayout({
         }}
       />
       <Header />
-
-      <main>{children}</main>
+      {children}
       <Footer />
     </div>
   );
