@@ -73,17 +73,75 @@ export const events = defineType({
   preview: {
     select: {
       title: "title",
+      date: "date",
+      time: "time",
+      // Правильный способ - для первого тега из массива
       tag0: "tags.0.name",
       tag1: "tags.1.name",
       tag2: "tags.2.name",
     },
-    prepare({ title, tag0, tag1, tag2 }) {
+    prepare({ title, date, time, tag0, tag1, tag2 }) {
+      // Собираем все теги которые есть
       const tags = [tag0, tag1, tag2].filter(Boolean);
+
+      // Форматируем дату
+      const dateFormatted = date
+        ? new Date(date).toLocaleDateString("ru-RU", {
+            day: "numeric",
+            month: "numeric",
+            year: "numeric",
+          })
+        : "";
+
+      // Объединяем дату и время
+      const dateTime = time ? `${dateFormatted} в ${time}` : dateFormatted;
+
+      // Объединяем теги
+      const tagsText =
+        tags.length > 0
+          ? tags.join(", ") +
+            (tags.length === 3 && tag2 ? "" : tags.length >= 3 ? "..." : "")
+          : "";
+
+      // Формируем subtitle: дата + теги
+      let subtitle = "";
+      if (dateTime && tagsText) {
+        subtitle = `${dateTime} • ${tagsText}`;
+      } else if (dateTime) {
+        subtitle = dateTime;
+      } else if (tagsText) {
+        subtitle = tagsText;
+      } else {
+        subtitle = "Нет даты и тегов";
+      }
+
       return {
         title: title,
-        subtitle:
-          tags.length > 0 ? tags.join(", ") + (tag2 ? "" : "...") : "Нет тегов",
+        subtitle: subtitle,
       };
     },
-  },
+  }, // Добавляем сортировку по дате (от новых к старым)
+  orderings: [
+    {
+      title: "По дате (новые первые)",
+      name: "dateDesc",
+      by: [
+        { field: "date", direction: "desc" },
+        { field: "time", direction: "desc" },
+      ],
+    },
+    {
+      title: "По дате (старые первые)",
+      name: "dateAsc",
+      by: [
+        { field: "date", direction: "asc" },
+        { field: "time", direction: "asc" },
+      ],
+    },
+    {
+      title: "По названию",
+      name: "titleAsc",
+      by: [{ field: "title", direction: "asc" }],
+    },
+  ],
 });
