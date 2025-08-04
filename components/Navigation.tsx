@@ -1,16 +1,15 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 // constants/routes.ts
 export const HOME_ROUTE = "/";
 export const TIMELINE_ROUTE = "/timeline";
 export const EVENT_ROUTE = "/events";
 export const CONCERTS_ROUTE = "/concerts";
 export const GALLERY_ROUTE = "/gallery";
-
-// components/Navigation.tsx
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 // Routes configuration with Ukrainian labels
 const ROUTES = [
@@ -32,7 +31,11 @@ const ROUTES = [
   },
 ];
 
-export default function Navigation() {
+interface NavigationProps {
+  className?: string;
+}
+
+export default function Navigation({ className }: NavigationProps) {
   const pathname = usePathname();
 
   // Function to check if a route is active (simplified without locale)
@@ -44,7 +47,7 @@ export default function Navigation() {
   };
 
   return (
-    <nav>
+    <nav className={className}>
       {ROUTES.map((route) => {
         const active = isActive(route.href);
 
