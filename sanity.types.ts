@@ -39,20 +39,45 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
+export type Geopoint = {
+  _type: "geopoint";
+  lat?: number;
+  lng?: number;
+  alt?: number;
 };
 
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
+export type Media = {
+  _id: string;
+  _type: "media";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  type: "photo" | "video" | "url";
+  imageFile?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  videoFile?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    media?: unknown;
+    _type: "file";
+  };
+  videoUrl?: string;
+  externalUrl?: string;
 };
 
 export type SanityFileAsset = {
@@ -75,6 +100,22 @@ export type SanityFileAsset = {
   path?: string;
   url?: string;
   source?: SanityAssetSourceData;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
 };
 
 export type SanityImageAsset = {
@@ -100,6 +141,13 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
+export type SanityAssetSourceData = {
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
+};
+
 export type SanityImageMetadata = {
   _type: "sanity.imageMetadata";
   location?: Geopoint;
@@ -111,29 +159,14 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type Geopoint = {
-  _type: "geopoint";
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
-
-export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
 export type Events = {
   _id: string;
   _type: "events";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  slug?: Slug;
-  intro?: string;
+  title: string;
+  slug: Slug;
   description?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -152,14 +185,22 @@ export type Events = {
     _type: "block";
     _key: string;
   }>;
-  date?: string;
+  date: string;
+  time?: string;
   location?: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "location";
   };
-  tags?: Array<{
+  media?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "media";
+  }>;
+  tags: Array<{
     _ref: string;
     _type: "reference";
     _weak?: boolean;
@@ -174,15 +215,13 @@ export type Location = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  place?: string;
-  address?: string;
-  city?: string;
-  url?: string;
+  place: string;
+  address: string;
 };
 
 export type Slug = {
   _type: "slug";
-  current?: string;
+  current: string;
   source?: string;
 };
 
@@ -192,48 +231,34 @@ export type Tag = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name?: string;
+  name: string;
 };
 
-export type AllSanitySchemaTypes =
-  | SanityImagePaletteSwatch
-  | SanityImagePalette
-  | SanityImageDimensions
-  | SanityImageHotspot
-  | SanityImageCrop
-  | SanityFileAsset
-  | SanityImageAsset
-  | SanityImageMetadata
-  | Geopoint
-  | SanityAssetSourceData
-  | Events
-  | Location
-  | Slug
-  | Tag;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Media | SanityFileAsset | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Events | Location | Slug | Tag;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: futureEventsQuery
-// Query: *[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date >= now()] {    _id,    title,    date,    "location": location->{      place,      address,      city    }  }
+// Query: *[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date >= now()] {    _id,    title,    date,    time,    "location": location->{      place,      address,    }  }
 export type FutureEventsQueryResult = Array<{
   _id: string;
-  title: string | null;
+  title: string;
   date: string;
+  time: string | null;
   location: {
-    place: string | null;
-    address: string | null;
-    city: string | null;
+    place: string;
+    address: string;
   } | null;
 }>;
 // Variable: pastEventsQuery
-// Query: *[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()] {    _id,    title,    date,    "location": location->{      place,      address,      city    }  }
+// Query: *[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()] | order(date desc) {    _id,    title,    date,    time,    "location": location->{      place,      address,    }  }
 export type PastEventsQueryResult = Array<{
   _id: string;
-  title: string | null;
+  title: string;
   date: string;
+  time: string | null;
   location: {
-    place: string | null;
-    address: string | null;
-    city: string | null;
+    place: string;
+    address: string;
   } | null;
 }>;
 // Variable: futureEventsCountQuery
@@ -242,14 +267,89 @@ export type FutureEventsCountQueryResult = number;
 // Variable: pastEventsCountQuery
 // Query: count(*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()])
 export type PastEventsCountQueryResult = number;
+// Variable: galleryPhotosQuery
+// Query: *[_type == "media" && type == "photo" && defined(imageFile.asset)] {    _id,    title,    "imageUrl": imageFile.asset->url  }
+export type GalleryPhotosQueryResult = Array<{
+  _id: string;
+  title: string;
+  imageUrl: string | null;
+}>;
+// Variable: galleryPhotosCountQuery
+// Query: count(*[_type == "media" && type == "photo" && defined(imageFile.asset)])
+export type GalleryPhotosCountQueryResult = number;
+// Variable: majorEventsQuery
+// Query: *[_type == "events" && references(*[_type == "tag" && name == "major"]._id)] | order(date asc) {    _id,    title,    date,     "media": media[]->{       imageFile     }  }
+export type MajorEventsQueryResult = Array<{
+  _id: string;
+  title: string;
+  date: string;
+  media: Array<{
+    imageFile: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  }> | null;
+}>;
+// Variable: minorEventsQuery
+// Query: *[_type == "events" && references(*[_type == "tag" && name == "minor" || name == "major"]._id)] | order(date asc) {    _id,    title,    date,    description,    "media": media[]->{      imageFile,      videoUrl,    }  }
+export type MinorEventsQueryResult = Array<{
+  _id: string;
+  title: string;
+  date: string;
+  description: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  media: Array<{
+    imageFile: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    videoUrl: string | null;
+  }> | null;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date >= now()] {\n    _id,\n    title,\n    date,\n    "location": location->{\n      place,\n      address,\n      city\n    }\n  }': FutureEventsQueryResult;
-    '*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()] {\n    _id,\n    title,\n    date,\n    "location": location->{\n      place,\n      address,\n      city\n    }\n  }': PastEventsQueryResult;
-    'count(*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date >= now()])': FutureEventsCountQueryResult;
-    'count(*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()])': PastEventsCountQueryResult;
+    "*[_type == \"events\" && references(*[_type == \"tag\" && name == \"concert\"]._id) && date >= now()] {\n    _id,\n    title,\n    date,\n    time,\n    \"location\": location->{\n      place,\n      address,\n    }\n  }": FutureEventsQueryResult;
+    "*[_type == \"events\" && references(*[_type == \"tag\" && name == \"concert\"]._id) && date < now()] | order(date desc) {\n    _id,\n    title,\n    date,\n    time,\n    \"location\": location->{\n      place,\n      address,\n    }\n  }": PastEventsQueryResult;
+    "count(*[_type == \"events\" && references(*[_type == \"tag\" && name == \"concert\"]._id) && date >= now()])": FutureEventsCountQueryResult;
+    "count(*[_type == \"events\" && references(*[_type == \"tag\" && name == \"concert\"]._id) && date < now()])": PastEventsCountQueryResult;
+    "\n  *[_type == \"media\" && type == \"photo\" && defined(imageFile.asset)] {\n    _id,\n    title,\n    \"imageUrl\": imageFile.asset->url\n  }\n": GalleryPhotosQueryResult;
+    "count(*[_type == \"media\" && type == \"photo\" && defined(imageFile.asset)])": GalleryPhotosCountQueryResult;
+    "\n  *[_type == \"events\" && references(*[_type == \"tag\" && name == \"major\"]._id)] | order(date asc) {\n    _id,\n    title,\n    date,\n     \"media\": media[]->{\n       imageFile\n     }\n  }\n": MajorEventsQueryResult;
+    "\n  *[_type == \"events\" && references(*[_type == \"tag\" && name == \"minor\" || name == \"major\"]._id)] | order(date asc) {\n    _id,\n    title,\n    date,\n    description,\n    \"media\": media[]->{\n      imageFile,\n      videoUrl,\n    }\n  }\n": MinorEventsQueryResult;
   }
 }
