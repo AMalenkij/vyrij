@@ -24,7 +24,7 @@ export default async function EventsTimeline({
   return (
     <>
       {majorEvents.map(({ _id, date, media, title }) => {
-        const imageFile = media?.[0]?.imageFile;
+        const imageFile = media?.[0].imageFile;
         const imageUrl = imageFile ? urlFor(imageFile).url() : null;
         const majorYear = new Date(date).getFullYear().toString();
 
