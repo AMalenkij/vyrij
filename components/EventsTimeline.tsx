@@ -1,18 +1,3 @@
-// ВЫХОДНЫЕ ДАННЫЕ (GroupedEventsResult)
-// └── GroupedMajorEvent[]
-//     ├── id (из _id)
-//     ├── date (год из majorEvent.date)
-//     ├── title
-//     ├── photoUrl (первое фото из media)
-//     ├── videoUrls (null - не реализовано)
-//     ├── type: "major"
-//     └── minorEvents[]
-//         ├── id (из _id)
-//         ├── description
-//         ├── date
-//         ├── photoUrls[] (все фото из media)
-//         └── videoUrls[] (все видео URL из media)
-
 import { Suspense } from "react";
 import Image from "next/image";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -38,10 +23,10 @@ export default async function EventsTimeline({
 
   return (
     <>
-      {majorEvents.map((majorEvent) => {
-        const imageFile = majorEvent.media?.[0]?.imageFile;
+      {majorEvents.map(({ _id, date, media, title }) => {
+        const imageFile = media?.[0]?.imageFile;
         const imageUrl = imageFile ? urlFor(imageFile).url() : null;
-        const majorYear = new Date(majorEvent.date).getFullYear().toString();
+        const majorYear = new Date(date).getFullYear().toString();
 
         const filteredMinorEvents = minorEvents.filter(
           (minorEvent): minorEvent is NonNullable<typeof minorEvent> =>
@@ -50,13 +35,13 @@ export default async function EventsTimeline({
         );
 
         return (
-          <div key={majorEvent._id}>
+          <div key={_id}>
             {majorYear !== excludeYears && (
               <Suspense fallback={<div>Загрузка...</div>}>
-                <MajorCard year={majorYear} title={majorEvent.title}>
+                <MajorCard year={majorYear} title={title}>
                   {imageUrl ? (
                     <Image
-                      alt={`photo ${majorEvent.title}`}
+                      alt={`photo ${title}`}
                       fill
                       src={imageUrl}
                       className="h-full w-full object-cover brightness-75 contrast-125"
@@ -70,14 +55,13 @@ export default async function EventsTimeline({
               </Suspense>
             )}
             {filteredMinorEvents.map(({ _id, description, date, media }) => {
-              const countMedia = media?.length || 0;
               return (
                 <AnimatedContainer key={_id}>
                   <MinorCard
                     description={description}
                     date={date}
-                    media={media}
-                    countMedia={countMedia}
+                    media={media || []}
+                    countMedia={media?.length || 0}
                   />
                 </AnimatedContainer>
               );

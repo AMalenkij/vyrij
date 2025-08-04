@@ -3,11 +3,12 @@ import { type PortableTextBlock } from "@portabletext/types";
 import RenderPhoto from "@/components/RenderPhoto";
 import { urlFor } from "@/sanity/lib/sanityImage";
 import YouTubeVideo from "./YouTubeVideo";
+import { type SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 // Define the media item type
 type MediaItem = {
-  videoUrl?: string | null;
-  imageFile?: string | null;
+  videoUrl: string | null;
+  imageFile: SanityImageSource | null;
 };
 
 function MediaComponent({
@@ -15,18 +16,19 @@ function MediaComponent({
   imageFile,
   className,
 }: {
-  videoUrl?: string | null;
-  imageFile?: string | null;
+  videoUrl: string | null;
+  imageFile: SanityImageSource | null;
   className?: string;
 }) {
-  const imageUrl = imageFile ? urlFor(imageFile).url() : null;
-
   if (videoUrl) {
     return <YouTubeVideo url={videoUrl} className={className} />;
   }
 
-  if (imageUrl) {
-    return <RenderPhoto photoUrl={imageUrl} className={className} />;
+  if (imageFile) {
+    const imgUrl = urlFor(imageFile).url();
+    if (typeof imgUrl === "string") {
+      return <RenderPhoto photoUrl={imgUrl} className={className} />;
+    }
   }
 
   return null;
@@ -35,7 +37,7 @@ function MediaComponent({
 export default function MinorCard({
   description,
   date,
-  media = [], // Add media prop with default empty array
+  media,
   countMedia,
 }: {
   description: unknown;
