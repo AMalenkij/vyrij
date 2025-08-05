@@ -21,7 +21,7 @@ const SubHeader: FC<SubHeaderProps> = ({ sectionName, title, counter }) => {
             <h1 className="font-accent text-6xl sm:text-7xl md:text-8xl">
               {title}
             </h1>
-            <div className="invisible flex flex-col items-center gap-y-1 sm:visible md:gap-y-3.5">
+            <div className="flex flex-col items-center gap-y-1 md:gap-y-3.5">
               <p className="p-0.5 font-light text-lg sm:p-1 md:p-3.5">
                 {"{ "}
                 {counter}

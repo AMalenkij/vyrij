@@ -92,13 +92,13 @@ export default function Footer() {
 
   return (
     <div
-      className="relative mt-96 h-[600px] md:h-screen"
+      className="relative mt-96 h-screen"
       style={{
         clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)",
       }}
     >
       <footer className="fixed bottom-0 h-[100vh] w-full bg-gradient-to-b from-red-500 to-red-600/50 px-6 pb-4 md:pb-6">
-        <div className="container mx-auto mt-32 text-white">
+        <div className="container mx-auto mt-14 text-white md:mt-32">
           {/* Main content grid */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-12">
             {/* About section */}
@@ -112,7 +112,7 @@ export default function Footer() {
             </div>
 
             {/* Contact section */}
-            <div className="space-y-3 md:space-y-4">
+            <div className="space-y-2 md:space-y-4">
               <h3 className="font-medium text-sm uppercase tracking-wide opacity-80">
                 {FOOTER_TEXT.SECTIONS.CONTACT.TITLE}
               </h3>
@@ -165,7 +165,7 @@ export default function Footer() {
             </div>
 
             {/* Navigation section */}
-            <div className="space-y-3 md:space-y-4">
+            <div className="hidden space-y-3 md:block md:space-y-4">
               <h3 className="font-medium text-sm uppercase tracking-wide opacity-80">
                 {FOOTER_TEXT.SECTIONS.NAVIGATION.TITLE}
               </h3>
@@ -174,10 +174,10 @@ export default function Footer() {
           </div>
 
           {/* Divider */}
-          <div className="my-8 mt-20 h-px bg-white/20" />
+          <div className="my-4 h-px bg-white/20 md:my-8 md:mt-20" />
 
           {/* Copyright section */}
-          <div className="flex flex-col items-center justify-between gap-4 text-sm md:flex-row">
+          <div className="flex flex-col items-center justify-between gap-4 text-sm md:flex-row md:gap-2">
             <p className="opacity-90">
               &copy; {currentYear} {FOOTER_TEXT.COPYRIGHT.TEXT}
             </p>
@@ -188,7 +188,7 @@ export default function Footer() {
               >
                 {FOOTER_TEXT.LEGAL.PRIVACY}
               </Link>
-              <span>•</span>
+              {/*<span>•</span>*/}
               <Link
                 href="/terms"
                 className="transition-opacity hover:opacity-100"

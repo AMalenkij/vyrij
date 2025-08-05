@@ -70,10 +70,12 @@ export default function MinorCard({
         );
       case 3:
         return (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div className="-ml-16 md:col-span-2">{getItem(0)}</div>
-            {getItem(1)}
-            {getItem(2)}
+          <div className="">
+            {getItem(0, "-ml-16 md:col-span-2")}
+            <div className="grid grid-cols-2 gap-4">
+              {getItem(1)}
+              {getItem(2)}
+            </div>
           </div>
         );
       case 4:
@@ -90,7 +92,7 @@ export default function MinorCard({
   };
 
   return (
-    <article className="container mx-auto my-16">
+    <article className="container mx-auto my-16 px-1 md:px-0 ">
       <header>
         <h2 className="mb-4 font-semibold text-2xl lg:text-3xl">
           {new Date(date).toLocaleDateString("uk-UA", {

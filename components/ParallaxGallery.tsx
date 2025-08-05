@@ -32,40 +32,43 @@ export default function ParallaxGallery() {
     {
       src: galleryHero,
       scale: scale4,
-      containerClass: "relative w-[14vw] h-[14vh]",
+      containerClass: "relative w-[14vw] h-[14vh]", // без изменений
     },
     {
       src: gallery1,
       scale: scale5,
       containerClass:
-        "relative w-[19.6vw] h-[16.8vh] -top-[16.8vh] left-[2.8vw]",
+        "relative w-1/2 md:w-[19.6vw] h-[16.8vh] -top-[16.8vh] md:left-[2.8vw] left-1/5",
     },
     {
       src: gallery2,
       scale: scale6,
       containerClass:
-        "relative w-[11.2vw] h-[25.2vh] -top-[5.6vh] -left-[14vw]",
+        "relative w-[30vw] md:w-[11.2vw] h-[25.2vh] -top-[5.6vh] md:-left-[14vw] -left-[25vw]",
     },
     {
       src: gallery3,
       scale: scale5,
-      containerClass: "relative w-[14vw] h-[14vh] left-[15.4vw]",
+      containerClass:
+        "relative w-[40vw] md:w-[14vw] h-[14vh] md:left-[15.4vw] left-[30vw]",
     },
     {
       src: gallery4,
       scale: scale6,
-      containerClass: "relative w-[11.2vw] h-[14vh] top-[15.4vh] left-[2.8vw]",
+      containerClass:
+        "relative w-[31vw] md:w-[11.2vw] h-[14vh] top-[15.4vh] left-[9vw] md:left-[2.8vw]",
     },
     {
       src: gallery5,
       scale: scale8,
       containerClass:
-        "relative w-[16.8vw] h-[14vh] top-[15.4vh] -left-[12.6vw]",
+        "relative w-[30vw] md:w-[16.8vw] h-[10vh] md:h-[14vh] top-[13vh] md:top-[15.4vh] md:-left-[12.6vw] right-1/4",
     },
     {
       src: gallery7,
       scale: scale9,
-      containerClass: "relative w-[8.4vw] h-[8.4vh] top-[12.6vh] left-[14vw]",
+      containerClass:
+        "relative w-[16.8vw] md:w-[8.4vw] h-[8.4vh] top-[12.6vh] md:left-[14vw] left-[34vw]",
     },
   ];
 
