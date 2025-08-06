@@ -2,76 +2,54 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
+import { ROUTES_CONFIG } from "@/constants/routes";
+import { cn } from "@/lib/utils";
 
-// constants/routes.ts
-export const HOME_ROUTE = "/";
-export const TIMELINE_ROUTE = "/timeline";
-export const EVENT_ROUTE = "/events";
-export const CONCERTS_ROUTE = "/concerts";
-export const GALLERY_ROUTE = "/gallery";
+export type Route = {
+  key: string;
+  label: string;
+  href: string;
+};
 
-// Routes configuration with Ukrainian labels
-const ROUTES = [
-  {
-    label: "Головна",
-    href: HOME_ROUTE,
-  },
-  {
-    label: "Події",
-    href: EVENT_ROUTE,
-  },
-  {
-    label: "Концерти",
-    href: CONCERTS_ROUTE,
-  },
-  {
-    label: "Галерея",
-    href: GALLERY_ROUTE,
-  },
-];
-
-interface NavigationProps {
+type NavigationProps = {
+  routes: Route[];
   className?: string;
-}
+};
 
-export default function Navigation({ className }: NavigationProps) {
+export default function Navigation({ routes, className }: NavigationProps) {
   const pathname = usePathname();
+  const { locale } = useParams();
 
-  // Function to check if a route is active (simplified without locale)
   const isActive = (href: string) => {
-    if (href === HOME_ROUTE) {
-      return pathname === "/" || pathname === "";
+    const fullHref = `/${locale}${href}`;
+    if (href === ROUTES_CONFIG.HOME) {
+      return pathname === `/${locale}` || pathname === `/${locale}/`;
     }
-    return pathname?.startsWith(href);
+    return pathname?.startsWith(fullHref);
   };
 
   return (
     <nav className={className}>
-      {ROUTES.map((route) => {
-        const active = isActive(route.href);
-
-        if (active) {
-          return (
-            <Button
-              key={route.href}
-              variant="link"
-              disabled
-              className="uppercase"
-            >
-              {route.label}
-            </Button>
-          );
-        }
+      {routes?.map(({ key, label, href }) => {
+        const active = isActive(href);
+        const localizedHref = `/${locale}${href}`;
 
         return (
           <Button
-            key={route.href}
-            asChild
+            key={key}
             variant="link"
-            className="text-white uppercase"
+            asChild={!active}
+            disabled={active}
+            aria-current={active ? "page" : undefined}
+            className={cn("uppercase", !active && "text-white")}
+            title={label}
           >
-            <Link href={route.href}>{route.label}</Link>
+            {active ? (
+              <span>{label}</span>
+            ) : (
+              <Link href={localizedHref}>{label}</Link>
+            )}
           </Button>
         );
       })}
