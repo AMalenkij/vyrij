@@ -37,6 +37,12 @@
     "past": "Past",
     "noConcerts": "There are no scheduled concerts at the moment."
   },
+  "Gallery": {
+    "title": "Gallery",
+    "sectionName": "Our Photos",
+    "imageAlt": "Gallery image",
+    "noImage": "No image available"
+  },
   "Footer": {
     "about": {
       "title": "Vyrij Choir",

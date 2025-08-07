@@ -37,6 +37,12 @@
     "past": "Przeszłość",
     "noConcerts": "W tej chwili nie ma zaplanowanych koncertów."
   },
+  "Gallery": {
+    "title": "Galeria",
+    "sectionName": "Nasze zdjęcia",
+    "imageAlt": "Zdjęcie z galerii",
+    "noImage": "Brak dostępnego zdjęcia"
+  },
   "Footer": {
     "about": {
       "title": "Chór „Wyrij”",

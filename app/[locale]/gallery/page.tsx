@@ -1,26 +1,22 @@
 import Link from "next/link";
+import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   galleryPhotosQuery,
   galleryPhotosCountQuery,
 } from "@/sanity/lib/queries";
-import Image from "next/image";
 import { GalleryModal } from "@/components/GalleryModal";
 import SubHeader from "@/components/SubHeader";
-
-const texts = {
-  title: "Галерея",
-  sectionName: "Наши фотографии",
-  imageAlt: "Gallery image",
-  noImage: "Нет изображения",
-} as const;
 
 export default async function Gallery({
   searchParams,
 }: {
   searchParams: Promise<{ photoId: string | undefined }>;
 }) {
+  const t = await getTranslations("Gallery");
   const { photoId } = await searchParams;
+
   const [photosResult, countResult] = await Promise.all([
     sanityFetch({ query: galleryPhotosQuery }),
     sanityFetch({ query: galleryPhotosCountQuery }),
@@ -29,9 +25,9 @@ export default async function Gallery({
   return (
     <div className="container mx-auto">
       <SubHeader
-        title={texts.title}
+        title={t("title")}
         counter={countResult.data}
-        sectionName={texts.sectionName}
+        sectionName={t("sectionName")}
       />
       <main className="mt-20 w-full">
         <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
@@ -47,7 +43,7 @@ export default async function Gallery({
                     width={720}
                     height={480}
                     src={imageUrl}
-                    alt={title || texts.imageAlt}
+                    alt={title || t("imageAlt")}
                     sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
                     className="transform rounded-lg transition will-change-auto md:brightness-90 md:group-hover:brightness-110"
                   />
@@ -58,7 +54,7 @@ export default async function Gallery({
                 key={_id}
                 className="mb-5 w-full text-center text-gray-500 text-sm"
               >
-                {texts.noImage}
+                {t("noImage")}
               </div>
             ),
           )}
