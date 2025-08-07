@@ -4,22 +4,40 @@ import HomeClient from "@/components/HomeClient";
 import EventsTimeline from "@/components/EventsTimeline";
 import Hero from "@/components/Hero";
 import Image from "next/image";
-import { TEXT_CONSTANTS } from "@/constants/app-content";
+import { useTranslations } from "next-intl";
 
 export default function Home() {
+  const tHero = useTranslations("Hero");
+  const heroTranslations = {
+    title: tHero("title"),
+    subtitle: tHero("subtitle"),
+    author: tHero("author"),
+    scrollText: tHero("scrollText"),
+  };
+
+  const homeClientTranslations = {
+    aboutText: tHero("aboutText"),
+    galleryImage: tHero("altTexts.galleryImage"),
+  };
+
+  const parallaxTranslations = {
+    events: tHero("events"),
+  };
+
   return (
     <>
-      <Hero>
+      <Hero translations={heroTranslations}>
         <Image
           src={heroImg}
-          alt={TEXT_CONSTANTS.ALT_TEXTS.HERO_IMAGE}
+          alt={tHero("altTexts.heroImage")}
           width={188}
           height={250}
           className="absolute top-20 right-10 max-w-[120px] md:max-w-full"
         />
       </Hero>
-      <HomeClient />
-      <ParallaxGallery />
+
+      <HomeClient translations={homeClientTranslations} />
+      <ParallaxGallery year="2019" translations={parallaxTranslations} />
       <EventsTimeline excludeYears="2019" />
     </>
   );

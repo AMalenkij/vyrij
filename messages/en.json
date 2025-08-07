@@ -63,5 +63,17 @@
       "privacy": "Privacy Policy",
       "terms": "Terms of Use"
     }
+  },
+  "Hero": {
+    "title": "A person does not seem to fly…",
+    "subtitle": "But has wings.",
+    "author": "-L. Kostenko",
+    "scrollText": "scroll to explore",
+    "aboutText": "We are the Ukrainian choir \"Vyriy\" of the Gdańsk Archipelago of Culture, operating under the Gama Hak Cultural Center",
+    "events": "The founding of the choir",
+    "altTexts": {
+      "heroImage": "Hero Image",
+      "galleryImage": "Gallery Image"
+    }
   }
 }

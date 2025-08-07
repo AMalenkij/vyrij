@@ -63,5 +63,17 @@
       "privacy": "Polityka prywatności",
       "terms": "Warunki korzystania"
     }
+  },
+  "Hero": {
+    "title": "Człowiek niby nie lata…",
+    "subtitle": "A ma skrzydła.",
+    "author": "-L. Kostenko",
+    "scrollText": "przewiń, aby odkryć",
+    "aboutText": "Jesteśmy ukraińskim chórem \"Vyriy\" Archipelagu Kultury w Gdańsku, działającym przy Domu Kultury Gama Hak",
+    "events": "Założenie chóru",
+    "altTexts": {
+      "heroImage": "Obraz główny",
+      "galleryImage": "Obraz galerii"
+    }
   }
 }

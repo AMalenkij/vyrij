@@ -10,36 +10,42 @@ import heroImg8 from "@/public/img/hero8.webp";
 // Конфигурация изображений main page
 export const GALLERY_IMAGES = [
   {
+    index: 0,
     src: heroImg1,
     width: 288,
     height: 250,
     className: "absolute top-40 right-[10vh] max-w-[201px] md:max-w-full",
   },
   {
+    index: 1,
     src: heroImg2,
     width: 200,
     height: 250,
     className: "absolute top-[50vh] left-[30vh] max-w-[140px] md:max-w-full",
   },
   {
+    index: 2,
     src: heroImg3,
     width: 200,
     height: 250,
     className: "absolute top-[35vh] right-[40vh] max-w-[140px] md:max-w-full",
   },
   {
+    index: 3,
     src: heroImg4,
     width: 200,
     height: 250,
     className: "absolute top-[70vh] left-[40vh] max-w-[140px] md:max-w-full",
   },
   {
+    index: 4,
     src: heroImg5,
     width: 200,
     height: 250,
     className: "absolute top-[90vh] right-[40vh] max-w-[140px] md:max-w-full",
   },
   {
+    index: 5,
     src: heroImg6,
     width: 200,
     height: 250,
@@ -47,6 +53,7 @@ export const GALLERY_IMAGES = [
       "absolute top-[104.5vh] left-[30.5vw] max-w-[140px] md:max-w-full",
   },
   {
+    index: 6,
     src: heroImg7,
     width: 200,
     height: 250,
@@ -54,6 +61,7 @@ export const GALLERY_IMAGES = [
       "absolute top-[124.5vh] left-[55.5vw] max-w-[140px] md:max-w-full",
   },
   {
+    index: 7,
     src: heroImg8,
     width: 200,
     height: 250,
@@ -62,65 +70,26 @@ export const GALLERY_IMAGES = [
   },
 ] as const;
 
-// Текстовые константы
-export const TEXT_CONSTANTS = {
-  HERO_TITLE: "Людина нібито не літає…",
-  HERO_SUBTITLE: "А крила має.",
-  AUTHOR: "-Л. Костенко",
-  SCROLL_TEXT: "{scroll to explore}",
-  ABOUT_TEXT:
-    'Ми Український хор "Вирій" Гданського Архіпелагу Культури, діємо при Дому культури Гама Гак',
-  ALT_TEXTS: {
-    HERO_IMAGE: "Hero Image",
-    GALLERY_IMAGE: "Gallery Image",
+// Social media links data
+export const SOCIAL_MEDIA = [
+  {
+    url: "https://www.facebook.com/chorvyrij",
+    label: "Facebook",
+    text: "Facebook",
   },
-};
+  {
+    url: "https://www.youtube.com/@chorvyrij",
+    label: "YouTube",
+    text: "YouTube",
+  },
+  {
+    url: "https://www.instagram.com/chor_vyrij/",
+    label: "Instagram",
+    text: "Instagram",
+  },
+] as const;
 
 export const YEAR = "year";
-export const YEAR_SYMBOL = "р";
 export const EVENTS_YEAR_QUERY_ENDPOINT = "?year=";
-
-export const QUOTE_TEXT = "Людина нібито не літає…";
-export const QUOTE_TEXT_NEXT = "A крила має!";
-export const AUTOR = "Л. Костенко";
-export const HERO_TEXT =
-  "Квітень 2022. Катовіце. Останні приготування перед виступом: за хвилину хор виступатиме на сцені  Концертного залу Симфонічного оркестру Національного радіо Польщі.";
 export const HERO_TEXT_END = "Це наша історія.";
-export const EXPLORE = "Досліджуйте";
-export const CHOR = "Chor";
-
-export const CHOOSE_A_YEAR = "Виберіть рік";
-// export const YEAR_SYMBOL = 'р'
-export const SCROLL = "Прокрутка";
-
-export const LIGHT = "Світла";
-export const DARK = "Темна";
-export const SYSTEM = "Системна";
-
-export const GALLERY = "Галерея";
-export const CONCERTS = "Концерти";
-
-export const FUTURES = "Майбутні";
-export const PAST = "Минулі";
-export const EVENTS_HASH_ENDPOINT = "/event#";
-// export const EVENTS_YEAR_QUERY_ENDPOINT = '/event?year='
-
-export const SOCIAL_MEDIA = {
-  FACEBOOK: {
-    URL: "https://www.facebook.com/chorvyrij",
-    LABEL: "Facebook",
-    TEXT: "Facebook",
-  },
-  YOUTUBE: {
-    URL: "https://www.youtube.com/@chorvyrij",
-    LABEL: "YouTube",
-    TEXT: "YouTube",
-  },
-  INSTAGRAM: {
-    URL: "https://www.instagram.com/chor_vyrij/",
-    LABEL: "Instagram",
-    TEXT: "Instagram",
-  },
-} as const;
-
 export const DESIGNER_URL = "https://github.com/AMalenkij:";
