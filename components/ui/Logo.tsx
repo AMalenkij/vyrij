@@ -1,10 +1,10 @@
 import Link from "next/link";
 import LogoIcon from "@/components/icons/Logo";
-import { HOME_ROUTE } from "@/constants/routes";
+import { ROUTES_CONFIG } from "@/constants/routes";
 
 export default function Logo() {
   return (
-    <Link href={HOME_ROUTE} className="flex items-center gap-2">
+    <Link href={ROUTES_CONFIG.HOME} className="flex items-center gap-2">
       <span className="text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
         Chor
       </span>
