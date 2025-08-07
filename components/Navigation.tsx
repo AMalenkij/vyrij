@@ -46,7 +46,7 @@ export default function Navigation({ routes, className }: NavigationProps) {
             title={label}
           >
             {active ? (
-              <span>{label}</span>
+              <p className="text-start">{label}</p>
             ) : (
               <Link href={localizedHref}>{label}</Link>
             )}
