@@ -1,6 +1,5 @@
 import { SOCIAL_MEDIA } from "@/constants/app-content";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import ExternalLink from "@/components/ui/ExternalLink";
 
 interface SocialMediaSectionProps {
   title?: string;
@@ -18,17 +17,14 @@ export default function SocialMediaSection({
       </h3>
       <nav className="flex flex-col space-y-2" aria-label="Social media links">
         {SOCIAL_MEDIA.map(({ url, label, text }) => (
-          <Link
+          <ExternalLink
             key={text}
             href={url}
-            target="_blank"
-            rel="noopener noreferrer"
             aria-label={label}
+            className="px-0"
           >
-            <Button variant="link" size="sm" className="px-0">
-              {text}
-            </Button>
-          </Link>
+            {text}
+          </ExternalLink>
         ))}
       </nav>
     </div>
