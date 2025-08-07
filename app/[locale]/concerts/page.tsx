@@ -26,73 +26,75 @@ export default async function Concerts() {
   const tConcerts = await getTranslations("Concerts");
 
   return (
-    <>
-      <div className="container mx-auto min-h-screen">
-        <SubHeader
-          title={tConcerts("subHeader")}
-          counter={allCount}
-          sectionName={tConcerts("sectionName")}
-        />
-        <Accordion
-          type="single"
-          className="w-full"
-          defaultValue="Futures"
-          collapsible
-        >
-          <AccordionItem value="Futures">
-            <AccordionTrigger>
-              <div className="flex gap-x-1">
-                <p className="font-light text-sm md:text-sm">
-                  {"{ "}
-                  {futureCount.data}
-                  {" }"}
-                </p>
-                <h3 className="text-xl md:text-2xl ">{tConcerts("futures")}</h3>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent>
-              {futureData.data && futureData.data.length > 0 ? (
-                futureData.data?.map((concert, index) => (
+    <div className="container mx-auto min-h-screen">
+      <SubHeader
+        title={tConcerts("subHeader")}
+        counter={allCount}
+        sectionName={tConcerts("sectionName")}
+      />
+      <Accordion
+        type="single"
+        className="w-full"
+        defaultValue="Futures"
+        collapsible
+      >
+        <AccordionItem value="Futures">
+          <AccordionTrigger>
+            <div className="flex gap-x-1">
+              <p className="font-light text-sm md:text-sm">
+                {"{ "}
+                {futureCount.data}
+                {" }"}
+              </p>
+              <h3 className="text-xl md:text-2xl ">{tConcerts("futures")}</h3>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent>
+            {futureData.data.length > 0 ? (
+              futureData.data.map(
+                ({ _id, date, time, title, location }, index) => (
                   <ConcertCard
-                    key={`Future-${concert._id}`}
+                    key={`Future-${_id}`}
                     index={index}
-                    date={concert.date}
-                    time={concert.time || null}
-                    title={concert?.title}
-                    location={concert.location || null}
+                    date={date}
+                    time={time || null}
+                    title={title}
+                    location={location || null}
                   />
-                ))
-              ) : (
-                <p className="ml-3 text-lg">{tConcerts("noConcerts")}</p>
-              )}
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="Past">
-            <AccordionTrigger>
-              <div className="flex gap-x-1">
-                <p className="font-light text-sm md:text-sm">
-                  {"{ "}
-                  {pastCount.data}
-                  {" }"}
-                </p>
-                <h3 className="text-xl md:text-2xl ">{tConcerts("past")}</h3>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent>
-              {pastData.data?.map((concert, index) => (
+                ),
+              )
+            ) : (
+              <p className="ml-3 text-lg">{tConcerts("noConcerts")}</p>
+            )}
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="Past">
+          <AccordionTrigger>
+            <div className="flex gap-x-1">
+              <p className="font-light text-sm md:text-sm">
+                {"{ "}
+                {pastCount.data}
+                {" }"}
+              </p>
+              <h3 className="text-xl md:text-2xl ">{tConcerts("past")}</h3>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent>
+            {pastData.data?.map(
+              ({ _id, date, time, title, location }, index) => (
                 <ConcertCard
-                  key={`Past-${concert._id}`}
+                  key={`Past-${_id}`}
                   index={index}
-                  date={concert.date}
-                  time={concert.time || null}
-                  title={concert?.title}
-                  location={concert.location || null}
+                  date={date}
+                  time={time || null}
+                  title={title}
+                  location={location || null}
                 />
-              ))}
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </div>
-    </>
+              ),
+            )}
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
   );
 }
