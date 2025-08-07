@@ -31,9 +31,10 @@
     "backToHome": "Return to the main page"
   },
   "Concerts": {
+    "subHeader": "Concerts",
+    "sectionName": "Our Concerts",
     "futures": "Futures",
     "past": "Past",
-    "subHeader": "Concerts",
     "noConcerts": "There are no scheduled concerts at the moment."
   },
   "Footer": {

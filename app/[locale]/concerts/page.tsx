@@ -13,14 +13,7 @@ import {
   pastEventsCountQuery,
   pastEventsQuery,
 } from "@/sanity/lib/queries";
-
-const texts = {
-  title: "Concerts",
-  sectionName: "Наши концерты",
-  futures: "Futures",
-  past: "Past",
-  noConcerts: "noConcerts",
-};
+import { getTranslations } from "next-intl/server";
 
 export default async function Concerts() {
   const [futureData, pastData, futureCount, pastCount] = await Promise.all([
@@ -30,13 +23,15 @@ export default async function Concerts() {
     sanityFetch({ query: pastEventsCountQuery }),
   ]);
   let allCount = futureCount.data + pastCount.data;
+  const tConcerts = await getTranslations("Concerts");
+
   return (
     <>
       <div className="container mx-auto min-h-screen">
         <SubHeader
-          title={texts.title}
+          title={tConcerts("subHeader")}
           counter={allCount}
-          sectionName={texts.sectionName}
+          sectionName={tConcerts("sectionName")}
         />
         <Accordion
           type="single"
@@ -52,7 +47,7 @@ export default async function Concerts() {
                   {futureCount.data}
                   {" }"}
                 </p>
-                <h3 className="text-xl md:text-2xl ">{texts.futures}</h3>
+                <h3 className="text-xl md:text-2xl ">{tConcerts("futures")}</h3>
               </div>
             </AccordionTrigger>
             <AccordionContent>
@@ -68,7 +63,7 @@ export default async function Concerts() {
                   />
                 ))
               ) : (
-                <p className="ml-3 text-lg">{texts.noConcerts}</p>
+                <p className="ml-3 text-lg">{tConcerts("noConcerts")}</p>
               )}
             </AccordionContent>
           </AccordionItem>
@@ -80,7 +75,7 @@ export default async function Concerts() {
                   {pastCount.data}
                   {" }"}
                 </p>
-                <h3 className="text-xl md:text-2xl ">{texts.past}</h3>
+                <h3 className="text-xl md:text-2xl ">{tConcerts("past")}</h3>
               </div>
             </AccordionTrigger>
             <AccordionContent>
