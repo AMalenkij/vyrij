@@ -1,0 +1,67 @@
+{
+  "Metadata": {
+    "title": "",
+    "description": "",
+    "keywords": ""
+  },
+  "Header": {
+    "MobileMenu": {
+      "SheetDescription": "Меню",
+      "MobileMenu": "Мобільне меню",
+      "ToggleMenu": "Перемкнути меню"
+    },
+    "ModeToggle": {
+      "lightLabel": "Світла",
+      "darkLabel": "Темна",
+      "systemLabel": "Система",
+      "toggleTheme": "Перемкнути тему"
+    },
+    "LanguageToggle": {
+      "changeLanguage": "Змінити мову",
+      "english": "Англійська",
+      "polski": "Польська",
+      "ukrainian": "Українська"
+    }
+  },
+  "Nav": {
+    "home": "Головна",
+    "events": "Новини",
+    "concerts": "Концерти",
+    "gallery": "Галерея",
+    "backToHome": "Повернутися на головну сторінку"
+  },
+  "Concerts": {
+    "futures": "Майбутні",
+    "past": "Минулі",
+    "subHeader": "Концерти",
+    "noConcerts": "На даний момент немає запланованих концертів."
+  },
+  "Footer": {
+    "about": {
+      "title": "Хор \"Вирій\"",
+      "description": "Український академічний хор з багаторічною історією та традиціями. Ми зберігаємо та популяризуємо українську хорову культуру."
+    },
+    "contact": {
+      "title": "Контакти",
+      "email": "chorvyrij@gmail.com",
+      "phone": "+380 XX XXX XX XX",
+      "address": {
+        "line1": "вул. Музична, 15",
+        "line2": "Київ, Україна"
+      }
+    },
+    "social": {
+      "title": "Соціальні мережі"
+    },
+    "navigation": {
+      "title": "Навігація"
+    },
+    "copyright": {
+      "text": "Хор \"Вирій\". Всі права захищені."
+    },
+    "legal": {
+      "privacy": "Політика конфіденційності",
+      "terms": "Умови використання"
+    }
+  }
+}

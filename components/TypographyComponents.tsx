@@ -1,4 +1,5 @@
 import { PortableTextComponents } from "@portabletext/react";
+import ExternalLink from "./ui/ExternalLink";
 
 export const TypographyComponents: PortableTextComponents = {
   block: {
@@ -37,6 +38,17 @@ export const TypographyComponents: PortableTextComponents = {
         {children}
       </code>
     ),
+    link: ({ children, value }) => {
+      const { href } = value || {};
+      if (!href) return <span>{children}</span>;
+
+      // Check if it's an external link
+      const isExternal = href.startsWith("http") || href.startsWith("//");
+
+      if (isExternal) {
+        return <ExternalLink href={href}>{children}</ExternalLink>;
+      }
+    },
   },
   list: {
     bullet: ({ children }) => (
