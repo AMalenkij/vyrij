@@ -28,7 +28,7 @@ export default function MajorCard({ year, title, children }: MajorCardProps) {
   const updateURL = useCallback(() => {
     if (isInView) {
       const currentYear = searchParams.get(YEAR);
-      if (currentYear !== year.toString()) {
+      if (currentYear !== year) {
         const newUrl = `${EVENTS_YEAR_QUERY_ENDPOINT}${year}`;
         router.replace(newUrl, { scroll: false });
       }
