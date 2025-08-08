@@ -4,17 +4,13 @@ type ConcertType = {
   index: number;
   date: string;
   time: string | null;
-  title: string;
+  title: string | null;
   location: {
     place: string;
     address: string;
   } | null;
+  translation: Record<string, string>;
 };
-
-const CARD_TEXT = {
-  NO_LOCATION: "Место еще не определено",
-  NO_TIME: "Время уточняется",
-} as const;
 
 export default function ConcertCard({
   date,
@@ -22,12 +18,12 @@ export default function ConcertCard({
   time,
   location,
   index = 0,
+  translation,
 }: ConcertType) {
   const dateObj = new Date(date);
   const day = dateObj.getDate().toString().padStart(2, "0");
   const month = dateObj.toLocaleDateString("en", { month: "short" });
   const year = dateObj.getFullYear().toString();
-
   const isEvenIndex = index % 2 === 0;
 
   return (
@@ -50,22 +46,32 @@ export default function ConcertCard({
               !time && "text-sm opacity-75 lg:text-base",
             )}
           >
-            {time || CARD_TEXT.NO_TIME}
+            {time || translation.noTime}
           </div>
         </div>
         <div className="grid items-center lf:gap-x-20 gap-y-1 lg:flex lg:basis-full">
           <h2 className="text-2xl lg:basis-4/5 lg:px-10 lg:text-center lg:font-semibold lg:text-2xl">
-            {title}
+            {title || translation.noTitle}
           </h2>
           <div className="basis-4/5">
             {location ? (
               <>
-                <div className="font-bold">{location.place}</div>
-                <div>{location.address}</div>
+                <div className="font-bold">
+                  <span className="mr-1 text-sm opacity-75">
+                    {translation.locationTitle}:
+                  </span>
+                  {location.place}
+                </div>
+                <div>
+                  <span className="mr-1 text-sm opacity-75">
+                    {translation.addressTitle}:
+                  </span>
+                  {location.address}
+                </div>
               </>
             ) : (
               <div className="text-sm italic opacity-75">
-                {CARD_TEXT.NO_LOCATION}
+                {translation.noLocation}
               </div>
             )}
           </div>

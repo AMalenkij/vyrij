@@ -35,7 +35,12 @@
     "sectionName": "Nasze koncerty",
     "futures": "Przyszły",
     "past": "Przeszłość",
-    "noConcerts": "W tej chwili nie ma zaplanowanych koncertów."
+    "noConcerts": "W tej chwili nie ma zaplanowanych koncertów.",
+    "noLocation": "Miejsce jeszcze nie ustalone",
+    "noTime": "Godzina do potwierdzenia",
+    "noTitle": "Tytuł jeszcze nie ustalony",
+    "locationTitle": "Miejsce",
+    "addressTitle": "Adres"
   },
   "Gallery": {
     "title": "Galeria",

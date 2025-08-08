@@ -35,7 +35,12 @@
     "sectionName": "Our Concerts",
     "futures": "Futures",
     "past": "Past",
-    "noConcerts": "There are no scheduled concerts at the moment."
+    "noConcerts": "There are no scheduled concerts at the moment.",
+    "noLocation": "Location to be determined",
+    "noTime": "Time to be confirmed",
+    "noTitle": "Title to be determined",
+    "locationTitle": "Venue",
+    "addressTitle": "Address"
   },
   "Gallery": {
     "title": "Gallery",
