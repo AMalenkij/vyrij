@@ -1,31 +1,42 @@
 import { defineType, defineField } from "sanity";
 
 export const events = defineType({
-  name: "events", // Имя схемы
-  title: "Events", // Заголовок схемы в Studio
-  type: "document", // Тип документа
+  name: "events",
+  title: "Events",
+  type: "document",
+  description:
+    "Події хору: концерти, записи, внутрішні моменти колективу та інші значущі події в житті хорового колективу",
   fields: [
     defineField({
-      name: "title", // Имя поля
-      title: "Название", // Заголовок для Studio
-      type: "string", // Тип данных
-      validation: (Rule) => Rule.required(), // Валидатор
+      name: "eventTitle",
+      title: "Назва події (для генерації slug)",
+      description:
+        "Основна назва події (використовується для відображення та генерації посилання)",
+      type: "localeString",
+      validation: (Rule) =>
+        Rule.fields({
+          ua: (fieldRule) => fieldRule.required(),
+          en: (fieldRule) => fieldRule.required(),
+          pl: (fieldRule) => fieldRule.required(),
+        }),
     }),
     defineField({
-      name: "slug", // Имя поля для slug
-      title: "Slug", // Заголовок для Studio
-      type: "slug", // Тип данных (slug)
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      description:
+        "Унікальна частина URL. Автоматично генерується з англійської назви події",
       options: {
-        source: "title", // Значение будет генерироваться на основе поля "title"
+        source: "eventTitle.en", // Источник - английская версия названия
         maxLength: 96, // Максимальная длина slug
       },
       validation: (Rule) => Rule.required(), // Валидатор, который делает поле обязательным
     }),
     defineField({
-      name: "description", // Имя поля для описания
-      title: "Описание", // Заголовок
-      type: "array", // Тип данных (blockContent, который мы только что создали)
-      of: [{ type: "block" }],
+      name: "eventDescription",
+      title: "Описание",
+      description: "Детальний опис події з підтримкою форматування та медіа",
+      type: "localeBlockContent",
     }),
     {
       title: "Date",
@@ -40,53 +51,53 @@ export const events = defineType({
       name: "time",
       title: "Time",
       type: "string",
-      description: "Введите время в формате HH:mm, например, 14:30",
+      description: "Час початку події у форматі HH:mm (наприклад, 14:30)",
       placeholder: "HH:mm",
       validation: (Rule) =>
         Rule.regex(/^([01]\d|2[0-3]):[0-5]\d$/).error(
-          "Пожалуйста, введите действительное время в формате HH:mm (00:00 до 23:59)",
+          "Будь ласка, введіть дійсний час у форматі HH:mm (00:00 до 23:59)",
         ),
     }),
     defineField({
       name: "location",
-      title: "Локация",
+      title: "Локація",
+      description: "Місце проведення події (посилання на локацію)",
       type: "reference",
       to: [{ type: "location" }],
     }),
     defineField({
       name: "media",
-      title: "Медиа",
+      title: "Медіа",
+      description: "Фотографії, відео пов'язані з подією",
       type: "array",
       of: [{ type: "reference", to: [{ type: "media" }] }],
     }),
     defineField({
-      name: "tags", // Имя поля для тегов
-      title: "Теги", // Заголовок
-      type: "array", // Тип данных (массив)
-      of: [
-        { type: "reference", to: [{ type: "tag" }] }, // Ссылка на тег
-      ],
-      validation: (Rule) => Rule.required(), // Валидатор
+      name: "tags",
+      title: "Теги",
+      type: "array",
+      description: "Категорії або ключові слова для класифікації події",
+      of: [{ type: "reference", to: [{ type: "tag" }] }],
+      validation: (Rule) => Rule.required(),
     }),
   ],
   // Конфигурация превью для Studio
   preview: {
     select: {
-      title: "title",
+      eventTitle: "eventTitle.ua",
       date: "date",
       time: "time",
-      // Правильный способ - для первого тега из массива
       tag0: "tags.0.name",
       tag1: "tags.1.name",
       tag2: "tags.2.name",
     },
-    prepare({ title, date, time, tag0, tag1, tag2 }) {
+    prepare({ eventTitle, date, time, tag0, tag1, tag2 }) {
       // Собираем все теги которые есть
       const tags = [tag0, tag1, tag2].filter(Boolean);
 
       // Форматируем дату
       const dateFormatted = date
-        ? new Date(date).toLocaleDateString("ru-RU", {
+        ? new Date(date).toLocaleDateString("uk-UA", {
             day: "numeric",
             month: "numeric",
             year: "numeric",
@@ -116,7 +127,7 @@ export const events = defineType({
       }
 
       return {
-        title: title,
+        title: eventTitle,
         subtitle: subtitle,
       };
     },

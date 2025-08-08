@@ -3,7 +3,7 @@ import { defineQuery } from "next-sanity";
 export const futureEventsQuery =
   defineQuery(`*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date >= now()] {
     _id,
-    title,
+    "eventTitle": eventTitle[$locale],
     date,
     time,
     "location": location->{
@@ -15,7 +15,7 @@ export const futureEventsQuery =
 export const pastEventsQuery =
   defineQuery(`*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()] | order(date desc) {
     _id,
-    title,
+    "eventTitle": eventTitle[$locale],
     date,
     time,
     "location": location->{
@@ -46,11 +46,11 @@ export const galleryPhotosCountQuery = defineQuery(
 export const majorEventsQuery = defineQuery(`
   *[_type == "events" && references(*[_type == "tag" && name == "major"]._id)] | order(date asc) {
     _id,
-    title,
+    "eventTitle": eventTitle[$locale],
     date,
-     "media": media[]->{
-       imageFile
-     }
+    "media": media[]->{
+      imageFile
+    }
   }
 `);
 
@@ -59,7 +59,7 @@ export const minorEventsQuery = defineQuery(`
     _id,
     title,
     date,
-    description,
+    "eventDescription": eventDescription[$locale],
     "media": media[]->{
       imageFile,
       videoUrl,
