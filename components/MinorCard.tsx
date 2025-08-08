@@ -94,12 +94,7 @@ export default function MinorCard({
   return (
     <article className="container mx-auto my-16 px-1 md:px-0 ">
       <header>
-        <h2 className="mb-4 font-semibold text-2xl lg:text-3xl">
-          {new Date(date).toLocaleDateString("uk-UA", {
-            month: "long",
-            day: "numeric",
-          })}
-        </h2>
+        <h2 className="mb-4 font-semibold text-2xl lg:text-3xl">{date}</h2>
       </header>
       <div className="whitespace-pre-line text-lg lg:text-xl">
         {description ? (
