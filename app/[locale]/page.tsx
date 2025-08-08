@@ -4,10 +4,16 @@ import HomeClient from "@/components/HomeClient";
 import EventsTimeline from "@/components/EventsTimeline";
 import Hero from "@/components/Hero";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { type Locale } from "@/types/app";
 
-export default function Home() {
-  const tHero = useTranslations("Hero");
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  const tHero = await getTranslations("Hero");
   const heroTranslations = {
     title: tHero("title"),
     subtitle: tHero("subtitle"),
@@ -38,7 +44,7 @@ export default function Home() {
 
       <HomeClient translations={homeClientTranslations} />
       <ParallaxGallery year="2019" translations={parallaxTranslations} />
-      <EventsTimeline excludeYears="2019" />
+      <EventsTimeline locale={locale} excludeYears="2019" />
     </>
   );
 }

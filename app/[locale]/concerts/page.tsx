@@ -14,16 +14,30 @@ import {
   pastEventsQuery,
 } from "@/sanity/lib/queries";
 import { getTranslations } from "next-intl/server";
+import { type Locale } from "@/types/app";
 
-export default async function Concerts() {
+export default async function Concerts({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
   const [futureData, pastData, futureCount, pastCount] = await Promise.all([
-    sanityFetch({ query: futureEventsQuery }),
-    sanityFetch({ query: pastEventsQuery }),
+    sanityFetch({ query: futureEventsQuery, params: { locale } }),
+    sanityFetch({ query: pastEventsQuery, params: { locale } }),
     sanityFetch({ query: futureEventsCountQuery }),
     sanityFetch({ query: pastEventsCountQuery }),
   ]);
   let allCount = futureCount.data + pastCount.data;
   const tConcerts = await getTranslations("Concerts");
+
+  const concertTranslations = {
+    noLocation: tConcerts("noLocation"),
+    noTime: tConcerts("noTime"),
+    noTitle: tConcerts("noTitle"),
+    locationTitle: tConcerts("locationTitle"),
+    addressTitle: tConcerts("addressTitle"),
+  };
 
   return (
     <div className="container mx-auto min-h-screen">
@@ -52,14 +66,15 @@ export default async function Concerts() {
           <AccordionContent>
             {futureData.data.length > 0 ? (
               futureData.data.map(
-                ({ _id, date, time, title, location }, index) => (
+                ({ _id, date, time, eventTitle, location }, index) => (
                   <ConcertCard
                     key={`Future-${_id}`}
                     index={index}
                     date={date}
-                    time={time || null}
-                    title={title}
-                    location={location || null}
+                    time={time}
+                    title={eventTitle}
+                    location={location}
+                    translation={concertTranslations}
                   />
                 ),
               )
@@ -81,14 +96,15 @@ export default async function Concerts() {
           </AccordionTrigger>
           <AccordionContent>
             {pastData.data?.map(
-              ({ _id, date, time, title, location }, index) => (
+              ({ _id, date, time, eventTitle, location }, index) => (
                 <ConcertCard
                   key={`Past-${_id}`}
                   index={index}
                   date={date}
-                  time={time || null}
-                  title={title}
-                  location={location || null}
+                  time={time}
+                  title={eventTitle}
+                  location={location}
+                  translation={concertTranslations}
                 />
               ),
             )}
