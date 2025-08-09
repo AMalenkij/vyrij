@@ -54,6 +54,13 @@ export const majorEventsQuery = defineQuery(`
   }
 `);
 
+export const majorEventsYearsQuery = defineQuery(`
+  *[_type == "events" && references(*[_type == "tag" && name == "major"]._id)] | order(date asc) {
+    _id,
+    date
+  }
+`);
+
 export const minorEventsQuery = defineQuery(`
   *[_type == "events" && references(*[_type == "tag" && name == "minor" || name == "major"]._id)] | order(date asc) {
     _id,
