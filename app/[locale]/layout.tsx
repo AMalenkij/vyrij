@@ -69,11 +69,11 @@ export async function generateMetadata({
       images: OG_IMAGE,
     },
     alternates: {
-      canonical: SITE_URL,
+      canonical: locale === "ua" ? SITE_URL : `${SITE_URL}/${locale}`,
       languages: {
+        uk: `${SITE_URL}/ua`, // Ukrainian default
         en: `${SITE_URL}/en`,
         pl: `${SITE_URL}/pl`,
-        uk: `${SITE_URL}/ua`,
       },
       types: {
         "application/rss+xml": `${SITE_URL}/rss.xml`,
@@ -107,7 +107,7 @@ export default async function RootLayout({
   // const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={LOCALE_MAP[locale].split("-")[0]} suppressHydrationWarning>
       <Head>
         <link
           rel="apple-touch-icon"
