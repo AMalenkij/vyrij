@@ -33,7 +33,7 @@ export default async function Page({
         counter={events.length.toString()}
       />
 
-      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="grid gap-6 lg:grid-cols-2">
         {events.map(({ tags, media, date, slug, eventTitle, _id }) => {
           const tagNames = tags?.slice(0, 4) || [];
           const imageFile = media?.[0].imageFile;
@@ -59,7 +59,9 @@ export default async function Page({
                     </div>
                   </div>
                   <div className="flex items-center"></div>
-                  <h3 className="mt-4 font-semibold text-4xl">{title}</h3>
+                  <h3 className="mt-4 font-semibold text-xl md:text-2xl lg:text-4xl">
+                    {title}
+                  </h3>
                 </CardContent>
                 <CardFooter className="p-0">
                   <div className="relative aspect-[16/9] w-full">
