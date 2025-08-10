@@ -46,7 +46,8 @@
     "noMedia": "Зображення відсутнє",
     "noDescription": "Текст ще не перекладено або не додано",
     "backToEvents": "Назад до подій",
-    "atTime": "о"
+    "atTime": "о",
+    "noTitle": "Назва ще не визначена"
   },
   "Concerts": {
     "subHeader": "Концерти",
