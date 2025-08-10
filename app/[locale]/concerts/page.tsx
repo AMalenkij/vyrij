@@ -75,6 +75,7 @@ export default async function Concerts({
                     title={eventTitle}
                     location={location}
                     translation={concertTranslations}
+                    locale={locale}
                   />
                 ),
               )
@@ -105,6 +106,7 @@ export default async function Concerts({
                   title={eventTitle}
                   location={location}
                   translation={concertTranslations}
+                  locale={locale}
                 />
               ),
             )}

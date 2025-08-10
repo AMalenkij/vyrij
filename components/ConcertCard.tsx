@@ -1,4 +1,6 @@
 import { cn } from "@/lib/utils";
+import { type Locale } from "@/types/app";
+import { LOCALE_MAP } from "@/constants/i18n";
 
 type ConcertType = {
   index: number;
@@ -10,7 +12,9 @@ type ConcertType = {
     address: string;
   } | null;
   translation: Record<string, string>;
+  locale: Locale;
 };
+
 
 export default function ConcertCard({
   date,
@@ -19,10 +23,13 @@ export default function ConcertCard({
   location,
   index = 0,
   translation,
+  locale,
 }: ConcertType) {
   const dateObj = new Date(date);
   const day = dateObj.getDate().toString().padStart(2, "0");
-  const month = dateObj.toLocaleDateString("en", { month: "short" });
+  const month = dateObj.toLocaleDateString(LOCALE_MAP[locale], {
+    month: "short",
+  });
   const year = dateObj.getFullYear().toString();
   const isEvenIndex = index % 2 === 0;
 
