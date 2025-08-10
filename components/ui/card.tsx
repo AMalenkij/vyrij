@@ -10,7 +10,7 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
         "relative isolate overflow-hidden",
         "bg-gray-100/10 dark:bg-gray-900/10",
         "backdrop-blur-xl backdrop-saturate-100",
-        "border border-white/2 dark:border-white/2",
+        "border border-white/5 dark:border-white/5",
         // "shadow-lg shadow-blue-500/10 dark:shadow-blue-900/20",
 
         // Текстура фростед-стекла (легкая матовая текстура)
