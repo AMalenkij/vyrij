@@ -1,8 +1,16 @@
 {
+  "Common": {
+    "close": "Close",
+    "loading": "Loading…"
+  },
   "Metadata": {
-    "title": "",
-    "description": "",
-    "keywords": ""
+    "title": "Vyrij Choir",
+    "description": "A Ukrainian academic choir with a long-standing history and traditions.",
+    "keywords": "choir, Vyrij, Ukrainian, music, concerts, culture"
+  },
+  "Site": {
+    "slogan": "A person seems not to fly, yet has wings — L. Kostenko",
+    "description": "These words have become the symbol of the Vyrij choir, inspiring members and giving faith in a better future."
   },
   "Header": {
     "MobileMenu": {
@@ -56,7 +64,18 @@
     "title": "Gallery",
     "sectionName": "Our Photos",
     "imageAlt": "Gallery image",
-    "noImage": "No image available"
+    "noImage": "No photos found",
+    "dialogTitle": "Photo",
+    "filters": {
+      "sort": {
+        "title": "Sort photos",
+        "description": "Choose order of photos: newest first or oldest first.",
+        "newestFirst": "Newest first",
+        "oldestFirst": "Oldest first"
+      },
+      "tags": { "title": "Filter by tags" },
+      "years": { "title": "Filter by years" }
+    }
   },
   "Footer": {
     "about": {

@@ -1,8 +1,16 @@
 {
+  "Common": {
+    "close": "Zamknij",
+    "loading": "Ładowanie…"
+  },
   "Metadata": {
-    "title": "",
-    "description": "",
-    "keywords": ""
+    "title": "Chór Wyrij",
+    "description": "Ukraiński chór akademicki z wieloletnią historią i tradycją.",
+    "keywords": "chór, Wyrij, ukraiński, muzyka, koncerty, kultura"
+  },
+  "Site": {
+    "slogan": "Człowiek niby nie lata, a ma skrzydła — L. Kostenko",
+    "description": "Te słowa stały się symbolem chóru Wyrij, inspirując członków i dając wiarę w lepszą przyszłość."
   },
   "Header": {
     "MobileMenu": {
@@ -56,7 +64,18 @@
     "title": "Galeria",
     "sectionName": "Nasze zdjęcia",
     "imageAlt": "Zdjęcie z galerii",
-    "noImage": "Brak dostępnego zdjęcia"
+    "noImage": "Nie znaleziono zdjęć",
+    "dialogTitle": "Zdjęcie",
+    "filters": {
+      "sort": {
+        "title": "Sortuj zdjęcia",
+        "description": "Wybierz kolejność zdjęć: najpierw najnowsze albo najstarsze.",
+        "newestFirst": "Najnowsze pierwsze",
+        "oldestFirst": "Najstarsze pierwsze"
+      },
+      "tags": { "title": "Filtruj po tagach" },
+      "years": { "title": "Filtruj po latach" }
+    }
   },
   "Footer": {
     "about": {

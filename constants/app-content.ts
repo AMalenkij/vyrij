@@ -93,3 +93,10 @@ export const YEAR = "year";
 export const EVENTS_YEAR_QUERY_ENDPOINT = "?year=";
 export const HERO_TEXT_END = "Це наша історія.";
 export const DESIGNER_URL = "https://github.com/AMalenkij:";
+
+// Site metadata
+export const SITE_NAME = "Vyrij";
+export const SITE_DOMAIN = "vyrij.vercel.app";
+export const SITE_URL = `https://${SITE_DOMAIN}`;
+export const SITE_AUTHOR = { name: "Hanna Malenka", url: SITE_URL } as const;
+export const OG_IMAGE = `${SITE_URL}/img/OGLogo.jpg`;
