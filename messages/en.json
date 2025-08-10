@@ -30,6 +30,16 @@
     "gallery": "Gallery",
     "backToHome": "Return to the main page"
   },
+  "Events": {
+    "title": "Choir Events",
+    "sectionName": "Events in the life of the collective.",
+    "noEvents": "There are currently no events",
+    "defaultTitle": "Event title",
+    "noMedia": "Image not available",
+    "noDescription": "Text has not been translated or added yet",
+    "backToEvents": "Back to events",
+    "atTime": "at"
+  },
   "Concerts": {
     "subHeader": "Concerts",
     "sectionName": "Our Concerts",

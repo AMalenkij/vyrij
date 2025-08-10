@@ -30,6 +30,16 @@
     "gallery": "Galeria",
     "backToHome": "Powrót do strony głównej"
   },
+  "Events": {
+    "title": "Wydarzenia chóru",
+    "sectionName": "Wydarzenia w życiu zespołu.",
+    "noEvents": "Obecnie brak wydarzeń",
+    "defaultTitle": "Tytuł wydarzenia",
+    "noMedia": "Brak obrazu",
+    "noDescription": "Tekst nie został jeszcze przetłumaczony lub dodany",
+    "backToEvents": "Powrót do wydarzeń",
+    "atTime": "o"
+  },
   "Concerts": {
     "subHeader": "Koncerty",
     "sectionName": "Nasze koncerty",

@@ -30,6 +30,16 @@
     "gallery": "Галерея",
     "backToHome": "Повернутися на головну сторінку"
   },
+  "Events": {
+    "title": "Події хору",
+    "sectionName": "Події в житті колективу.",
+    "noEvents": "На даний момент подій немає",
+    "defaultTitle": "Назва події",
+    "noMedia": "Зображення відсутнє",
+    "noDescription": "Текст ще не перекладено або не додано",
+    "backToEvents": "Назад до подій",
+    "atTime": "о"
+  },
   "Concerts": {
     "subHeader": "Концерти",
     "sectionName": "Наші концерти",
