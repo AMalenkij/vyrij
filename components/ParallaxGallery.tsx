@@ -1,7 +1,11 @@
 "use client";
-import { useScroll, useTransform, motion } from "framer-motion";
-import { useRef } from "react";
+
+import { useScroll, useTransform, motion, useInView } from "framer-motion";
+import { useRef, useCallback, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
+
+import { EVENTS_YEAR_QUERY_ENDPOINT, YEAR } from "@/constants/app-content";
 
 import gallery1 from "@/public/img/gallary1.webp";
 import gallery2 from "@/public/img/gallary2.webp";
@@ -18,7 +22,13 @@ export default function ParallaxGallery({
   translations: Record<string, string>;
   year: string;
 }) {
-  const container = useRef(null);
+  const container = useRef<HTMLDivElement>(null);
+  const textBlockRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(textBlockRef, { amount: 0.5 });
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start start", "end end"],
@@ -31,8 +41,22 @@ export default function ParallaxGallery({
   const scale8 = useTransform(scrollYProgress, [0, 1], [1, 11]);
   const scale9 = useTransform(scrollYProgress, [0, 1], [1, 12]);
 
-  // Изменяем логику появления текста - он появляется только в самом конце
   const textOpacity = useTransform(scrollYProgress, [0.9, 1], [0, 1]);
+
+  const updateURL = useCallback(() => {
+    if (isInView) {
+      const currentYear = searchParams.get(YEAR);
+      if (currentYear !== year) {
+        router.replace(`${EVENTS_YEAR_QUERY_ENDPOINT}${year}`, {
+          scroll: false,
+        });
+      }
+    }
+  }, [isInView, year, searchParams, router]);
+
+  useEffect(() => {
+    updateURL();
+  }, [updateURL]);
 
   let pictures = [
     {
@@ -84,11 +108,13 @@ export default function ParallaxGallery({
         "relative w-[16.8vw] md:w-[8.4vw] h-[8.4vh] top-[12.6vh] md:left-[14vw] left-[34vw]",
     },
   ];
+
   return (
     <div ref={container} className="relative h-[300vh]">
-      <div className="sticky top-0 h-screen overflow-hidden ">
+      <div className="sticky top-0 h-screen overflow-hidden">
         {/* Центрированный текст с условной активацией */}
         <motion.div
+          ref={textBlockRef}
           style={{ opacity: textOpacity }}
           className="absolute inset-0 z-10 flex items-center justify-center"
         >
