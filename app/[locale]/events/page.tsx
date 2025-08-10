@@ -70,7 +70,7 @@ export default async function Page({
                         {tagNames.map(({ _id, name }) => (
                           <Badge
                             key={_id}
-                            variant="outline"
+                            variant="secondary"
                             className="mx-1 gap-2"
                           >
                             <Tag className="h-3 w-3" />
