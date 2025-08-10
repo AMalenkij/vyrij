@@ -8,10 +8,7 @@ type SubHeaderProps = {
 
 const SubHeader: FC<SubHeaderProps> = ({ sectionName, title, counter }) => {
   return (
-    <section
-      aria-labelledby={title}
-      className="flex w-full justify-between py-12 text-white"
-    >
+    <section aria-labelledby={title} className="flex w-full justify-between py-12">
       <div className="w-full space-y-3 ">
         <p className="text-muted-foreground text-xs sm:text-sm md:ml-3.5 lg:ml-3.5">
           {sectionName}
