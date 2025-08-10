@@ -6,12 +6,25 @@ import Hero from "@/components/Hero";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { type Locale } from "@/types/app";
+import { majorEventsYearsQuery } from "@/sanity/lib/queries";
+import { sanityFetch } from "@/sanity/lib/live";
+import { Scrollbar } from "@/components/Scrollbar";
 
 export default async function Home({
   params,
 }: {
   params: Promise<{ locale: Locale }>;
 }) {
+  const majorEventsYearsResult = await sanityFetch({
+    query: majorEventsYearsQuery,
+  });
+
+  const majorEventsYears = majorEventsYearsResult.data;
+
+  const allMajorYears = majorEventsYears.map(({ date }: { date: string }) =>
+    new Date(date).getFullYear().toString(),
+  );
+
   const { locale } = await params;
   const tHero = await getTranslations("Hero");
   const heroTranslations = {
@@ -44,6 +57,7 @@ export default async function Home({
 
       <HomeClient translations={homeClientTranslations} />
       <ParallaxGallery year="2019" translations={parallaxTranslations} />
+      <Scrollbar MajorEventYears={allMajorYears} />
       <EventsTimeline locale={locale} excludeYears="2019" />
     </>
   );
