@@ -23,7 +23,7 @@ export default async function Page({
     params: { locale },
   });
 
-  const events = eventsData.data || [];
+  const events = eventsData.data;
 
   return (
     <main className="container mx-auto">

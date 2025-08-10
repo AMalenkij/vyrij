@@ -74,7 +74,7 @@ export default async function Page({ params }: Props) {
           </div>
         )}
       </header>
-      <div className="flex gap-x-10">
+      <div className=" flex flex-col-reverse gap-x-10 lg:flex-row">
         <article className="mx-auto w-2/3">
           <section className="prose prose-gray dark:prose-invert max-w-none">
             {eventDescription ? (
