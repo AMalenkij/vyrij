@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
+import { LINKS_STYLES } from "@/constants/app-content";
 
 import { cn } from "@/lib/utils";
 
@@ -20,7 +21,7 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         linkDefault: "text-primary underline-offset-4 hover:underline",
-        link: "relative uppercase inline-block text-foreground leading-8 no-underline transition-colors duration-300 before:content-[''] before:absolute before:bottom-[-0.5rem] before:left-0 before:w-full before:h-0.5 before:bg-current before:rounded-sm before:opacity-0 before:transition-all before:duration-400 hover:before:opacity-100 hover:before:transform hover:before:-translate-y-1",
+        link: LINKS_STYLES,
       },
       size: {
         default: "h-9 py-2 has-[>svg]:px-3",
