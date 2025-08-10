@@ -56,7 +56,6 @@ export const majorEventsQuery = defineQuery(`
 
 export const majorEventsYearsQuery = defineQuery(`
   *[_type == "events" && references(*[_type == "tag" && name == "major"]._id)] | order(date asc) {
-    _id,
     date
   }
 `);
@@ -73,3 +72,43 @@ export const minorEventsQuery = defineQuery(`
     }
   }
 `);
+export const eventsQuery =
+  defineQuery(`*[_type == "events" && references(*[_type == "tag" && (name == "major" || name == "minor")]._id)] | order(date desc) {
+  _id,
+  "eventTitle": eventTitle[$locale],
+  slug,
+  date,
+  time,
+  location->{
+    title
+  },
+  "media": media[]->{
+    imageFile,
+    videoUrl,
+  },
+  tags[]->{
+    _id,
+    name
+  }
+}`);
+
+export const eventQuery =
+  defineQuery(`*[_type == "events" && slug.current == $slug][0]{
+  _id,
+  "eventTitle": eventTitle[$locale],
+  "eventDescription": eventDescription[$locale],
+  date,
+  time,
+  location->{
+    title,
+    url
+  },
+  "media": media[]->{
+    imageFile,
+    videoUrl,
+  },
+  tags[]->{
+    _id,
+    name
+  }
+}`);
