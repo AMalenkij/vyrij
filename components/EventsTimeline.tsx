@@ -8,12 +8,7 @@ import MinorCard from "@/components/MinorCard";
 import AnimatedContainer from "@/components/WithViewportAnimation";
 import { urlFor } from "@/sanity/lib/sanityImage";
 import { type Locale } from "@/types/app";
-
-const localeMap: Record<Locale, string> = {
-  en: "en-US",
-  ua: "uk-UA",
-  pl: "pl-PL",
-};
+import { LOCALE_MAP } from "@/constants/i18n";
 
 export default async function EventsTimeline({
   excludeYears,
@@ -29,6 +24,7 @@ export default async function EventsTimeline({
 
   const majorEvents = majorEventsResult.data;
   const minorEvents = minorEventsResult.data;
+
   return (
     <>
       {majorEvents.map(({ _id, date, media, eventTitle }) => {
@@ -68,7 +64,7 @@ export default async function EventsTimeline({
             {filteredMinorEvents.map(
               ({ _id, eventDescription, date, media }) => {
                 const formattedMinorDate = new Date(date).toLocaleDateString(
-                  localeMap[locale],
+                  LOCALE_MAP[locale],
                   {
                     month: "long",
                     day: "numeric",
