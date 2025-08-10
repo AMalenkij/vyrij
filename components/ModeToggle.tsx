@@ -37,7 +37,7 @@ export default function ModeToggle({
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="icon" className="text-stone-50">
+          <Button variant="outline" size="icon">
             <Sun className="dark:-rotate-90 h-4 w-4 dark:scale-0" />
             <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             <span className="sr-only">{toggleTheme}</span>

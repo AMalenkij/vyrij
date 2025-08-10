@@ -20,7 +20,7 @@ export function Scrollbar({
     : [MajorEventYears];
 
   return (
-    <div className="sticky top-1/3 left-20 z-100 h-1/2 w-100 font-accent font-bold text-xl">
+    <div className="lg:blok sticky top-1/3 left-20 z-100 hidden h-1/2 w-100 font-accent font-bold text-xl">
       <ul className="list-none">
         {years.map((year) => {
           const isCurrentYear = year.toString() === currentSelectedYear;
@@ -30,8 +30,8 @@ export function Scrollbar({
                 href={`${EVENTS_HASH_ENDPOINT}${year}`}
                 className={`transition-colors duration-300 ${
                   isCurrentYear
-                    ? "pointer-events-none text-red-400"
-                    : "hover:text-white"
+                    ? "pointer-events-none text-red-500"
+                    : "hover:text-foreground"
                 }`}
               >
                 {year}

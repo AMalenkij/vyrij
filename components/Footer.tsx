@@ -41,7 +41,7 @@ export default function Footer() {
       }}
     >
       <footer className="glass-surface fixed bottom-0 h-screen w-full bg-gradient-to-b from-red-500/60 to-red-600/30 px-6 pb-4 md:pb-6">
-        <div className="container mx-auto mt-14 text-white md:mt-32">
+        <div className="container mx-auto mt-14 md:mt-32">
           {/* Main content grid */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-12">
             {/* About section */}

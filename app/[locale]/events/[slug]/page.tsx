@@ -67,14 +67,14 @@ export default async function Page({ params }: Props) {
         {eventData.tags && eventData.tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-2">
             {eventData.data.tags.map(({ _id, name }) => (
-              <Badge key={_id} variant="outline">
+              <Badge key={_id} variant="secondary">
                 {name}
               </Badge>
             ))}
           </div>
         )}
       </header>
-      <div className="flex">
+      <div className="flex gap-x-10">
         <article className="mx-auto w-2/3">
           <section className="prose prose-gray dark:prose-invert max-w-none">
             {eventDescription ? (
@@ -87,7 +87,7 @@ export default async function Page({ params }: Props) {
             )}
           </section>
         </article>
-        <div className="relative mb-6 aspect-[16/9] w-full overflow-hidden rounded-lg">
+        <div className="relative mb-6 aspect-[16/9] w-full overflow-hidden">
           {imgUrl ? (
             <Image
               src={imgUrl}

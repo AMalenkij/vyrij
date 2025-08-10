@@ -42,7 +42,7 @@ export default function Navigation({ routes, className }: NavigationProps) {
             asChild={!active}
             disabled={active}
             aria-current={active ? "page" : undefined}
-            className={cn("uppercase", !active && "text-white")}
+            className={cn("uppercase")}
             title={label}
           >
             {active ? (

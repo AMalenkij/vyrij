@@ -12,7 +12,7 @@ export default function ExternalLink({
   className = "",
 }: ExternalLinkButtonProps) {
   const linkStyles =
-    "relative  uppercase flex flex-col  inline-block gap-2 text-white leading-8 no-underline transition-colors duration-300 before:content-[''] before:absolute before:bottom-[-0.5rem] before:left-0 before:w-full before:h-0.5 before:bg-white before:rounded-sm before:opacity-0 before:transition-all before:duration-400 hover:before:opacity-100 hover:before:transform hover:before:-translate-y-1";
+    "relative  uppercase flex flex-col  inline-block gap-2 leading-8 no-underline transition-colors duration-300 before:content-[''] before:absolute before:bottom-[-0.5rem] before:left-0 before:w-full before:h-0.5 before:bg-primary before:rounded-sm before:opacity-0 before:transition-all before:duration-400 hover:before:opacity-100 hover:before:transform hover:before:-translate-y-1";
 
   return (
     <span>
