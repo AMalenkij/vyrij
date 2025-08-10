@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { ReactNode, useCallback, useEffect, useRef } from "react";
 
 import { EVENTS_YEAR_QUERY_ENDPOINT, YEAR } from "@/constants/app-content";
+import { YearTitle } from "@/components/YearTitle";
 
 type MajorCardProps = {
   year: string;
@@ -48,14 +49,7 @@ export default function MajorCard({ year, title, children }: MajorCardProps) {
         >
           {children}
         </motion.div>
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <div className="mb-12 font-bold text-base text-static_white lg:text-xl 2xl:text-3xl">
-            {year}
-          </div>
-          <div className="px-10 text-center font-accent text-7xl text-static_white lg:px-28 lg:text-8xl xl:text-9xl 2xl:text-10xl">
-            {title}
-          </div>
-        </div>
+        <YearTitle year={year} title={title} />
       </div>
     </div>
   );
