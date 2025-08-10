@@ -102,9 +102,7 @@ export default function MinorCard({
             value={description as PortableTextBlock[]}
             components={TypographyComponents}
           />
-        ) : (
-          <p>Текст еще не переведен или не добавлен</p>
-        )}
+        ) : null}
       </div>
       {renderMediaByCount()}
     </article>
