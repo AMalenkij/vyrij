@@ -93,18 +93,10 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
-  // Ensure that the incoming `locale` is valid
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
-  // Проверяем, что локаль поддерживается
-  // if (!routing.locales.includes(locale as "en" | "pl" | "ua")) {
-  //   notFound();
-  // }
-
-  // Получаем сообщения для текущей локали
-  // const messages = await getMessages();
 
   return (
     <html lang={LOCALE_MAP[locale].split("-")[0]} suppressHydrationWarning>
