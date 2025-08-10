@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { majorEventsQuery } from "@/sanity/lib/queries";
@@ -17,6 +18,9 @@ export default async function EventsTimeline({
   excludeYears?: string;
   locale: Locale;
 }) {
+  const tCommon = await getTranslations("Common");
+  const tEvents = await getTranslations("Events");
+
   const [majorEventsResult, minorEventsResult] = await Promise.all([
     sanityFetch({ query: majorEventsQuery, params: { locale } }),
     sanityFetch({ query: minorEventsQuery, params: { locale } }),
@@ -41,10 +45,10 @@ export default async function EventsTimeline({
         return (
           <div key={_id}>
             {majorYear !== excludeYears && (
-              <Suspense fallback={<div>Загрузка...</div>}>
+              <Suspense fallback={<div>{tCommon("loading")}</div>}>
                 <MajorCard
                   year={majorYear}
-                  title={eventTitle || "Название не указано"}
+                  title={eventTitle || tEvents("defaultTitle")}
                 >
                   {imageUrl ? (
                     <Image
@@ -53,11 +57,7 @@ export default async function EventsTimeline({
                       src={imageUrl}
                       className="h-full w-full object-cover brightness-75 contrast-125"
                     />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-zinc-800 text-sm text-white">
-                      Нет изображения
-                    </div>
-                  )}
+                  ) : null}
                 </MajorCard>
               </Suspense>
             )}
