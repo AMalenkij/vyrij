@@ -45,7 +45,7 @@ export default function Footer() {
           {/* Main content grid */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-12">
             {/* About section */}
-            <div className="md:blok hidden space-y-3 md:space-y-4">
+            <div className="hidden space-y-3 md:block md:space-y-4">
               <h3 className="font-semibold text-lg">
                 {tFooter("about.title")}
               </h3>
