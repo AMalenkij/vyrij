@@ -36,21 +36,23 @@ export default function Navigation({ routes, className }: NavigationProps) {
         const localizedHref = `/${locale}${href}`;
 
         return (
-          <Button
-            key={key}
-            variant="link"
-            asChild={!active}
-            disabled={active}
-            aria-current={active ? "page" : undefined}
-            className={cn("")}
-            title={label}
-          >
-            {active ? (
-              <p className="text-start">{label}</p>
-            ) : (
-              <Link href={localizedHref}>{label}</Link>
-            )}
-          </Button>
+          <span>
+            <Button
+              key={key}
+              variant="link"
+              asChild={!active}
+              disabled={active}
+              aria-current={active ? "page" : undefined}
+              className={cn("")}
+              title={label}
+            >
+              {active ? (
+                <p className="text-start">{label}</p>
+              ) : (
+                <Link href={localizedHref}>{label}</Link>
+              )}
+            </Button>
+          </span>
         );
       })}
     </nav>
