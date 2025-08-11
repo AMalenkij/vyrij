@@ -36,9 +36,8 @@ export default function Navigation({ routes, className }: NavigationProps) {
         const localizedHref = `/${locale}${href}`;
 
         return (
-          <span>
+          <span key={key}>
             <Button
-              key={key}
               variant="link"
               asChild={!active}
               disabled={active}
