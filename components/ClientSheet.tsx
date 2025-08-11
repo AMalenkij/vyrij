@@ -23,8 +23,8 @@ export default function ClientSheet({
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button size="icon" className="flex md:hidden">
-          <Menu className="h-10 w-10" />
+        <Button variant="ghost" className="flex md:hidden">
+          {"{ "} open {"} "}
         </Button>
       </SheetTrigger>
       <SheetContent className="translate-custom-translate-rotate transform text-foreground transition duration-custom-long ease-custom-cubic">

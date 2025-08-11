@@ -102,4 +102,4 @@ export const SITE_AUTHOR = { name: "Hanna Malenka", url: SITE_URL } as const;
 export const OG_IMAGE = `${SITE_URL}/img/OGLogo.jpg`;
 
 export const LINKS_STYLES =
-  "relative  uppercase flex flex-col  inline-block gap-2 leading-8 no-underline transition-colors duration-300 before:content-[''] before:absolute before:bottom-[-0.5rem] before:left-0 before:w-full before:h-0.5 before:bg-primary before:rounded-sm before:opacity-0 before:transition-all before:duration-400 hover:before:opacity-100 hover:before:transform hover:before:-translate-y-1";
+  "uppercase relative flex flex-col inline-block px-3 leading-8 no-underline transition-colors duration-300 before:content-[''] before:absolute before:bottom-[-0.5rem] before:left-0 before:w-full before:h-0.5 before:bg-primary before:rounded-sm before:opacity-0 before:transition-all before:duration-400 hover:before:opacity-100 hover:before:transform hover:before:-translate-y-1";

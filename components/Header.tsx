@@ -43,10 +43,10 @@ export default function Header() {
   ];
 
   return (
-    <header className="container sticky inset-x-1 top-0 z-100 mx-auto flex items-center justify-between px-1 py-2 md:px-0 md:py-4">
+    <header className="container sticky inset-x-1 top-0 z-50 mx-auto flex items-center justify-between px-2 py-2 md:px-0 md:py-4">
       <Logo />
       <nav className="hidden items-center space-x-2 md:flex">
-        <Navigation routes={routes} className="hidden gap-4 md:flex" />
+        <Navigation routes={routes} className="hidden md:flex" />
         <div className="flex items-center space-x-2 pl-4">
           <ModeToggle
             variant="dropdown"
@@ -92,7 +92,7 @@ export default function Header() {
           <h3 className="font-medium text-sm uppercase tracking-wide opacity-80">
             {tFooter("navigation.title")}
           </h3>
-          <Navigation routes={routes} className="flex flex-col gap-4" />
+          <Navigation routes={routes} className="flex flex-col" />
         </div>
 
         <SocialMediaSection />

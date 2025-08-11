@@ -45,7 +45,7 @@ export default function Footer() {
           {/* Main content grid */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-12">
             {/* About section */}
-            <div className="space-y-3 md:space-y-4">
+            <div className="md:blok hidden space-y-3 md:space-y-4">
               <h3 className="font-semibold text-lg">
                 {tFooter("about.title")}
               </h3>
@@ -59,7 +59,7 @@ export default function Footer() {
               <h3 className="font-medium text-sm uppercase tracking-wide opacity-80">
                 {tFooter("contact.title")}
               </h3>
-              <div className="space-y-2">
+              <div className="space-y-2 px-2">
                 <Link
                   href={`mailto:${tFooter("contact.email")}`}
                   className="block text-sm transition-opacity hover:opacity-80"
@@ -83,14 +83,11 @@ export default function Footer() {
             <SocialMediaSection title={tFooter("social.title")} />
 
             {/* Navigation section */}
-            <div className="hidden space-y-3 md:block md:space-y-4">
+            <div className="space-y-2 md:space-y-4">
               <h3 className="font-medium text-sm uppercase tracking-wide opacity-80">
                 {tFooter("navigation.title")}
               </h3>
-              <Navigation
-                routes={routes}
-                className="flex flex-col items-start"
-              />
+              <Navigation routes={routes} className="flex flex-col" />
             </div>
           </div>
 
