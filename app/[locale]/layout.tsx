@@ -9,7 +9,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 import { Marmelad, Great_Vibes } from "next/font/google";
-import Head from "next/head";
 import { getMessages, getTranslations } from "next-intl/server";
 import type { Locale } from "@/types/app";
 import {
@@ -48,6 +47,14 @@ export async function generateMetadata({
     authors: [SITE_AUTHOR],
     category: "Music",
     metadataBase: new URL(SITE_URL),
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "48x48" },
+        { url: "/favicon.svg", sizes: "any", type: "image/svg+xml" },
+      ],
+      apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
+    },
+    manifest: "/manifest.json",
     openGraph: {
       type: "website",
       locale: LOCALE_MAP[locale],
@@ -100,21 +107,6 @@ export default async function RootLayout({
 
   return (
     <html lang={LOCALE_MAP[locale].split("-")[0]} suppressHydrationWarning>
-      <Head>
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
-        />
-        <link rel="icon" href="/favicon.ico" sizes="48x48" />
-        <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
-        <link rel="manifest" href="/site.webmanifest" />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content={SITE_NAME} />
-        <meta property="twitter:site" content={SITE_URL} />
-        <meta property="twitter:creator" content="@colbyfayock" />
-      </Head>
       <body
         suppressHydrationWarning
         className={`${primaryFont.variable} ${accentFont.variable} font-primary antialiased`}
