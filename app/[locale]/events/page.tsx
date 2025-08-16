@@ -59,7 +59,7 @@ export default async function Page({
                     </div>
                   </div>
                   <div className="flex items-center"></div>
-                  <h3 className="mt-4 font-semibold text-xl md:text-2xl lg:text-4xl">
+                  <h3 className="mt-4 h-16 font-semibold text-xl md:text-2xl lg:text-4xl ">
                     {title}
                   </h3>
                 </CardContent>

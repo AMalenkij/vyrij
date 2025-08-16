@@ -56,7 +56,7 @@ export default async function Page({ params }: Props) {
         </Button>
       </div>
       <header className="mb-6">
-        <h1 className="font-accent font-bold text-3xl tracking-tight md:text-7xl">
+        <h1 className="font-accent font-bold text-5xl tracking-tight md:text-7xl">
           {eventTitle && <span className="mr-2">{t("noTitle")}</span>}
         </h1>
         <div className="mt-3 flex flex-wrap items-center gap-4 text-muted-foreground text-sm">
@@ -74,8 +74,8 @@ export default async function Page({ params }: Props) {
           </div>
         )}
       </header>
-      <div className=" flex flex-col-reverse gap-x-10 lg:flex-row">
-        <article className="mx-auto w-2/3">
+      <div className=" flex flex-col-reverse lg:flex-row lg:gap-x-10">
+        <article className="lg:w-2/3">
           <section className="prose prose-gray dark:prose-invert max-w-none">
             {eventDescription ? (
               <PortableText
