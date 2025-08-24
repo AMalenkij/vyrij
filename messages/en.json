@@ -36,6 +36,8 @@
     "events": "Events",
     "concerts": "Concerts",
     "gallery": "Gallery",
+    "privacy": "Privacy",
+    "terms": "Terms",
     "backToHome": "Return to the main page"
   },
   "Events": {
@@ -116,6 +118,147 @@
     "altTexts": {
       "heroImage": "Hero Image",
       "galleryImage": "Gallery Image"
+    }
+  },
+  "Privacy": {
+    "header": {
+      "title": "Privacy Policy",
+      "lastUpdate": "Last updated: August 23, 2025"
+    },
+    "sections": {
+      "general": {
+        "title": "1. General Information",
+        "text": "The «Vyrij» Choir website respects your privacy. We do not collect or process users’ personal data."
+      },
+      "notCollected": {
+        "title": "2. What data we do NOT collect",
+        "items": [
+          "No subscription or registration forms",
+          "No analytical cookies (Google Analytics or similar)",
+          "No IP addresses or device data are collected"
+        ]
+      },
+      "images": {
+        "title": "3. Content with people’s images",
+        "intro": "The «Gallery» section contains photos of choir members:",
+        "list": [
+          "All photos were taken at public events (concerts, rehearsals)",
+          "Choir members have given consent to publish these photos",
+          "If you recognize yourself in a photo and wish to have it removed:"
+        ],
+        "email": "vyrijchor@gmail.com",
+        "note": "Please include: page URL and photo description"
+      },
+      "gdpr": {
+        "title": "5. Your GDPR rights",
+        "intro": "You have the right to:",
+        "list": [
+          "Request deletion of a photo with your image (response within 14 days)",
+          "Obtain information about data related to you"
+        ]
+      },
+      "contacts": {
+        "title": "6. Contacts",
+        "intro": "For privacy matters:",
+        "email": "vyrijchor@gmail.com",
+        "address": "Aksamitna 4a, Gdańsk, Poland"
+      }
+    }
+  },
+  "Terms": {
+    "header": {
+      "title": "Terms of Use",
+      "effectiveLabel": "Effective from:",
+      "effectiveDate": "08/23/2025",
+      "lastUpdate": "Last updated: 08/23/2025",
+      "back": "Return to main page"
+    },
+    "sections": {
+      "acceptance": {
+        "title": "1. Acceptance of Terms",
+        "paragraphs": [
+          "By using the vyrij.org website, you agree to these terms. If you do not agree with them - please do not use the site."
+        ]
+      },
+      "intellectualProperty": {
+        "title": "2. Intellectual Property",
+        "paragraphs": [
+          "All materials on the site belong to the Vyrij choir, including:"
+        ],
+        "list": [
+          "photos from concerts, rehearsals and other public events;",
+          "video materials;",
+          "texts and event descriptions;",
+          "Vyrij choir logo."
+        ],
+        "allowedTitle": "Allowed:",
+        "allowedList": [
+          "personal viewing of materials;",
+          "posting links to site pages."
+        ],
+        "restrictedTitle": "Prohibited without written consent of the Vyrij choir:",
+        "restrictedList": [
+          "commercial use of photos and videos;",
+          "modification of materials (e.g., cropping photos or editing videos);",
+          "use of the choir's logo."
+        ]
+      },
+      "mediaContent": {
+        "title": "3. Rules for Media Content",
+        "subsections": {
+          "photosVideos": {
+            "title": "For photos and videos in the gallery:",
+            "list": [
+              "it is prohibited to use images of choir members in:",
+              "advertising purposes;",
+              "political context;",
+              "on websites with illegal or obscene content."
+            ]
+          },
+          "eventInfo": {
+            "title": "For event information:",
+            "list": [
+              "event schedules may change - check for updates;",
+              "the Vyrij choir is not responsible for:",
+              "cancellation of events by third parties;",
+              "errors in location information (it is recommended to use official sources)."
+            ]
+          }
+        }
+      },
+      "liability": {
+        "title": "4. Liability Limitation",
+        "paragraphs": [
+          "The site is provided \"as is\". The Vyrij choir does not guarantee:"
+        ],
+        "list": [
+          "uninterrupted operation of the site;",
+          "accuracy of archival materials (e.g., descriptions of past events);",
+          "correctness or safety of third-party resources that may be linked to."
+        ]
+      },
+      "confidentiality": {
+        "title": "5. Confidentiality",
+        "paragraphs": [
+          "The vyrij.org website does not use cookies and does not collect users' personal data."
+        ]
+      },
+      "changes": {
+        "title": "6. Terms Changes",
+        "paragraphs": [
+          "The Vyrij choir reserves the right to change these terms. The updated version is always available on this page. Changes may be made in particular:"
+        ],
+        "list": [
+          "when adding new services (e.g., online ticket sales);",
+          "when changes occur in Polish legislation (e.g., Consumer Rights Act)."
+        ]
+      },
+      "contacts": {
+        "title": "7. Contacts",
+        "intro": "Questions regarding terms of use and confidentiality can be sent to:",
+        "email": "vyrijchor@gmail.com",
+        "address": "Aksamitna 4a, Gdańsk, Poland"
+      }
     }
   }
 }

@@ -34,7 +34,6 @@ export default function Navigation({ routes, className }: NavigationProps) {
       {routes?.map(({ key, label, href }) => {
         const active = isActive(href);
         const localizedHref = `/${locale}${href}`;
-
         return (
           <span key={key}>
             <Button

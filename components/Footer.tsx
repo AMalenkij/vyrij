@@ -31,6 +31,16 @@ export default function Footer() {
       label: tNavMenu("gallery"),
       href: ROUTES_CONFIG.GALLERY,
     },
+    {
+      key: "terms",
+      label: tNavMenu("terms"),
+      href: ROUTES_CONFIG.TERMS,
+    },
+    {
+      key: "privacy",
+      label: tNavMenu("privacy"),
+      href: ROUTES_CONFIG.PRIVACY,
+    },
   ];
 
   return (

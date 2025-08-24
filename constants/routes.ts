@@ -3,4 +3,6 @@ export const ROUTES_CONFIG = {
   EVENTS: "/events",
   CONCERTS: "/concerts",
   GALLERY: "/gallery",
+  TERMS: "/terms",
+  PRIVACY: "/privacy",
 } as const;
