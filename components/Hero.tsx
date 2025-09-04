@@ -37,7 +37,7 @@ export default function Hero({
       </div>
 
       <motion.div
-        className="-translate-x-1/2 absolute top-[80%] left-1/2 font-extralight text-xs uppercase md:tracking-widest lg:text-sm xl:text-base"
+        className="-translate-x-1/2 absolute top-[85vh] left-1/2 font-extralight text-xs uppercase md:top-[90vh] md:tracking-widest lg:text-sm xl:text-base"
         style={{ opacity }}
       >
         {"{ "}
