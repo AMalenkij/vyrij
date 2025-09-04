@@ -8,23 +8,24 @@ export default function HomeClient({
   translations: Record<string, string>;
 }) {
   return (
-    <div className="container relative mx-auto mt-96 h-[155vh]">
-      <p className="top-0 left-0 h-44 text-start font-extralight text-xl uppercase tracking-widest md:sticky md:w-96 md:pt-96 md:pb-196 lg:pt-40">
+    <div className="container relative mx-auto h-[260vh] lg:h-[240vh]">
+      <p className="top-0 left-0 h-44 px-3 text-start font-extralight uppercase tracking-widest lg:sticky lg:w-96 lg:pt-96 lg:pb-196 lg:text-xl">
         {translations.aboutText}
       </p>
-
-      {/* Изображения галереи */}
-      {GALLERY_IMAGES.map(({ src, index, width, height, className }) => (
-        <MotionWrapper key={index} className={className} index={index}>
-          <Image
-            src={src}
-            alt={`${translations.galleryImage} ${index + 1}`}
-            width={width}
-            height={height}
-            loading="lazy"
-          />
-        </MotionWrapper>
-      ))}
+      <div className="relative top-[5vh] lg:static">
+        {/* Изображения галереи */}
+        {GALLERY_IMAGES.map(({ src, index, width, height, className }) => (
+          <MotionWrapper key={index} className={className} index={index}>
+            <Image
+              src={src}
+              alt={`${translations.galleryImage} ${index + 1}`}
+              width={width}
+              height={height}
+              loading="lazy"
+            />
+          </MotionWrapper>
+        ))}
+      </div>
     </div>
   );
 }

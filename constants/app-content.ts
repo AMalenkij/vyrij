@@ -14,59 +14,57 @@ export const GALLERY_IMAGES = [
     src: heroImg1,
     width: 288,
     height: 250,
-    className: "absolute top-40 right-[10vh] max-w-[201px] md:max-w-full",
+    className: "absolute top-0 right-0 max-w-[200px] lg:max-w-full ",
   },
   {
     index: 1,
-    src: heroImg2,
-    width: 200,
-    height: 250,
-    className: "absolute top-[50vh] left-[30vh] max-w-[140px] md:max-w-full",
-  },
-  {
-    index: 2,
     src: heroImg3,
     width: 200,
     height: 250,
-    className: "absolute top-[35vh] right-[40vh] max-w-[140px] md:max-w-full",
+    className: "absolute top-[30vh] right-[20vw] max-w-[140px] lg:max-w-full",
   },
+  {
+    index: 2,
+    src: heroImg2,
+    width: 200,
+    height: 250,
+    className: "absolute top-[60vh] right-[40vw] max-w-[140px] lg:max-w-full",
+  },
+
   {
     index: 3,
     src: heroImg4,
     width: 200,
     height: 250,
-    className: "absolute top-[70vh] left-[40vh] max-w-[140px] md:max-w-full",
+    className: "absolute top-[90vh] right-[30vw] max-w-[140px] lg:max-w-full",
   },
   {
     index: 4,
     src: heroImg5,
     width: 200,
     height: 250,
-    className: "absolute top-[90vh] right-[40vh] max-w-[140px] md:max-w-full",
+    className: "absolute top-[120vh] right-[40vw] max-w-[140px] lg:max-w-full",
   },
   {
     index: 5,
     src: heroImg6,
     width: 200,
     height: 250,
-    className:
-      "absolute top-[104.5vh] left-[30.5vw] max-w-[140px] md:max-w-full",
+    className: "absolute top-[150vh] right-[30vw] max-w-[140px] lg:max-w-full",
   },
   {
     index: 6,
     src: heroImg7,
     width: 200,
     height: 250,
-    className:
-      "absolute top-[124.5vh] left-[55.5vw] max-w-[140px] md:max-w-full",
+    className: "absolute top-[180vh] right-[20vw] max-w-[140px] lg:max-w-full",
   },
   {
     index: 7,
     src: heroImg8,
     width: 200,
     height: 250,
-    className:
-      "absolute top-[139.5vh] left-[40.5vw] max-w-[140px] md:max-w-full",
+    className: "absolute top-[210vh] right-[40vw] max-w-[140px] lg:max-w-full",
   },
 ] as const;
 
