@@ -14,7 +14,7 @@ export default function Hero({
   const additionalTextOpacity = useTransform(scrollY, [0, 150], [0, 1]);
 
   return (
-    <div className="container relative mx-auto h-screen">
+    <div className="container relative mx-auto h-[160vh] md:h-[140vh]">
       <motion.div style={{ opacity }}>{children}</motion.div>
 
       <div className="sticky inset-1/2 z-10 mb-60 items-center justify-center font-extralight">
