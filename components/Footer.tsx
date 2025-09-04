@@ -4,7 +4,6 @@ import Navigation from "@/components/Navigation";
 import SocialMediaSection from "./SocialLink";
 import { ROUTES_CONFIG } from "@/constants/routes";
 import { useTranslations } from "next-intl";
-import ExternalLink from "@/components/ui/ExternalLink";
 
 export default function Footer() {
   const tNavMenu = useTranslations("Nav");
