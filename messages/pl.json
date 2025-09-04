@@ -127,11 +127,11 @@
     },
     "sections": {
       "general": {
-        "title": "1. Informacje ogólne",
+        "title": "Informacje ogólne",
         "text": "Strona chóru «Wyrij» szanuje Twoją prywatność. Nie zbieramy ani nie przetwarzamy danych osobowych użytkowników."
       },
       "notCollected": {
-        "title": "2. Jakich danych NIE zbieramy",
+        "title": "Jakich danych NIE zbieramy",
         "items": [
           "Brak formularzy rejestracji lub subskrypcji",
           "Nie używamy plików cookies analitycznych (Google Analytics i podobnych)",
@@ -139,7 +139,7 @@
         ]
       },
       "images": {
-        "title": "3. Treści ze zdjęciami osób",
+        "title": "Treści ze zdjęciami osób",
         "intro": "W sekcji «Galeria» znajdują się zdjęcia członków chóru:",
         "list": [
           "Wszystkie zdjęcia zostały wykonane podczas wydarzeń publicznych (koncertów, prób)",
@@ -150,7 +150,7 @@
         "note": "Podaj: adres URL strony i opis zdjęcia"
       },
       "gdpr": {
-        "title": "5. Twoje prawa zgodnie z RODO",
+        "title": "Twoje prawa zgodnie z RODO",
         "intro": "Masz prawo do:",
         "list": [
           "Żądania usunięcia zdjęcia z Twoim wizerunkiem (odpowiedź w ciągu 14 dni)",
@@ -158,7 +158,7 @@
         ]
       },
       "contacts": {
-        "title": "6. Kontakt",
+        "title": "Kontakt",
         "intro": "W sprawach prywatności:",
         "email": "vyrijchor@gmail.com",
         "address": "Aksamitna 4a, Gdańsk, Polska"
@@ -170,7 +170,7 @@
       "title": "Warunki korzystania",
       "effectiveLabel": "Obowiązuje od:",
       "effectiveDate": "23.08.2025",
-      "lastUpdate": "Ostatnia aktualizacja: 23.08.2025",
+      "lastUpdate": "Ostatnia aktualizacja: 23 sierpnia 2025",
       "back": "Powrót do strony głównej"
     },
     "sections": {
@@ -181,7 +181,7 @@
         ]
       },
       "intellectualProperty": {
-        "title": "2. Własność intelektualna",
+        "title": "Własność intelektualna",
         "paragraphs": [
           "Wszystkie materiały na stronie należą do chóru Wyrij, w tym:"
         ],
@@ -204,7 +204,7 @@
         ]
       },
       "mediaContent": {
-        "title": "3. Zasady dotyczące treści multimedialnych",
+        "title": "Zasady dotyczące treści multimedialnych",
         "subsections": {
           "photosVideos": {
             "title": "Dla zdjęć i wideo w galerii:",
@@ -227,7 +227,7 @@
         }
       },
       "liability": {
-        "title": "4. Ograniczenie odpowiedzialności",
+        "title": "Ograniczenie odpowiedzialności",
         "paragraphs": [
           "Strona jest udostępniana \"jak jest\". Chór Wyrij nie gwarantuje:"
         ],
@@ -238,13 +238,13 @@
         ]
       },
       "confidentiality": {
-        "title": "5. Poufność",
+        "title": "Poufność",
         "paragraphs": [
           "Witryna vyrij.org nie używa plików cookie i nie zbiera danych osobowych użytkowników."
         ]
       },
       "changes": {
-        "title": "6. Zmiana warunków",
+        "title": "Zmiana warunków",
         "paragraphs": [
           "Chór Wyrij zastrzega sobie prawo do zmiany tych warunków. Zaktualizowana wersja jest zawsze dostępna na tej stronie. Zmiany mogą być wprowadzone w szczególności:"
         ],
@@ -254,7 +254,7 @@
         ]
       },
       "contacts": {
-        "title": "7. Kontakty",
+        "title": "Kontakty",
         "intro": "Pytania dotyczące warunków korzystania i poufności można wysyłać na adres:",
         "email": "vyrijchor@gmail.com",
         "address": "Aksamitna 4a, Gdańsk, Polska"
