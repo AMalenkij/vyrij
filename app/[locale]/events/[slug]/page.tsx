@@ -9,11 +9,9 @@ import { PortableText } from "@portabletext/react";
 import { eventQuery } from "@/sanity/lib/queries";
 import { type Locale } from "@/types/app";
 import { LOCALE_MAP } from "@/constants/i18n";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { ROUTES_CONFIG } from "@/constants/routes";
+import BackButton from "@/components/BackButton";
 
 type Props = {
   params: Promise<{ slug: string; locale: Locale }>;
@@ -45,15 +43,7 @@ export default async function Page({ params }: Props) {
   return (
     <main className="container mx-auto px-4 py-8 pt-20">
       <div className="mb-12">
-        <Button asChild variant="ghost">
-          <Link
-            href={ROUTES_CONFIG.EVENTS}
-            className="inline-flex items-center gap-2"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            {t("backToEvents")}
-          </Link>
-        </Button>
+        <BackButton path={ROUTES_CONFIG.EVENTS} title={t("backToEvents")} />
       </div>
       <header className="mb-6">
         <h1 className="font-accent font-bold text-5xl tracking-tight md:text-7xl">
