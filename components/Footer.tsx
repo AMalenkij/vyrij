@@ -109,14 +109,6 @@ export default function Footer() {
             <p className="opacity-90">
               &copy; {currentYear} {tFooter("copyright.text")}
             </p>
-            <div className="flex items-center gap-4 text-xs opacity-75">
-              <ExternalLink href="/privacy">
-                {tFooter("legal.privacy")}
-              </ExternalLink>
-              <ExternalLink href="/terms">
-                {tFooter("legal.terms")}
-              </ExternalLink>
-            </div>
           </div>
         </div>
       </footer>
