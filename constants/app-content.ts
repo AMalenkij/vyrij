@@ -89,8 +89,8 @@ export const SOCIAL_MEDIA = [
 
 export const YEAR = "year";
 export const EVENTS_YEAR_QUERY_ENDPOINT = "?year=";
-export const HERO_TEXT_END = "Це наша історія.";
 export const DESIGNER_URL = "https://github.com/AMalenkij:";
+export const CHOR = "Chor";
 
 // Site metadata
 export const SITE_NAME = "Vyrij";
