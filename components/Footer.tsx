@@ -4,6 +4,8 @@ import Navigation from "@/components/Navigation";
 import SocialMediaSection from "./SocialLink";
 import { ROUTES_CONFIG } from "@/constants/routes";
 import { useTranslations } from "next-intl";
+import ExternalLink from "@/components/ui/ExternalLink";
+import { DESIGN, LINK_DESIGN } from "@/constants/app-content";
 
 export default function Footer() {
   const tNavMenu = useTranslations("Nav");
@@ -108,6 +110,7 @@ export default function Footer() {
             <p className="opacity-90">
               &copy; {currentYear} {tFooter("copyright.text")}
             </p>
+            <ExternalLink href={LINK_DESIGN}>{DESIGN}</ExternalLink>
           </div>
         </div>
       </footer>

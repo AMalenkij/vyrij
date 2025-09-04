@@ -89,7 +89,8 @@ export const SOCIAL_MEDIA = [
 
 export const YEAR = "year";
 export const EVENTS_YEAR_QUERY_ENDPOINT = "?year=";
-export const DESIGNER_URL = "https://github.com/AMalenkij:";
+export const DESIGN = "Design Anton Malenkyi";
+export const LINK_DESIGN = "https://github.com/AMalenkij";
 export const CHOR = "Chor";
 
 // Site metadata
