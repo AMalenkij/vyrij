@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 import { EVENTS_YEAR_QUERY_ENDPOINT, YEAR } from "@/constants/app-content";
+// import { PARALLAX_GALLERY } from "@/constants/animations";
 import { YearTitle } from "@/components/YearTitle";
 
 import gallery1 from "@/public/img/gallary1.webp";
@@ -15,6 +16,7 @@ import gallery4 from "@/public/img/gallary4.webp";
 import gallery5 from "@/public/img/gallary5.webp";
 import gallery7 from "@/public/img/gallary7.webp";
 import galleryHero from "@/public/img/gallaryHero.webp";
+import TextParallaxWrapper from "@/components/animation/TextParallaxWrapper";
 
 export default function ParallaxGallery({
   translations,
@@ -42,7 +44,7 @@ export default function ParallaxGallery({
   const scale8 = useTransform(scrollYProgress, [0, 1], [1, 11]);
   const scale9 = useTransform(scrollYProgress, [0, 1], [1, 12]);
 
-  const textOpacity = useTransform(scrollYProgress, [0.9, 1], [0, 1]);
+  // const textOpacity = useTransform(scrollYProgress, [0.9, 1], [0, 1]);
 
   const updateURL = useCallback(() => {
     if (isInView) {
@@ -114,13 +116,13 @@ export default function ParallaxGallery({
     <div ref={container} className="relative h-[300vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
         {/* Центрированный текст с условной активацией */}
-        <motion.div
+        <TextParallaxWrapper
+          scrollYProgress={scrollYProgress}
           ref={textBlockRef}
-          style={{ opacity: textOpacity }}
-          className="absolute inset-0 z-10 flex items-center justify-center"
+          className="your-custom-class"
         >
           <YearTitle year={year} title={translations.events} />
-        </motion.div>
+        </TextParallaxWrapper>
 
         {/* Изображения */}
         {pictures.map(({ src, scale, containerClass, index }) => (
