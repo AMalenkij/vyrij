@@ -6,6 +6,7 @@ import React, { ReactNode, useCallback, useEffect, useRef } from "react";
 
 import { EVENTS_YEAR_QUERY_ENDPOINT, YEAR } from "@/constants/app-content";
 import { YearTitle } from "@/components/YearTitle";
+import { PHOTO_SCALE_ANIMATION } from "@/constants/animations"; // Adjust the import path as needed
 
 type MajorCardProps = {
   year: string;
@@ -21,10 +22,14 @@ export default function MajorCard({ year, title, children }: MajorCardProps) {
 
   const { scrollYProgress } = useScroll({
     target: refFM,
-    offset: ["start end", "end start"],
+    offset: PHOTO_SCALE_ANIMATION.SCROLL_OFFSET,
   });
 
-  const scaleProgressImg = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
+  const scaleProgressImg = useTransform(
+    scrollYProgress,
+    PHOTO_SCALE_ANIMATION.SCALE_RANGE.INPUT,
+    PHOTO_SCALE_ANIMATION.SCALE_RANGE.OUTPUT,
+  );
 
   const updateURL = useCallback(() => {
     if (isInView) {
