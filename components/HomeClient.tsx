@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { GALLERY_IMAGES } from "@/constants/app-content";
-import MotionWrapper from "@/components/MotionWrapper";
+import PhotoScrollWrapper from "@/components/animation/PhotoScrollWrapper";
 
 export default function HomeClient({
   translations,
@@ -15,7 +15,7 @@ export default function HomeClient({
       <div className="relative top-[5vh] lg:static">
         {/* Изображения галереи */}
         {GALLERY_IMAGES.map(({ src, index, width, height, className }) => (
-          <MotionWrapper key={index} className={className} index={index}>
+          <PhotoScrollWrapper key={index} className={className} index={index}>
             <Image
               src={src}
               alt={`${translations.galleryImage} ${index + 1}`}
@@ -23,7 +23,7 @@ export default function HomeClient({
               height={height}
               loading="lazy"
             />
-          </MotionWrapper>
+          </PhotoScrollWrapper>
         ))}
       </div>
     </div>
