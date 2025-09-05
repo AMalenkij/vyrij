@@ -6,7 +6,7 @@ import { majorEventsQuery } from "@/sanity/lib/queries";
 import { minorEventsQuery } from "@/sanity/lib/queries";
 import MajorCard from "@/components/MajorCard";
 import MinorCard from "@/components/MinorCard";
-import AnimatedContainer from "@/components/WithViewportAnimation";
+import { ViewportWrapper } from "@/components/animation/ViewportWrapper";
 import { urlFor } from "@/sanity/lib/sanityImage";
 import { type Locale } from "@/types/app";
 import { LOCALE_MAP } from "@/constants/i18n";
@@ -71,14 +71,14 @@ export default async function EventsTimeline({
                   },
                 );
                 return (
-                  <AnimatedContainer key={_id}>
+                  <ViewportWrapper key={_id}>
                     <MinorCard
                       description={eventDescription}
                       date={formattedMinorDate}
                       media={media || []}
                       countMedia={media?.length || 0}
                     />
-                  </AnimatedContainer>
+                  </ViewportWrapper>
                 );
               },
             )}
