@@ -49,7 +49,7 @@ export default async function Page({
 
           return (
             <Link key={_id} href={`events/${slug.current}`}>
-              <Card className="flex flex-col overflow-hidden transition-all will-change-auto hover:brightness-110">
+              <Card className="flex flex-col overflow-hidden transition-all will-change-auto hover:scale-101">
                 <CardContent className="p-4 ">
                   <div>
                     <div className="text-3xl md:text-4xl lg:w-20">{day}</div>

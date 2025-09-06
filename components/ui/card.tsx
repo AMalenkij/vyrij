@@ -8,9 +8,9 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
       className={cn(
         // Основные стили стекла
         "relative isolate overflow-hidden",
-        "bg-gray-100/10 dark:bg-gray-900/10",
+        "bg-gray-100/30 dark:bg-gray-900/30",
         "backdrop-blur-xl backdrop-saturate-100",
-        "border border-white/5 dark:border-white/5",
+        "border border-gray-800/10 dark:border-white/5",
         // "shadow-lg shadow-blue-500/10 dark:shadow-blue-900/20",
 
         // Текстура фростед-стекла (легкая матовая текстура)
