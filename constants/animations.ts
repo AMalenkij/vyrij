@@ -213,9 +213,9 @@ export const PARALLAX_GALLERY = {
 
 // Photo scaling on scroll
 export const PHOTO_SCALE_ANIMATION = {
-  SCROLL_OFFSET: ["start end", "end start"] as const,
+  SCROLL_OFFSET: ["start end", "end start"] as ["start end", "end start"],
   SCALE_RANGE: {
-    INPUT: [0, 1] as const,
-    OUTPUT: [TRANSFORM.SCALE.NORMAL, TRANSFORM.SCALE.LARGE_ENLARGED] as const,
+    INPUT: [0, 1],
+    OUTPUT: [TRANSFORM.SCALE.NORMAL, TRANSFORM.SCALE.LARGE_ENLARGED],
   },
-} as const;
+};
