@@ -23,13 +23,11 @@ export default function PhotoScrollWrapper({
         opacity: PHOTO_ANIMATION.INITIAL.OPACITY,
         y: PHOTO_ANIMATION.INITIAL.Y,
         filter: PHOTO_ANIMATION.INITIAL.BLUR,
-        scale: PHOTO_ANIMATION.INITIAL.SCALE,
       }}
       whileInView={{
         opacity: PHOTO_ANIMATION.ANIMATE.OPACITY,
         y: PHOTO_ANIMATION.ANIMATE.Y,
         filter: PHOTO_ANIMATION.ANIMATE.BLUR,
-        scale: PHOTO_ANIMATION.ANIMATE.SCALE,
       }}
       transition={{
         duration: PHOTO_ANIMATION.TRANSITION.DURATION,
