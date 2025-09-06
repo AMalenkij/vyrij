@@ -10,9 +10,7 @@ export default function Hero({
 }) {
   return (
     <div className="container relative mx-auto h-[160vh] md:h-[140vh]">
-      <PhotoWrapper delay={1}>
-        <ScrollFadeWrapper fadeOut={true}>{children}</ScrollFadeWrapper>
-      </PhotoWrapper>
+      <PhotoWrapper delay={1}>{children}</PhotoWrapper>
       <div className="sticky inset-1/2 z-10 mb-60 items-center justify-center font-extralight">
         <div className="text-center">
           <h1 className="font-extralight text-xl uppercase tracking-widest md:text-2xl lg:text-3xl xl:text-4xl">
