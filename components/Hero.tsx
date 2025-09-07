@@ -13,14 +13,14 @@ export default function Hero({
       <PhotoWrapper delay={1}>{children}</PhotoWrapper>
       <div className="sticky inset-1/2 z-10 mb-60 items-center justify-center font-extralight">
         <div className="text-center">
-          <h1 className="font-extralight text-xl uppercase tracking-widest md:text-2xl lg:text-3xl xl:text-4xl">
+          <h1 className="font-extralight text-lg uppercase tracking-widest md:text-2xl lg:text-3xl xl:text-4xl">
             {translations.title}
           </h1>
           <ScrollFadeWrapper fadeOut={false} className="mt-4">
-            <p className="font-extralight uppercase tracking-widest md:text-xl lg:text-2xl xl:text-3xl">
+            <p className="font-extralight text-lg uppercase tracking-widest md:text-xl lg:text-2xl xl:text-3xl">
               {translations.subtitle}
             </p>
-            <p className="mt-2 font-extralight text-sm uppercase tracking-widest lg:text-base xl:text-lg">
+            <p className="mt-2 font-extralight text-xs uppercase tracking-widest lg:text-base xl:text-lg">
               {translations.author}
             </p>
           </ScrollFadeWrapper>
