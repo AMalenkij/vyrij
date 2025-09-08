@@ -115,6 +115,7 @@ export default function ParallaxGallery({
       <div className="sticky top-0 h-screen overflow-hidden">
         {/* Центрированный текст с условной активацией */}
         <motion.div
+          id={year}
           ref={textBlockRef}
           style={{ opacity: textOpacity }}
           className="absolute inset-0 z-10 flex items-center justify-center"
