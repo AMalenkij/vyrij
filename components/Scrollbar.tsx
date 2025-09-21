@@ -28,7 +28,7 @@ export function Scrollbar({
   };
 
   return (
-    <div className="sticky top-1/3 left-[5vw] z-100 hidden h-1/2 w-100 font-accent font-bold text-xl 2xl:flex">
+    <div className="sticky top-1/3 left-[5vw] z-100 hidden h-1/2 w-100 font-bold text-xl 2xl:flex">
       <ul className="list-none">
         {years.map((year) => {
           const isCurrentYear = year.toString() === currentSelectedYear;
@@ -40,7 +40,7 @@ export function Scrollbar({
                 onClick={() => handleClick(year.toString())}
                 className={`text-2xl lowercase transition-colors duration-300 ${
                   isCurrentYear
-                    ? "pointer-events-none text-red-400"
+                    ? "pointer-events-none text-primary"
                     : "hover:text-foreground"
                 }`}
               >

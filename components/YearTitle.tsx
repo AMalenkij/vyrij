@@ -5,7 +5,7 @@ type YearTitleProps = {
 
 export function YearTitle({ year, title }: YearTitleProps) {
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center text-stone-50">
+    <div className="absolute inset-0 flex flex-col items-center justify-center text-secondary-foreground">
       <div className="mb-12 font-bold text-base tlg:text-xl 2xl:text-3xl">
         {year}
       </div>

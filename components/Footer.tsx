@@ -51,7 +51,7 @@ export default function Footer() {
         clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)",
       }}
     >
-      <footer className="glass-surface fixed bottom-0 h-screen w-full bg-gradient-to-b from-red-500/60 to-red-600/30 px-6 pb-4 md:pb-6">
+      <footer className="glass-surface fixed bottom-0 h-screen w-full px-6 pb-4 md:pb-6">
         <div className="container mx-auto mt-14 md:mt-32">
           {/* Main content grid */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-12">
@@ -103,7 +103,7 @@ export default function Footer() {
           </div>
 
           {/* Divider */}
-          <div className="my-4 h-px bg-white/20 md:my-8 md:mt-20" />
+          <div className="my-4 h-px bg-border/20 md:my-8 md:mt-20" />
 
           {/* Copyright section */}
           <div className="flex flex-col items-center justify-between gap-4 text-sm md:flex-row md:gap-2">
