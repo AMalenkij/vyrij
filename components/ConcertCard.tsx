@@ -15,7 +15,6 @@ type ConcertType = {
   locale: Locale;
 };
 
-
 export default function ConcertCard({
   date,
   title,
@@ -38,7 +37,7 @@ export default function ConcertCard({
       <div
         className={cn(
           "mx-auto flex items-center md:mb-6 md:ml-3",
-          isEvenIndex ? "" : "bg-stone-900/25",
+          isEvenIndex ? "" : "bg-muted/25",
         )}
       >
         <div className="mr-3 grid gap-y-1 px-3 py-2 text-center lg:mr-0 lg:flex lg:w-72 lg:justify-between lg:gap-x-4 lg:gap-y-0 lg:px-3">
