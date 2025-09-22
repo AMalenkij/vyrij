@@ -71,7 +71,7 @@ export default async function EventsTimeline({
                   },
                 );
                 return (
-                  <ViewportWrapper key={_id}>
+                  <ViewportWrapper once={true} key={_id}>
                     <MinorCard
                       description={eventDescription}
                       date={formattedMinorDate}
