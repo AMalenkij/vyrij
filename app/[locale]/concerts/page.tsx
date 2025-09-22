@@ -40,7 +40,7 @@ export default async function Concerts({
   };
 
   return (
-    <div className="container mx-auto min-h-screen">
+    <div className="container mx-auto min-h-screen px-1">
       <SubHeader
         title={tConcerts("subHeader")}
         counter={allCount}

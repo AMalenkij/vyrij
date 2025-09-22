@@ -26,7 +26,7 @@ export default async function Page({
   const events = eventsData.data;
 
   return (
-    <main className="container mx-auto">
+    <main className="container mx-auto px-1">
       <SubHeader
         title={tEvents("title")}
         sectionName={tEvents("sectionName")}
