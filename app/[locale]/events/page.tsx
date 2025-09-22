@@ -50,18 +50,20 @@ export default async function Page({
           return (
             <Link key={_id} href={`events/${slug.current}`}>
               <Card className="flex flex-col overflow-hidden transition-all will-change-auto hover:scale-101">
-                <CardContent className="p-4 ">
-                  <div>
-                    <div className="text-3xl md:text-4xl lg:w-20">{day}</div>
-                    <div className="grid-cols-3 gap-y-1 lg:w-20">
-                      <div className="text-xl">{month}</div>
-                      <div className="text-xl">{year}</div>
+                <CardContent className="px-4 py-2">
+                  <div className="flex flex-row">
+                    <div>
+                      <div className="text-3xl md:text-4xl lg:w-20">{day}</div>
+                      <div className="grid-cols-3 gap-y-1 lg:w-20">
+                        <div className="text-xl">{month}</div>
+                        <div className="text-xl">{year}</div>
+                      </div>
                     </div>
+                    <div className="flex items-center"></div>
+                    <h3 className="h-16 font-semibold text-xl md:text-2xl lg:text-4xl ">
+                      {title}
+                    </h3>
                   </div>
-                  <div className="flex items-center"></div>
-                  <h3 className="mt-4 h-16 font-semibold text-xl md:text-2xl lg:text-4xl ">
-                    {title}
-                  </h3>
                 </CardContent>
                 <CardFooter className="p-0">
                   <div className="relative aspect-[16/9] w-full">
