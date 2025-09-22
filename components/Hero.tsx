@@ -29,7 +29,7 @@ export default function Hero({
 
       <ScrollFadeWrapper
         fadeOut={true}
-        className="-translate-x-1/2 absolute top-[80vh] left-1/2 font-extralight text-xs uppercase md:top-[85vh] md:tracking-widest lg:text-sm xl:text-base"
+        className="-translate-x-1/2 absolute top-[80vh] left-1/2 whitespace-nowrap font-extralight text-xs uppercase md:top-[85vh] md:tracking-widest lg:text-sm xl:text-base"
       >
         {"{ "}
         {translations.scrollText}
