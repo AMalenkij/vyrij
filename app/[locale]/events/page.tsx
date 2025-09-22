@@ -82,7 +82,7 @@ export default async function Page({
 
                     {videoUrl ? (
                       <iframe
-                        className="aspect-video w-full pt-8"
+                        className="aspect-video w-full"
                         src={videoUrl}
                         title="YouTube video player"
                         allowFullScreen
