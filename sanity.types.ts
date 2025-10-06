@@ -165,9 +165,26 @@ export type Events = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  eventTitle: string;
+  title: string;
   slug: Slug;
-  eventDescription?: LocaleBlockContent;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
   date: string;
   time?: string;
   location?: {
@@ -202,64 +219,6 @@ export type Location = {
   address: string;
 };
 
-export type LocaleBlockContent = {
-  _type: "localeBlockContent";
-  en?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  pl?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  ua?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-};
-
 export type Slug = {
   _type: "slug";
   current: string;
@@ -275,30 +234,14 @@ export type Tag = {
   name: string;
 };
 
-export type AllSanitySchemaTypes =
-  | SanityImagePaletteSwatch
-  | SanityImagePalette
-  | SanityImageDimensions
-  | Geopoint
-  | Media
-  | SanityFileAsset
-  | SanityImageCrop
-  | SanityImageHotspot
-  | SanityImageAsset
-  | SanityAssetSourceData
-  | SanityImageMetadata
-  | Events
-  | Location
-  | LocaleBlockContent
-  | Slug
-  | Tag;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Media | SanityFileAsset | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Events | Location | Slug | Tag;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: futureEventsQuery
 // Query: *[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date >= now()] {    _id,    "eventTitle": eventTitle[$locale],    date,    time,    "location": location->{      place,      address,    }  }
 export type FutureEventsQueryResult = Array<{
   _id: string;
-  eventTitle: string;
+  eventTitle: null;
   date: string;
   time: string | null;
   location: {
@@ -310,7 +253,7 @@ export type FutureEventsQueryResult = Array<{
 // Query: *[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()] | order(date desc) {    _id,    "eventTitle": eventTitle[$locale],    date,    time,    "location": location->{      place,      address,    }  }
 export type PastEventsQueryResult = Array<{
   _id: string;
-  eventTitle: string;
+  eventTitle: null;
   date: string;
   time: string | null;
   location: {
@@ -338,7 +281,7 @@ export type GalleryPhotosCountQueryResult = number;
 // Query: *[_type == "events" && references(*[_type == "tag" && name == "major"]._id)] | order(date asc) {    _id,    "eventTitle": eventTitle[$locale],    date,    "media": media[]->{      imageFile    }  }
 export type MajorEventsQueryResult = Array<{
   _id: string;
-  eventTitle: string;
+  eventTitle: null;
   date: string;
   media: Array<{
     imageFile: {
@@ -364,65 +307,9 @@ export type MajorEventsYearsQueryResult = Array<{
 // Query: *[_type == "events" && references(*[_type == "tag" && name == "minor" || name == "major"]._id)] | order(date asc) {    _id,    title,    date,    "eventDescription": eventDescription[$locale],    "media": media[]->{      imageFile,      videoUrl,    }  }
 export type MinorEventsQueryResult = Array<{
   _id: string;
-  title: null;
+  title: string;
   date: string;
-  eventDescription: Array<{
-    _type: "localeBlockContent";
-    en?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    pl?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    ua?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-  }> | null;
+  eventDescription: null;
   media: Array<{
     imageFile: {
       asset?: {
@@ -439,11 +326,14 @@ export type MinorEventsQueryResult = Array<{
     videoUrl: string | null;
   }> | null;
 }>;
+// Variable: eventsCountQuery
+// Query: count(*[_type == "events" && references(*[_type == "tag" && (name == "major" || name == "minor")]._id)])
+export type EventsCountQueryResult = number;
 // Variable: eventsQuery
-// Query: *[_type == "events" && references(*[_type == "tag" && (name == "major" || name == "minor")]._id)] | order(date desc) {  _id,  "eventTitle": eventTitle[$locale],  slug,  date,  time,  location->{    title  },  "media": media[]->{    imageFile,    videoUrl,  },  tags[]->{    _id,    name  }}
+// Query: *[_type == "events" && references(*[_type == "tag" && (name == "major" || name == "minor")]._id)] | order(date desc) [$start...$end] {  _id,  "eventTitle": eventTitle[$locale],  slug,  date,  time,  location->{    title  },  "media": media[]->{    imageFile,    videoUrl,  },  tags[]->{    _id,    name  }}
 export type EventsQueryResult = Array<{
   _id: string;
-  eventTitle: string;
+  eventTitle: null;
   slug: Slug;
   date: string;
   time: string | null;
@@ -474,64 +364,8 @@ export type EventsQueryResult = Array<{
 // Query: *[_type == "events" && slug.current == $slug][0]{  _id,  "eventTitle": eventTitle[$locale],  "eventDescription": eventDescription[$locale],  date,  time,  location->{    title,    url  },  "media": media[]->{    imageFile,    videoUrl,  },  tags[]->{    _id,    name  }}
 export type EventQueryResult = {
   _id: string;
-  eventTitle: string;
-  eventDescription: Array<{
-    _type: "localeBlockContent";
-    en?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    pl?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    ua?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-  }> | null;
+  eventTitle: null;
+  eventDescription: null;
   date: string;
   time: string | null;
   location: {
@@ -563,16 +397,17 @@ export type EventQueryResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date >= now()] {\n    _id,\n    "eventTitle": eventTitle[$locale],\n    date,\n    time,\n    "location": location->{\n      place,\n      address,\n    }\n  }': FutureEventsQueryResult;
-    '*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()] | order(date desc) {\n    _id,\n    "eventTitle": eventTitle[$locale],\n    date,\n    time,\n    "location": location->{\n      place,\n      address,\n    }\n  }': PastEventsQueryResult;
-    'count(*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date >= now()])': FutureEventsCountQueryResult;
-    'count(*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()])': PastEventsCountQueryResult;
-    '\n  *[_type == "media" && type == "photo" && defined(imageFile.asset)] {\n    _id,\n    title,\n    "imageUrl": imageFile.asset->url\n  }\n': GalleryPhotosQueryResult;
-    'count(*[_type == "media" && type == "photo" && defined(imageFile.asset)])': GalleryPhotosCountQueryResult;
-    '\n  *[_type == "events" && references(*[_type == "tag" && name == "major"]._id)] | order(date asc) {\n    _id,\n    "eventTitle": eventTitle[$locale],\n    date,\n    "media": media[]->{\n      imageFile\n    }\n  }\n': MajorEventsQueryResult;
-    '\n  *[_type == "events" && references(*[_type == "tag" && name == "major"]._id)] | order(date asc) {\n    date\n  }\n': MajorEventsYearsQueryResult;
-    '\n  *[_type == "events" && references(*[_type == "tag" && name == "minor" || name == "major"]._id)] | order(date asc) {\n    _id,\n    title,\n    date,\n    "eventDescription": eventDescription[$locale],\n    "media": media[]->{\n      imageFile,\n      videoUrl,\n    }\n  }\n': MinorEventsQueryResult;
-    '*[_type == "events" && references(*[_type == "tag" && (name == "major" || name == "minor")]._id)] | order(date desc) {\n  _id,\n  "eventTitle": eventTitle[$locale],\n  slug,\n  date,\n  time,\n  location->{\n    title\n  },\n  "media": media[]->{\n    imageFile,\n    videoUrl,\n  },\n  tags[]->{\n    _id,\n    name\n  }\n}': EventsQueryResult;
-    '*[_type == "events" && slug.current == $slug][0]{\n  _id,\n  "eventTitle": eventTitle[$locale],\n  "eventDescription": eventDescription[$locale],\n  date,\n  time,\n  location->{\n    title,\n    url\n  },\n  "media": media[]->{\n    imageFile,\n    videoUrl,\n  },\n  tags[]->{\n    _id,\n    name\n  }\n}': EventQueryResult;
+    "*[_type == \"events\" && references(*[_type == \"tag\" && name == \"concert\"]._id) && date >= now()] {\n    _id,\n    \"eventTitle\": eventTitle[$locale],\n    date,\n    time,\n    \"location\": location->{\n      place,\n      address,\n    }\n  }": FutureEventsQueryResult;
+    "*[_type == \"events\" && references(*[_type == \"tag\" && name == \"concert\"]._id) && date < now()] | order(date desc) {\n    _id,\n    \"eventTitle\": eventTitle[$locale],\n    date,\n    time,\n    \"location\": location->{\n      place,\n      address,\n    }\n  }": PastEventsQueryResult;
+    "count(*[_type == \"events\" && references(*[_type == \"tag\" && name == \"concert\"]._id) && date >= now()])": FutureEventsCountQueryResult;
+    "count(*[_type == \"events\" && references(*[_type == \"tag\" && name == \"concert\"]._id) && date < now()])": PastEventsCountQueryResult;
+    "\n  *[_type == \"media\" && type == \"photo\" && defined(imageFile.asset)] {\n    _id,\n    title,\n    \"imageUrl\": imageFile.asset->url\n  }\n": GalleryPhotosQueryResult;
+    "count(*[_type == \"media\" && type == \"photo\" && defined(imageFile.asset)])": GalleryPhotosCountQueryResult;
+    "\n  *[_type == \"events\" && references(*[_type == \"tag\" && name == \"major\"]._id)] | order(date asc) {\n    _id,\n    \"eventTitle\": eventTitle[$locale],\n    date,\n    \"media\": media[]->{\n      imageFile\n    }\n  }\n": MajorEventsQueryResult;
+    "\n  *[_type == \"events\" && references(*[_type == \"tag\" && name == \"major\"]._id)] | order(date asc) {\n    date\n  }\n": MajorEventsYearsQueryResult;
+    "\n  *[_type == \"events\" && references(*[_type == \"tag\" && name == \"minor\" || name == \"major\"]._id)] | order(date asc) {\n    _id,\n    title,\n    date,\n    \"eventDescription\": eventDescription[$locale],\n    \"media\": media[]->{\n      imageFile,\n      videoUrl,\n    }\n  }\n": MinorEventsQueryResult;
+    "count(*[_type == \"events\" && references(*[_type == \"tag\" && (name == \"major\" || name == \"minor\")]._id)])": EventsCountQueryResult;
+    "*[_type == \"events\" && references(*[_type == \"tag\" && (name == \"major\" || name == \"minor\")]._id)] | order(date desc) [$start...$end] {\n  _id,\n  \"eventTitle\": eventTitle[$locale],\n  slug,\n  date,\n  time,\n  location->{\n    title\n  },\n  \"media\": media[]->{\n    imageFile,\n    videoUrl,\n  },\n  tags[]->{\n    _id,\n    name\n  }\n}": EventsQueryResult;
+    "*[_type == \"events\" && slug.current == $slug][0]{\n  _id,\n  \"eventTitle\": eventTitle[$locale],\n  \"eventDescription\": eventDescription[$locale],\n  date,\n  time,\n  location->{\n    title,\n    url\n  },\n  \"media\": media[]->{\n    imageFile,\n    videoUrl,\n  },\n  tags[]->{\n    _id,\n    name\n  }\n}": EventQueryResult;
   }
 }
