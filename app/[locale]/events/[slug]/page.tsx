@@ -6,16 +6,24 @@ import { urlFor } from "@/sanity/lib/sanityImage";
 import type { PortableTextBlock } from "@portabletext/types";
 import { TypographyComponents } from "@/components/TypographyComponents";
 import { PortableText } from "@portabletext/react";
-import { eventQuery } from "@/sanity/lib/queries";
+import { allEventsSlugsQuery, eventQuery } from "@/sanity/lib/queries";
 import { type Locale } from "@/types/app";
 import { LOCALE_MAP } from "@/constants/i18n";
 import { getTranslations } from "next-intl/server";
-import { ROUTES_CONFIG } from "@/constants/routes";
 import BackButton from "@/components/BackButton";
+import { client } from "@/sanity/lib/client";
 
-type Props = {
-  params: Promise<{ slug: string; locale: Locale }>;
-};
+export async function generateStaticParams() {
+  const slugs: { slug: string }[] = await client.fetch(allEventsSlugsQuery);
+  const locales = Object.keys(LOCALE_MAP);
+
+  return slugs.flatMap((slug) =>
+    locales.map((locale) => ({
+      slug: slug.slug,
+      locale: locale,
+    })),
+  );
+}
 
 function formatDateTime(date: string, locale: Locale, time?: string | null) {
   const dateFormatted = new Date(date).toLocaleDateString(LOCALE_MAP[locale], {
@@ -26,7 +34,11 @@ function formatDateTime(date: string, locale: Locale, time?: string | null) {
   return time ? `${dateFormatted} о ${time}` : dateFormatted;
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ locale: Locale; slug: string }>;
+}) {
   const { locale, slug } = await params;
   const eventData = await sanityFetch({
     query: eventQuery,
@@ -77,14 +89,14 @@ export default async function Page({ params }: Props) {
             )}
           </section>
         </article>
-        <div className="relative mb-6 aspect-[16/9] w-full overflow-hidden">
+        <div className="relative mb-6 w-full overflow-hidden">
           {imgUrl ? (
             <Image
               src={imgUrl}
               alt={eventTitle || ""}
               fill
               sizes="100vw"
-              className="max-h-screen object-cover"
+              className="object-cover"
               priority
             />
           ) : null}

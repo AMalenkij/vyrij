@@ -117,3 +117,7 @@ export const eventQuery =
     name
   }
 }`);
+
+export const allEventsSlugsQuery = defineQuery(
+  `*[_type == "events" && defined(slug.current)]{ "slug": slug.current }`,
+);
