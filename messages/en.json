@@ -260,5 +260,13 @@
         "address": "Aksamitna 4a, Gdańsk, Poland"
       }
     }
+  },
+  "Pagination": {
+    "label": "Pagination",
+    "prevLabel": "Go to previous page",
+    "prevText": "Previous",
+    "nextLabel": "Go to next page",
+    "nextText": "Next",
+    "more": "More pages"
   }
 }

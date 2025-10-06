@@ -260,5 +260,13 @@
         "address": "Aksamitna 4a, Gdańsk, Polska"
       }
     }
+  },
+  "Pagination": {
+    "label": "Paginacja",
+    "prevLabel": "Przejdź do poprzedniej strony",
+    "prevText": "Poprzednia",
+    "nextLabel": "Przejdź do następnej strony",
+    "nextText": "Następna",
+    "more": "Więcej stron"
   }
 }
