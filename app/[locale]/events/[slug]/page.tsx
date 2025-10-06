@@ -43,11 +43,11 @@ export default async function Page({ params }: Props) {
   return (
     <main className="container mx-auto px-4 py-8 pt-20">
       <div className="mb-12">
-        <BackButton path={ROUTES_CONFIG.EVENTS} title={t("backToEvents")} />
+        <BackButton title={t("backToEvents")} />
       </div>
       <header className="mb-6">
         <h1 className="font-accent font-bold text-5xl tracking-tight md:text-7xl">
-          {eventTitle && <span className="mr-2">{t("noTitle")}</span>}
+          {eventTitle || t("noTitle")}
         </h1>
         <div className="mt-3 flex flex-wrap items-center gap-4 text-muted-foreground text-sm">
           <span className="inline-flex items-center gap-1 uppercase">
