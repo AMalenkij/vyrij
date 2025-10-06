@@ -34,11 +34,11 @@ const accentFont = Great_Vibes({
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: Locale };
+  params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const tMeta = await getTranslations("Metadata");
   const tSite = await getTranslations("Site");
-  const { locale } = params;
+  const { locale } = await params;
 
   return {
     title: `${tMeta("title")} | ${SITE_NAME}`,
