@@ -76,9 +76,9 @@ export default async function Page({
           </div>
         )}
       </header>
-      <div className=" flex flex-col-reverse lg:flex-row lg:gap-x-10">
+      <div className=" flex flex-col-reverse lg:flex-row lg:gap-x-8">
         <article className="lg:w-2/3">
-          <section className="prose prose-gray dark:prose-invert max-w-none">
+          <section>
             {eventDescription ? (
               <PortableText
                 value={eventDescription as PortableTextBlock[]}
@@ -89,7 +89,7 @@ export default async function Page({
             )}
           </section>
         </article>
-        <div className="relative mb-6 w-full overflow-hidden">
+        <div className="relative mb-6 aspect-[16/9] w-full">
           {imgUrl ? (
             <Image
               src={imgUrl}
