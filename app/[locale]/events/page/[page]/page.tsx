@@ -5,7 +5,6 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { sanityFetch } from "@/sanity/lib/live";
 import { client } from "@/sanity/lib/client";
 import { eventsCountQuery, eventsQuery } from "@/sanity/lib/queries";
-// import { urlFor } from "@/sanity/lib/sanityImage";
 import { type Locale } from "@/types/app";
 import { LOCALE_MAP } from "@/constants/i18n";
 import { Tag } from "lucide-react";
