@@ -306,12 +306,7 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 // Query: *[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date >= now()] {    _id,    "eventTitle": eventTitle[$locale],    date,    time,    "location": location->{      place,      address,    }  }
 export type FutureEventsQueryResult = Array<{
   _id: string;
-  eventTitle: Array<{
-    _type: "localeString";
-    en?: string;
-    pl?: string;
-    ua?: string;
-  }> | null;
+  eventTitle: string | null;
   date: string;
   time: string | null;
   location: {
@@ -323,12 +318,7 @@ export type FutureEventsQueryResult = Array<{
 // Query: *[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()] | order(date desc) {    _id,    "eventTitle": eventTitle[$locale],    date,    time,    "location": location->{      place,      address,    }  }
 export type PastEventsQueryResult = Array<{
   _id: string;
-  eventTitle: Array<{
-    _type: "localeString";
-    en?: string;
-    pl?: string;
-    ua?: string;
-  }> | null;
+  eventTitle: string | null;
   date: string;
   time: string | null;
   location: {
