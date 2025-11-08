@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { sanityFetch } from "@/sanity/lib/live";
 import { client } from "@/sanity/lib/client";
 import { eventsCountQuery, eventsQuery } from "@/sanity/lib/queries";
-import { urlFor } from "@/sanity/lib/sanityImage";
+// import { urlFor } from "@/sanity/lib/sanityImage";
 import { type Locale } from "@/types/app";
 import { LOCALE_MAP } from "@/constants/i18n";
 import { Tag } from "lucide-react";
@@ -71,9 +71,15 @@ export default async function Page({
       <section className="grid gap-6 lg:grid-cols-2">
         {events.map(({ tags, media, date, slug, eventTitle, _id }) => {
           const tagNames = tags?.slice(0, 4) || [];
-          const imageFile = media?.[0].imageFile;
-          const imageUrl = imageFile ? urlFor(imageFile).url() : null;
-          const videoUrl = media?.[0].videoUrl;
+          const firstMedia = media?.[0];
+          const imageUrl =
+            firstMedia?.type === "photo" && firstMedia.imageUrl
+              ? firstMedia.imageUrl
+              : null;
+          const videoUrl =
+            firstMedia?.type === "video" && firstMedia.videoUrl
+              ? firstMedia.videoUrl
+              : null;
           const dateObj = new Date(date);
           const day = dateObj.getDate().toString().padStart(2, "0");
           const month = dateObj.toLocaleDateString(LOCALE_MAP[locale], {
@@ -121,12 +127,10 @@ export default async function Page({
                       <iframe
                         className="aspect-video w-full"
                         src={videoUrl}
-                        title="YouTube video player"
+                        title={title}
                         allowFullScreen
                       />
-                    ) : null}
-
-                    {imageUrl ? (
+                    ) : imageUrl ? (
                       <Image
                         src={imageUrl}
                         alt={title}
@@ -135,7 +139,9 @@ export default async function Page({
                         className="object-cover"
                         priority={false}
                       />
-                    ) : null}
+                    ) : (
+                      <div className="aspect-video w-full bg-muted"></div>
+                    )}
                   </div>
                 </CardFooter>
               </Card>
