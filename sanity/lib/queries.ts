@@ -88,7 +88,10 @@ export const eventsQuery =
     title
   },
   "media": media[]->{
-    imageFile,
+    _id,
+    title,
+    type,
+    "imageUrl": imageFile.asset->url,
     videoUrl,
   },
   tags[]->{
@@ -109,7 +112,10 @@ export const eventQuery =
     url
   },
   "media": media[]->{
-    imageFile,
+    _id,
+    title,
+    type,
+    "imageUrl": imageFile.asset->url,
     videoUrl,
   },
   tags[]->{

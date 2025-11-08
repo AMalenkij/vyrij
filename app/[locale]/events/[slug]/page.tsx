@@ -1,17 +1,17 @@
-import Image from "next/image";
-import { notFound } from "next/navigation";
-import { Badge } from "@/components/ui/badge";
-import { sanityFetch } from "@/sanity/lib/live";
-import { urlFor } from "@/sanity/lib/sanityImage";
-import type { PortableTextBlock } from "@portabletext/types";
-import { TypographyComponents } from "@/components/TypographyComponents";
 import { PortableText } from "@portabletext/react";
-import { allEventsSlugsQuery, eventQuery } from "@/sanity/lib/queries";
-import { type Locale } from "@/types/app";
-import { LOCALE_MAP } from "@/constants/i18n";
+import type { PortableTextBlock } from "@portabletext/types";
+import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import BackButton from "@/components/BackButton";
+import MediaGallery from "@/components/MediaGallery";
+import { TypographyComponents } from "@/components/TypographyComponents";
+import { Badge } from "@/components/ui/badge";
+import { LOCALE_MAP } from "@/constants/i18n";
+import { transformSanityMedia } from "@/lib/media";
 import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/live";
+import { allEventsSlugsQuery, eventQuery } from "@/sanity/lib/queries";
+import { type Locale } from "@/types/app";
 
 export async function generateStaticParams() {
   const slugs: { slug: string }[] = await client.fetch(allEventsSlugsQuery);
@@ -49,8 +49,8 @@ export default async function Page({
   if (!eventData.data) return notFound();
 
   const { eventDescription, eventTitle, date, time, media } = eventData.data;
-  const firstMedia = media?.[0]?.imageFile;
-  const imgUrl = firstMedia ? urlFor(firstMedia).url() : null;
+
+  const cleanMedia = transformSanityMedia(media);
 
   return (
     <main className="container mx-auto px-4 py-8 pt-20">
@@ -77,7 +77,7 @@ export default async function Page({
         )}
       </header>
       <div className=" flex flex-col-reverse lg:flex-row lg:gap-x-8">
-        <article className="lg:w-2/3">
+        <article className="lg:w-5/12">
           <section>
             {eventDescription ? (
               <PortableText
@@ -89,17 +89,8 @@ export default async function Page({
             )}
           </section>
         </article>
-        <div className="relative mb-6 aspect-[16/9] w-full">
-          {imgUrl ? (
-            <Image
-              src={imgUrl}
-              alt={eventTitle || ""}
-              fill
-              sizes="100vw"
-              className="object-cover"
-              priority
-            />
-          ) : null}
+        <div className="mb-6 w-full lg:mb-0 lg:w-7/12">
+          <MediaGallery media={cleanMedia} variant="eventPage" />
         </div>
       </div>
     </main>

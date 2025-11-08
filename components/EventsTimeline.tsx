@@ -1,23 +1,27 @@
-import { Suspense } from "react";
-import { getTranslations } from "next-intl/server";
 import Image from "next/image";
-import { sanityFetch } from "@/sanity/lib/live";
-import { majorEventsQuery } from "@/sanity/lib/queries";
-import { minorEventsQuery } from "@/sanity/lib/queries";
+import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
+import { ViewportWrapper } from "@/components/animation/ViewportWrapper";
 import MajorCard from "@/components/MajorCard";
 import MinorCard from "@/components/MinorCard";
-import { ViewportWrapper } from "@/components/animation/ViewportWrapper";
-import { urlFor } from "@/sanity/lib/sanityImage";
-import { type Locale } from "@/types/app";
 import { LOCALE_MAP } from "@/constants/i18n";
+import { transformSanityMedia } from "@/lib/media";
+import { sanityFetch } from "@/sanity/lib/live";
+import { majorEventsQuery, minorEventsQuery } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/sanityImage";
+import { MinorEventsQueryResult } from "@/sanity.types";
+import { type Locale } from "@/types/app";
+import MediaGallery from "./MediaGallery";
+
+interface EventsTimelineProps {
+  excludeYears?: string;
+  locale: Locale;
+}
 
 export default async function EventsTimeline({
   excludeYears,
   locale,
-}: {
-  excludeYears?: string;
-  locale: Locale;
-}) {
+}: EventsTimelineProps) {
   const tCommon = await getTranslations("Common");
   const tEvents = await getTranslations("Events");
 
@@ -29,55 +33,74 @@ export default async function EventsTimeline({
   const majorEvents = majorEventsResult.data;
   const minorEvents = minorEventsResult.data;
 
+  // Группируем минорные события по годам для оптимизации
+  const minorEventsByYear = minorEvents.reduce(
+    (acc, event) => {
+      if (!event) return acc;
+      const year = new Date(event.date).getFullYear().toString();
+      if (!acc[year]) acc[year] = [];
+      acc[year].push(event);
+      return acc;
+    },
+    {} as Record<string, NonNullable<MinorEventsQueryResult[number]>[]>,
+  );
+
+  const formatDate = (date: string) => {
+    return new Date(date).toLocaleDateString(LOCALE_MAP[locale], {
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   return (
     <>
       {majorEvents.map(({ _id, date, media, eventTitle }) => {
-        const imageFile = media?.[0].imageFile;
-        const imageUrl = imageFile ? urlFor(imageFile).url() : null;
+        const imageUrl = media?.[0]?.imageFile
+          ? urlFor(media[0].imageFile).url()
+          : null;
         const majorYear = new Date(date).getFullYear().toString();
+        const filteredMinorEvents = minorEventsByYear[majorYear] || [];
 
-        const filteredMinorEvents = minorEvents.filter(
-          (minorEvent): minorEvent is NonNullable<typeof minorEvent> =>
-            minorEvent !== null &&
-            new Date(minorEvent.date).getFullYear().toString() === majorYear,
-        );
+        const shouldShowMajorCard = majorYear !== excludeYears;
 
         return (
           <div key={_id}>
-            {majorYear !== excludeYears && (
+            {shouldShowMajorCard && (
               <Suspense fallback={<div>{tCommon("loading")}</div>}>
                 <MajorCard
                   year={majorYear}
                   title={eventTitle || tEvents("defaultTitle")}
                 >
-                  {imageUrl ? (
+                  {imageUrl && (
                     <Image
                       alt={`photo ${eventTitle}`}
                       fill
                       src={imageUrl}
                       className="h-full w-full object-cover brightness-75 contrast-125"
                     />
-                  ) : null}
+                  )}
                 </MajorCard>
               </Suspense>
             )}
+
             {filteredMinorEvents.map(
-              ({ _id, eventDescription, date, media }) => {
-                const formattedMinorDate = new Date(date).toLocaleDateString(
-                  LOCALE_MAP[locale],
-                  {
-                    month: "long",
-                    day: "numeric",
-                  },
-                );
+              ({
+                _id: minorId,
+                eventDescription,
+                date: minorDate,
+                media: minorMedia,
+              }) => {
+                const formattedDate = formatDate(minorDate);
+                const cleanMedia = transformSanityMedia(minorMedia);
+
                 return (
-                  <ViewportWrapper once={true} key={_id}>
+                  <ViewportWrapper once key={minorId}>
                     <MinorCard
                       description={eventDescription}
-                      date={formattedMinorDate}
-                      media={media || []}
-                      countMedia={media?.length || 0}
-                    />
+                      date={formattedDate}
+                    >
+                      <MediaGallery media={cleanMedia} />
+                    </MinorCard>
                   </ViewportWrapper>
                 );
               },
