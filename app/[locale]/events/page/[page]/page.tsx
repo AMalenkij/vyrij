@@ -104,24 +104,19 @@ export default async function Page({
                       {title}
                     </h3>
                   </div>
+                  {tagNames.length > 0 ? (
+                    <div>
+                      {tagNames.map(({ _id, name }) => (
+                        <Badge key={_id} variant="secondary" className="mr-2">
+                          <Tag className="h-3 w-3" />
+                          {name}
+                        </Badge>
+                      ))}
+                    </div>
+                  ) : null}
                 </CardContent>
                 <CardFooter className="p-0">
                   <div className="relative aspect-[16/9] w-full">
-                    {tagNames.length > 0 ? (
-                      <div className="absolute top-3 left-3 z-50">
-                        {tagNames.map(({ _id, name }) => (
-                          <Badge
-                            key={_id}
-                            variant="secondary"
-                            className="mx-1 gap-2"
-                          >
-                            <Tag className="h-3 w-3" />
-                            {name}
-                          </Badge>
-                        ))}
-                      </div>
-                    ) : null}
-
                     {videoUrl ? (
                       <iframe
                         className="aspect-video w-full"
