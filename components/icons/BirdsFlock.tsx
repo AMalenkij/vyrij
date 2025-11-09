@@ -1,6 +1,4 @@
-import type React from "react";
-
-const BirdsFlock: React.FC<{ className?: string }> = ({ className }) => {
+export default function BirdsFlock({ className }: { className?: string }) {
   return (
     <svg
       width="2986.667"
@@ -16,6 +14,4 @@ const BirdsFlock: React.FC<{ className?: string }> = ({ className }) => {
       />
     </svg>
   );
-};
-
-export default BirdsFlock;
+}
