@@ -6,6 +6,7 @@ import { ROUTES_CONFIG } from "@/constants/routes";
 import { useTranslations } from "next-intl";
 import ExternalLink from "@/components/ui/ExternalLink";
 import { DESIGN, LINK_DESIGN } from "@/constants/app-content";
+import BirdsFlock from "./icons/BirdsFlock";
 
 export default function Footer() {
   const tNavMenu = useTranslations("Nav");
@@ -52,6 +53,7 @@ export default function Footer() {
       }}
     >
       <footer className="glass-surface fixed bottom-0 h-screen w-full px-6 pb-4 md:pb-6">
+        <BirdsFlock className="-bottom-1/8 absolute right-1/12 w-full max-w-screen-lg text-black/10 dark:text-white/5" />
         <div className="container mx-auto mt-14 md:mt-32">
           {/* Main content grid */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-12">

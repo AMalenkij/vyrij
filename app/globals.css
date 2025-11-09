@@ -186,14 +186,9 @@
     /* positioning + clipping for frosted effect layers */
     @apply relative isolate overflow-hidden;
     /* translucent background and strong blur */
-    @apply backdrop-blur-xl backdrop-saturate-100;
-    @apply bg-white/10 dark:bg-white/10;
+    @apply backdrop-blur-2xl backdrop-saturate-100;
+    @apply bg-white/15 dark:bg-white/10;
     /* soft border and shadow for depth */
-    @apply border border-white/20 dark:border-white/10 shadow-lg;
-  }
-
-  /* Slightly stronger hover state for interactive glass elements */
-  .glass-hover:hover {
-    @apply bg-white/15 dark:bg-white/15;
+    @apply border border-white/20 dark:border-white/20;
   }
 }
