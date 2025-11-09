@@ -49,8 +49,8 @@ export default async function Home({
         <Image
           src={heroImg}
           alt={tHero("altTexts.heroImage")}
-          width={188}
-          height={250}
+          placeholder="blur"
+          priority={true}
           className="absolute top-20 right-10 max-w-[100px] md:max-w-full"
         />
       </Hero>
