@@ -35,7 +35,6 @@ export default function ParallaxGallery({
     offset: ["start start", "end end"],
   });
 
-  // Анимации
   const scale4 = useTransform(scrollYProgress, [0, 1], [1, 7]);
   const scale5 = useTransform(scrollYProgress, [0, 1], [1, 8]);
   const scale6 = useTransform(scrollYProgress, [0, 1], [1, 9]);
@@ -113,7 +112,6 @@ export default function ParallaxGallery({
   return (
     <div ref={container} className="relative h-[300vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Центрированный текст с условной активацией */}
         <motion.div
           id={year}
           ref={textBlockRef}
@@ -123,7 +121,6 @@ export default function ParallaxGallery({
           <YearTitle year={year} title={translations.events} />
         </motion.div>
 
-        {/* Изображения */}
         {pictures.map(({ src, scale, containerClass, index }) => (
           <motion.div
             key={index}
@@ -135,9 +132,7 @@ export default function ParallaxGallery({
                 src={src}
                 alt={`Parallax landscape ${index + 1}`}
                 className="pointer-events-none h-full w-full object-cover"
-                loading="lazy"
-                decoding="async"
-                crossOrigin="anonymous"
+                placeholder="blur"
               />
             </div>
           </motion.div>
