@@ -7,63 +7,47 @@ import heroImg6 from "@/public/img/hero6.webp";
 import heroImg7 from "@/public/img/hero7.webp";
 import heroImg8 from "@/public/img/hero8.webp";
 
-// Конфигурация изображений main page
+// config for main page
 export const GALLERY_IMAGES = [
   {
     index: 0,
     src: heroImg1,
-    width: 288,
-    height: 250,
     className: "absolute top-0 right-0 max-w-[200px] lg:max-w-full ",
   },
   {
     index: 1,
     src: heroImg3,
-    width: 200,
-    height: 250,
     className: "absolute top-[30vh] right-[20vw] max-w-[140px] lg:max-w-full",
   },
   {
     index: 2,
     src: heroImg2,
-    width: 200,
-    height: 250,
     className: "absolute top-[60vh] right-[40vw] max-w-[140px] lg:max-w-full",
   },
 
   {
     index: 3,
     src: heroImg4,
-    width: 200,
-    height: 250,
     className: "absolute top-[90vh] right-[30vw] max-w-[140px] lg:max-w-full",
   },
   {
     index: 4,
     src: heroImg5,
-    width: 200,
-    height: 250,
     className: "absolute top-[120vh] right-[40vw] max-w-[140px] lg:max-w-full",
   },
   {
     index: 5,
     src: heroImg6,
-    width: 200,
-    height: 250,
     className: "absolute top-[150vh] right-[30vw] max-w-[140px] lg:max-w-full",
   },
   {
     index: 6,
     src: heroImg7,
-    width: 200,
-    height: 250,
     className: "absolute top-[180vh] right-[20vw] max-w-[140px] lg:max-w-full",
   },
   {
     index: 7,
     src: heroImg8,
-    width: 200,
-    height: 250,
     className: "absolute top-[210vh] right-[40vw] max-w-[140px] lg:max-w-full",
   },
 ] as const;

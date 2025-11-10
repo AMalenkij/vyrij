@@ -13,15 +13,12 @@ export default function HomeClient({
         {translations.aboutText}
       </p>
       <div className="relative top-[5vh] lg:static">
-        {/* Изображения галереи */}
-        {GALLERY_IMAGES.map(({ src, index, width, height, className }) => (
+        {GALLERY_IMAGES.map(({ src, index, className }) => (
           <PhotoScrollWrapper key={index} className={className} index={index}>
             <Image
               src={src}
               alt={`${translations.galleryImage} ${index + 1}`}
-              width={width}
-              height={height}
-              loading="lazy"
+              placeholder="blur"
             />
           </PhotoScrollWrapper>
         ))}
