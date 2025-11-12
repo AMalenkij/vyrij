@@ -31,32 +31,29 @@ export default async function Gallery({
       />
       <main className="mt-20 w-full">
         <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
-          {photosResult.data.map(({ imageUrl, title, _id }) =>
-            imageUrl ? (
-              <div key={_id} className="group relative mb-5 w-full">
-                <Link
-                  href={`/gallery?photoId=${_id}`}
-                  scroll={false}
-                  className="block cursor-zoom-in"
-                >
-                  <Image
-                    width={720}
-                    height={480}
-                    src={imageUrl}
-                    alt={title || t("imageAlt")}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
-                    className="transform rounded-lg transition will-change-auto md:brightness-90 md:group-hover:brightness-110"
-                  />
-                </Link>
-              </div>
-            ) : (
-              <div
-                key={_id}
-                className="mb-5 w-full text-center text-gray-500 text-sm"
-              >
-                {t("noImage")}
-              </div>
-            ),
+          {photosResult.data.map(
+            ({ imageUrl, title, _id, lqip, dimensions }) =>
+              imageUrl &&
+              dimensions && (
+                <div key={_id} className="group relative mb-5 w-full">
+                  <Link
+                    href={`/gallery?photoId=${_id}`}
+                    scroll={false}
+                    className="block cursor-zoom-in"
+                  >
+                    <Image
+                      width={dimensions.width}
+                      height={dimensions.height}
+                      src={imageUrl}
+                      alt={title || t("imageAlt")}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
+                      className="transform rounded-lg transition will-change-auto md:brightness-90 md:group-hover:brightness-110"
+                      placeholder={lqip ? "blur" : "empty"}
+                      blurDataURL={lqip ?? undefined}
+                    />
+                  </Link>
+                </div>
+              ),
           )}
         </div>
       </main>
