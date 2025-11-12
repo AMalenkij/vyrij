@@ -1,6 +1,7 @@
 import RenderPhoto from "@/components/RenderPhoto";
 import YouTubeVideo from "./YouTubeVideo";
 import { CleanMediaItem } from "@/types/app";
+import { SanityImageDimensions } from "@/sanity.types";
 
 function MediaComponent({
   mediaItem,
@@ -14,7 +15,16 @@ function MediaComponent({
   }
 
   if (mediaItem.type === "photo") {
-    return <RenderPhoto photoUrl={mediaItem.url} className={className} />;
+    return (
+      <RenderPhoto
+        photoUrl={mediaItem.url}
+        className={"pt-8"}
+        lqip={mediaItem.lqip || null}
+        dimensions={
+          (mediaItem.dimensions || null) as SanityImageDimensions | null
+        }
+      />
+    );
   }
 
   return null;
@@ -28,6 +38,7 @@ export default function MediaGallery({
   variant?: "minorCard" | "eventPage";
 }) {
   if (!media || media.length === 0) return null;
+
   const countMedia = media.length;
 
   const getItem = (index: number, className?: string) => (
