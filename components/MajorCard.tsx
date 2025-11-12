@@ -6,7 +6,7 @@ import React, { ReactNode, useCallback, useEffect, useRef } from "react";
 
 import { EVENTS_YEAR_QUERY_ENDPOINT, YEAR } from "@/constants/app-content";
 import { YearTitle } from "@/components/YearTitle";
-import { PHOTO_SCALE_ANIMATION } from "@/constants/animations"; // Adjust the import path as needed
+import { PHOTO_SCALE_ANIMATION } from "@/constants/animations";
 
 type MajorCardProps = {
   year: string;
