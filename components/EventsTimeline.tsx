@@ -33,7 +33,6 @@ export default async function EventsTimeline({
   const majorEvents = majorEventsResult.data;
   const minorEvents = minorEventsResult.data;
 
-  // Группируем минорные события по годам для оптимизации
   const minorEventsByYear = minorEvents.reduce(
     (acc, event) => {
       if (!event) return acc;
@@ -55,12 +54,13 @@ export default async function EventsTimeline({
   return (
     <>
       {majorEvents.map(({ _id, date, media, eventTitle }) => {
-        const imageUrl = media?.[0]?.imageFile
-          ? urlFor(media[0].imageFile).url()
-          : null;
+        const imageFile = media?.[0].imageFile;
+        const imageUrl = urlFor(imageFile).url();
+        const dimensions = media?.[0].dimensions;
+        const lqip = media?.[0].lqip;
+
         const majorYear = new Date(date).getFullYear().toString();
         const filteredMinorEvents = minorEventsByYear[majorYear] || [];
-
         const shouldShowMajorCard = majorYear !== excludeYears;
 
         return (
@@ -71,14 +71,14 @@ export default async function EventsTimeline({
                   year={majorYear}
                   title={eventTitle || tEvents("defaultTitle")}
                 >
-                  {imageUrl && (
-                    <Image
-                      alt={`photo ${eventTitle}`}
-                      fill
-                      src={imageUrl}
-                      className="h-full w-full object-cover brightness-75 contrast-125"
-                    />
-                  )}
+                  <Image
+                    alt={`photo ${eventTitle}`}
+                    width={dimensions?.width}
+                    height={dimensions?.height}
+                    src={imageUrl}
+                    className="h-full w-full object-cover brightness-75 contrast-125"
+                    blurDataURL={lqip ? lqip : undefined}
+                  />
                 </MajorCard>
               </Suspense>
             )}
