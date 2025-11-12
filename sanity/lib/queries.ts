@@ -36,7 +36,9 @@ export const galleryPhotosQuery = defineQuery(`
   *[_type == "media" && type == "photo" && defined(imageFile.asset)] {
     _id,
     title,
-    "imageUrl": imageFile.asset->url
+    "imageUrl": imageFile.asset->url,
+    "lqip": imageFile.asset->metadata.lqip,
+    "dimensions": imageFile.asset->metadata.dimensions
   }
 `);
 export const galleryPhotosCountQuery = defineQuery(
@@ -49,7 +51,11 @@ export const majorEventsQuery = defineQuery(`
     "eventTitle": eventTitle[$locale],
     date,
     "media": media[]->{
-      imageFile
+      imageFile,
+      _id,
+      "imageUrl": imageFile.asset->url,
+      "lqip": imageFile.asset->metadata.lqip,
+      "dimensions": imageFile.asset->metadata.dimensions
     }
   }
 `);
@@ -63,12 +69,16 @@ export const majorEventsYearsQuery = defineQuery(`
 export const minorEventsQuery = defineQuery(`
   *[_type == "events" && references(*[_type == "tag" && name == "minor" || name == "major"]._id)] | order(date asc) {
     _id,
-    title,
+    "eventTitle": eventTitle[$locale],
     date,
     "eventDescription": eventDescription[$locale],
     "media": media[]->{
-      imageFile,
+      _id,
+      "imageUrl": imageFile.asset->url,
+      "lqip": imageFile.asset->metadata.lqip,
+      "dimensions": imageFile.asset->metadata.dimensions,
       videoUrl,
+      imageFile
     }
   }
 `);
@@ -92,6 +102,8 @@ export const eventsQuery =
     title,
     type,
     "imageUrl": imageFile.asset->url,
+    "lqip": imageFile.asset->metadata.lqip,
+    "dimensions": imageFile.asset->metadata.dimensions,
     videoUrl,
   },
   tags[]->{
@@ -116,6 +128,8 @@ export const eventQuery =
     title,
     type,
     "imageUrl": imageFile.asset->url,
+    "lqip": imageFile.asset->metadata.lqip,
+    "dimensions": imageFile.asset->metadata.dimensions,
     videoUrl,
   },
   tags[]->{

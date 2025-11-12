@@ -6,4 +6,9 @@ export type CleanMediaItem = {
   type: "photo" | "video";
   url: string;
   title?: string;
+  lqip?: string;
+  dimensions?: {
+    width: number;
+    height: number;
+  };
 };

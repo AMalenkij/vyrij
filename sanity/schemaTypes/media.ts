@@ -30,6 +30,7 @@ export const media = defineType({
       type: "image",
       options: {
         hotspot: true,
+        metadata: ["lqip"],
       },
       hidden: ({ document }) => document?.type !== "photo",
       validation: (Rule) =>
