@@ -13,6 +13,7 @@ import {
 import Image from "next/image";
 // import { ClientCldImage } from "./clientCldImage";
 import { useRouter } from "next/navigation";
+import { SanityImageDimensions } from "@/sanity.types";
 // import { ExternalLink, ImageDown } from "lucide-react";
 // import { Button } from "./ui/button";
 // import downloadPhoto from "@/utils/downloadPhoto";
@@ -21,7 +22,13 @@ export function GalleryModal({
   images,
   photoId,
 }: {
-  images: Array<{ _id: string; imageUrl: string | null }>;
+  images: Array<{
+    _id: string;
+    imageUrl: string | null;
+    lqip?: string | null;
+    dimensions: SanityImageDimensions | null;
+    alt?: string | null;
+  }>;
   photoId?: string;
 }) {
   const router = useRouter();
@@ -85,9 +92,11 @@ export function GalleryModal({
                     <Image
                       fill
                       src={image.imageUrl}
-                      alt="Gallery image"
+                      alt={image.alt ?? "Gallery image"}
                       className="object-contain"
                       sizes="(max-width: 768px) 100vw, 80vw"
+                      placeholder={image.lqip ? "blur" : "empty"}
+                      blurDataURL={image.lqip ?? undefined}
                     />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center bg-zinc-800 text-sm text-white">
@@ -173,6 +182,8 @@ export function GalleryModal({
                       src={image.imageUrl}
                       alt={`Thumbnail ${index + 1}`}
                       className="object-cover"
+                      placeholder={image.lqip ? "blur" : "empty"}
+                      blurDataURL={image.lqip ?? undefined}
                     />
                   ) : (
                     <div className="flex h-[80px] w-[140px] items-center justify-center bg-zinc-700 text-white text-xs">
