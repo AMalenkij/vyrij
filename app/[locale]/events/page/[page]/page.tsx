@@ -9,8 +9,8 @@ import { type Locale } from "@/types/app";
 import { LOCALE_MAP } from "@/constants/i18n";
 import { Tag } from "lucide-react";
 import { getTranslations } from "next-intl/server";
-import Image from "next/image";
 import Link from "next/link";
+import RenderPhoto from "@/components/RenderPhoto";
 
 export const revalidate = 60;
 
@@ -75,6 +75,14 @@ export default async function Page({
             firstMedia?.type === "photo" && firstMedia.imageUrl
               ? firstMedia.imageUrl
               : null;
+          const lqip =
+            firstMedia?.type === "photo" && firstMedia.lqip
+              ? firstMedia.lqip
+              : null;
+          const dimensions =
+            firstMedia?.type === "photo" && firstMedia.dimensions
+              ? firstMedia.dimensions
+              : null;
           const videoUrl =
             firstMedia?.type === "video" && firstMedia.videoUrl
               ? firstMedia.videoUrl
@@ -125,13 +133,11 @@ export default async function Page({
                         allowFullScreen
                       />
                     ) : imageUrl ? (
-                      <Image
-                        src={imageUrl}
+                      <RenderPhoto
+                        photoUrl={imageUrl}
                         alt={title}
-                        fill
-                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                        className="object-cover"
-                        priority={false}
+                        lqip={lqip}
+                        dimensions={dimensions ? dimensions : null}
                       />
                     ) : (
                       <div className="aspect-video w-full bg-muted"></div>
