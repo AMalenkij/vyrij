@@ -13,22 +13,16 @@ import {
 import Image from "next/image";
 // import { ClientCldImage } from "./clientCldImage";
 import { useRouter } from "next/navigation";
-import { SanityImageDimensions } from "@/sanity.types";
 // import { ExternalLink, ImageDown } from "lucide-react";
 // import { Button } from "./ui/button";
 // import downloadPhoto from "@/utils/downloadPhoto";
+import { type AppGalleryPhoto } from "@/adapters/mapToAppGalleryPhotos";
 
 export function GalleryModal({
   images,
   photoId,
 }: {
-  images: Array<{
-    _id: string;
-    imageUrl: string | null;
-    lqip?: string | null;
-    dimensions: SanityImageDimensions | null;
-    alt?: string | null;
-  }>;
+  images: AppGalleryPhoto[];
   photoId?: string;
 }) {
   const router = useRouter();
@@ -85,18 +79,18 @@ export function GalleryModal({
         {/* Основная карусель */}
         <Carousel setApi={setMainApi} opts={{ startIndex: initialIndex }}>
           <CarouselContent className="">
-            {images.map((image) => (
-              <CarouselItem key={image._id} className="">
+            {images.map(({ _id, title, image }) => (
+              <CarouselItem key={_id} className="">
                 <div className="relative flex aspect-[3/2] items-center justify-center">
-                  {image.imageUrl ? (
+                  {image ? (
                     <Image
                       fill
-                      src={image.imageUrl}
-                      alt={image.alt ?? "Gallery image"}
+                      src={image.url}
+                      alt={title}
                       className="object-contain"
                       sizes="(max-width: 768px) 100vw, 80vw"
-                      placeholder={image.lqip ? "blur" : "empty"}
-                      blurDataURL={image.lqip ?? undefined}
+                      placeholder={"blur"}
+                      blurDataURL={image.lqip}
                     />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center bg-zinc-800 text-sm text-white">
@@ -164,8 +158,8 @@ export function GalleryModal({
           }}
         >
           <CarouselContent className="absolute">
-            {images?.map((image, index) => (
-              <CarouselItem key={image._id} className="basis-1/6">
+            {images.map(({ _id, image }, index) => (
+              <CarouselItem key={_id} className="basis-1/6">
                 <button
                   type="button" // Добавлен явный тип
                   onClick={() => onThumbClick(index)}
@@ -175,21 +169,15 @@ export function GalleryModal({
                       : "opacity-70 hover:opacity-100"
                   }`}
                 >
-                  {image.imageUrl ? (
-                    <Image
-                      width={140}
-                      height={80}
-                      src={image.imageUrl}
-                      alt={`Thumbnail ${index + 1}`}
-                      className="object-cover"
-                      placeholder={image.lqip ? "blur" : "empty"}
-                      blurDataURL={image.lqip ?? undefined}
-                    />
-                  ) : (
-                    <div className="flex h-[80px] w-[140px] items-center justify-center bg-zinc-700 text-white text-xs">
-                      Нет изображения
-                    </div>
-                  )}
+                  <Image
+                    width={140}
+                    height={80}
+                    src={image.url}
+                    alt={`Thumbnail ${index + 1}`}
+                    className="object-cover"
+                    placeholder="blur"
+                    blurDataURL={image.lqip}
+                  />
                 </button>
               </CarouselItem>
             ))}
