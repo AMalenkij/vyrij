@@ -3,7 +3,7 @@ import { type GalleryPhotosQueryResult } from "@/sanity.types";
 
 type RawGalleryItem = GalleryPhotosQueryResult[number];
 
-type AppGalleryPhoto = {
+export type AppGalleryPhoto = {
   _id: string;
   title: string;
   image: {
