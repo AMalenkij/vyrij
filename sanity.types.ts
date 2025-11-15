@@ -333,13 +333,15 @@ export type FutureEventsCountQueryResult = number;
 // Query: count(*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()])
 export type PastEventsCountQueryResult = number;
 // Variable: galleryPhotosQuery
-// Query: *[_type == "media" && type == "photo" && defined(imageFile.asset)] {    _id,    title,    "imageUrl": imageFile.asset->url,    "lqip": imageFile.asset->metadata.lqip,    "dimensions": imageFile.asset->metadata.dimensions  }
+// Query: *[_type == "media" && type == "photo" && defined(imageFile.asset)] {    _id,    title,    "image": {      "url": imageFile.asset->url,      "lqip": imageFile.asset->metadata.lqip,      "dimensions": imageFile.asset->metadata.dimensions    }  }
 export type GalleryPhotosQueryResult = Array<{
   _id: string;
   title: string;
-  imageUrl: string | null;
-  lqip: string | null;
-  dimensions: SanityImageDimensions | null;
+  image: {
+    url: string | null;
+    lqip: string | null;
+    dimensions: SanityImageDimensions | null;
+  };
 }>;
 // Variable: galleryPhotosCountQuery
 // Query: count(*[_type == "media" && type == "photo" && defined(imageFile.asset)])
@@ -581,7 +583,7 @@ declare module "@sanity/client" {
     '*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()] | order(date desc) {\n    _id,\n    "eventTitle": eventTitle[$locale],\n    date,\n    time,\n    "location": location->{\n      place,\n      address,\n    }\n  }': PastEventsQueryResult;
     'count(*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date >= now()])': FutureEventsCountQueryResult;
     'count(*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()])': PastEventsCountQueryResult;
-    '\n  *[_type == "media" && type == "photo" && defined(imageFile.asset)] {\n    _id,\n    title,\n    "imageUrl": imageFile.asset->url,\n    "lqip": imageFile.asset->metadata.lqip,\n    "dimensions": imageFile.asset->metadata.dimensions\n  }\n': GalleryPhotosQueryResult;
+    '\n  *[_type == "media" && type == "photo" && defined(imageFile.asset)] {\n    _id,\n    title,\n    "image": {\n      "url": imageFile.asset->url,\n      "lqip": imageFile.asset->metadata.lqip,\n      "dimensions": imageFile.asset->metadata.dimensions\n    }\n  }\n': GalleryPhotosQueryResult;
     'count(*[_type == "media" && type == "photo" && defined(imageFile.asset)])': GalleryPhotosCountQueryResult;
     '\n  *[_type == "events" && references(*[_type == "tag" && name == "major"]._id)] | order(date asc) {\n    _id,\n    "eventTitle": eventTitle[$locale],\n    date,\n    "media": media[]->{\n      imageFile,\n      _id,\n      "imageUrl": imageFile.asset->url,\n      "lqip": imageFile.asset->metadata.lqip,\n      "dimensions": imageFile.asset->metadata.dimensions\n    }\n  }\n': MajorEventsQueryResult;
     '\n  *[_type == "events" && references(*[_type == "tag" && name == "major"]._id)] | order(date asc) {\n    date\n  }\n': MajorEventsYearsQueryResult;
