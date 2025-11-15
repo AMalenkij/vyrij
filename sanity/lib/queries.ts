@@ -36,11 +36,14 @@ export const galleryPhotosQuery = defineQuery(`
   *[_type == "media" && type == "photo" && defined(imageFile.asset)] {
     _id,
     title,
-    "imageUrl": imageFile.asset->url,
-    "lqip": imageFile.asset->metadata.lqip,
-    "dimensions": imageFile.asset->metadata.dimensions
+    "image": {
+      "url": imageFile.asset->url,
+      "lqip": imageFile.asset->metadata.lqip,
+      "dimensions": imageFile.asset->metadata.dimensions
+    }
   }
 `);
+
 export const galleryPhotosCountQuery = defineQuery(
   `count(*[_type == "media" && type == "photo" && defined(imageFile.asset)])`,
 );
