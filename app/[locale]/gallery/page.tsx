@@ -8,7 +8,7 @@ import {
 } from "@/sanity/lib/queries";
 import { GalleryModal } from "@/components/GalleryModal";
 import SubHeader from "@/components/SubHeader";
-
+import mapToAppGalleryPhotos from "@/adapters/mapToAppGalleryPhotos";
 export default async function Gallery({
   searchParams,
 }: {
@@ -22,6 +22,8 @@ export default async function Gallery({
     sanityFetch({ query: galleryPhotosCountQuery }),
   ]);
 
+  const transformedPhotos = mapToAppGalleryPhotos(photosResult.data);
+
   return (
     <div className="container mx-auto">
       <SubHeader
@@ -31,33 +33,29 @@ export default async function Gallery({
       />
       <main className="mt-20 w-full">
         <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
-          {photosResult.data.map(
-            ({ imageUrl, title, _id, lqip, dimensions }) =>
-              imageUrl &&
-              dimensions && (
-                <div key={_id} className="group relative mb-5 w-full">
-                  <Link
-                    href={`/gallery?photoId=${_id}`}
-                    scroll={false}
-                    className="block cursor-zoom-in"
-                  >
-                    <Image
-                      width={dimensions.width}
-                      height={dimensions.height}
-                      src={imageUrl}
-                      alt={title || t("imageAlt")}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
-                      className="transform rounded-lg transition will-change-auto md:brightness-90 md:group-hover:brightness-110"
-                      placeholder={lqip ? "blur" : "empty"}
-                      blurDataURL={lqip ?? undefined}
-                    />
-                  </Link>
-                </div>
-              ),
-          )}
+          {transformedPhotos.map(({ _id, title, image }) => (
+            <div key={_id} className="group relative mb-5 w-full">
+              <Link
+                href={`/gallery?photoId=${_id}`}
+                scroll={false}
+                className="block cursor-zoom-in"
+              >
+                <Image
+                  width={image.dimensions.width}
+                  height={image.dimensions.height}
+                  src={image.url}
+                  alt={title}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
+                  className="transform rounded-lg transition will-change-auto md:brightness-90 md:group-hover:brightness-110"
+                  placeholder={"blur"}
+                  blurDataURL={image.lqip}
+                />
+              </Link>
+            </div>
+          ))}
         </div>
       </main>
-      <GalleryModal images={photosResult.data} photoId={photoId} />
+      <GalleryModal images={transformedPhotos} photoId={photoId} />
     </div>
   );
 }
