@@ -297,10 +297,10 @@ export type GalleryPhotosQueryResult = Array<{
   };
 }>;
 // Variable: futureEventsQuery
-// Query: *[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date >= now()] {    _id,    "eventTitle": eventTitle[$locale],    date,    time,    "location": location->{      place,      address,    }  }
+// Query: *[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date >= now()] {      "id": _id,  "title": eventTitle[$locale],  date,  time,    "location": location->{    place,    address,  }  }
 export type FutureEventsQueryResult = Array<{
-  _id: string;
-  eventTitle: Array<{
+  id: string;
+  title: Array<{
     _type: "localeString";
     en?: string;
     pl?: string;
@@ -314,10 +314,10 @@ export type FutureEventsQueryResult = Array<{
   } | null;
 }>;
 // Variable: pastEventsQuery
-// Query: *[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()] | order(date desc) {    _id,    "eventTitle": eventTitle[$locale],    date,    time,    "location": location->{      place,      address,    }  }
+// Query: *[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()] | order(date desc) {      "id": _id,  "title": eventTitle[$locale],  date,  time,    "location": location->{    place,    address,  }  }
 export type PastEventsQueryResult = Array<{
-  _id: string;
-  eventTitle: Array<{
+  id: string;
+  title: Array<{
     _type: "localeString";
     en?: string;
     pl?: string;
@@ -593,8 +593,8 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "\n  *[_type == \"media\" && type == \"photo\" && defined(imageFile.asset)] {\n    \n  \"image\": {\n    \n  \"id\": _id,\n  \"alt\": title,\n  \"url\": imageFile.asset->url,\n  \"lqip\": imageFile.asset->metadata.lqip,\n  \"dimensions\": imageFile.asset->metadata.dimensions\n\n  }\n\n  }\n": GalleryPhotosQueryResult;
-    "*[_type == \"events\" && references(*[_type == \"tag\" && name == \"concert\"]._id) && date >= now()] {\n    _id,\n    \"eventTitle\": eventTitle[$locale],\n    date,\n    time,\n    \"location\": location->{\n      place,\n      address,\n    }\n  }": FutureEventsQueryResult;
-    "*[_type == \"events\" && references(*[_type == \"tag\" && name == \"concert\"]._id) && date < now()] | order(date desc) {\n    _id,\n    \"eventTitle\": eventTitle[$locale],\n    date,\n    time,\n    \"location\": location->{\n      place,\n      address,\n    }\n  }": PastEventsQueryResult;
+    "*[_type == \"events\" && references(*[_type == \"tag\" && name == \"concert\"]._id) && date >= now()] {\n    \n  \"id\": _id,\n  \"title\": eventTitle[$locale],\n  date,\n  time,\n  \n  \"location\": location->{\n    place,\n    address,\n  }\n\n\n  }": FutureEventsQueryResult;
+    "*[_type == \"events\" && references(*[_type == \"tag\" && name == \"concert\"]._id) && date < now()] | order(date desc) {\n    \n  \"id\": _id,\n  \"title\": eventTitle[$locale],\n  date,\n  time,\n  \n  \"location\": location->{\n    place,\n    address,\n  }\n\n\n  }": PastEventsQueryResult;
     "count(*[_type == \"events\" && references(*[_type == \"tag\" && name == \"concert\"]._id) && date >= now()])": FutureEventsCountQueryResult;
     "count(*[_type == \"events\" && references(*[_type == \"tag\" && name == \"concert\"]._id) && date < now()])": PastEventsCountQueryResult;
     "count(*[_type == \"media\" && type == \"photo\" && defined(imageFile.asset)])": GalleryPhotosCountQueryResult;
