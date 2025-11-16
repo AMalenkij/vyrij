@@ -7,108 +7,133 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { sanityFetch } from "@/sanity/lib/live";
-import {
-  futureEventsCountQuery,
-  futureEventsQuery,
-  pastEventsCountQuery,
-  pastEventsQuery,
-} from "@/sanity/lib/queries";
+import { futureEventsQuery, pastEventsQuery } from "@/sanity/lib/queries";
 import { getTranslations } from "next-intl/server";
 import { type Locale } from "@/types/app";
+import { toAppConcerts } from "@/adapters/toAppConcert";
+import formatDate from "@/formatters/formattedDate";
 
-export default async function Concerts({
-  params,
-}: {
+type ConcertsPageProps = {
   params: Promise<{ locale: Locale }>;
-}) {
+};
+
+type ConcertTranslations = {
+  noLocation: string;
+  noTime: string;
+  noTitle: string;
+  locationTitle: string;
+  addressTitle: string;
+};
+
+export default async function Concerts({ params }: ConcertsPageProps) {
   const { locale } = await params;
-  const [futureData, pastData, futureCount, pastCount] = await Promise.all([
+
+  // fetch data
+  const [futureConcerts, pastConcerts] = await Promise.all([
     sanityFetch({ query: futureEventsQuery, params: { locale } }),
     sanityFetch({ query: pastEventsQuery, params: { locale } }),
-    sanityFetch({ query: futureEventsCountQuery }),
-    sanityFetch({ query: pastEventsCountQuery }),
   ]);
-  let allCount = futureCount.data + pastCount.data;
-  const tConcerts = await getTranslations("Concerts");
 
-  const concertTranslations = {
-    noLocation: tConcerts("noLocation"),
-    noTime: tConcerts("noTime"),
-    noTitle: tConcerts("noTitle"),
-    locationTitle: tConcerts("locationTitle"),
-    addressTitle: tConcerts("addressTitle"),
+  // translations
+  const t = await getTranslations("Concerts");
+  const concertTranslations: ConcertTranslations = {
+    noLocation: t("noLocation"),
+    noTime: t("noTime"),
+    noTitle: t("noTitle"),
+
+    locationTitle: t("locationTitle"),
+    addressTitle: t("addressTitle"),
   };
+
+  // adapter translations
+  const adaptedFutureConcerts =
+    futureConcerts.data.length > 0
+      ? toAppConcerts(futureConcerts.data, concertTranslations)
+      : [];
+
+  const adaptedPastConcerts =
+    pastConcerts.data.length > 0
+      ? toAppConcerts(pastConcerts.data, concertTranslations)
+      : [];
+
+  const totalCount = adaptedFutureConcerts.length + adaptedPastConcerts.length;
 
   return (
     <div className="container mx-auto min-h-screen px-1">
       <SubHeader
-        title={tConcerts("subHeader")}
-        counter={allCount}
-        sectionName={tConcerts("sectionName")}
+        title={t("subHeader")}
+        counter={totalCount}
+        sectionName={t("sectionName")}
       />
+
       <Accordion
         type="single"
         className="w-full"
-        defaultValue="Futures"
+        defaultValue="futures"
         collapsible
       >
-        <AccordionItem value="Futures">
+        {/* Future Concerts */}
+        <AccordionItem value="futures">
           <AccordionTrigger>
-            <div className="flex gap-x-1">
-              <p className="font-light text-sm md:text-sm">
-                {"{ "}
-                {futureCount.data}
-                {" }"}
-              </p>
-              <h3 className="text-xl md:text-2xl ">{tConcerts("futures")}</h3>
+            <div className="flex items-center gap-x-2">
+              <span className="font-light text-sm">
+                {`{ ${adaptedFutureConcerts.length} }`}
+              </span>
+              <h3 className="text-xl md:text-2xl">{t("futures")}</h3>
             </div>
           </AccordionTrigger>
           <AccordionContent>
-            {futureData.data.length > 0 ? (
-              futureData.data.map(
-                ({ _id, date, time, eventTitle, location }, index) => (
+            {adaptedFutureConcerts.length > 0 ? (
+              <div className="space-y-4">
+                {adaptedFutureConcerts.map((concert, index) => (
                   <ConcertCard
-                    key={`Future-${_id}`}
+                    key={concert.id}
                     index={index}
-                    date={date}
-                    time={time}
-                    title={eventTitle}
-                    location={location}
+                    formattedDate={formatDate(concert.date, locale)}
+                    time={concert.time}
+                    title={concert.title}
+                    location={concert.location}
                     translation={concertTranslations}
-                    locale={locale}
                   />
-                ),
-              )
+                ))}
+              </div>
             ) : (
-              <p className="ml-3 text-lg">{tConcerts("noConcerts")}</p>
+              <p className="ml-3 text-lg text-muted-foreground">
+                {t("noConcerts")}
+              </p>
             )}
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="Past">
+
+        {/* Past Concerts */}
+        <AccordionItem value="past">
           <AccordionTrigger>
-            <div className="flex gap-x-1">
-              <p className="font-light text-sm md:text-sm">
-                {"{ "}
-                {pastCount.data}
-                {" }"}
-              </p>
-              <h3 className="text-xl md:text-2xl ">{tConcerts("past")}</h3>
+            <div className="flex items-center gap-x-2">
+              <span className="font-light text-sm">
+                {`{ ${adaptedPastConcerts.length} }`}
+              </span>
+              <h3 className="text-xl md:text-2xl">{t("past")}</h3>
             </div>
           </AccordionTrigger>
           <AccordionContent>
-            {pastData.data?.map(
-              ({ _id, date, time, eventTitle, location }, index) => (
-                <ConcertCard
-                  key={`Past-${_id}`}
-                  index={index}
-                  date={date}
-                  time={time}
-                  title={eventTitle}
-                  location={location}
-                  translation={concertTranslations}
-                  locale={locale}
-                />
-              ),
+            {adaptedPastConcerts.length > 0 ? (
+              <div className="space-y-4">
+                {adaptedPastConcerts.map((concert, index) => (
+                  <ConcertCard
+                    key={concert.id}
+                    index={index}
+                    formattedDate={formatDate(concert.date, locale)}
+                    time={concert.time}
+                    title={concert.title}
+                    location={concert.location}
+                    translation={concertTranslations}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="ml-3 text-lg text-muted-foreground">
+                {t("noConcerts")}
+              </p>
             )}
           </AccordionContent>
         </AccordionItem>
