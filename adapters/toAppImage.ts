@@ -23,9 +23,8 @@ export default function toAppImages(sanityImages: RawImage[]): AppImage[] {
       item.lqip &&
       item.id &&
       item.alt &&
-      item.dimensions &&
-      typeof item.dimensions.height === "number" &&
-      typeof item.dimensions.width === "number"
+      item.dimensions?.height &&
+      item.dimensions?.width
     ) {
       acc.push({
         image: {
