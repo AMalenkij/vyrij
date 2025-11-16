@@ -45,7 +45,7 @@ export const events = defineType({
       options: {
         dateFormat: "YYYY-MM-DD",
       },
-      validation: (Rule) => Rule.required(), // Валидатор
+      validation: (Rule) => Rule.required(),
     },
     defineField({
       name: "time",
