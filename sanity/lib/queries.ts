@@ -1,5 +1,25 @@
 import { defineQuery } from "next-sanity";
 
+export const IMAGE_FIELDS = `
+  "id": _id,
+  "alt": title,
+  "url": imageFile.asset->url,
+  "lqip": imageFile.asset->metadata.lqip,
+  "dimensions": imageFile.asset->metadata.dimensions
+`;
+
+export const IMAGE_PROJECTION = `
+  "image": {
+    ${IMAGE_FIELDS}
+  }
+`;
+
+export const galleryPhotosQuery = defineQuery(`
+  *[_type == "media" && type == "photo" && defined(imageFile.asset)] {
+    ${IMAGE_PROJECTION}
+  }
+`);
+
 export const futureEventsQuery =
   defineQuery(`*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date >= now()] {
     _id,
@@ -31,18 +51,6 @@ export const futureEventsCountQuery = defineQuery(
 export const pastEventsCountQuery = defineQuery(
   `count(*[_type == "events" && references(*[_type == "tag" && name == "concert"]._id) && date < now()])`,
 );
-
-export const galleryPhotosQuery = defineQuery(`
-  *[_type == "media" && type == "photo" && defined(imageFile.asset)] {
-    _id,
-    title,
-    "image": {
-      "url": imageFile.asset->url,
-      "lqip": imageFile.asset->metadata.lqip,
-      "dimensions": imageFile.asset->metadata.dimensions
-    }
-  }
-`);
 
 export const galleryPhotosCountQuery = defineQuery(
   `count(*[_type == "media" && type == "photo" && defined(imageFile.asset)])`,

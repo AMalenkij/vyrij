@@ -16,13 +16,13 @@ import { useRouter } from "next/navigation";
 // import { ExternalLink, ImageDown } from "lucide-react";
 // import { Button } from "./ui/button";
 // import downloadPhoto from "@/utils/downloadPhoto";
-import { type AppGalleryPhoto } from "@/adapters/mapToAppGalleryPhotos";
+import { type AppImage } from "@/adapters/toAppImage";
 
 export function GalleryModal({
   images,
   photoId,
 }: {
-  images: AppGalleryPhoto[];
+  images: AppImage[];
   photoId?: string;
 }) {
   const router = useRouter();
@@ -32,7 +32,7 @@ export function GalleryModal({
 
   // Инициализация начального индекса
   const initialIndex = React.useMemo(
-    () => (photoId ? images.findIndex((img) => img._id === photoId) : 0),
+    () => (photoId ? images.findIndex((img) => img.image.id === photoId) : 0),
     [photoId, images],
   );
 
@@ -79,24 +79,18 @@ export function GalleryModal({
         {/* Основная карусель */}
         <Carousel setApi={setMainApi} opts={{ startIndex: initialIndex }}>
           <CarouselContent className="">
-            {images.map(({ _id, title, image }) => (
-              <CarouselItem key={_id} className="">
+            {images.map(({ image }) => (
+              <CarouselItem key={image.id} className="">
                 <div className="relative flex aspect-[3/2] items-center justify-center">
-                  {image ? (
-                    <Image
-                      fill
-                      src={image.url}
-                      alt={title}
-                      className="object-contain"
-                      sizes="(max-width: 768px) 100vw, 80vw"
-                      placeholder={"blur"}
-                      blurDataURL={image.lqip}
-                    />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-zinc-800 text-sm text-white">
-                      Нет изображения
-                    </div>
-                  )}
+                  <Image
+                    fill
+                    src={image.url}
+                    alt={image.alt}
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, 80vw"
+                    placeholder={"blur"}
+                    blurDataURL={image.lqip}
+                  />
                 </div>
                 {/* Main image */}
                 {/* <div className="w-full overflow-hidden">
@@ -158,8 +152,8 @@ export function GalleryModal({
           }}
         >
           <CarouselContent className="absolute">
-            {images.map(({ _id, image }, index) => (
-              <CarouselItem key={_id} className="basis-1/6">
+            {images.map(({ image }, index) => (
+              <CarouselItem key={image.id} className="basis-1/6">
                 <button
                   type="button" // Добавлен явный тип
                   onClick={() => onThumbClick(index)}

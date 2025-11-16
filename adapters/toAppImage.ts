@@ -1,10 +1,12 @@
 import { type GalleryPhotosQueryResult } from "@/sanity.types";
 
-type RawImages = GalleryPhotosQueryResult[number];
-type RawImage = RawImages["image"];
+type RawItem = GalleryPhotosQueryResult[number];
+type RawImage = RawItem["image"];
 
-type AppImage = {
+export type AppImage = {
   image: {
+    id: string;
+    alt: string;
     url: string;
     lqip: string;
     dimensions: {
@@ -19,12 +21,16 @@ export default function toAppImages(sanityImages: RawImage[]): AppImage[] {
     if (
       item.url &&
       item.lqip &&
+      item.id &&
+      item.alt &&
       item.dimensions &&
       typeof item.dimensions.height === "number" &&
       typeof item.dimensions.width === "number"
     ) {
       acc.push({
         image: {
+          id: item.id,
+          alt: item.alt,
           url: item.url,
           lqip: item.lqip,
           dimensions: {
