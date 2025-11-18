@@ -16,7 +16,7 @@ export type AppImage = {
   };
 };
 
-export default function toAppImages(sanityImages: RawImage[]): AppImage[] {
+export default function toAppImage(sanityImages: RawImage[]): AppImage[] {
   return sanityImages.reduce<AppImage[]>((acc, item) => {
     if (
       item.url &&
