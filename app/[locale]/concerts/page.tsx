@@ -17,14 +17,6 @@ type ConcertsPageProps = {
   params: Promise<{ locale: Locale }>;
 };
 
-type ConcertTranslations = {
-  noLocation: string;
-  noTime: string;
-  noTitle: string;
-  locationTitle: string;
-  addressTitle: string;
-};
-
 export default async function Concerts({ params }: ConcertsPageProps) {
   const { locale } = await params;
 
@@ -36,7 +28,7 @@ export default async function Concerts({ params }: ConcertsPageProps) {
 
   // translations
   const t = await getTranslations("Concerts");
-  const concertTranslations: ConcertTranslations = {
+  const concertTranslations = {
     noLocation: t("noLocation"),
     noTime: t("noTime"),
     noTitle: t("noTitle"),
