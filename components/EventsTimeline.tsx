@@ -3,23 +3,25 @@ import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { ViewportWrapper } from "@/components/animation/ViewportWrapper";
 import MajorCard from "@/components/MajorCard";
-import MinorCard from "@/components/MinorCard";
-import { LOCALE_MAP } from "@/constants/i18n";
-import { transformSanityMedia } from "@/lib/media";
 import { sanityFetch } from "@/sanity/lib/live";
 import { majorEventsQuery, minorEventsQuery } from "@/sanity/lib/queries";
-import { urlFor } from "@/sanity/lib/sanityImage";
-import { MinorEventsQueryResult } from "@/sanity.types";
 import { type Locale } from "@/types/app";
 import MediaGallery from "./MediaGallery";
+import toAppMajorEvent from "@/adapters/toAppMajorEvents";
+import toAppMinorEvent from "@/adapters/toAppMinorEvents";
+import { notFound } from "next/dist/client/components/not-found";
+import { PortableText } from "@portabletext/react";
+import { TypographyComponents } from "@/components/TypographyComponents";
+import { formatDateLong } from "@/formatters/formattedDate";
+import toAppEventsByYear from "@/adapters/toAppEventsByYear";
 
 interface EventsTimelineProps {
-  excludeYears?: string;
+  excludeYear?: string;
   locale: Locale;
 }
 
 export default async function EventsTimeline({
-  excludeYears,
+  excludeYear,
   locale,
 }: EventsTimelineProps) {
   const tCommon = await getTranslations("Common");
@@ -30,81 +32,68 @@ export default async function EventsTimeline({
     sanityFetch({ query: minorEventsQuery, params: { locale } }),
   ]);
 
-  const majorEvents = majorEventsResult.data;
-  const minorEvents = minorEventsResult.data;
-
-  const minorEventsByYear = minorEvents.reduce(
-    (acc, event) => {
-      if (!event) return acc;
-      const year = new Date(event.date).getFullYear().toString();
-      if (!acc[year]) acc[year] = [];
-      acc[year].push(event);
-      return acc;
-    },
-    {} as Record<string, NonNullable<MinorEventsQueryResult[number]>[]>,
-  );
-
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString(LOCALE_MAP[locale], {
-      month: "long",
-      day: "numeric",
-    });
+  const eventTranslations = {
+    noTitle: tEvents("noTitle"),
+    noDescription: tEvents("noDescription"),
   };
+
+  const majorEvents = toAppMajorEvent(
+    majorEventsResult?.data,
+    eventTranslations,
+    excludeYear,
+  );
+  if (majorEvents === null) return notFound();
+
+  const minorEvents = toAppMinorEvent(
+    minorEventsResult.data,
+    eventTranslations,
+  );
+  if (minorEvents === null) return notFound();
+
+  const unifiedEvents = toAppEventsByYear(majorEvents, minorEvents);
 
   return (
     <>
-      {majorEvents.map(({ _id, date, media, eventTitle }) => {
-        const imageFile = media?.[0].imageFile;
-        const imageUrl = urlFor(imageFile).url();
-        const dimensions = media?.[0].dimensions;
-        const lqip = media?.[0].lqip;
-
-        const majorYear = new Date(date).getFullYear().toString();
-        const filteredMinorEvents = minorEventsByYear[majorYear] || [];
-        const shouldShowMajorCard = majorYear !== excludeYears;
-
+      {unifiedEvents.map(({ year, majorEvent, minorEvents }) => {
         return (
-          <div key={_id}>
-            {shouldShowMajorCard && (
+          <div key={year} className="mb-24">
+            {majorEvent && (
               <Suspense fallback={<div>{tCommon("loading")}</div>}>
-                <MajorCard
-                  year={majorYear}
-                  title={eventTitle || tEvents("defaultTitle")}
-                >
+                <MajorCard year={year} title={majorEvent.title}>
                   <Image
-                    alt={`photo ${eventTitle}`}
-                    width={dimensions?.width}
-                    height={dimensions?.height}
-                    src={imageUrl}
+                    alt={`photo ${majorEvent.title}`}
+                    width={majorEvent.media[0].image.dimensions.width}
+                    height={majorEvent.media[0].image.dimensions.height}
+                    src={majorEvent.media[0].image.url}
                     className="h-full w-full object-cover brightness-75 contrast-125"
-                    blurDataURL={lqip ? lqip : undefined}
+                    blurDataURL={majorEvent.media[0].image.lqip}
+                    placeholder="blur"
                   />
                 </MajorCard>
               </Suspense>
             )}
+            {minorEvents.map(({ id, date, media, description }) => {
+              const formattedDate = formatDateLong(date, locale);
 
-            {filteredMinorEvents.map(
-              ({
-                _id: minorId,
-                eventDescription,
-                date: minorDate,
-                media: minorMedia,
-              }) => {
-                const formattedDate = formatDate(minorDate);
-                const cleanMedia = transformSanityMedia(minorMedia);
-
-                return (
-                  <ViewportWrapper once key={minorId}>
-                    <MinorCard
-                      description={eventDescription}
-                      date={formattedDate}
-                    >
-                      <MediaGallery media={cleanMedia} />
-                    </MinorCard>
-                  </ViewportWrapper>
-                );
-              },
-            )}
+              return (
+                <ViewportWrapper once key={id}>
+                  <article className="container mx-auto my-16 px-1 md:px-12">
+                    <header>
+                      <h2 className="mb-4 font-semibold text-2xl lg:text-3xl">
+                        {formattedDate}
+                      </h2>
+                    </header>
+                    <div className="whitespace-pre-line text-lg lg:text-xl">
+                      <PortableText
+                        value={description}
+                        components={TypographyComponents}
+                      />
+                    </div>
+                    <MediaGallery media={media} variant="minorCard" />
+                  </article>
+                </ViewportWrapper>
+              );
+            })}
           </div>
         );
       })}
