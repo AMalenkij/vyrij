@@ -29,6 +29,7 @@ const accentFont = Great_Vibes({
   subsets: ["latin", "cyrillic"],
   weight: "400",
   variable: "--font-accent",
+  preload: false,
 });
 
 export async function generateMetadata({
