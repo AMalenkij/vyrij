@@ -1,16 +1,17 @@
+import { Tag } from "lucide-react";
+import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import toAppEvents from "@/adapters/toAppEvents";
 import EventsPagination from "@/components/EventsPagination";
+import RenderPhoto from "@/components/RenderPhoto";
 import SubHeader from "@/components/SubHeader";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { sanityFetch } from "@/sanity/lib/live";
-import { client } from "@/sanity/lib/client";
-import { eventsCountQuery, eventsQuery } from "@/sanity/lib/queries";
-import { type Locale } from "@/types/app";
 import { LOCALE_MAP } from "@/constants/i18n";
-import { Tag } from "lucide-react";
-import { getTranslations } from "next-intl/server";
-import Link from "next/link";
-import RenderPhoto from "@/components/RenderPhoto";
+import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/live";
+import { eventsCountQuery, eventsQuery } from "@/sanity/lib/queries";
+import type { Locale } from "@/types/app";
 
 export const revalidate = 60;
 
@@ -57,8 +58,12 @@ export default async function Page({
     }),
   ]);
 
-  const events = eventsData.data;
   const totalPages = Math.ceil(totalEvents.data / EVENTS_PER_PAGE);
+  const eventTranslations = {
+    noTitle: tEvents("noTitle"),
+    noMedia: tEvents("noMedia"),
+  };
+  const events = toAppEvents(eventsData.data, eventTranslations);
 
   return (
     <main className="container mx-auto px-1">
@@ -68,35 +73,18 @@ export default async function Page({
         counter={totalEvents.data.toString()}
       />
       <section className="grid gap-6 lg:grid-cols-2">
-        {events.map(({ tags, media, date, slug, eventTitle, _id }) => {
-          const tagNames = tags?.slice(0, 4) || [];
-          const firstMedia = media?.[0];
-          const imageUrl =
-            firstMedia?.type === "photo" && firstMedia.imageUrl
-              ? firstMedia.imageUrl
-              : null;
-          const lqip =
-            firstMedia?.type === "photo" && firstMedia.lqip
-              ? firstMedia.lqip
-              : null;
-          const dimensions =
-            firstMedia?.type === "photo" && firstMedia.dimensions
-              ? firstMedia.dimensions
-              : null;
-          const videoUrl =
-            firstMedia?.type === "video" && firstMedia.videoUrl
-              ? firstMedia.videoUrl
-              : null;
-          const dateObj = new Date(date);
-          const day = dateObj.getDate().toString().padStart(2, "0");
-          const month = dateObj.toLocaleDateString(LOCALE_MAP[locale], {
+        {events.map(({ id, title, date, slug, tags, media }) => {
+          const day = date.getDate().toString().padStart(2, "0");
+          const month = date.toLocaleDateString(LOCALE_MAP[locale], {
             month: "short",
           });
-          const year = dateObj.getFullYear().toString();
-          const title = eventTitle || tEvents("noTitle");
+          const year = date.getFullYear().toString();
+          const mediaItem = media?.[0];
+          const hasVideo = mediaItem && "video" in mediaItem;
+          const hasImage = mediaItem && "image" in mediaItem;
 
           return (
-            <Link key={_id} href={`/${locale}/events/${slug.current}`}>
+            <Link key={id} href={`/${locale}/events/${slug.current}`}>
               <Card className="flex flex-col overflow-hidden transition-all will-change-auto hover:scale-101">
                 <CardContent className="px-4 py-2">
                   <div className="flex flex-row">
@@ -112,35 +100,37 @@ export default async function Page({
                       {title}
                     </h3>
                   </div>
-                  {tagNames.length > 0 ? (
-                    <div>
-                      {tagNames.map(({ _id, name }) => (
-                        <Badge key={_id} variant="secondary" className="mr-2">
-                          <Tag className="h-3 w-3" />
-                          {name}
-                        </Badge>
-                      ))}
-                    </div>
-                  ) : null}
+                  <div>
+                    {tags.map(({ id, name }) => (
+                      <Badge key={id} variant="secondary" className="mr-2">
+                        <Tag className="h-3 w-3" />
+                        {name}
+                      </Badge>
+                    ))}
+                  </div>
                 </CardContent>
                 <CardFooter className="p-0">
                   <div className="relative aspect-[16/9] w-full">
-                    {videoUrl ? (
+                    {hasVideo ? (
                       <iframe
                         className="aspect-video w-full"
-                        src={videoUrl}
+                        src={mediaItem.video.url}
                         title={title}
                         allowFullScreen
                       />
-                    ) : imageUrl ? (
+                    ) : hasImage ? (
                       <RenderPhoto
-                        photoUrl={imageUrl}
+                        photoUrl={mediaItem.image.url}
                         alt={title}
-                        lqip={lqip}
-                        dimensions={dimensions ? dimensions : null}
+                        lqip={mediaItem.image.lqip}
+                        dimensions={mediaItem.image.dimensions}
                       />
                     ) : (
-                      <div className="aspect-video w-full bg-muted"></div>
+                      <div className="flex aspect-video w-full items-center justify-center bg-muted">
+                        <span className="text-muted-foreground">
+                          {eventTranslations.noMedia}
+                        </span>
+                      </div>
                     )}
                   </div>
                 </CardFooter>

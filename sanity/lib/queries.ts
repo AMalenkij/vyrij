@@ -97,20 +97,41 @@ export const eventsCountQuery = defineQuery(
   `count(*[_type == "events" && references(*[_type == "tag" && (name == "major" || name == "minor")]._id)])`,
 );
 
-export const eventsQuery =
-  defineQuery(`*[_type == "events" && references(*[_type == "tag" && (name == "major" || name == "minor")]._id)] | order(date desc) [$start...$end] {
-  _id,
-  "eventTitle": eventTitle[$locale],
-  slug,
-  date,
-  time,
-  location->{
-    title
-  },
-  "media": media[]->{
-    _id,
-    name
-  }
+// export const eventsQuery =
+//   defineQuery(`*[_type == "events" && references(*[_type == "tag" && (name == "major" || name == "minor")]._id)] | order(date desc) [$start...$end] {
+//   _id,
+//   "eventTitle": eventTitle[$locale],
+//   slug,
+//   date,
+//   time,
+//   location->{
+//     title
+//   },
+//   "media": media[]->{
+//     _id,
+//     name
+//   }
+// }`);
+
+export const eventsQuery = defineQuery(`
+  *[_type == "events" && references(*[_type == "tag" && (name == "major" || name == "minor")]._id)]
+  | order(date desc) [$start...$end] {
+    "id": _id,
+    "title": eventTitle[$locale],
+    slug,
+    date,
+    "tags": tags[]->{
+      "id": _id,
+      name
+    },
+    "media": media[0]->{
+      ...select(type == 'photo' => {
+        ${IMAGE_PROJECTION}
+      }),
+      ...select(type == 'video' => {
+        ${VIDEO_PROJECTION}
+      })
+    }
 }`);
 
 export const eventQuery =
