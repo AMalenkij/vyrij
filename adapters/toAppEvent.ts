@@ -33,8 +33,8 @@ export default function toAppEvent(
   const parsedDate = new Date(rawData.date);
   const description =
     rawData.description && rawData.description.length > 0
-      ? rawData.description // 1. Використовуємо реальні дані, якщо вони є
-      : toPortableText(translations.noDescription); // 2. Або створюємо заглушку
+      ? rawData.description // 1. Use real data if it exists
+      : toPortableText(translations.noDescription); // 2. Or create a placeholder
 
   return {
     id: rawData.id,
