@@ -2,25 +2,27 @@
 
 import { twMerge } from "tailwind-merge";
 import Image from "next/image";
-import { SanityImageDimensions } from "@/sanity.types";
 
 export default function RenderPhoto({
   photoUrl,
-  alt = "Image",
+  alt,
   className,
   lqip,
   dimensions,
 }: {
   photoUrl: string;
-  alt?: string;
+  alt: string;
   className?: string;
-  lqip?: string | null;
-  dimensions: SanityImageDimensions | null;
+  lqip: string;
+  dimensions: {
+    height: number;
+    width: number;
+  };
 }) {
   return (
     <Image
-      width={dimensions?.width || 1000}
-      height={dimensions?.height || 500}
+      width={dimensions.width}
+      height={dimensions.height}
       alt={alt}
       src={photoUrl}
       className={twMerge(
@@ -28,8 +30,8 @@ export default function RenderPhoto({
         className,
       )}
       sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
-      placeholder={lqip ? "blur" : "empty"}
-      blurDataURL={lqip || undefined}
+      placeholder={"blur"}
+      blurDataURL={lqip}
       onLoadingComplete={(img) => {
         img.classList.remove("opacity-0");
         img.classList.add("opacity-100");
