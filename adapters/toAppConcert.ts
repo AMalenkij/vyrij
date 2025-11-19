@@ -7,7 +7,7 @@ type RawConcert = FutureEventsQueryResult[number];
 export interface AppConcert {
   id: string;
   title: string;
-  date: string;
+  date: Date;
   time: string;
   location: {
     place: string;
@@ -28,6 +28,7 @@ export function toAppConcerts(
   return rawData.reduce<AppConcert[]>((acc, item) => {
     if (item?.id && item.title && item.date) {
       const adaptedTitle = toAppEventTitle(item.title, translations.noTitle);
+      const parsedDate = new Date(item.date);
       const adaptedTime = toAppTime(item.time, translations.noTime);
       const adaptedLocation = {
         place: item.location?.place || translations.noLocation,
@@ -37,7 +38,7 @@ export function toAppConcerts(
       acc.push({
         id: item.id,
         title: adaptedTitle,
-        date: item.date,
+        date: parsedDate,
         time: adaptedTime,
         location: adaptedLocation,
       });
