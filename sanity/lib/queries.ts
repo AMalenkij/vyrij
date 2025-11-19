@@ -30,6 +30,14 @@ export const IMAGE_PROJECTION = `
   }
 `;
 
+const VIDEO_PROJECTION = `
+  "video": {
+    "id": _id,
+    "alt": title,
+    "url": coalesce(videoUrl, videoFile.asset->url, externalUrl)
+  }
+`;
+
 export const galleryPhotosQuery = defineQuery(`
   *[_type == "media" && type == "photo" && defined(imageFile.asset)] {
     ${IMAGE_PROJECTION}
@@ -52,39 +60,36 @@ export const galleryPhotosCountQuery = defineQuery(
 
 export const majorEventsQuery = defineQuery(`
   *[_type == "events" && references(*[_type == "tag" && name == "major"]._id)] | order(date asc) {
-    _id,
-    "eventTitle": eventTitle[$locale],
-    date,
-    "media": media[]->{
-      imageFile,
-      _id,
-      "imageUrl": imageFile.asset->url,
-      "lqip": imageFile.asset->metadata.lqip,
-      "dimensions": imageFile.asset->metadata.dimensions
-    }
+  "id": _id,
+  "title": eventTitle[$locale],
+  date,
+  "media": media[]->{
+    ...select(type == 'photo' => {
+      ${IMAGE_PROJECTION}
+    })
+  },
+  }
+`);
+
+export const minorEventsQuery = defineQuery(`
+  *[_type == "events" && references(*[_type == "tag" && name == "minor" || name == "major"]._id)] | order(date asc) {
+  "id": _id,
+  "description": eventDescription[$locale],
+  date,
+  "media": media[]->{
+    ...select(type == 'photo' => {
+      ${IMAGE_PROJECTION}
+    }),
+    ...select(type == 'video' => {
+      ${VIDEO_PROJECTION}
+    })
+  },
   }
 `);
 
 export const majorEventsYearsQuery = defineQuery(`
   *[_type == "events" && references(*[_type == "tag" && name == "major"]._id)] | order(date asc) {
     date
-  }
-`);
-
-export const minorEventsQuery = defineQuery(`
-  *[_type == "events" && references(*[_type == "tag" && name == "minor" || name == "major"]._id)] | order(date asc) {
-    _id,
-    "eventTitle": eventTitle[$locale],
-    date,
-    "eventDescription": eventDescription[$locale],
-    "media": media[]->{
-      _id,
-      "imageUrl": imageFile.asset->url,
-      "lqip": imageFile.asset->metadata.lqip,
-      "dimensions": imageFile.asset->metadata.dimensions,
-      videoUrl,
-      imageFile
-    }
   }
 `);
 
@@ -104,42 +109,31 @@ export const eventsQuery =
   },
   "media": media[]->{
     _id,
-    title,
-    type,
-    "imageUrl": imageFile.asset->url,
-    "lqip": imageFile.asset->metadata.lqip,
-    "dimensions": imageFile.asset->metadata.dimensions,
-    videoUrl,
-  },
-  tags[]->{
-    _id,
     name
   }
 }`);
 
 export const eventQuery =
   defineQuery(`*[_type == "events" && slug.current == $slug][0]{
-  _id,
-  "eventTitle": eventTitle[$locale],
-  "eventDescription": eventDescription[$locale],
+  "id": _id,
+  "title": eventTitle[$locale],
+  "description": eventDescription[$locale],
   date,
-  time,
-  location->{
-    title,
-    url
-  },
-  "media": media[]->{
-    _id,
-    title,
-    type,
-    "imageUrl": imageFile.asset->url,
-    "lqip": imageFile.asset->metadata.lqip,
-    "dimensions": imageFile.asset->metadata.dimensions,
-    videoUrl,
-  },
-  tags[]->{
-    _id,
+  "tags": tags[]->{
+    "id": _id,
     name
+  }
+}`);
+
+export const eventMediaQuery =
+  defineQuery(`*[_type == "events" && slug.current == $slug][0]{
+  "media": media[]->{
+    ...select(type == 'photo' => {
+      ${IMAGE_PROJECTION}
+    }),
+    ...select(type == 'video' => {
+      ${VIDEO_PROJECTION}
+    })
   }
 }`);
 
