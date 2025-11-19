@@ -440,29 +440,8 @@ export type MajorEventsYearsQueryResult = Array<{
 // Query: count(*[_type == "events" && references(*[_type == "tag" && (name == "major" || name == "minor")]._id)])
 export type EventsCountQueryResult = number;
 // Variable: eventsQuery
-// Query: *[_type == "events" && references(*[_type == "tag" && (name == "major" || name == "minor")]._id)] | order(date desc) [$start...$end] {  _id,  "eventTitle": eventTitle[$locale],  slug,  date,  time,  location->{    title  },  "media": media[]->{    _id,    name  }}
-export type EventsQueryResult = Array<{
-  _id: string;
-  eventTitle: Array<{
-    _type: "localeString";
-    en?: string;
-    pl?: string;
-    ua?: string;
-  }> | null;
-  slug: Slug;
-  date: string;
-  time: string | null;
-  location: {
-    title: null;
-  } | null;
-  media: Array<{
-    _id: string;
-    name: null;
-  }> | null;
-}>;
-// Variable: eventsQueryTest
 // Query: *[_type == "events" && references(*[_type == "tag" && (name == "major" || name == "minor")]._id)]  | order(date desc) [$start...$end] {    "id": _id,    "title": eventTitle[$locale],    slug,    date,    "tags": tags[]->{      "id": _id,      name    },    "media": media[0]->{      ...select(type == 'photo' => {          "image": {      "id": _id,  "alt": title,  "url": imageFile.asset->url,  "lqip": imageFile.asset->metadata.lqip,  "dimensions": imageFile.asset->metadata.dimensions  }      }),      ...select(type == 'video' => {          "video": {    "id": _id,    "alt": title,    "url": coalesce(videoUrl, videoFile.asset->url, externalUrl)  }      })    }}
-export type EventsQueryTestResult = Array<{
+export type EventsQueryResult = Array<{
   id: string;
   title: Array<{
     _type: "localeString";
@@ -600,8 +579,7 @@ declare module "@sanity/client" {
     "\n  *[_type == \"events\" && references(*[_type == \"tag\" && name == \"minor\" || name == \"major\"]._id)] | order(date asc) {\n  \"id\": _id,\n  \"description\": eventDescription[$locale],\n  date,\n  \"media\": media[]->{\n    ...select(type == 'photo' => {\n      \n  \"image\": {\n    \n  \"id\": _id,\n  \"alt\": title,\n  \"url\": imageFile.asset->url,\n  \"lqip\": imageFile.asset->metadata.lqip,\n  \"dimensions\": imageFile.asset->metadata.dimensions\n\n  }\n\n    }),\n    ...select(type == 'video' => {\n      \n  \"video\": {\n    \"id\": _id,\n    \"alt\": title,\n    \"url\": coalesce(videoUrl, videoFile.asset->url, externalUrl)\n  }\n\n    })\n  },\n  }\n": MinorEventsQueryResult;
     "\n  *[_type == \"events\" && references(*[_type == \"tag\" && name == \"major\"]._id)] | order(date asc) {\n    date\n  }\n": MajorEventsYearsQueryResult;
     "count(*[_type == \"events\" && references(*[_type == \"tag\" && (name == \"major\" || name == \"minor\")]._id)])": EventsCountQueryResult;
-    "*[_type == \"events\" && references(*[_type == \"tag\" && (name == \"major\" || name == \"minor\")]._id)] | order(date desc) [$start...$end] {\n  _id,\n  \"eventTitle\": eventTitle[$locale],\n  slug,\n  date,\n  time,\n  location->{\n    title\n  },\n  \"media\": media[]->{\n    _id,\n    name\n  }\n}": EventsQueryResult;
-    "\n  *[_type == \"events\" && references(*[_type == \"tag\" && (name == \"major\" || name == \"minor\")]._id)]\n  | order(date desc) [$start...$end] {\n    \"id\": _id,\n    \"title\": eventTitle[$locale],\n    slug,\n    date,\n    \"tags\": tags[]->{\n      \"id\": _id,\n      name\n    },\n    \"media\": media[0]->{\n      ...select(type == 'photo' => {\n        \n  \"image\": {\n    \n  \"id\": _id,\n  \"alt\": title,\n  \"url\": imageFile.asset->url,\n  \"lqip\": imageFile.asset->metadata.lqip,\n  \"dimensions\": imageFile.asset->metadata.dimensions\n\n  }\n\n      }),\n      ...select(type == 'video' => {\n        \n  \"video\": {\n    \"id\": _id,\n    \"alt\": title,\n    \"url\": coalesce(videoUrl, videoFile.asset->url, externalUrl)\n  }\n\n      })\n    }\n}": EventsQueryTestResult;
+    "\n  *[_type == \"events\" && references(*[_type == \"tag\" && (name == \"major\" || name == \"minor\")]._id)]\n  | order(date desc) [$start...$end] {\n    \"id\": _id,\n    \"title\": eventTitle[$locale],\n    slug,\n    date,\n    \"tags\": tags[]->{\n      \"id\": _id,\n      name\n    },\n    \"media\": media[0]->{\n      ...select(type == 'photo' => {\n        \n  \"image\": {\n    \n  \"id\": _id,\n  \"alt\": title,\n  \"url\": imageFile.asset->url,\n  \"lqip\": imageFile.asset->metadata.lqip,\n  \"dimensions\": imageFile.asset->metadata.dimensions\n\n  }\n\n      }),\n      ...select(type == 'video' => {\n        \n  \"video\": {\n    \"id\": _id,\n    \"alt\": title,\n    \"url\": coalesce(videoUrl, videoFile.asset->url, externalUrl)\n  }\n\n      })\n    }\n}": EventsQueryResult;
     "*[_type == \"events\" && slug.current == $slug][0]{\n  \"id\": _id,\n  \"title\": eventTitle[$locale],\n  \"description\": eventDescription[$locale],\n  date,\n  \"tags\": tags[]->{\n    \"id\": _id,\n    name\n  }\n}": EventQueryResult;
     "*[_type == \"events\" && slug.current == $slug][0]{\n  \"media\": media[]->{\n    ...select(type == 'photo' => {\n      \n  \"image\": {\n    \n  \"id\": _id,\n  \"alt\": title,\n  \"url\": imageFile.asset->url,\n  \"lqip\": imageFile.asset->metadata.lqip,\n  \"dimensions\": imageFile.asset->metadata.dimensions\n\n  }\n\n    }),\n    ...select(type == 'video' => {\n      \n  \"video\": {\n    \"id\": _id,\n    \"alt\": title,\n    \"url\": coalesce(videoUrl, videoFile.asset->url, externalUrl)\n  }\n\n    })\n  }\n}": EventMediaQueryResult;
     "*[_type == \"events\" && defined(slug.current)]{ \"slug\": slug.current }": AllEventsSlugsQueryResult;
