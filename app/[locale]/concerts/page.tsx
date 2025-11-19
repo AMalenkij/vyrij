@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+import { toAppConcerts } from "@/adapters/toAppConcert";
 import ConcertCard from "@/components/ConcertCard";
 import SubHeader from "@/components/SubHeader";
 import {
@@ -6,12 +8,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { formatDateShort } from "@/formatters/formattedDate";
 import { sanityFetch } from "@/sanity/lib/live";
 import { futureEventsQuery, pastEventsQuery } from "@/sanity/lib/queries";
-import { getTranslations } from "next-intl/server";
-import { type Locale } from "@/types/app";
-import { toAppConcerts } from "@/adapters/toAppConcert";
-import formatDate from "@/formatters/formattedDate";
+import type { Locale } from "@/types/app";
 
 type ConcertsPageProps = {
   params: Promise<{ locale: Locale }>;
@@ -81,7 +81,7 @@ export default async function Concerts({ params }: ConcertsPageProps) {
                   <ConcertCard
                     key={concert.id}
                     index={index}
-                    formattedDate={formatDate(concert.date, locale)}
+                    formattedDate={formatDateShort(concert.date, locale)}
                     time={concert.time}
                     title={concert.title}
                     location={concert.location}
@@ -114,7 +114,7 @@ export default async function Concerts({ params }: ConcertsPageProps) {
                   <ConcertCard
                     key={concert.id}
                     index={index}
-                    formattedDate={formatDate(concert.date, locale)}
+                    formattedDate={formatDateShort(concert.date, locale)}
                     time={concert.time}
                     title={concert.title}
                     location={concert.location}
