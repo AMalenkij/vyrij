@@ -1,19 +1,18 @@
+import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
-import { ViewportWrapper } from "@/components/animation/ViewportWrapper";
-import MajorCard from "@/components/MajorCard";
-import { sanityFetch } from "@/sanity/lib/live";
-import { majorEventsQuery, minorEventsQuery } from "@/sanity/lib/queries";
-import { type Locale } from "@/types/app";
-import MediaGallery from "./MediaGallery";
+import toAppEventsByYear from "@/adapters/toAppEventsByYear";
 import toAppMajorEvent from "@/adapters/toAppMajorEvents";
 import toAppMinorEvent from "@/adapters/toAppMinorEvents";
-import { notFound } from "next/dist/client/components/not-found";
-import { PortableText } from "@portabletext/react";
+import { ViewportWrapper } from "@/components/animation/ViewportWrapper";
+import MajorCard from "@/components/MajorCard";
 import { TypographyComponents } from "@/components/TypographyComponents";
 import { formatDateLong } from "@/formatters/formattedDate";
-import toAppEventsByYear from "@/adapters/toAppEventsByYear";
+import { sanityFetch } from "@/sanity/lib/live";
+import { majorEventsQuery, minorEventsQuery } from "@/sanity/lib/queries";
+import type { Locale } from "@/types/app";
+import MediaGallery from "./MediaGallery";
 
 interface EventsTimelineProps {
   excludeYear?: string;
@@ -42,13 +41,11 @@ export default async function EventsTimeline({
     eventTranslations,
     excludeYear,
   );
-  if (majorEvents === null) return notFound();
 
   const minorEvents = toAppMinorEvent(
     minorEventsResult.data,
     eventTranslations,
   );
-  if (minorEvents === null) return notFound();
 
   const unifiedEvents = toAppEventsByYear(majorEvents, minorEvents);
 
