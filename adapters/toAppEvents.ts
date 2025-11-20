@@ -1,47 +1,11 @@
 import toAppEventTitle from "@/adapters/toAppEventTitle";
 import toAppMedia, { AppMediaItem } from "@/adapters/toAppMedia";
+import { EventsQueryResult } from "@/sanity.types";
 
 export type Slug = {
   _type: "slug";
   current: string;
 };
-
-export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
-  height?: number;
-  width?: number;
-  aspectRatio?: number;
-};
-
-export type EventsQueryTestResult = Array<{
-  id: string;
-  title: Array<{
-    _type: "localeString";
-    en?: string;
-    pl?: string;
-    ua?: string;
-  }> | null;
-  slug: Slug;
-  date: string;
-  tags: Array<{
-    id: string;
-    name: string;
-  }>;
-  media: {
-    image: {
-      id: string;
-      alt: string;
-      url: string | null;
-      lqip: string | null;
-      dimensions: SanityImageDimensions | null;
-    };
-    video: {
-      id: string;
-      alt: string;
-      url: string | null;
-    };
-  } | null;
-}>;
 
 export interface AppEvents {
   id: string;
@@ -60,7 +24,7 @@ export type EventAdapterTranslations = {
 };
 
 export default function toAppEvents(
-  data: EventsQueryTestResult,
+  data: EventsQueryResult,
   translations: EventAdapterTranslations,
 ): AppEvents[] {
   return data.reduce<AppEvents[]>((acc, item) => {
