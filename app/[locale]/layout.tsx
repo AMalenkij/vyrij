@@ -124,7 +124,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <div
-              className="pointer-events-none fixed inset-0 z-[100] animate-noise opacity-90"
+              className="pointer-events-none fixed inset-0 z-100 animate-noise opacity-90"
               style={{
                 background: `transparent url(${noiseTransparent.src}) repeat 0 0`,
                 backgroundSize: "300px 300px",
