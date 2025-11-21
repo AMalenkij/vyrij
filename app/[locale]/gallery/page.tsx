@@ -1,28 +1,20 @@
-import Link from "next/link";
-import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import toAppImage from "@/adapters/toAppImage";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
-  galleryPhotosQuery,
   galleryPhotosCountQuery,
+  galleryPhotosQuery,
 } from "@/sanity/lib/queries";
-import { GalleryModal } from "@/components/GalleryModal";
+import GalleryClient from "@/components/gallery/GalleryClient";
+import { getTranslations } from "next-intl/server";
 import SubHeader from "@/components/SubHeader";
-import toAppImage from "@/adapters/toAppImage";
+import { Suspense } from "react";
 
-export default async function Gallery({
-  searchParams,
-}: {
-  searchParams: Promise<{ photoId: string | undefined }>;
-}) {
-  const t = await getTranslations("Gallery");
-  const { photoId } = await searchParams;
-
+export default async function Gallery() {
   const [photosFetchResult, countFetchResult] = await Promise.all([
     sanityFetch({ query: galleryPhotosQuery }),
     sanityFetch({ query: galleryPhotosCountQuery }),
   ]);
-
+  const t = await getTranslations("Gallery");
   const rawSanityItems = photosFetchResult.data;
   const unwrappedImages = rawSanityItems.map((item) => item.image);
   const appPhotos = toAppImage(unwrappedImages);
@@ -34,31 +26,15 @@ export default async function Gallery({
         counter={countFetchResult.data}
         sectionName={t("sectionName")}
       />
-      <main className="mt-20 w-full">
-        <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
-          {appPhotos.map(({ image }) => (
-            <div key={image.id} className="group relative mb-5 w-full">
-              <Link
-                href={`/gallery?photoId=${image.id}`}
-                scroll={false}
-                className="block cursor-zoom-in"
-              >
-                <Image
-                  width={image.dimensions.width}
-                  height={image.dimensions.height}
-                  src={image.url}
-                  alt={image.alt}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
-                  className="transform rounded-lg transition will-change-auto md:brightness-90 md:group-hover:brightness-110"
-                  placeholder={"blur"}
-                  blurDataURL={image.lqip}
-                />
-              </Link>
-            </div>
-          ))}
-        </div>
-      </main>
-      <GalleryModal images={appPhotos} photoId={photoId} />
+      <Suspense
+        fallback={
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            Loading...
+          </div>
+        }
+      >
+        <GalleryClient items={appPhotos} />
+      </Suspense>
     </div>
   );
 }
