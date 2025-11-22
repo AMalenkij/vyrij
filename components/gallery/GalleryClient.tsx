@@ -1,13 +1,18 @@
 "use client";
 
-import { useMemo } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import dynamic from "next/dynamic";
+import { useMemo } from "react";
 import "yet-another-react-lightbox/styles.css";
+import "yet-another-react-lightbox/plugins/counter.css";
+import Counter from "yet-another-react-lightbox/plugins/counter";
+import "yet-another-react-lightbox/plugins/thumbnails.css";
+import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
+import "yet-another-react-lightbox/plugins/captions.css";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Captions from "yet-another-react-lightbox/plugins/captions";
 import { AppImage } from "@/adapters/toAppImage";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import NextJsImage from "@/components/gallery/NextJsImage";
+import GalleryThumbnail from "@/components/gallery/GalleryThumbnail";
 
 const Lightbox = dynamic(() => import("yet-another-react-lightbox"), {
   ssr: false,
@@ -40,6 +45,7 @@ export default function GalleryClient({ items }: GalleryClientProps) {
         width: item.image.dimensions.width,
         height: item.image.dimensions.height,
         blurDataURL: item.image.lqip,
+        title: item.image.alt,
       })),
     [items],
   );
@@ -69,25 +75,11 @@ export default function GalleryClient({ items }: GalleryClientProps) {
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {items.map((item) => (
-          <Link
+          <GalleryThumbnail
             key={item.image.id}
+            item={item}
             href={getPhotoHref(item.image.id)}
-            scroll={false}
-            className="group relative cursor-pointer overflow-hidden rounded-md border border-card-foreground/60 bg-muted"
-          >
-            <div className="absolute inset-0 z-10 bg-black/0 transition-colors group-hover:bg-black/20" />
-
-            <Image
-              src={item.image.url}
-              alt={item.image.alt}
-              width={item.image.dimensions.width}
-              height={item.image.dimensions.height}
-              placeholder="blur"
-              blurDataURL={item.image.lqip}
-              className="aspect-square object-cover transition-transform duration-300 group-hover:scale-105"
-              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-            />
-          </Link>
+          />
         ))}
       </div>
 
@@ -102,6 +94,8 @@ export default function GalleryClient({ items }: GalleryClientProps) {
             view: ({ index: currentIndex }) => handleSlideChange(currentIndex),
           }}
           controller={{ closeOnBackdropClick: true }}
+          plugins={[Counter, Thumbnails, Captions]}
+          counter={{ container: { style: { top: "unset", bottom: 0 } } }}
         />
       )}
     </div>
