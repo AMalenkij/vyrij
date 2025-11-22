@@ -20,7 +20,7 @@ const EVENTS_PER_PAGE = 6;
 export async function generateStaticParams({
   params: { locale },
 }: {
-  params: { locale: Locale };
+  params: { locale: string };
 }) {
   const totalEvents = await client.fetch(eventsCountQuery, {
     locale,
