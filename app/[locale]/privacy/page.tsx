@@ -1,11 +1,18 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Mail, Calendar, Shield, Eye, Users } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ContactsCard } from "@/components/ContactsCard";
+import type { Locale } from "@/types/app";
 
-export default function PrivacyPage() {
-  const t = useTranslations("Privacy");
+export default async function PrivacyPage({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Privacy");
 
   const sectionsData = [
     {

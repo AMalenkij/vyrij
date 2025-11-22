@@ -9,7 +9,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 import { Marmelad, Great_Vibes } from "next/font/google";
-import { getMessages, getTranslations } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/types/app";
 import {
   SITE_AUTHOR,
@@ -106,6 +106,7 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }

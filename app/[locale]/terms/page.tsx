@@ -1,11 +1,17 @@
 import { ContactsCard } from "@/components/ContactsCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar } from "lucide-react";
-import { useTranslations } from "next-intl";
-import React from "react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { Locale } from "@/types/app";
 
-export default function TermsPage() {
-  const t = useTranslations("Terms");
+export default async function TermsPage({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Terms");
 
   const sectionsData = [
     {

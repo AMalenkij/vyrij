@@ -1,6 +1,6 @@
 import { Tag } from "lucide-react";
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import toAppEvents from "@/adapters/toAppEvents";
 import EventsPagination from "@/components/EventsPagination";
 import RenderPhoto from "@/components/RenderPhoto";
@@ -40,6 +40,7 @@ export default async function Page({
   params: Promise<{ locale: Locale; page: string }>;
 }) {
   const { locale, page: pageString } = await params;
+  setRequestLocale(locale);
   const page = pageString ? parseInt(pageString, 10) : 1;
   const tEvents = await getTranslations("Events");
 

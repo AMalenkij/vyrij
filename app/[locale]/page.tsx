@@ -1,12 +1,13 @@
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Suspense } from "react";
 import EventsTimeline from "@/components/EventsTimeline";
 import Hero from "@/components/Hero";
 import HomeClient from "@/components/HomeClient";
 import ParallaxGallery from "@/components/ParallaxGallery";
 import { Scrollbar } from "@/components/Scrollbar";
 import heroImg from "@/public/img/hero.webp";
-import { sanityFetch } from "@/sanity/lib/live";
+import { client } from "@/sanity/lib/client";
 import { majorEventsYearsQuery } from "@/sanity/lib/queries";
 import type { Locale } from "@/types/app";
 
@@ -15,17 +16,14 @@ export default async function Home({
 }: {
   params: Promise<{ locale: Locale }>;
 }) {
-  const majorEventsYearsResult = await sanityFetch({
-    query: majorEventsYearsQuery,
-  });
-
-  const majorEventsYears = majorEventsYearsResult.data;
+  const majorEventsYears = await client.fetch(majorEventsYearsQuery);
 
   const allMajorYears = majorEventsYears.map(({ date }: { date: string }) =>
     new Date(date).getFullYear().toString(),
   );
 
   const { locale } = await params;
+  setRequestLocale(locale);
   const tHero = await getTranslations("Hero");
   const heroTranslations = {
     title: tHero("title"),
@@ -56,8 +54,12 @@ export default async function Home({
       </Hero>
 
       <HomeClient translations={homeClientTranslations} />
-      <ParallaxGallery year="2019" translations={parallaxTranslations} />
-      <Scrollbar MajorEventYears={allMajorYears} />
+      <Suspense>
+        <ParallaxGallery year="2019" translations={parallaxTranslations} />
+      </Suspense>
+      <Suspense>
+        <Scrollbar MajorEventYears={allMajorYears} />
+      </Suspense>
       <EventsTimeline locale={locale} excludeYear="2019" />
     </>
   );

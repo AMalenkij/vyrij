@@ -9,7 +9,7 @@ import { ViewportWrapper } from "@/components/animation/ViewportWrapper";
 import MajorCard from "@/components/MajorCard";
 import { TypographyComponents } from "@/components/TypographyComponents";
 import { formatDateLong } from "@/formatters/formattedDate";
-import { sanityFetch } from "@/sanity/lib/live";
+import { client } from "@/sanity/lib/client";
 import { majorEventsQuery, minorEventsQuery } from "@/sanity/lib/queries";
 import type { Locale } from "@/types/app";
 import MediaGallery from "./MediaGallery";
@@ -27,8 +27,8 @@ export default async function EventsTimeline({
   const tEvents = await getTranslations("Events");
 
   const [majorEventsResult, minorEventsResult] = await Promise.all([
-    sanityFetch({ query: majorEventsQuery, params: { locale } }),
-    sanityFetch({ query: minorEventsQuery, params: { locale } }),
+    client.fetch(majorEventsQuery, { locale }),
+    client.fetch(minorEventsQuery, { locale }),
   ]);
 
   const eventTranslations = {
@@ -37,13 +37,13 @@ export default async function EventsTimeline({
   };
 
   const majorEvents = toAppMajorEvent(
-    majorEventsResult?.data,
+    majorEventsResult,
     eventTranslations,
     excludeYear,
   );
 
   const minorEvents = toAppMinorEvent(
-    minorEventsResult.data,
+    minorEventsResult,
     eventTranslations,
   );
 
