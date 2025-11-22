@@ -170,6 +170,7 @@
     @apply bg-background text-foreground;
   }
 }
+
 @layer base {
   .font-primary {
     font-family: var(--font-primary), ui-sans-serif, system-ui, sans-serif;
@@ -191,4 +192,21 @@
     /* soft border and shadow for depth */
     @apply border border-white/20 dark:border-white/20;
   }
+}
+
+.yarl__root {
+  --yarl__color_backdrop: var(--background);
+  --yarl__color_bg: var(--card);
+  --yarl__color_text: var(--foreground);
+  --yarl__color_button: var(--foreground);
+  --yarl__color_button_active: var(--primary);
+  --yarl__color_button_disabled: var(--muted-foreground);
+
+  /* Thumbnails overrides */
+  --yarl__thumbnails_thumbnail_active_border_color: var(--primary);
+  --yarl__thumbnails_thumbnail_border_color: var(--border);
+
+  /* Reduce shadows */
+  --yarl__button_filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1));
+  --yarl__counter_filter: none;
 }
