@@ -38,20 +38,21 @@ export const events = defineType({
       description: "Детальний опис події з підтримкою форматування та медіа",
       type: "localeBlockContent",
     }),
-    {
-      title: "Date",
+    defineField({
       name: "date",
+      title: "Дата",
+      description: "Дата проведення події",
       type: "date",
       options: {
         dateFormat: "YYYY-MM-DD",
       },
       validation: (Rule) => Rule.required(),
-    },
+    }),
     defineField({
       name: "time",
-      title: "Time",
-      type: "string",
+      title: "Час",
       description: "Час початку події у форматі HH:mm (наприклад, 14:30)",
+      type: "string",
       placeholder: "HH:mm",
       validation: (Rule) =>
         Rule.regex(/^([01]\d|2[0-3]):[0-5]\d$/).error(
@@ -98,10 +99,10 @@ export const events = defineType({
       // Форматируем дату
       const dateFormatted = date
         ? new Date(date).toLocaleDateString("uk-UA", {
-            day: "numeric",
-            month: "numeric",
-            year: "numeric",
-          })
+          day: "numeric",
+          month: "numeric",
+          year: "numeric",
+        })
         : "";
 
       // Объединяем дату и время
@@ -111,7 +112,7 @@ export const events = defineType({
       const tagsText =
         tags.length > 0
           ? tags.join(", ") +
-            (tags.length === 3 && tag2 ? "" : tags.length >= 3 ? "..." : "")
+          (tags.length === 3 && tag2 ? "" : tags.length >= 3 ? "..." : "")
           : "";
 
       // Формируем subtitle: дата + теги

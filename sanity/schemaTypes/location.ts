@@ -2,19 +2,22 @@ import { defineType, defineField } from "sanity";
 
 export const location = defineType({
   name: "location",
-  title: "Location",
+  title: "Локації",
   type: "document",
+  description: "Місця проведення подій: концертні зали, церкви, студії звукозапису та інші локації",
   fields: [
     defineField({
       name: "place",
-      title: "Место",
+      title: "Назва місця",
+      description: "Назва локації (наприклад, 'Національна філармонія України')",
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
 
     defineField({
       name: "address",
-      title: "Адрес",
+      title: "Адреса",
+      description: "Повна адреса місця проведення події",
       type: "string",
       validation: (Rule) => Rule.required(),
     }),

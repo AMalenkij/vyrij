@@ -2,31 +2,35 @@ import { defineType, defineField } from "sanity";
 
 export const media = defineType({
   name: "media",
-  title: "Media",
+  title: "Медіа",
   type: "document",
+  description: "Фотографії, відео та інші медіа-файли, пов'язані з подіями хору",
   fields: [
     defineField({
       name: "title",
-      title: "Title",
+      title: "Назва",
+      description: "Назва медіа-файлу для ідентифікації в системі",
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "type",
-      title: "Media Type",
+      title: "Тип медіа",
+      description: "Оберіть тип медіа-контенту",
       type: "string",
       options: {
         list: [
-          { title: "Photo", value: "photo" },
-          { title: "Video", value: "video" },
-          { title: "External URL", value: "url" },
+          { title: "Фото", value: "photo" },
+          { title: "Відео", value: "video" },
+          { title: "Зовнішнє посилання", value: "url" },
         ],
       },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "imageFile",
-      title: "Image File",
+      title: "Файл зображення",
+      description: "Завантажте фотографію (підтримуються JPG, PNG, WebP)",
       type: "image",
       options: {
         hotspot: true,
@@ -37,47 +41,47 @@ export const media = defineType({
         Rule.custom((value, context) => {
           const document = context.document;
           if (document?.type === "photo" && !value) {
-            return "Image file is required for photo type";
+            return "Файл зображення обов'язковий для типу 'Фото'";
           }
           return true;
         }),
     }),
-    // Условное поле для видео файла
     defineField({
       name: "videoFile",
-      title: "Video File",
+      title: "Відео файл",
+      description: "Завантажте відео файл (MP4, MOV, AVI тощо)",
       type: "file",
       options: {
         accept: "video/*",
       },
       hidden: ({ document }) => document?.type !== "video",
     }),
-    // Условное поле для YouTube/Vimeo URL
     defineField({
       name: "videoUrl",
-      title: "Video URL (YouTube/Vimeo)",
+      title: "Посилання на відео (YouTube/Vimeo)",
+      description: "Вставте посилання на відео з YouTube або Vimeo",
       type: "url",
       hidden: ({ document }) => document?.type !== "video",
       validation: (Rule) =>
         Rule.custom((value, context) => {
           const document = context.document;
           if (document?.type === "video" && !value && !document?.videoFile) {
-            return "Either video file or video URL is required for video type";
+            return "Потрібно вказати або файл відео, або посилання на відео";
           }
           return true;
         }),
     }),
-    // Условное поле для внешних URL
     defineField({
       name: "externalUrl",
-      title: "External URL",
+      title: "Зовнішнє посилання",
+      description: "Посилання на зовнішній ресурс",
       type: "url",
       hidden: ({ document }) => document?.type !== "url",
       validation: (Rule) =>
         Rule.custom((value, context) => {
           const document = context.document;
           if (document?.type === "url" && !value) {
-            return "External URL is required for URL type";
+            return "Зовнішнє посилання обов'язкове для типу 'Зовнішнє посилання'";
           }
           return true;
         }),
@@ -91,9 +95,14 @@ export const media = defineType({
     },
     prepare(selection) {
       const { title, type, media } = selection;
+      const typeLabels: Record<string, string> = {
+        photo: "ФОТО",
+        video: "ВІДЕО",
+        url: "ПОСИЛАННЯ",
+      };
       return {
-        title: title || "Untitled Media",
-        subtitle: type ? type.toUpperCase() : "No Type",
+        title: title || "Без назви",
+        subtitle: type ? typeLabels[type] || type.toUpperCase() : "Без типу",
         media: media,
       };
     },
