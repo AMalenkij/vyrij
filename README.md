@@ -1,12 +1,27 @@
 # 🎵 Vyrij Choir — Official Website
 
+<div align="start">
+
+[![Website](https://img.shields.io/badge/Website-vyrij.org-blue?style=for-the-badge)](https://vyrij.org)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Sanity](https://img.shields.io/badge/Sanity-CMS-red?style=for-the-badge&logo=sanity)](https://www.sanity.io/)
+
+</div>
 
 > **"Humans can't fly… Yet they have wings!"**  
 > — Lina Kostenko
 
 Official website of the Ukrainian choir "Vyrij" in Gdańsk, Poland.
 
+🌐 **Live Site**: [vyrij.org](https://vyrij.org)
+
 ---
+### Homepage
+![Homepage](https://private-user-images.githubusercontent.com/98691823/517888225-a13a73eb-95ff-4500-85a5-506e9e5e88a0.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjM5MzA4ODYsIm5iZiI6MTc2MzkzMDU4NiwicGF0aCI6Ii85ODY5MTgyMy81MTc4ODgyMjUtYTEzYTczZWItOTVmZi00NTAwLTg1YTUtNTA2ZTllNWU4OGEwLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTExMjMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUxMTIzVDIwNDMwNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWViMmQzNzNlY2UxMzMxZjExN2ZkNDFlMzMxOTA5MmY5MThkZDZkMjc2MWFmNmFjN2M5MmE4OWEyMTkxOGJiMTgmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.Vg2f26J4KUijk6eNrxptkFVxEkcaCNQ8rJ1w5kY6Q7Q)
+
+### Events Timeline
+![Events](https://private-user-images.githubusercontent.com/98691823/517889363-7445c158-e660-4d96-8c3a-ef181fec6364.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjM5MzE4OTEsIm5iZiI6MTc2MzkzMTU5MSwicGF0aCI6Ii85ODY5MTgyMy81MTc4ODkzNjMtNzQ0NWMxNTgtZTY2MC00ZDk2LThjM2EtZWYxODFmZWM2MzY0LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTExMjMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUxMTIzVDIwNTk1MVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTFhNGM3NzMxZDU3NGVmN2UxYTQyYmU5ZDViZDA3YmZlYjNiNmY5ZWI3M2EwMDRiYTM4YTVjZmVlODE3YTQwY2EmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.h3KvgyFhHfVR6wUT9Z6cYaD_jh1HxdUQbCqDr335t1Q)
 
 ## 📖 About the Project
 
