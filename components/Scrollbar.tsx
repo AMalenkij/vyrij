@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 export const YEAR_SYMBOL = "р";
 export const YEAR = "year";
 
-export function Scrollbar({
+export default function Scrollbar({
   MajorEventYears,
 }: {
   MajorEventYears: string[] | string;
