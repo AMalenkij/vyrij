@@ -10,8 +10,12 @@ import { majorEventsYearsQuery } from "@/sanity/lib/queries";
 import type { Locale } from "@/types/app";
 
 const HomeClient = dynamic(() => import("@/components/HomeClient"));
-const ParallaxGallery = dynamic(() => import("@/components/ParallaxGallery"));
-const Scrollbar = dynamic(() => import("@/components/Scrollbar"));
+const ParallaxGallery = dynamic(() => import("@/components/ParallaxGallery"), {
+  ssr: false,
+});
+const Scrollbar = dynamic(() => import("@/components/Scrollbar"), {
+  ssr: false,
+});
 const EventsTimeline = dynamic(() => import("@/components/EventsTimeline"));
 
 export default async function Home({
