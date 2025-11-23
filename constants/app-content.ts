@@ -71,6 +71,7 @@ export const SOCIAL_MEDIA = [
   },
 ] as const;
 
+export const EXCLUDE_YEAR = "2019";
 export const YEAR = "year";
 export const EVENTS_YEAR_QUERY_ENDPOINT = "?year=";
 export const DESIGN = "Design Anton Malenkyi";
