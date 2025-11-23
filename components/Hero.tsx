@@ -17,9 +17,9 @@ export default function Hero({
             {translations.title}
           </h1>
           <ScrollFadeWrapper fadeOut={false} className="mt-4">
-            <p className="font-extralight text-lg uppercase tracking-widest md:text-xl lg:text-2xl xl:text-3xl">
+            <h2 className="font-extralight text-lg uppercase tracking-widest md:text-xl lg:text-2xl xl:text-3xl">
               {translations.subtitle}
-            </p>
+            </h2>
             <p className="mt-2 font-extralight text-xs uppercase tracking-widest lg:text-base xl:text-lg">
               {translations.author}
             </p>
