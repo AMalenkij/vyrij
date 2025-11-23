@@ -2,11 +2,10 @@
 
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { ReactNode, useCallback, useEffect, useRef } from "react";
-
-import { EVENTS_YEAR_QUERY_ENDPOINT, YEAR } from "@/constants/app-content";
+import { ReactNode, useCallback, useEffect, useRef } from "react";
 import { YearTitle } from "@/components/YearTitle";
 import { PHOTO_SCALE_ANIMATION } from "@/constants/animations";
+import { EVENTS_YEAR_QUERY_ENDPOINT, YEAR } from "@/constants/app-content";
 
 type MajorCardProps = {
   year: string;
