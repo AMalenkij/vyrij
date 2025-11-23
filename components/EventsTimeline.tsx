@@ -12,7 +12,7 @@ import { formatDateLong } from "@/formatters/formattedDate";
 import { client } from "@/sanity/lib/client";
 import { majorEventsQuery, minorEventsQuery } from "@/sanity/lib/queries";
 import type { Locale } from "@/types/app";
-import MediaGallery from "./MediaGallery";
+import MediaGallery from "@/components/MediaGallery";
 
 interface EventsTimelineProps {
   excludeYear?: string;
@@ -42,10 +42,7 @@ export default async function EventsTimeline({
     excludeYear,
   );
 
-  const minorEvents = toAppMinorEvent(
-    minorEventsResult,
-    eventTranslations,
-  );
+  const minorEvents = toAppMinorEvent(minorEventsResult, eventTranslations);
 
   const unifiedEvents = toAppEventsByYear(majorEvents, minorEvents);
 
