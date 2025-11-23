@@ -1,15 +1,18 @@
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
-import EventsTimeline from "@/components/EventsTimeline";
 import Hero from "@/components/Hero";
-import HomeClient from "@/components/HomeClient";
-import ParallaxGallery from "@/components/ParallaxGallery";
-import { Scrollbar } from "@/components/Scrollbar";
+import { EXCLUDE_YEAR } from "@/constants/app-content";
 import heroImg from "@/public/img/hero.webp";
 import { client } from "@/sanity/lib/client";
 import { majorEventsYearsQuery } from "@/sanity/lib/queries";
 import type { Locale } from "@/types/app";
+
+const HomeClient = dynamic(() => import("@/components/HomeClient"));
+const ParallaxGallery = dynamic(() => import("@/components/ParallaxGallery"));
+const Scrollbar = dynamic(() => import("@/components/Scrollbar"));
+const EventsTimeline = dynamic(() => import("@/components/EventsTimeline"));
 
 export default async function Home({
   params,
@@ -53,14 +56,21 @@ export default async function Home({
         />
       </Hero>
 
-      <HomeClient translations={homeClientTranslations} />
       <Suspense>
-        <ParallaxGallery year="2019" translations={parallaxTranslations} />
+        <HomeClient translations={homeClientTranslations} />
+      </Suspense>
+      <Suspense>
+        <ParallaxGallery
+          year={EXCLUDE_YEAR}
+          translations={parallaxTranslations}
+        />
       </Suspense>
       <Suspense>
         <Scrollbar MajorEventYears={allMajorYears} />
       </Suspense>
-      <EventsTimeline locale={locale} excludeYear="2019" />
+      <Suspense>
+        <EventsTimeline locale={locale} excludeYear={EXCLUDE_YEAR} />
+      </Suspense>
     </>
   );
 }
