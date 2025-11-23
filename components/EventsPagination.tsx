@@ -7,7 +7,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { type Locale } from "@/types/app";
+import type { Locale } from "@/types/app";
 
 export default function EventsPagination({
   currentPage,

@@ -7,14 +7,5 @@ import { localeBlockContent } from "./locale/localeBlockContent";
 import { localeString } from "./locale/localeString";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [
-    // документы
-    tag,
-    events,
-    location,
-    media,
-    // вспомогательные типы
-    localeBlockContent,
-    localeString,
-  ],
+  types: [tag, events, location, media, localeBlockContent, localeString],
 };

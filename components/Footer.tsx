@@ -1,12 +1,11 @@
-import type React from "react";
 import Link from "next/link";
-import Navigation from "@/components/Navigation";
-import SocialMediaSection from "./SocialLink";
-import { ROUTES_CONFIG } from "@/constants/routes";
 import { useTranslations } from "next-intl";
+import BirdsFlock from "@/components/icons/BirdsFlock";
+import Navigation from "@/components/Navigation";
+import SocialMediaSection from "@/components/SocialLink";
 import ExternalLink from "@/components/ui/ExternalLink";
 import { DESIGN, LINK_DESIGN } from "@/constants/app-content";
-import BirdsFlock from "./icons/BirdsFlock";
+import { ROUTES_CONFIG } from "@/constants/routes";
 
 export default function Footer() {
   const tNavMenu = useTranslations("Nav");

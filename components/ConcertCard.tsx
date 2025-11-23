@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { type FormattedDate } from "@/formatters/formattedDate";
+import type { FormattedDate } from "@/formatters/formattedDate";
 
 type ConcertType = {
   index: number;

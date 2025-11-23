@@ -97,22 +97,6 @@ export const eventsCountQuery = defineQuery(
   `count(*[_type == "events" && references(*[_type == "tag" && (name == "major" || name == "minor")]._id)])`,
 );
 
-// export const eventsQuery =
-//   defineQuery(`*[_type == "events" && references(*[_type == "tag" && (name == "major" || name == "minor")]._id)] | order(date desc) [$start...$end] {
-//   _id,
-//   "eventTitle": eventTitle[$locale],
-//   slug,
-//   date,
-//   time,
-//   location->{
-//     title
-//   },
-//   "media": media[]->{
-//     _id,
-//     name
-//   }
-// }`);
-
 export const eventsQuery = defineQuery(`
   *[_type == "events" && references(*[_type == "tag" && (name == "major" || name == "minor")]._id)]
   | order(date desc) [$start...$end] {
