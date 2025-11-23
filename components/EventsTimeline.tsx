@@ -1,18 +1,17 @@
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Suspense } from "react";
 import toAppEventsByYear from "@/adapters/toAppEventsByYear";
 import toAppMajorEvent from "@/adapters/toAppMajorEvents";
 import toAppMinorEvent from "@/adapters/toAppMinorEvents";
 import { ViewportWrapper } from "@/components/animation/ViewportWrapper";
 import MajorCard from "@/components/MajorCard";
+import MediaGallery from "@/components/MediaGallery";
 import { TypographyComponents } from "@/components/TypographyComponents";
 import { formatDateLong } from "@/formatters/formattedDate";
 import { client } from "@/sanity/lib/client";
 import { majorEventsQuery, minorEventsQuery } from "@/sanity/lib/queries";
 import type { Locale } from "@/types/app";
-import MediaGallery from "@/components/MediaGallery";
 
 interface EventsTimelineProps {
   excludeYear?: string;
@@ -23,7 +22,6 @@ export default async function EventsTimeline({
   excludeYear,
   locale,
 }: EventsTimelineProps) {
-  const tCommon = await getTranslations("Common");
   const tEvents = await getTranslations("Events");
 
   const [majorEventsResult, minorEventsResult] = await Promise.all([
@@ -52,19 +50,19 @@ export default async function EventsTimeline({
         return (
           <div key={year} className="mb-24">
             {majorEvent && (
-              <Suspense fallback={<div>{tCommon("loading")}</div>}>
-                <MajorCard year={year} title={majorEvent.title}>
-                  <Image
-                    alt={`photo ${majorEvent.title}`}
-                    width={majorEvent.media[0].image.dimensions.width}
-                    height={majorEvent.media[0].image.dimensions.height}
-                    src={majorEvent.media[0].image.url}
-                    className="h-full w-full object-cover brightness-75 contrast-125"
-                    blurDataURL={majorEvent.media[0].image.lqip}
-                    placeholder="blur"
-                  />
-                </MajorCard>
-              </Suspense>
+              <MajorCard year={year} title={majorEvent.title}>
+                <Image
+                  alt={`photo ${majorEvent.title}`}
+                  width={majorEvent.media[0].image.dimensions.width}
+                  height={majorEvent.media[0].image.dimensions.height}
+                  src={majorEvent.media[0].image.url}
+                  className="h-full w-full object-cover brightness-75 contrast-125"
+                  blurDataURL={majorEvent.media[0].image.lqip}
+                  placeholder="blur"
+                  sizes="100vw"
+                  priority={true}
+                />
+              </MajorCard>
             )}
             {minorEvents.map(({ id, date, media, description }) => {
               const formattedDate = formatDateLong(date, locale);
